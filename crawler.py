@@ -17,9 +17,11 @@ class Crawler:
         
         sp.go_into_extension_page(self.driver, self.env)
         
-        result = ep.get_year_indicator(2023, self.driver)
+        result = ep.get_action_by_year_indicator(2023, 4, self.driver)
         
         print(result)
+        
+        
         time.sleep(5)
         self.driver.quit()
         print("Ending Crawler")
