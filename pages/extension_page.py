@@ -11,9 +11,11 @@ def get_total_actions_indicator(driver):
 def get_year_indicator(year: str, driver):
     _use_year(year, driver)
     _make_search(driver)
-    #verificar se retornou erro
+    # Verificar se id = "painel-erros" está na página.
+    # Se estiver, obter a quantidade por: A consulta retornou X resultados. Por favor, restrinja mais a busca.
     
-
+    
+    # Caso contrário, obter por:
     listing_count = dc.count_listing(driver)
     return f'Total of actions for the year of {year}: {listing_count}'
 
