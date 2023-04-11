@@ -28,20 +28,19 @@ class Crawler:
 
         while (self.driver.current_url != page_discente):
             print(RIGHT_ARROW + "Not logged in yet" + LEFT_ARROW) 
-            self.driver.implicitly_wait(5)
-            time.sleep(5)
+            time.sleep(5) # Usado para não poluir o console com mensagens de "Not logged in yet"
         
-
         print(RIGHT_ARROW + "Login successful" + LEFT_ARROW)
       
         sp.go_into_extension_page(self.driver, self.env)
         
-        result = ep.get_year_indicator(2023, self.driver)
+        total_actions = ep.get_total_actions_indicator(self.driver)
+
+        # result = ep.get_year_indicator(2023, self.driver)
         # result = ep.get_action_by_year_indicator(2023, 4, self.driver)
         
-        print(result)
+        print(total_actions)
         
-        
-        time.sleep(50)
-        self.driver.quit()
+        time.sleep(20)
+        # self.driver.quit()
         print(RIGHT_ARROW + "Ending Crawler")

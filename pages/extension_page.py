@@ -2,9 +2,18 @@
 import time
 import components.selection_components as dc
 
+def get_total_actions_indicator(driver):
+    for year in range(2020, 2024): # 2020 to 2023
+        _use_year(year, driver)
+        _make_search(driver)
+
+
 def get_year_indicator(year: str, driver):
     _use_year(year, driver)
     _make_search(driver)
+    #verificar se retornou erro
+    
+
     listing_count = dc.count_listing(driver)
     return f'Total of actions for the year of {year}: {listing_count}'
 
