@@ -3,8 +3,8 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 
 def go_into_extension_page(driver, env):
-    # _login_into_sigaa(driver, env)
-    # _skip_welcome_screen(driver)
+    _login_into_sigaa(driver, env)
+    _skip_welcome_screen(driver)
     _go_into_extension_actions(driver)
 
 def _login_into_sigaa(driver, env_var):
