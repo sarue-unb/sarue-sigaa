@@ -26,12 +26,13 @@ class Crawler:
       
         self.driver.implicitly_wait(20) # Espera 20 segundos para o usuário se autenticar.
 
-        while (self.driver.current_url != page_discente):
+        while (self.driver.current_url not in pages['discente']):
             print(RIGHT_ARROW + "Not logged in yet" + LEFT_ARROW) 
             time.sleep(5) # Usado para não poluir o console com mensagens de "Not logged in yet"
         
         print(RIGHT_ARROW + "Login successful" + LEFT_ARROW)
       
+        input("Pressione Enter para continuar...")
         sp.go_into_extension_page(self.driver, self.env)
         
         total_actions = ep.get_total_actions_indicator(self.driver)
