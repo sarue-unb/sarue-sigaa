@@ -8,16 +8,29 @@ from output_format import *
 
 class Crawler:
     def __init__(self):
-        # Aqui pode ser selecionado pelo usuário qual navegador ele que usar.
-        # Importante: Usuarios MacOS normalmente só possuem Safari.
-        # ou até mesmo verificar se o driver retorna algo.
-
-        self.driver = webdriver.Chrome()
-        # self.driver = webdriver.Firefox() 
-        # self.driver = webdriver.Edge()
-        # self.driver = webdriver.Safari()
+        try:
+            self.driver = webdriver.Chrome()
+            navegador = "chrome"
+        except Exception as e:
+            try: 
+                self.driver = webdriver.Safari()
+                navegador = "safari"    
+            except Exception as e:
+                try: 
+                    self.driver = webdriver.Edge()
+                    navegador = "edge"
+                except Exception as e:
+                    try: 
+                        self.driver = webdriver.Firefox()
+                        navegador = "firefox"
+                    except Exception as e:
+                        print("Nenhum navegador padrão encontrado.")
+                        navegador = None
+                        exit(1)
         
         self.env = dotenv_values(".env")
+        
+        print("NAVEGADOR USADO:" + RIGHT_ARROW + navegador + LEFT_ARROW)                 
     
     def run(self):
         print(HASH + "Running Crawler" + HASH)
@@ -31,8 +44,11 @@ class Crawler:
             time.sleep(5) # Usado para não poluir o console com mensagens de "Not logged in yet"
         
         print(RIGHT_ARROW + "Login successful" + LEFT_ARROW)
-      
-        # Adicionar pular tela de aviso
+
+        # TODO: Adicionar pular tela de aviso
+
+        # aqui pode ser um baner de aviso ou algo do tipo
+        input("Pressione enter para continuar...")
 
         sp.go_into_extension_page(self.driver, self.env)
         
