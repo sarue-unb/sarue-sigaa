@@ -48,7 +48,7 @@ class Crawler:
         # TODO: Adicionar pular tela de aviso
 
         # aqui pode ser um baner de aviso ou algo do tipo
-        input("Pressione enter para continuar...")
+        input("Usuário Logado - Pressione enter para continuar...")
 
         sp.go_into_extension_page(self.driver, self.env)
         
