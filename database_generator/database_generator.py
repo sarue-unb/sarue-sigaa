@@ -10,9 +10,9 @@ def get_every_extension_activity_from_years(start_year: str, end_year: str, driv
         return
     
     for year in range(start_year, end_year + 1):
-        for month in range(8,9):
+        for month in range(1,13): # Janeiro a Dezembro
             _search_month_year(month, year, driver)
-            time.sleep(2)
+            time.sleep(2) # Precisa?
         # try:       
             _get_activities_from_list(driver)
             #except:
@@ -35,7 +35,6 @@ def _get_activities_from_list(driver):
         activity["dimensao_academica "] = dc.get_data_cells_from_from_rows(ROWS_DATA_CELLS["dimensao_academica"], row)
         jg.add_item_to_database(codigo, activity)
         
-    
 def _search_month_year(month:int, year:int, driver):
     print("Buscando:", month, year)
     _clear_execution_period(driver)
