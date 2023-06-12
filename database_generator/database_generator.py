@@ -11,10 +11,16 @@ def get_every_extension_activity_from_years(start_year: str, end_year: str, driv
     
     for year in range(start_year, end_year + 1):
         for month in range(1,13): # Janeiro a Dezembro
+            if (year == 2020 and (month == 1 or month == 2 or month == 3 or month == 4)):
+                print("Pulando:", month, year)
+                continue
             _search_month_year(month, year, driver)
-            time.sleep(2) # Precisa?
+            print("Buscando:", month, year)
+            time.sleep(3) # Precisa? = Sim, dependendo da conexão, o site demora para carregar e o script crasha
+            print("Getting activities from list")
+            # _get_activities_from_list(driver)
+                
         # try:       
-            _get_activities_from_list(driver)
             #except:
                 #print("No result found for month, year", month, year)
             # For iterando
@@ -36,7 +42,6 @@ def _get_activities_from_list(driver):
         jg.add_item_to_database(codigo, activity)
         
 def _search_month_year(month:int, year:int, driver):
-    print("Buscando:", month, year)
     _clear_execution_period(driver)
     start_date =  _monthly_date_generator(month, year, False)
     end_date = _monthly_date_generator(month, year, True)
