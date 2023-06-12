@@ -9,13 +9,13 @@ from output_format import *
 
 class Crawler:
     def __init__(self):
-        try:
-            self.driver = webdriver.Chrome()
-            navegador = "chrome"
+        try: 
+            self.driver = webdriver.Safari()
+            navegador = "safari"    
         except Exception as e:
-            try: 
-                self.driver = webdriver.Safari()
-                navegador = "safari"    
+            try:
+                self.driver = webdriver.Chrome()
+                navegador = "chrome"
             except Exception as e:
                 try: 
                     self.driver = webdriver.Edge()
