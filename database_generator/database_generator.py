@@ -1,8 +1,8 @@
-import time
 import components.selection_components as dc
 from database_generator.constants import FIRST_DAY_OF_MONTH, MONTHS_LAST_DAY, ROWS_DATA_CELLS
 import pages.extension_page as ep
 import database_generator.json_generator as jg
+from output_format import *
 
 def get_every_extension_activity_from_years(start_year: str, end_year: str, driver):
     if (end_year < start_year):
@@ -10,13 +10,12 @@ def get_every_extension_activity_from_years(start_year: str, end_year: str, driv
         return
     
     for year in range(start_year, end_year + 1):
-        for month in range(1,13):
+        for month in range(1,13): # Janeiro a Dezembro
             _search_month_year(month, year, driver)
-            try:       
-                print("Trying for month", month)
+            
+            print(RIGHT_ARROW, year, month, HASH, dc.count_listing(driver), LEFT_ARROW)
+            if (dc.count_listing(driver) != 0):
                 _get_activities_from_list(driver)
-            except:
-                print("No result found for month, year", month, year)
     
     jg.generate_json()
     
@@ -25,9 +24,7 @@ def _get_activities_from_list(driver):
     for row in activities_info:
         jg.add_item_to_database(row["codigo"], row)
         
-    
 def _search_month_year(month:int, year:int, driver):
-    print("Buscando:", month, year)
     _clear_execution_period(driver)
     start_date =  _monthly_date_generator(month, year, False)
     end_date = _monthly_date_generator(month, year, True)
