@@ -10,30 +10,20 @@ def get_every_extension_activity_from_years(start_year: str, end_year: str, driv
         return
     
     for year in range(start_year, end_year + 1):
-        for month in range(8,9):
+        for month in range(8,13):
             _search_month_year(month, year, driver)
-            time.sleep(2)
-        # try:       
-            _get_activities_from_list(driver)
-            #except:
-                #print("No result found for month, year", month, year)
-            # For iterando
-                # pega as infos
-                # volta
+            try:       
+                print("Trying for month", month)
+                _get_activities_from_list(driver)
+            except:
+                print("No result found for month, year", month, year)
     
     jg.generate_json()
     
 def _get_activities_from_list(driver):
-    list_table = dc.get_tbody_rows_from_table(driver)
-    for row in list_table:
-        print("Adding row: now", row)
-        activity = {}
-        codigo = dc.get_data_cells_from_from_rows(ROWS_DATA_CELLS["codigo"], row)
-        activity["titulo"] = dc.get_data_cells_from_from_rows(ROWS_DATA_CELLS["titulo"], row)
-        activity["unidade"] = dc.get_data_cells_from_from_rows(ROWS_DATA_CELLS["unidade"], row)
-        activity["situacao"] = dc.get_data_cells_from_from_rows(ROWS_DATA_CELLS["situacao"], row)
-        activity["dimensao_academica "] = dc.get_data_cells_from_from_rows(ROWS_DATA_CELLS["dimensao_academica"], row)
-        jg.add_item_to_database(codigo, activity)
+    activities_info = dc.get_row_data(driver)
+    for row in activities_info:
+        jg.add_item_to_database(row["codigo"], row)
         
     
 def _search_month_year(month:int, year:int, driver):
