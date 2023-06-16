@@ -30,7 +30,6 @@ def _search_month_year(month:int, year:int, driver):
     end_date = _monthly_date_generator(month, year, True)
     _use_execution_period(start_date, end_date, driver)
     
-
 def _clear_execution_period(driver):
     dc.clear_input('formBuscaAtividade:dataInicioExecucao', driver)
     dc.clear_input('formBuscaAtividade:dataFimExecucao', driver)

@@ -46,7 +46,6 @@ def get_rows_len(result_table):
 def get_rows_from_table(driver):
         return driver.find_element(By.ID, "listagem")
 
-
 def get_row_data( driver):
     rows_total_data = []
     result_table= get_rows_from_table(driver)
