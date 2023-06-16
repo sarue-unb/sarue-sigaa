@@ -3,7 +3,7 @@ import time
 import components.selection_components as dc
 
 def get_total_actions_indicator(driver):
-    for year in range(2020, 2024): # 2020 to 2023
+    for year in range(2020, 2024): # remember the upper bound is exclusive
         _use_year(year, driver)
         make_search(driver)
 
@@ -35,5 +35,4 @@ def _use_year(year: int, driver):
     
 def _use_type_action(action: str, driver):
     tipoAcao = dc.get_element_by_select('formBuscaAtividade:buscaTipoAcao', 'CURSO', driver)
-    time.sleep(10)
     # dc.use_element_by_value(1, tipoAcao)
