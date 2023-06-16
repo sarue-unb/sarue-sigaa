@@ -3,6 +3,7 @@ import components.selection_components as dc
 from database_generator.constants import FIRST_DAY_OF_MONTH, MONTHS_LAST_DAY, ROWS_DATA_CELLS
 import pages.extension_page as ep
 import database_generator.json_generator as jg
+from output_format import *
 
 def get_every_extension_activity_from_years(start_year: str, end_year: str, driver):
     if (end_year < start_year):
@@ -11,14 +12,19 @@ def get_every_extension_activity_from_years(start_year: str, end_year: str, driv
     
     for year in range(start_year, end_year + 1):
         for month in range(1,13): # Janeiro a Dezembro
-            if (year == 2020 and (month == 1 or month == 2 or month == 3 or month == 4)):
-                print("Pulando:", month, year)
-                continue
             _search_month_year(month, year, driver)
-            print("Buscando:", month, year)
-            time.sleep(3) # Precisa? = Sim, dependendo da conexão, o site demora para carregar e o script crasha
-            print("Getting activities from list")
-            # _get_activities_from_list(driver)
+            
+            print(LEFT_ARROW, year, month, HASH, dc.count_listing(driver), RIGHT_ARROW)
+            if (dc.count_listing(driver) != 0):
+                _get_activities_from_list(driver)
+                
+            # if (year == 2020 and (month == 1 or month == 2 or month == 3 or month == 4)):
+            #     print("Pulando:", month, year)
+            #     continue
+
+            # input("Press Enter to continue...")
+            # time.sleep(3) # Precisa? = Sim, dependendo da conexão, o site demora para carregar e o script crasha
+            # print("Getting activities from list")
                 
         # try:       
             #except:
