@@ -29,6 +29,5 @@ class Crawler:
 
         dg.get_every_extension_activity_from_years(2023,2023,self.driver)
         
-        time.sleep(20)
         # self.driver.quit()
         print(RIGHT_ARROW + "Ending Crawler")
