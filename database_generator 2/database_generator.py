@@ -20,9 +20,16 @@ def get_every_extension_activity_from_years(start_year: str, end_year: str, driv
     jg.generate_json()
     
 def _get_activities_from_list(driver):
-    activities_info = dc.get_row_data(driver)
-    for row in activities_info:
-        jg.add_item_to_database(row["codigo"], row)
+    list_table = dc.get_tbody_rows_from_table(driver)
+    for row in list_table:
+        print("Adding row: now", row)
+        activity = {}
+        codigo = dc.get_data_cells_from_from_rows(ROWS_DATA_CELLS["codigo"], row)
+        activity["titulo"] = dc.get_data_cells_from_from_rows(ROWS_DATA_CELLS["titulo"], row)
+        activity["unidade"] = dc.get_data_cells_from_from_rows(ROWS_DATA_CELLS["unidade"], row)
+        activity["situacao"] = dc.get_data_cells_from_from_rows(ROWS_DATA_CELLS["situacao"], row)
+        activity["dimensao_academica "] = dc.get_data_cells_from_from_rows(ROWS_DATA_CELLS["dimensao_academica"], row)
+        jg.add_item_to_database(codigo, activity)
         
 def _search_month_year(month:int, year:int, driver):
     _clear_execution_period(driver)
@@ -30,7 +37,9 @@ def _search_month_year(month:int, year:int, driver):
     end_date = _monthly_date_generator(month, year, True)
     _use_execution_period(start_date, end_date, driver)
     
+
 def _clear_execution_period(driver):
+    print("Clearing input")
     dc.clear_input('formBuscaAtividade:dataInicioExecucao', driver)
     dc.clear_input('formBuscaAtividade:dataFimExecucao', driver)
 

@@ -24,6 +24,3 @@ ROWS_DATA_CELLS = {
     "situacao": 4,
     "dimensao_academica": 5,
 }
-
-PRINTER_FORM_ID_PRE_FIX = 'form:j_id_jsp_1439633680_506:'
-PRINTER_FORM_ID_POS_FIX = ':imprimir'
