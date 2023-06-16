@@ -13,8 +13,10 @@ def get_every_extension_activity_from_years(start_year: str, end_year: str, driv
         for month in range(1,13): # Janeiro a Dezembro
             _search_month_year(month, year, driver)
             
-            print(RIGHT_ARROW, year, month, HASH, dc.count_listing(driver), LEFT_ARROW)
-            if (dc.count_listing(driver) != 0):
+            qtd = dc.get_rows_len(driver) # 55 é a quantidade quando não tem ações
+
+            print(RIGHT_ARROW, year, month, HASH, qtd-55, LEFT_ARROW)
+            if (qtd > 55):
                 _get_activities_from_list(driver)
     
     jg.generate_json()
@@ -29,7 +31,7 @@ def _search_month_year(month:int, year:int, driver):
     start_date =  _monthly_date_generator(month, year, False)
     end_date = _monthly_date_generator(month, year, True)
     _use_execution_period(start_date, end_date, driver)
-    
+
 def _clear_execution_period(driver):
     dc.clear_input('formBuscaAtividade:dataInicioExecucao', driver)
     dc.clear_input('formBuscaAtividade:dataFimExecucao', driver)
