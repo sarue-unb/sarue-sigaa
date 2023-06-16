@@ -1,4 +1,3 @@
-import time
 import components.selection_components as dc
 from database_generator.constants import FIRST_DAY_OF_MONTH, MONTHS_LAST_DAY, ROWS_DATA_CELLS
 import pages.extension_page as ep
@@ -14,7 +13,7 @@ def get_every_extension_activity_from_years(start_year: str, end_year: str, driv
         for month in range(1,13): # Janeiro a Dezembro
             _search_month_year(month, year, driver)
             
-            print(LEFT_ARROW, year, month, HASH, dc.count_listing(driver), RIGHT_ARROW)
+            print(RIGHT_ARROW, year, month, HASH, dc.count_listing(driver), LEFT_ARROW)
             if (dc.count_listing(driver) != 0):
                 _get_activities_from_list(driver)
     
