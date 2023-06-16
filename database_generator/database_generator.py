@@ -17,21 +17,6 @@ def get_every_extension_activity_from_years(start_year: str, end_year: str, driv
             print(LEFT_ARROW, year, month, HASH, dc.count_listing(driver), RIGHT_ARROW)
             if (dc.count_listing(driver) != 0):
                 _get_activities_from_list(driver)
-                
-            # if (year == 2020 and (month == 1 or month == 2 or month == 3 or month == 4)):
-            #     print("Pulando:", month, year)
-            #     continue
-
-            # input("Press Enter to continue...")
-            # time.sleep(3) # Precisa? = Sim, dependendo da conexão, o site demora para carregar e o script crasha
-            # print("Getting activities from list")
-                
-        # try:       
-            #except:
-                #print("No result found for month, year", month, year)
-            # For iterando
-                # pega as infos
-                # volta
     
     jg.generate_json()
     
