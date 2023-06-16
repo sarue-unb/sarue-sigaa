@@ -35,11 +35,14 @@ def get_element_by_class(class_name: str, driver):
     driver.find_element(By.CLASS_NAME, class_name)
 
 def count_listing(driver):
-    # This is being done directly through XPATH
-    # But we could also do it by using the table Id
-    rows = driver.find_elements(By.XPATH, '/html/body/div[2]/div[2]/form[2]/table/tbody/tr')
-    return len(rows)
-
+    try:
+        # This is being done directly through XPATH
+        # But we could also do it by using the table Id
+        rows = driver.find_elements(By.XPATH, '/html/body/div[2]/div[2]/form[2]/table/tbody/tr')
+        return len(rows)
+    except:
+        return 0
+    
 def get_rows_len(result_table):
      return len(result_table.find_elements(By.XPATH, ".//tr"))
 
