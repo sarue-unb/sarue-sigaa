@@ -81,10 +81,9 @@ def get_info_from_print_page(driver):
         info["abrangencia"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[9]/td", driver).text
         info["publico_alvo"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[10]/td", driver).text
         info["unidade_proponente"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[11]/td", driver).text
+        info["unidade_orcamentaria"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[12]/td", driver).text
         #This is a table, contrary to the other fields
         # info["outras_unidades_envolvidas"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[13]/td/table/tbody/tr/td", driver).text
-        info["unidade_orcamentaria"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[12]/td", driver).text
-        info["outras_unidades_envolvidas"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[13]/td/table/tbody/tr/td", driver).text
         info["area_principal"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[14]/td", driver).text
         info["area_do_cnpq"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[15]/td", driver).text
         info["fonte_de_financiamento"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[16]/td", driver).text

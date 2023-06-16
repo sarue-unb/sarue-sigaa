@@ -10,7 +10,7 @@ def get_every_extension_activity_from_years(start_year: str, end_year: str, driv
         return
     
     for year in range(start_year, end_year + 1):
-        for month in range(8,13):
+        for month in range(1,13):
             _search_month_year(month, year, driver)
             try:       
                 print("Trying for month", month)
@@ -35,7 +35,6 @@ def _search_month_year(month:int, year:int, driver):
     
 
 def _clear_execution_period(driver):
-    print("Clearing input")
     dc.clear_input('formBuscaAtividade:dataInicioExecucao', driver)
     dc.clear_input('formBuscaAtividade:dataFimExecucao', driver)
 
