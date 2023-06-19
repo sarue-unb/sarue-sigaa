@@ -54,13 +54,13 @@ class Crawler:
             
         elif self.driver.current_url in pages_valid['docente']: 
             print(RIGHT_ARROW + "Logged in as docente" + LEFT_ARROW)
-            
+
             perfil = "docente"
         ###
 
         # input("Ao chegar na pagina de extensao aperte enter")
         
-        dg.get_every_extension_activity_from_years(2020,2023,self.driver)
+        dg.get_every_extension_activity_from_years(2020,2023,self.driver, perfil)
         
         # self.driver.quit()
         print(RIGHT_ARROW + "Ending Crawler")
