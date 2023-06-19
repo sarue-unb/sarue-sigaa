@@ -4,7 +4,7 @@ import pages.extension_page as ep
 import database_generator.json_generator as jg
 from output_format import *
 
-def get_every_extension_activity_from_years(start_year: str, end_year: str, driver):
+def get_every_extension_activity_from_years(start_year: str, end_year: str, driver, perfil:str):
     if (end_year < start_year):
         print("ERROR: End Year less than start year")
         return
@@ -13,11 +13,18 @@ def get_every_extension_activity_from_years(start_year: str, end_year: str, driv
         for month in range(1,13): # Janeiro a Dezembro
             _search_month_year(month, year, driver)
             
-            qtd = dc.get_rows_len(driver) # 55 é a quantidade quando não tem ações
+            if perfil == "discente":
+                qtd = dc.get_rows_len(driver) # 55 é a quantidade quando não tem ações para discentes
 
-            print(RIGHT_ARROW, year, month, HASH, qtd-55, LEFT_ARROW)
-            if (qtd > 55):
-                _get_activities_from_list(driver)
+                print(RIGHT_ARROW, year, month, HASH, qtd-55, LEFT_ARROW)
+                if (qtd > 55):
+                    _get_activities_from_list(driver)
+
+            elif perfil == "docente":
+                qtd = dc.count_listing(driver) # função demora muito quando não encontra
+
+                if (qtd > 0):
+                    _get_activities_from_list(driver)
     
     jg.generate_json()
     

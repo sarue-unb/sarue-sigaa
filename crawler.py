@@ -49,11 +49,12 @@ class Crawler:
         if self.driver.current_url in pages_valid['discente']:
             print(RIGHT_ARROW + "Logged in as discente"  + LEFT_ARROW)
             perfil = "discente"
-            ### Navegar para a página de extensão
-            sp.go_into_extension_page(self.driver, self.env)
-            ### 
+            
+            sp.go_into_extension_page(self.driver, self.env) # Navegar para a página de extensão
+            
         elif self.driver.current_url in pages_valid['docente']: 
             print(RIGHT_ARROW + "Logged in as docente" + LEFT_ARROW)
+            
             perfil = "docente"
         ###
 
