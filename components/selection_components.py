@@ -67,44 +67,178 @@ def get_row_data( driver):
             
     return rows_total_data
 
-def get_info_from_print_page(driver):
+def get_info_try_except(xpath, driver):
     try:
-        # to-do: add map here with try except for each field
-        
-        info = {}
-        info["codigo"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[1]/td", driver).text
-        info["titulo"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[2]/td", driver).text
-        info["ano"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[3]/td", driver).text
-        info["periodo_de_realizacao"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[4]/td", driver).text
-        info["tipo"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[5]/td", driver).text
-        info["situacao"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[6]/td", driver).text
-        info["munincipio_de_realizacao"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[7]/td", driver).text
-        info["espaco_de_realizacao"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[8]/td", driver).text
-        info["abrangencia"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[9]/td", driver).text
-        info["publico_alvo"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[10]/td", driver).text
-        info["unidade_proponente"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[11]/td", driver).text
-        info["unidade_orcamentaria"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[12]/td", driver).text
-        #This is a table, contrary to the other fields
-        # info["outras_unidades_envolvidas"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[13]/td/table/tbody/tr/td", driver).text
-        info["area_principal"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[14]/td", driver).text
-        info["area_do_cnpq"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[15]/td", driver).text
-        info["fonte_de_financiamento"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[16]/td", driver).text
-        info["convenio_funpec"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[17]/td", driver).text
-        info["renovacao"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[18]/td", driver).text
-        info["numero_bolsas_solicitadas"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[19]/td", driver).text
-        info["numero_bolsas_concedidas"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[20]/td", driver).text
-        info["numero_discentes_envolvidos"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[21]/td", driver).text
-        info["faz_parte_de_programa_de_extensao"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[22]/td", driver).text
-        info["publico_estimado"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[23]/td", driver).text
-        info["publico_real_atendido"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[24]/td", driver).text
-        info["tipo_de_cadastro"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[25]/td", driver).text
-        info["tipo_do_evento"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[26]/td", driver).text
-        info["periodo_do_evento"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[27]/td", driver).text
-        info["carga_horario"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[28]/td", driver).text
-        info["previsao_n_de_vagas"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[29]/td", driver).text
-        info["contato_coordenacao"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[31]/td", driver).text
-        info["contato_email"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[32]/td", driver).text
-        info["contato_telefone"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[33]/td", driver).text
+        return get_element_by_xpath(xpath, driver).text
     except:
-        return info
+        return "N/A"
+    
+def get_info_from_print_page(driver):
+    info = {}
+
+    info["codigo"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[1]/td", driver)
+    info["titulo"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[2]/td", driver)
+    info["ano"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[3]/td", driver)
+    info["periodo_de_realizacao"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[4]/td", driver)
+    info["tipo"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[5]/td", driver)
+    info["situacao"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[6]/td", driver)
+    info["munincipio_de_realizacao"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[7]/td", driver)
+    info["espaco_de_realizacao"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[8]/td", driver)
+    info["abrangencia"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[9]/td", driver)
+    info["publico_alvo"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[10]/td", driver)
+    info["unidade_proponente"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[11]/td", driver)
+    info["unidade_orcamentaria"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[12]/td", driver)
+    #This is a table, contrary to the other fields
+    # info["outras_unidades_envolvidas"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[13]/td", driver)
+    info["area_principal"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[14]/td", driver)
+    info["area_do_cnpq"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[15]/td", driver)
+    info["fonte_de_financiamento"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[16]/td", driver)
+    info["convenio_funpec"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[17]/td", driver)   
+    info["renovacao"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[18]/td", driver)
+    info["numero_bolsas_solicitadas"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[19]/td", driver) 
+    info["numero_bolsas_concedidas"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[20]/td", driver)
+    info["numero_discentes_envolvidos"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[21]/td", driver)
+    info["faz_parte_de_programa_de_extensao"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[22]/td", driver)
+    info["publico_estimado"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[23]/td", driver)  
+    info["publico_real_atendido"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[24]/td", driver)
+    info["tipo_de_cadastro"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[25]/td", driver)
+    info["tipo_do_evento"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[26]/td", driver)
+    info["periodo_do_evento"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[27]/td", driver)
+    info["carga_horario"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[28]/td", driver)
+    info["previsao_n_de_vagas"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[29]/td", driver)
+    info["contato_coordenacao"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[31]/td", driver)
+    info["contato_email"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[32]/td", driver)
+    info["contato_telefone"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[33]/td", driver)
+    
     return info
+
+# def get_info_from_print_page(driver):
+#     info = {}
+#     try:
+#         info["codigo"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[1]/td", driver).text
+#     except:
+#         info["codigo"] = "N/A"
+#     try:
+#         info["titulo"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[2]/td", driver).text
+#     except:
+#         info["titulo"] = "N/A"
+#     try:
+#         info["ano"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[3]/td", driver).text
+#     except:
+#         info["ano"] = "N/A"
+#     try:
+#         info["periodo_de_realizacao"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[4]/td", driver).text
+#     except:
+#         info["periodo_de_realizacao"] = "N/A"
+#     try:
+#         info["tipo"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[5]/td", driver).text
+#     except:
+#         info["tipo"] = "N/A"
+#     try:
+#         info["situacao"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[6]/td", driver).text
+#     except:
+#         info["situacao"] = "N/A"
+#     try:
+#         info["munincipio_de_realizacao"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[7]/td", driver).text
+#     except:
+#         info["munincipio_de_realizacao"] = "N/A"
+#     try:
+#         info["espaco_de_realizacao"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[8]/td", driver).text
+#     except:
+#         info["espaco_de_realizacao"] = "N/A"
+#     try:
+#         info["abrangencia"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[9]/td", driver).text
+#     except:
+#         info["abrangencia"] = "N/A"
+#     try:
+#         info["publico_alvo"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[10]/td", driver).text
+#     except:
+#         info["publico_alvo"] = "N/A"
+#     try:
+#         info["unidade_proponente"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[11]/td", driver).text
+#     except:
+#         info["unidade_proponente"] = "N/A"
+#     try:
+#         info["unidade_orcamentaria"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[12]/td", driver).text
+#     except:
+#         info["unidade_orcamentaria"] = "N/A"
+
+#     # try:
+#     #     #This is a table, contrary to the other fields
+#     #     info["outras_unidades_envolvidas"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[13]/td/table/tbody/tr/td", driver).text
+#     # except:
+#     #     info["outras_unidades_envolvidas"] = "N/A"
+#     try:
+#         info["area_principal"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[14]/td", driver).text
+#     except:
+#         info["area_principal"] = "N/A"
+#     try:
+#         info["area_do_cnpq"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[15]/td", driver).text
+#     except:
+#         info["area_do_cnpq"] = "N/A"
+#     try:
+#         info["fonte_de_financiamento"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[16]/td", driver).text
+#     except:
+#         info["fonte_de_financiamento"] = "N/A"
+#     try:
+#         info["convenio_funpec"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[17]/td", driver).text
+#     except:
+#         info["convenio_funpec"] = "N/A"
+#     try:
+#         info["renovacao"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[18]/td", driver).text
+#     except:
+#         info["renovacao"] = "N/A"
+#     try:
+#         info["numero_bolsas_solicitadas"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[19]/td", driver).text
+#     except:
+#         info["numero_bolsas_solicitadas"] = "N/A"
+#     try:
+#         info["numero_bolsas_concedidas"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[20]/td", driver).text
+#     except:
+#         info["numero_bolsas_concedidas"] = "N/A"
+#     try:
+#         info["numero_discentes_envolvidos"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[21]/td", driver).text
+#     except:
+#         info["numero_discentes_envolvidos"] = "N/A"
+#     try:
+#         info["faz_parte_de_programa_de_extensao"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[22]/td", driver).text
+#     except:
+#         info["faz_parte_de_programa_de_extensao"] = "N/A"
+#     try:
+#         info["publico_estimado"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[23]/td", driver).text
+#     except:
+#         info["publico_estimado"] = "N/A"
+#     try:
+#         info["publico_real_atendido"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[24]/td", driver).text
+#     except:
+#         info["publico_real_atendido"] = "N/A"
+#     try:
+#         info["tipo_de_cadastro"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[25]/td", driver).text
+#     except:
+#         info["tipo_de_cadastro"] = "N/A"
+#     try:
+#         info["tipo_do_evento"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[26]/td", driver).text
+#     except:
+#         info["tipo_do_evento"] = "N/A"
+#     try:
+#         info["periodo_do_evento"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[27]/td", driver).text
+#     except:
+#         info["periodo_do_evento"] = "N/A"
+#     try:
+#         info["carga_horario"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[28]/td", driver).text
+#     except:
+#         info["carga_horario"] = "N/A"
+#     try:
+#         info["previsao_n_de_vagas"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[29]/td", driver).text
+#     except:
+#         info["previsao_n_de_vagas"] = "N/A"
+#     try:
+#         info["contato_coordenacao"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[31]/td", driver).text
+#     except:
+#         info["contato_email"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[32]/td", driver).text
+#     try:
+#         info["contato_telefone"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[33]/td", driver).text
+#     except:
+#         info["contato_telefone"] = "N/A"
+
+#     return info
