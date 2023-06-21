@@ -16,9 +16,15 @@ def get_every_extension_activity_from_years(start_year: str, end_year: str, driv
             if perfil == "discente":
                 qtd = dc.get_rows_len(driver) # 55 é a quantidade quando não tem ações para discentes
 
-                print(RIGHT_ARROW, year, month, HASH, qtd-55, LEFT_ARROW)
+                time = Timer()
+                time.set_start_time()
+
+                print(HASH, f'{month}/{year}', HASH)
                 if (qtd > 55):
                     _get_activities_from_list(driver)
+                print(f' {RIGHT_ARROW} Itens = {qtd-55} {LEFT_ARROW}')
+                
+                time.print_partial_elapsed_ctime(f'{month}/{year}')  
 
             elif perfil == "docente":
                 qtd = dc.count_listing(driver) # função demora muito quando não encontra
