@@ -31,10 +31,10 @@ class Crawler:
 
         self.env = dotenv_values(".env")
 
-        print("NAVEGADOR USADO:" + RIGHT_ARROW + navegador.capitalize() + LEFT_ARROW)                
+        print("NAVEGADOR USADO:", RIGHT_ARROW, navegador.capitalize(), LEFT_ARROW)                
     
     def run(self):
-        print(HASH + "Running Crawler" + HASH)
+        print(HASH, "Running Crawler", HASH)
 
         self.driver.get("https://sigaa.unb.br/sigaa/")
       
@@ -43,17 +43,17 @@ class Crawler:
 
         ### Aqui, posso ver qual o perfil do usuário
         while (self.driver.current_url not in pages_valid['discente'] and self.driver.current_url not in pages_valid['docente']):
-            print(RIGHT_ARROW + "Not logged in yet" + LEFT_ARROW) 
+            print(RIGHT_ARROW, "Not logged in yet", LEFT_ARROW) 
             time.sleep(5) # Usado para não poluir o console com mensagens de "Not logged in yet"
         
         if self.driver.current_url in pages_valid['discente']:
-            print(RIGHT_ARROW + "Logged in as discente"  + LEFT_ARROW)
+            print(RIGHT_ARROW, "Logged in as discente", LEFT_ARROW)
             perfil = "discente"
             
             sp.go_into_extension_page(self.driver, self.env) # Navegar para a página de extensão
             
         elif self.driver.current_url in pages_valid['docente']: 
-            print(RIGHT_ARROW + "Logged in as docente" + LEFT_ARROW)
+            print(RIGHT_ARROW, "Logged in as docente", LEFT_ARROW)
 
             perfil = "docente"
 
@@ -63,4 +63,4 @@ class Crawler:
         dg.get_every_extension_activity_from_years(2020,2023,self.driver, perfil)
         
         # self.driver.quit()
-        print(RIGHT_ARROW + "Ending Crawler")
+        print(RIGHT_ARROW, "Ending Crawler", LEFT_ARROW)

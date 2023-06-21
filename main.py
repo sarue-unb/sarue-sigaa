@@ -13,10 +13,11 @@ class Main:
         timer.set_start_time()
         crawler.run()
         timer.print_elapsed_ctime()
-        input("Press enter to exit")
 
-        print("Formatting file:")
+        print("Formatting file...")
         format_special_char()
+
+        input("Press enter to exit")
 
 if __name__ == "__main__":
     main_obj = Main()
