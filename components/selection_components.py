@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
 from database_generator.constants import PRINTER_FORM_ID_PRE_FIX, PRINTER_FORM_ID_POS_FIX
-import time
+from tqdm import tqdm
 
 def use_input_by_name(name: str, input: str, driver):
     input_field = driver.find_element(By.NAME, name)
@@ -53,18 +53,17 @@ def get_row_data( driver):
     rows_total_data = []
     result_table= get_rows_from_table(driver)
     rows_length = get_rows_len(result_table)
-    print("Rows length:", rows_length)
     
-    for i in range(0, rows_length - 1):
-            use_element_by_id(PRINTER_FORM_ID_PRE_FIX + str(i) + PRINTER_FORM_ID_POS_FIX, result_table)
-            
-            row_info = get_info_from_print_page(driver)
-            rows_total_data.append(row_info)
-            
-            use_element_by_class("voltar", driver)
-            
-            result_table = get_rows_from_table(driver)
-            
+    for i in tqdm(range(0, rows_length - 1)): # tqdm is a progress bar
+        use_element_by_id(PRINTER_FORM_ID_PRE_FIX + str(i) + PRINTER_FORM_ID_POS_FIX, result_table)
+        
+        row_info = get_info_from_print_page(driver)
+        rows_total_data.append(row_info)
+        
+        use_element_by_class("voltar", driver)
+        
+        result_table = get_rows_from_table(driver)
+        
     return rows_total_data
 
 def get_info_try_except(xpath, driver):
