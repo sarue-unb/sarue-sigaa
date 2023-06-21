@@ -9,33 +9,59 @@ def get_every_extension_activity_from_years(start_year: str, end_year: str, driv
         print("ERROR: End Year less than start year")
         return
     
-    for year in range(start_year, end_year + 1):
-        for month in range(1,13): # Janeiro a Dezembro
-            _search_month_year(month, year, driver)
+
+    ### Obter apenas 2020/5 na forma de discentes
+    year = 2020
+    month = 5
+
+    _search_month_year(month, year, driver)
+
+    qtd = dc.get_rows_len(driver) # 55 é a quantidade quando não tem ações para discentes
+
+    time = Timer()
+    time.set_start_time()
+
+    print(HASH, f'{month}/{year}', HASH)
+    if (qtd > 55):
+        # _get_activities_from_list_printer(driver)
+        _get_activities_from_list_view(driver)
+    print(f' {RIGHT_ARROW} Itens = {qtd-55} {LEFT_ARROW}')
+    
+    time.print_partial_elapsed_ctime(f'{month}/{year}')  
+    ### REMOVER APOS TESTES
+
+    # for year in range(start_year, end_year + 1):
+    #     for month in range(1,13): # Janeiro a Dezembro
+    #         _search_month_year(month, year, driver)
             
-            if perfil == "discente":
-                qtd = dc.get_rows_len(driver) # 55 é a quantidade quando não tem ações para discentes
+    #         if perfil == "discente":
+    #             qtd = dc.get_rows_len(driver) # 55 é a quantidade quando não tem ações para discentes
 
-                time = Timer()
-                time.set_start_time()
+    #             time = Timer()
+    #             time.set_start_time()
 
-                print(HASH, f'{month}/{year}', HASH)
-                if (qtd > 55):
-                    _get_activities_from_list(driver)
-                print(f' {RIGHT_ARROW} Itens = {qtd-55} {LEFT_ARROW}')
+    #             print(HASH, f'{month}/{year}', HASH)
+    #             if (qtd > 55):
+    #                 _get_activities_from_list(driver)
+    #             print(f' {RIGHT_ARROW} Itens = {qtd-55} {LEFT_ARROW}')
                 
-                time.print_partial_elapsed_ctime(f'{month}/{year}')  
+    #             time.print_partial_elapsed_ctime(f'{month}/{year}')  
 
-            elif perfil == "docente":
-                qtd = dc.count_listing(driver) # função demora muito quando não encontra
+    #         elif perfil == "docente":
+    #             qtd = dc.count_listing(driver) # função demora muito quando não encontra
 
-                if (qtd > 0):
-                    _get_activities_from_list(driver)
+    #             if (qtd > 0):
+    #                 _get_activities_from_list(driver)
     
     jg.generate_json()
     
-def _get_activities_from_list(driver):
+def _get_activities_from_list_printer(driver):
     activities_info = dc.get_row_data_printer(driver)
+    for row in activities_info:
+        jg.add_item_to_database(row["codigo"], row)
+        
+def _get_activities_from_list_view(driver):
+    activities_info = dc.get_row_data_view(driver)
     for row in activities_info:
         jg.add_item_to_database(row["codigo"], row)
         
