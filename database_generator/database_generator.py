@@ -35,7 +35,7 @@ def get_every_extension_activity_from_years(start_year: str, end_year: str, driv
     jg.generate_json()
     
 def _get_activities_from_list(driver):
-    activities_info = dc.get_row_data(driver)
+    activities_info = dc.get_row_data_printer(driver)
     for row in activities_info:
         jg.add_item_to_database(row["codigo"], row)
         
