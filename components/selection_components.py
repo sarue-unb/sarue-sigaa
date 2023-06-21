@@ -1,6 +1,6 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
-from database_generator.constants import PRINTER_FORM_ID_PRE_FIX, PRINTER_FORM_ID_POS_FIX
+from database_generator.constants import *
 from tqdm import tqdm
 
 def use_input_by_name(name: str, input: str, driver):
@@ -49,9 +49,9 @@ def get_rows_len(result_table):
 def get_rows_from_table(driver):
         return driver.find_element(By.ID, "listagem")
 
-def get_row_data( driver):
+def get_row_data_printer( driver):
     rows_total_data = []
-    result_table= get_rows_from_table(driver)
+    result_table = get_rows_from_table(driver)
     rows_length = get_rows_len(result_table)
     
     for i in tqdm(range(0, rows_length - 1)): # tqdm is a progress bar
@@ -60,8 +60,27 @@ def get_row_data( driver):
         row_info = get_info_from_print_page(driver)
         rows_total_data.append(row_info)
         
-        use_element_by_class("voltar", driver)
+        # use_element_by_class("voltar", driver)
+        use_element_by_xpath("/html/body/div/div[4]/p/table/tbody/tr/td[1]", driver)
+
+        result_table = get_rows_from_table(driver)
         
+    return rows_total_data
+
+def get_row_data_view( driver):
+    rows_total_data = []
+    result_table = get_rows_from_table(driver)
+    rows_length = get_rows_len(result_table)
+    
+    for i in tqdm(range(0, rows_length - 1)): # tqdm is a progress bar
+        use_element_by_id(VIEW_FORM_ID_PRE_FIX + str(i) + VIEW_FORM_ID_POS_FIX, result_table)
+        
+        row_info = get_info_from_view_page(driver)
+        rows_total_data.append(row_info)
+        
+        # use_element_by_class("voltar", driver)
+        use_element_by_xpath("/html/body/div[2]/div[2]/form/table/tfoot/tr/td/input", driver)
+
         result_table = get_rows_from_table(driver)
         
     return rows_total_data
@@ -77,38 +96,46 @@ def get_info_from_print_page(driver):
 
     info["codigo"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[1]/td", driver)
     info["titulo"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[2]/td", driver)
-    info["ano"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[3]/td", driver)
-    info["periodo_de_realizacao"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[4]/td", driver)
-    info["tipo"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[5]/td", driver)
-    info["situacao"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[6]/td", driver)
-    info["munincipio_de_realizacao"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[7]/td", driver)
-    info["espaco_de_realizacao"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[8]/td", driver)
-    info["abrangencia"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[9]/td", driver)
-    info["publico_alvo"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[10]/td", driver)
-    info["unidade_proponente"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[11]/td", driver)
-    info["unidade_orcamentaria"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[12]/td", driver)
-    #This is a table, contrary to the other fields
-    # info["outras_unidades_envolvidas"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[13]/td", driver)
-    info["area_principal"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[14]/td", driver)
-    info["area_do_cnpq"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[15]/td", driver)
-    info["fonte_de_financiamento"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[16]/td", driver)
-    info["convenio_funpec"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[17]/td", driver)   
-    info["renovacao"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[18]/td", driver)
-    info["numero_bolsas_solicitadas"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[19]/td", driver) 
-    info["numero_bolsas_concedidas"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[20]/td", driver)
-    info["numero_discentes_envolvidos"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[21]/td", driver)
-    info["faz_parte_de_programa_de_extensao"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[22]/td", driver)
-    info["publico_estimado"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[23]/td", driver)  
-    info["publico_real_atendido"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[24]/td", driver)
-    info["tipo_de_cadastro"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[25]/td", driver)
-    info["tipo_do_evento"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[26]/td", driver)
-    info["periodo_do_evento"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[27]/td", driver)
-    info["carga_horario"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[28]/td", driver)
-    info["previsao_n_de_vagas"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[29]/td", driver)
-    info["contato_coordenacao"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[31]/td", driver)
-    info["contato_email"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[32]/td", driver)
-    info["contato_telefone"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[33]/td", driver)
+    # info["ano"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[3]/td", driver)
+    # info["periodo_de_realizacao"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[4]/td", driver)
+    # info["tipo"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[5]/td", driver)
+    # info["situacao"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[6]/td", driver)
+    # info["munincipio_de_realizacao"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[7]/td", driver)
+    # info["espaco_de_realizacao"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[8]/td", driver)
+    # info["abrangencia"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[9]/td", driver)
+    # info["publico_alvo"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[10]/td", driver)
+    # info["unidade_proponente"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[11]/td", driver)
+    # info["unidade_orcamentaria"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[12]/td", driver)
+    # #This is a table, contrary to the other fields
+    # # info["outras_unidades_envolvidas"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[13]/td", driver)
+    # info["area_principal"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[14]/td", driver)
+    # info["area_do_cnpq"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[15]/td", driver)
+    # info["fonte_de_financiamento"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[16]/td", driver)
+    # info["convenio_funpec"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[17]/td", driver)   
+    # info["renovacao"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[18]/td", driver)
+    # info["numero_bolsas_solicitadas"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[19]/td", driver) 
+    # info["numero_bolsas_concedidas"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[20]/td", driver)
+    # info["numero_discentes_envolvidos"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[21]/td", driver)
+    # info["faz_parte_de_programa_de_extensao"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[22]/td", driver)
+    # info["publico_estimado"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[23]/td", driver)  
+    # info["publico_real_atendido"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[24]/td", driver)
+    # info["tipo_de_cadastro"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[25]/td", driver)
+    # info["tipo_do_evento"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[26]/td", driver)
+    # info["periodo_do_evento"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[27]/td", driver)
+    # info["carga_horario"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[28]/td", driver)
+    # info["previsao_n_de_vagas"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[29]/td", driver)
+    # info["contato_coordenacao"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[31]/td", driver)
+    # info["contato_email"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[32]/td", driver)
+    # info["contato_telefone"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[33]/td", driver)
     
+    return info
+
+def get_info_from_view_page(driver):
+    info = {}
+
+    info["codigo"] = get_info_try_except("//html/body/div[2]/div[2]/form/table/tbody/tr[2]/td", driver)
+    info["titulo"] = get_info_try_except("//html/body/div/div[2]/form/table[1]/tbody/tr[3]/td", driver)
+
     return info
 
 # def get_info_from_print_page(driver):
