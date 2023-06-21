@@ -1,6 +1,6 @@
-RIGHT_ARROW = " -> "
-LEFT_ARROW = " <- "
-HASH = " ##### "
+RIGHT_ARROW = "->"
+LEFT_ARROW = "<-"
+HASH = "#####"
 
 pages_valid = {
     'discente' : ["https://sigaa.unb.br/sigaa/portais/discente/discente.jsf", "https://sigaa.unb.br/sigaa/telaAvisoLogon.jsf"],
@@ -32,3 +32,7 @@ class Timer:
         print(f"\tStart time: {self.start_ctime}")
         print(f"\tEnd time: {self.end_ctime}")
         print(f"\tElapsed time: {self.get_elapsed_time():.2f} minutes")
+
+    def print_partial_elapsed_ctime(self, msg:str):
+        self.set_end_time()
+        print(f"{msg} {self.get_elapsed_time():.2f} minutes")
