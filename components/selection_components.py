@@ -144,7 +144,7 @@ def get_info_from_view_page(driver):
     info["unidade_orcamentaria"] = get_info_try_except("/html/body/div[2]/div[2]/form/table/tbody/tr[7]/td", driver)
     info["executor_financeiro"] = get_info_try_except("/html/body/div[2]/div[2]/form/table/tbody/tr[8]/td", driver)
     info["unidade_coexecutora"] = get_info_try_except("/html/body/div[2]/div[2]/form/table/tbody/tr[9]/td", driver)
-    info["outras_unidades_envolvidas"] = get_info_try_except`("/html/body/div[2]/div[2]/form/table/tbody/tr[10]/td", driver)
+    info["outras_unidades_envolvidas"] = get_info_try_except("/html/body/div[2]/div[2]/form/table/tbody/tr[10]/td", driver)
     info["area_cnpq"] = get_info_try_except("/html/body/div[2]/div[2]/form/table/tbody/tr[11]/td[1]", driver)
     info["area_principal"] = get_info_try_except("/html/body/div[2]/div[2]/form/table/tbody/tr[11]/td[2]]", driver)
     info["qtd_bolsas_solicitadas"] = get_info_try_except("/html/body/div[2]/div[2]/form/table/tbody/tr[12]/td[1]", driver)
@@ -161,6 +161,30 @@ def get_info_from_view_page(driver):
     info["renovacao"] = get_info_try_except("/html/body/div[2]/div[2]/form/table/tbody/tr[17]/td[2]", driver)
 
     info["linha_atuacao"] = get_info_try_except("/html/body/div[2]/div[2]/form/table/tbody/tr[18]/td", driver)
+    info["programa_estrategico"] = get_info_try_except("/html/body/div[2]/div[2]/form/table/tbody/tr[19]/td", driver)
+    info["vinculado_acao"] = get_info_try_except("/html/body/div[2]/div[2]/form/table/tbody/tr[20]/td", driver)
+    info["vinculado_grupo"] = get_info_try_except("/html/body/div[2]/div[2]/form/table/tbody/tr[21]/td", driver)
+    
+    info["parte_programa_extensao"] = get_info_try_except("/html/body/div[2]/div[2]/form/table/tbody/tr[22]/td", driver)
+    info["tipo_evento"] = get_info_try_except("/html/body/div[2]/div[2]/form/table/tbody/tr[23]/td", driver)
+    info["periodo_evento"] = get_info_try_except("/html/body/div[2]/div[2]/form/table/tbody/tr[24]/td", driver)
+
+    info["carga_horaria"] = get_info_try_except("/html/body/div[2]/div[2]/form/table/tbody/tr[25]/td[1]", driver)
+    info["previsao_vagas"] = get_info_try_except("/html/body/div[2]/div[2]/form/table/tbody/tr[25]/td[2]", driver)
+
+    info["situacao"] = get_info_try_except("/html/body/div[2]/div[2]/form/table/tbody/tr[26]/td", driver)
+    info["reponsavel_acao_nome"] = get_info_try_except("/html/body/div[2]/div[2]/form/table/tbody/tr[27]/td", driver)
+    info["reponsavel_acao_email"] = get_info_try_except("/html/body/div[2]/div[2]/form/table/tbody/tr[28]/td", driver)
+    info["reponsavel_acao_telefone"] = get_info_try_except("/html/body/div[2]/div[2]/form/table/tbody/tr[29]/td", driver)
+
+    info["estado_realizacao"] = get_info_try_except("/html/body/div[2]/div[2]/form/table/tbody/tr[32]/td/table/tbody/tr[2]/td[1]")
+    info["municipio_realizacao"] = get_info_try_except("/html/body/div[2]/div[2]/form/table/tbody/tr[32]/td/table/tbody/tr[2]/td[2]", driver)
+    info["bairro_realizacao"] = get_info_try_except("/html/body/div[2]/div[2]/form/table/tbody/tr[32]/td/table/tbody/tr[2]/td[3]", driver)
+    info["espaco_realizacao"] = get_info_try_except("/html/body/div[2]/div[2]/form/table/tbody/tr[32]/td/table/tbody/tr[2]/td[4]", driver)
+
+    # Aqui precisa ter paciencia, ate fazer uma função para verificar se a imagem contida é light ou não
+
+
     return info
 
 # def get_info_from_print_page(driver):
