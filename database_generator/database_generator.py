@@ -23,8 +23,8 @@ def get_every_extension_activity_from_years(start_year: str, end_year: str, driv
 
     print(HASH, f'{month}/{year}', HASH)
     if (qtd > 55):
-        # _get_activities_from_list_printer(driver)
-        _get_activities_from_list_view(driver)
+        _get_activities_from_list_printer(driver)
+        # _get_activities_from_list_view(driver)
     print(f' {RIGHT_ARROW} Itens = {qtd-55} {LEFT_ARROW}')
     
     time.print_partial_elapsed_ctime(f'{month}/{year}')  
