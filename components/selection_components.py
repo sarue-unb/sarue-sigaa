@@ -46,7 +46,8 @@ def get_rows_len(result_table):
 def get_rows_from_table(driver):
         return driver.find_element(By.ID, "listagem")
 
-def get_row_data( driver):
+
+def get_row_data(driver, month, year):
     rows_total_data = []
     result_table= get_rows_from_table(driver)
     rows_length = get_rows_len(result_table)
@@ -56,6 +57,7 @@ def get_row_data( driver):
             use_element_by_id(PRINTER_FORM_ID_PRE_FIX + str(i) + PRINTER_FORM_ID_POS_FIX, result_table)
             
             row_info = get_info_from_print_page(driver)
+            add_date_to_item(row_info, month, year)
             rows_total_data.append(row_info)
             
             use_element_by_class("voltar", driver)
@@ -63,6 +65,10 @@ def get_row_data( driver):
             result_table = get_rows_from_table(driver)
             
     return rows_total_data
+
+def add_date_to_item(item, month, year):
+     item['data_inicio'] = {'mes': month, 'ano': year}
+     return item
 
 def get_info_from_print_page(driver):
     try:
@@ -102,6 +108,7 @@ def get_info_from_print_page(driver):
         info["contato_coordenacao"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[31]/td", driver).text
         info["contato_email"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[32]/td", driver).text
         info["contato_telefone"] = get_element_by_xpath("//html/body/div/div[2]/form/table[1]/tbody/tr[33]/td", driver).text
+        
     except:
         return info
     return info
