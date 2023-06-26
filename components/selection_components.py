@@ -80,8 +80,8 @@ def get_row_data_view(driver):
         row_info = get_info_from_view_page(driver)
         rows_total_data.append(row_info)
         
-        # use_element_by_class("voltar", driver)
-        use_element_by_xpath("/html/body/div[2]/div[2]/form/table/tfoot/tr/td/input", driver)
+        use_element_by_class("voltar", driver)
+        # use_element_by_xpath("/html/body/div[2]/div[2]/form/table/tfoot/tr/td/input", driver)
 
         result_table = get_rows_from_table(driver)
         
