@@ -2,7 +2,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
 from database_generator.constants import *
 import components.info_printer as Printer
-
 from tqdm import tqdm
 
 def use_input_by_name(name: str, input: str, driver):
@@ -51,7 +50,7 @@ def get_rows_len(result_table):
 def get_rows_from_table(driver):
         return driver.find_element(By.ID, "listagem")
 
-def get_row_data_printer( driver):
+def get_row_data_printer(driver, month, year):
     rows_total_data = []
     result_table = get_rows_from_table(driver)
     rows_length = get_rows_len(result_table)
@@ -60,6 +59,7 @@ def get_row_data_printer( driver):
         use_element_by_id(PRINTER_FORM_ID_PRE_FIX + str(i) + PRINTER_FORM_ID_POS_FIX, result_table)
         
         row_info = Printer.get_info_from_print_page(driver)
+        add_date_to_item(row_info, month, year)
         rows_total_data.append(row_info)
         
         use_element_by_class("voltar", driver)
@@ -69,7 +69,7 @@ def get_row_data_printer( driver):
         
     return rows_total_data
 
-def get_row_data_view(driver):
+def get_row_data_view(driver, month, year):
     rows_total_data = []
     result_table = get_rows_from_table(driver)
     rows_length = get_rows_len(result_table)
@@ -78,6 +78,7 @@ def get_row_data_view(driver):
         use_element_by_id(VIEW_FORM_ID_PRE_FIX + str(i) + VIEW_FORM_ID_POS_FIX, result_table)
         
         row_info = get_info_from_view_page(driver)
+        add_date_to_item(row_info, month, year)
         rows_total_data.append(row_info)
         
         use_element_by_class("voltar", driver)
@@ -86,6 +87,10 @@ def get_row_data_view(driver):
         result_table = get_rows_from_table(driver)
         
     return rows_total_data
+
+def add_date_to_item(item, month, year):
+     item['data_inicio'] = {'mes': month, 'ano': year}
+     return item
 
 def get_info_try_except(xpath, driver):
     try:
