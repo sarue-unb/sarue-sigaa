@@ -1,4 +1,3 @@
-from components.database_formatter import format_special_char
 from crawler import Crawler
 from output_format import Timer
 
@@ -15,8 +14,12 @@ class Main:
         timer.print_elapsed_ctime()
         input("Press enter to exit")
 
-        print("Formatting file:")
-        format_special_char()
+
+        end_time = time.time()
+        print("Script end", end_time)
+        execution_time = end_time - start_time
+
+        print(f"Execution time: {execution_time} seconds")
 
 if __name__ == "__main__":
     main_obj = Main()

@@ -10,17 +10,19 @@ def get_every_extension_activity_from_years(start_year: str, end_year: str, driv
         return
     
     for year in range(start_year, end_year + 1):
-        for month in range(1,13): # Janeiro a Dezembro
-            _search_month_year(month, year, driver)
-            
-            print(RIGHT_ARROW, year, month, HASH, dc.count_listing(driver), LEFT_ARROW)
-            if (dc.count_listing(driver) != 0):
-                _get_activities_from_list(driver)
+
+        for month in range(1,13):
+            try:
+                _search_month_year(month, year, driver)
+                print("Trying for month", month)
+                _get_activities_from_list(driver, month, year)
+            except:
+                print("No result found for month, year", month, year)
+    jg.generate_json(start_year, end_year)
+
     
-    jg.generate_json()
-    
-def _get_activities_from_list(driver):
-    activities_info = dc.get_row_data(driver)
+def _get_activities_from_list(driver, month, year):
+    activities_info = dc.get_row_data(driver, month, year)
     for row in activities_info:
         jg.add_item_to_database(row["codigo"], row)
         
