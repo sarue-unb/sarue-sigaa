@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
 from database_generator.constants import *
+from output_format import SIZE_TERMINAL
 import components.info_printer as Printer
 from tqdm import tqdm
 
@@ -55,7 +56,7 @@ def get_row_data_printer(driver, month, year):
     result_table = get_rows_from_table(driver)
     rows_length = get_rows_len(result_table)
     
-    for i in tqdm(range(0, rows_length - 1)): # tqdm is a progress bar
+    for i in tqdm(range(0, rows_length - 1), desc=f'{month}/{year}', bar_format='{desc} - {elapsed} {bar} {n_fmt}/{total_fmt} - {percentage:.0f}%', ncols=SIZE_TERMINAL): # tqdm is a progress bar
         use_element_by_id(PRINTER_FORM_ID_PRE_FIX + str(i) + PRINTER_FORM_ID_POS_FIX, result_table)
         
         row_info = Printer.get_info_from_print_page(driver)

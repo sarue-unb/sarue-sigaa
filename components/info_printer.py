@@ -1,7 +1,22 @@
 from selenium.webdriver.common.by import By
+from database_generator.constants import OBJECT_FORM_ID
+
+def get_qtd_tables_by_xpath(xpath: str, driver):
+    form = driver.find_element(By.XPATH, xpath)
+
+    return len(form.find_elements(By.XPATH, "table"))
 
 def get_element_by_xpath(value: int, driver):
     return driver.find_element(By.XPATH, value)
+
+def get_element_by_id(id: str, driver):
+    return driver.find_element(By.ID, id)
+    
+def get_element_by_class(class_name: str, driver):
+    return driver.find_element(By.CLASS_NAME, class_name)
+
+def get_rows_len(result_table):
+     return len(result_table.find_elements(By.XPATH, ".//tr"))
 
 def get_info_try_except(xpath, driver):
     try:
@@ -42,6 +57,9 @@ def get_info_from_print_page(driver):
     elif info["tipo"] == "PROJETO":
         info = get_info_from_printer_type_projeto(info, driver)
 
+    if (get_qtd_tables_by_xpath("/html/body/div/div[2]/form", driver) > 1):
+        info = get_info_objetivos(info, "/html/body/div/div[2]/form/table[2]", driver)
+    
     return info
 
 def get_info_from_printer_type_curso(info:dict, driver):
@@ -73,7 +91,7 @@ def get_info_from_printer_type_curso(info:dict, driver):
     info["contato_coordenacao"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[32]/td", driver)
     info["contato_email"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[33]/td", driver)
     info["contato_telefone"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[34]/td", driver)
-    
+   
     return info
 
 def get_info_from_printer_type_evento(info:dict, driver):
@@ -188,4 +206,13 @@ def get_info_from_printer_type_projeto(info:dict, driver):
     info["contato_email"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[29]/td", driver)
     info["contato_telefone"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[30]/td", driver)
 
+    return info
+
+def get_info_objetivos(info: dict, xpath: str, driver):
+    tipo = get_element_by_xpath(xpath, driver)
+    
+    if tipo != None:
+        qtd = get_rows_len(tipo)
+        info["objetivos"] = [int(get_info_direct("//html/body/div/div[2]/form/table[2]/tbody/tr[{}]/td[1]".format(i), driver)) for i in range(1, qtd)]
+        
     return info
