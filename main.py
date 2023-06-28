@@ -1,12 +1,13 @@
 from crawler import Crawler
-from output_format import Timer
+from output_format import *
 
 class Main:
     def __init__(self):
         pass
     
     def begin(self):
-        print("Script start")
+        print(SEPARATOR)
+        centralize("Script start")
         timer = Timer()
         crawler = Crawler()
         timer.set_start_time()

@@ -1,6 +1,8 @@
 RIGHT_ARROW = "->"
 LEFT_ARROW = "<-"
 HASH = "#####"
+SIZE_TERMINAL = 70
+SEPARATOR = "="*SIZE_TERMINAL
 
 pages_valid = {
     'discente' : ["https://sigaa.unb.br/sigaa/portais/discente/discente.jsf", "https://sigaa.unb.br/sigaa/telaAvisoLogon.jsf"],
@@ -24,15 +26,31 @@ class Timer:
 
     def get_elapsed_time(self):
         self.set_end_time()
-        return (self.end_time - self.start_time)/60
+        elapsed_time = (self.end_time - self.start_time)
+        minutes = int(elapsed_time/60)
+        seconds = int(elapsed_time%60)
+
+        return minutes, seconds
     
     def print_elapsed_ctime(self):
         self.set_end_time()
-        print("Script end")
+        minutes, seconds = self.get_elapsed_time()
+
+        print(RIGHT_ARROW, "Script end", LEFT_ARROW).center(SIZE_TERMINAL)
+        print(SEPARATOR)
         print(f"\tStart time: {self.start_ctime}")
         print(f"\tEnd time: {self.end_ctime}")
-        print(f"\tElapsed time: {self.get_elapsed_time():.2f} minutes")
+        print(f"\tElapsed time: {minutes:02}:{seconds:02} minutes")
+        print(SEPARATOR)
 
     def print_partial_elapsed_ctime(self, msg:str):
         self.set_end_time()
-        print(f"{msg} {self.get_elapsed_time():.2f} minutes")
+        minutes, seconds = self.get_elapsed_time()
+
+        print(SEPARATOR)
+        print(f"{msg} - {minutes:02}:{seconds:02}")
+        print(SEPARATOR)
+
+
+def centralize(msg:str):
+    print(msg.center(SIZE_TERMINAL))
