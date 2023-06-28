@@ -1,8 +1,0 @@
-{
-   " <input id=\"formBuscaAtividade:selectBuscaTitulo\" type=\"checkbox\" name=\"formBuscaAtividade:selectBuscaTitulo\" class=\"noborder\"> ": {
-      "titulo": " <label for=\"titulo\"> T\u00edtulo da A\u00e7\u00e3o: </label> ",
-      "unidade": " <input id=\"formBuscaAtividade:buscaTitulo\" type=\"text\" name=\"formBuscaAtividade:buscaTitulo\" value=\"\" onchange=\"javascript:$('formBuscaAtividade:selectBuscaTitulo').checked = true;\" style=\"width:90%\">\n\t    \t",
-      "situacao": "EM EXECU\u00c7\u00c3O",
-      "dimensao_academica ": "EXTENS\u00c3O"
-   }
-}
