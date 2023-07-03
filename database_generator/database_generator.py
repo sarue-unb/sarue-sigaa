@@ -19,8 +19,7 @@ def get_every_extension_activity_from_years(start_year: str, end_year: str, driv
                 qtd = dc.get_rows_len(driver) # 55 é a quantidade quando não tem ações para discentes
 
                 if (qtd > 55):
-                    pass
-                    # _get_activities_from_list_printer(driver, month, year)
+                    _get_activities_from_list_printer(driver, month, year)
                     # _get_activities_from_list_view(driver, month, year)
                     
             elif perfil == "docente":
