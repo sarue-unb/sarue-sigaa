@@ -15,4 +15,4 @@ def format_special_char(file_name):
     
 
 def _transform_quotation_marks(unaltered_text):
-    return unaltered_text.replace('\\"', "'")
+    return unaltered_text.replace('\\"', '"')
