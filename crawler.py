@@ -25,7 +25,7 @@ class Crawler:
                         self.driver = webdriver.Firefox()
                         navegador = "firefox"
                     except Exception as e:
-                        print("Nenhum navegador padrão encontrado.")
+                        centralize("Nenhum navegador encontrado")
                         navegador = None
                         exit(1)
 
@@ -51,6 +51,10 @@ class Crawler:
             perfil = "discente"
             
             sp.go_into_extension_page(self.driver, self.env) # Navegar para a página de extensão
+            
+            total = dg.get_qtd_actions(2020, 2023, self.driver)
+            
+            centralize(f'{RIGHT_ARROW} Total de ações de extensão: {total} {LEFT_ARROW}')
             
         elif self.driver.current_url in pages_valid['docente']: 
             centralize(f'{RIGHT_ARROW} Logged in as docente {LEFT_ARROW}')

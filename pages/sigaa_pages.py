@@ -1,4 +1,4 @@
-import components.selection_components as dc
+import components.selection_components as sc
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 
@@ -17,9 +17,7 @@ def _skip_welcome_screen(driver):
     except NoSuchElementException:  
         pass
 
-# not used anymore
 def _login_into_sigaa(driver, env_var):
-    dc.use_input_by_name("user.login", env_var['SIGAA_USER'], driver)
-    dc.use_input_by_name("user.senha", env_var['SIGAA_PASS'], driver)
+    sc.use_input_by_name("user.login", env_var['SIGAA_USER'], driver)
+    sc.use_input_by_name("user.senha", env_var['SIGAA_PASS'], driver)
     driver.find_element(By.XPATH, "//input[@type='submit']").click()
-    
