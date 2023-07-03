@@ -18,7 +18,9 @@ def generate_json(start_year, end_year):
 
     file_name = file_path + "extension_activity_database_" + str(start_year) + "_" + str(end_year) + "_" + str(current_time)
     file_name = file_name.replace(":", "-") + ".json"
-    file_output = open(file_name, "w+")
-
-    json.dump(activity_database, file_output, indent=3)
+    with open(file_name, "w+") as file_output:  
+        json.dump(activity_database, file_output, indent=3)
+        
     format_special_char(file_name)
+
+    
