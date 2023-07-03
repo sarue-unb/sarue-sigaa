@@ -40,4 +40,5 @@ Thumbs.db
 ################
 *~
 *.pyc
+.env
 __pycache__/
