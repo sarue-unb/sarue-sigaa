@@ -10,7 +10,7 @@ from selenium.common.exceptions import StaleElementReferenceException
 from concurrent.futures import ThreadPoolExecutor
 
 START_YEAR = 2020
-END_YEAR = 2023
+END_YEAR = 2022
 
 class MiniCrawler:
     def __init__(self):
