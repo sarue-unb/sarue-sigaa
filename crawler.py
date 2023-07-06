@@ -1,6 +1,7 @@
 import pages.extension_page as ep
 import pages.sigaa_pages as sp 
 import database_generator.database_generator as dg
+import database_generator.json_generator as jg
 import components.selection_components as sc
 
 from selenium import webdriver # pip install selenium
@@ -9,8 +10,9 @@ from output_format import *
 from selenium.common.exceptions import StaleElementReferenceException
 from concurrent.futures import ThreadPoolExecutor
 
+
 START_YEAR = 2020
-END_YEAR = 2022
+END_YEAR = 2023
 
 class MiniCrawler:
     def __init__(self):
@@ -80,6 +82,7 @@ class Crawler:
     def instance_login(self):
         self.driver.implicitly_wait(10)
 
+        sp._login_into_sigaa(self.driver, self.env)
         username_xpath = "/html/body/div[2]/div[2]/div[4]/form/table/tbody/tr[1]/td/input"
         password_xpath = "/html/body/div[2]/div[2]/div[4]/form/table/tbody/tr[2]/td/input"
 
@@ -120,4 +123,5 @@ class Crawler:
                 year_instance = MiniCrawler()
                 year_list[year] = year_instance
                 executor.submit(year_instance.run, year, self.perfil, username, password)
+            jg.generate_json(START_YEAR, END_YEAR)
 

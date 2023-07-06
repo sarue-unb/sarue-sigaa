@@ -11,11 +11,12 @@ def add_item_to_database(activity_name:str, activity_values:str):
     
 def generate_json(start_year, end_year):
     current_time = datetime.now().strftime('%H:%M:%S')
+    
+    file_path = "database/"
 
     if not os.path.exists(file_path):
         os.makedirs(file_path)
 
-    file_path = "database/"
     file_name = file_path + "extension_activity_database_" + str(start_year) + "_" + str(end_year) + "_" + str(current_time)
     file_name = file_name.replace(":", "-") + ".json"
     
