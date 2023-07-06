@@ -7,6 +7,11 @@ def go_into_extension_page(driver, env):
     # _skip_welcome_screen(driver)
     _go_into_extension_actions(driver)
 
+def login_into_sigaa(driver, USERNAME, PASSWORD):
+    sc.use_input_by_name("user.login", USERNAME, driver)
+    sc.use_input_by_name("user.senha", PASSWORD, driver)
+    driver.find_element(By.XPATH, "//input[@type='submit']").click()
+
 def _go_into_extension_actions(driver):
     driver.find_element(By.XPATH, "/html/body/div[2]/div[2]/div[1]/div[1]/div/form/div/table/tbody/tr/td[3]/span[2]").click()
     driver.find_element(By.XPATH, "/html/body/div[2]/div[2]/div[1]/div[1]/div/form/div/div[15]/table/tbody/tr[1]/td[1]").click()

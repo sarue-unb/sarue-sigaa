@@ -28,24 +28,24 @@ def uncheck_checkbox(name: str, driver):
 def use_element_by_id(id: str, driver):
     driver.find_element(By.ID, id).click()
 
-def use_element_by_class(class_name: str, driver):
-    driver.find_element(By.CLASS_NAME, class_name).click()
-
 def use_element_by_xpath(value: int, driver):
     return driver.find_element(By.XPATH, value).click()
 
-def get_element_by_xpath(value: int, driver):
-    return driver.find_element(By.XPATH, value)
+def use_element_by_class(class_name: str, driver):
+    driver.find_element(By.CLASS_NAME, class_name).click()
 
 def get_element_by_id(id: str, driver):
     return driver.find_element(By.ID, id)
 
-def get_element_by_select(name: str, option: str, driver):
-    select = Select(driver.find_element_by_name(name))
-    select.select_by_visible_text(option)
+def get_element_by_xpath(value: int, driver):
+    return driver.find_element(By.XPATH, value)
 
 def get_element_by_class(class_name: str, driver):
     driver.find_element(By.CLASS_NAME, class_name)
+
+def get_element_by_select(name: str, option: str, driver):
+    select = Select(driver.find_element_by_name(name))
+    select.select_by_visible_text(option)
 
 def count_listing(driver):
     try:

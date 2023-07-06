@@ -28,9 +28,11 @@ def get_every_extension_activity_from_years(start_year: str, end_year: str, driv
                 if (qtd > 0):
                     _get_activities_from_list_printer(driver, month, year)
                     # _get_activities_from_list_view(driver, month, year)
-    
+        
+        print(SEPARATOR)
         time.print_partial_elapsed_ctime(f'{year}')  
-                    
+        print(SEPARATOR)
+        
     jg.generate_json(start_year, end_year)
 
 def get_every_extension_activity_from_month_years(month: str, year: str, driver, perfil:str):
