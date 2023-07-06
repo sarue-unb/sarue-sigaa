@@ -5,6 +5,7 @@ import database_generator.json_generator as jg
 import components.selection_components as sc
 
 from selenium import webdriver # pip install selenium
+from selenium.webdriver.chrome.options import Options
 from dotenv import dotenv_values # pip install python-dotenv
 from output_format import *
 from selenium.common.exceptions import StaleElementReferenceException
@@ -17,20 +18,31 @@ END_YEAR = 2023
 class MiniCrawler:
     def __init__(self):
         try: 
-            self.driver = webdriver.Safari()
+            self.safari_options = Options()
+            self.safari_options.headless = True
+
+            self.driver = webdriver.Safari(options=self.safari_options)
             navegador = "safari"    
         except Exception as e:
             try:
-                self.driver = webdriver.Chrome()
+                self.chrome_options = Options()
+                self.chrome_options.headless = True
+                # self.chrome_options.add_argument("--disable-gpu")  # Desabilitar aceleração de hardware
+                self.chrome_options.add_argument("--no-sandbox")  # Necessário para rodar no Linux
+    
+                self.driver = webdriver.Chrome(options=self.chrome_options)
                 navegador = "chrome"
             except Exception as e:
                 try: 
-                    self.driver = webdriver.Edge()
-                    navegador = "edge"
+                    self.firefox_options = Options()
+                    self.firefox_options.headless = True    
+
+                    self.driver = webdriver.Firefox(options=self.firefox_options)
+                    navegador = "firefox"
                 except Exception as e:
                     try: 
-                        self.driver = webdriver.Firefox()
-                        navegador = "firefox"
+                        self.driver = webdriver.Edge()
+                        navegador = "edge"
                     except Exception as e:
                         centralize("Nenhum navegador encontrado")
                         navegador = None

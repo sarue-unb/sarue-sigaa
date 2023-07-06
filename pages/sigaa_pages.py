@@ -25,4 +25,4 @@ def _skip_welcome_screen(driver):
 def _login_into_sigaa(driver, env_var):
     sc.use_input_by_name("user.login", env_var['SIGAA_USER'], driver)
     sc.use_input_by_name("user.senha", env_var['SIGAA_PASS'], driver)
-    driver.find_element(By.XPATH, "//input[@type='submit']").click()
+    # driver.find_element(By.XPATH, "//input[@type='submit']").click()
