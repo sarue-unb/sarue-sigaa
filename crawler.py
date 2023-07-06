@@ -7,7 +7,7 @@ from selenium import webdriver # pip install selenium
 from dotenv import dotenv_values # pip install python-dotenv
 from output_format import *
 
-class Crawler:
+class MiniCrawler:
     def __init__(self):
         try: 
             self.driver = webdriver.Safari()
@@ -30,44 +30,81 @@ class Crawler:
                         exit(1)
 
         self.env = dotenv_values(".env")
-
-        centralize(f'Navegador Usado: {RIGHT_ARROW} {navegador.capitalize()} {LEFT_ARROW}')
     
+    def instance_login(self):
+        sp._login_into_sigaa(self.driver, self.env)
+        
+        if self.driver.current_url in pages_valid['discente']:
+            perfil = "discente"    
+            sp.go_into_extension_page(self.driver, self.env) # Navegar para a página de extensão
+            input("===")
+        elif self.driver.current_url in pages_valid['docente']: 
+            perfil = "docente"
+            input(("Ao chegar na pagina de extensao aperte enter").center(SIZE_TERMINAL))
+
+        return perfil
+    
+    def navigate_to_extension_page(self, perfil):
+        if perfil == 'discente':
+            sp.go_into_extension_page(self.driver, self.env) # Navegar para a página de extensão
+        elif perfil == 'docente':
+            pass
+
+    def run(self):
+        self.driver.get("https://sigaa.unb.br/sigaa/")
+        perfil = self.instance_login()
+        self.navigate_to_extension_page(perfil)
+
+        dg.get_every_extension_activity_from_years(self.year, self.year, self.driver, self.perfil)
+
+        self.driver.quit()
+
+class Crawler:
+    def __init__(self):
+        # try: 
+        #     self.driver = webdriver.Safari()
+        #     navegador = "safari"    
+        # except Exception as e:
+        #     try:
+        #         self.driver = webdriver.Chrome()
+        #         navegador = "chrome"
+        #     except Exception as e:
+        #         try: 
+        #             self.driver = webdriver.Edge()
+        #             navegador = "edge"
+        #         except Exception as e:
+        #             try: 
+        #                 self.driver = webdriver.Firefox()
+        #                 navegador = "firefox"
+        #             except Exception as e:
+        #                 centralize("Nenhum navegador encontrado")
+        #                 navegador = None
+        #                 exit(1)
+
+        self.env = dotenv_values(".env")
+
+        # centralize(f'Navegador Usado: {RIGHT_ARROW} {navegador.capitalize()} {LEFT_ARROW}')
+    
+   
     def run(self):
         centralize(f'{RIGHT_ARROW} Running Crawler {LEFT_ARROW}')
 
-        self.driver.get("https://sigaa.unb.br/sigaa/")
-      
-        ### LOGIN     
-        self.driver.implicitly_wait(20) # Espera 20 segundos para o usuário se autenticar.
-        sp._login_into_sigaa(self.driver, self.env)
-        ### Aqui, posso ver qual o perfil do usuário
-        while (self.driver.current_url not in pages_valid['discente'] and self.driver.current_url not in pages_valid['docente']):
-            centralize(f'{RIGHT_ARROW} Not logged in yet {LEFT_ARROW}')
-            time.sleep(5) # Usado para não poluir o console com mensagens de "Not logged in yet"
+        driver_2020 = MiniCrawler()
+        driver_2020.year = 2020
+        driver_2020.run()
+
+        # self.driver.get("https://sigaa.unb.br/sigaa/")
         
-        if self.driver.current_url in pages_valid['discente']:
-            centralize(f'{RIGHT_ARROW} Logged in as discente {LEFT_ARROW}')
-            perfil = "discente"
-            
-            sp.go_into_extension_page(self.driver, self.env) # Navegar para a página de extensão
-            
-            total = dg.get_qtd_actions(2020, 2023, self.driver)
-            
-            centralize(f'{RIGHT_ARROW} Total de ações de extensão: {total} {LEFT_ARROW}')
-            
-        elif self.driver.current_url in pages_valid['docente']: 
-            centralize(f'{RIGHT_ARROW} Logged in as docente {LEFT_ARROW}')
-            
-            perfil = "docente"
+        # perfil = "discente"
 
-            input(("Ao chegar na pagina de extensao aperte enter").center(SIZE_TERMINAL))
-        ###
+        # print(SEPARATOR)
+        # input("Aperte enter para continuar".center(SIZE_TERMINAL))
+        # start_year = 2020
+        # end_year = 2020
 
-        print(SEPARATOR)
-
-        dg.get_every_extension_activity_from_years(2020, 2023, self.driver, perfil)
-        # dg.get_every_extension_activity_from_month_years(5, 2020, self.driver, perfil)
+        # driver_2020 = webdriver.Chrome()
+        # driver_2020.get("https://sigaa.unb.br/sigaa/extensao/Atividade/lista.jsf")
+        # driver_2020.execute_cdp_cmd('Network.setCookies', {'cookies': self.driver.get_cookies()})
 
         # self.driver.quit()
         centralize(f'{RIGHT_ARROW} Ending Crawler {LEFT_ARROW}')
