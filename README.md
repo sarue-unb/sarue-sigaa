@@ -49,14 +49,15 @@ Para rodar esse software é necessário ter o python3 instalado
 ### Prerequisites
 
 - Python3
-- selenium
-- dotenv
+- Selenium
+- Dotenv
+- Tqdm
 Please read this guide to understand how Selenium Xpath works https://www.guru99.com/xpath-selenium.html
 
 ### Installation
 - pip install python-dotenv
 - pip install selenium
-
+- pip install tqdm
 
 <!-- USAGE EXAMPLES -->
 ## Usage

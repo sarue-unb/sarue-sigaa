@@ -5,6 +5,12 @@ from output_format import SIZE_TERMINAL
 import components.info_printer as Printer
 from tqdm import tqdm
 
+def get_error_message(driver):
+    try:
+        return driver.find_element(By.XPATH, '/html/body/div[2]/div[2]/div[1]/ul/li').text
+    except:
+        return None
+    
 def use_input_by_name(name: str, input: str, driver):
     input_field = driver.find_element(By.NAME, name)
     input_field.click()
@@ -14,27 +20,32 @@ def clear_input(name: str, driver):
     input_field = driver.find_element(By.NAME, name)
     input_field.clear()
     
+def uncheck_checkbox(name: str, driver):
+    checkbox = driver.find_element(By.NAME, name)
+    if checkbox.is_selected():
+        checkbox.click()
+        
 def use_element_by_id(id: str, driver):
     driver.find_element(By.ID, id).click()
-
-def use_element_by_class(class_name: str, driver):
-    driver.find_element(By.CLASS_NAME, class_name).click()
 
 def use_element_by_xpath(value: int, driver):
     return driver.find_element(By.XPATH, value).click()
 
-def get_element_by_xpath(value: int, driver):
-    return driver.find_element(By.XPATH, value)
+def use_element_by_class(class_name: str, driver):
+    driver.find_element(By.CLASS_NAME, class_name).click()
 
 def get_element_by_id(id: str, driver):
     return driver.find_element(By.ID, id)
 
-def get_element_by_select(name: str, option: str, driver):
-    select = Select(driver.find_element_by_name(name))
-    select.select_by_visible_text(option)
+def get_element_by_xpath(value: int, driver):
+    return driver.find_element(By.XPATH, value)
 
 def get_element_by_class(class_name: str, driver):
     driver.find_element(By.CLASS_NAME, class_name)
+
+def get_element_by_select(name: str, option: str, driver):
+    select = Select(driver.find_element_by_name(name))
+    select.select_by_visible_text(option)
 
 def count_listing(driver):
     try:
