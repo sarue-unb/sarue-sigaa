@@ -32,8 +32,28 @@ def get_every_extension_activity_from_years(start_year: str, end_year: str, driv
         print("\n",SEPARATOR, sep='')
         time.print_partial_elapsed_ctime(f'{year}')  
         print(SEPARATOR)
+
+def get_every_extension_activity_from_months(start_month: str, end_month: str, year: str, driver, perfil:str):
+    if (end_month < start_month):
+        print("ERROR: End Month less than start month")
+        return
+    
+    for month in range(start_month, end_month + 1):
+        _search_month_year(month, year, driver)
         
-    # jg.generate_json(start_year, end_year)
+        if perfil == "discente":
+            qtd = sc.get_rows_len(driver) # 55 é a quantidade quando não tem ações para discentes
+
+            if (qtd > 55):
+                _get_activities_from_list_printer(driver, month, year)
+                # _get_activities_from_list_view(driver, month, year)
+                
+        elif perfil == "docente":
+            qtd = sc.count_listing(driver) # função demora muito quando não encontra
+
+            if (qtd > 0):
+                _get_activities_from_list_printer(driver, month, year)
+                # _get_activities_from_list_view(driver, month, year)
 
 def get_every_extension_activity_from_month_years(month: str, year: str, driver, perfil:str):
     _search_month_year(month, year, driver)
@@ -45,7 +65,12 @@ def get_every_extension_activity_from_month_years(month: str, year: str, driver,
             _get_activities_from_list_printer(driver, month, year)
             # _get_activities_from_list_view(driver, month, year)
 
-    jg.generate_json(year, year)
+    elif perfil == "docente":
+            qtd = sc.count_listing(driver) # função demora muito quando não encontra
+
+            if (qtd > 0):
+                _get_activities_from_list_printer(driver, month, year)
+                # _get_activities_from_list_view(driver, month, year)
         
 def _get_activities_from_list_printer(driver, month, year):
     activities_info = sc.get_row_data_printer(driver, month, year)
