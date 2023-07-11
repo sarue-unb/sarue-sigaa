@@ -22,22 +22,21 @@ class MiniCrawler:
             self.chrome_options.add_argument("--headless=new")
 
             self.driver = webdriver.Chrome(options=self.chrome_options)
-            self.driver = webdriver.Chrome()
-            navegador = "chrome"
+            self.navegador = "chrome"
         except Exception as e:
             try: 
                 self.firefox_options = Options()
                 self.firefox_options.headless = True    
 
                 self.driver = webdriver.Firefox(options=self.firefox_options)
-                navegador = "firefox"
+                self.navegador = "firefox"
             except Exception as e:
                 try: 
                     self.driver = webdriver.Edge()
-                    navegador = "edge"
+                    self.navegador = "edge"
                 except Exception as e:
                     centralize("Nenhum navegador encontrado")
-                    navegador = None
+                    self.navegador = None
                     exit(1)
     
     def instance_login(self, username, password):
@@ -75,9 +74,7 @@ class MiniCrawler:
 
     def run(self, perfil, username, password, type_search, year, semester=None, quarter=None, trimester=None, group=None):
         self.driver.get(sp.LOGIN_PAGE)
-
         self.instance_login(username, password)
-      
         self.navigate_to_extension_page()
         
         if type_search == "year":
@@ -127,8 +124,6 @@ class Crawler:
         username = sc.get_element_by_xpath(sp.USERNAME_XPATH, self.driver)
         password = sc.get_element_by_xpath(sp.PASSWORD_XPATH, self.driver)
         
-        sp.click_submit_button(self.driver)
-
         while (self.driver.current_url not in pages_valid['discente'] and self.driver.current_url not in pages_valid['docente']):
             username = sc.get_element_by_xpath(sp.USERNAME_XPATH, self.driver)
             password = sc.get_element_by_xpath(sp.PASSWORD_XPATH, self.driver)
@@ -199,11 +194,11 @@ class Crawler:
        
         self.driver.quit()
 
-        self.search("year", username, password)
+        # self.search("year", username, password)
         # self.search("semester", username, password)
         # self.search("quarter", username, password)
-        # self.search("trimester", username, password)
+        self.search("trimester", username, password)
         # self.search("linear", username, password)
 
-        jg.generate_json(START_YEAR, END_YEAR)
+        # jg.generate_json(START_YEAR, END_YEAR)
 

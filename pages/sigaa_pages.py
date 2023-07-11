@@ -27,7 +27,7 @@ def insert_credencials_into_sigaa_env(driver, env_var):
 
 def click_submit_button(driver):
     # driver.find_element(By.XPATH, "//input[@type='submit']").click()
-    driver.find_element(By.XPATH, "//button[contains(text(), 'ENTRAR')]")
+    driver.find_element(By.XPATH, "//button[contains(text(), 'ENTRAR')]").click()
     # sc.use_element_by_xpath(SUBMIT_BUTTON, driver)
 
 def login_into_sigaa(driver, USERNAME, PASSWORD):
