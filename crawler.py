@@ -25,12 +25,13 @@ class MiniCrawler:
             navegador = "safari"    
         except Exception as e:
             try:
-                self.chrome_options = Options()
-                self.chrome_options.headless = True
-                # self.chrome_options.add_argument("--disable-gpu")  # Desabilitar aceleração de hardware
-                self.chrome_options.add_argument("--no-sandbox")  # Necessário para rodar no Linux
+                # self.chrome_options = Options()
+                # self.chrome_options.headless = True
+                # # self.chrome_options.add_argument("--disable-gpu")  # Desabilitar aceleração de hardware
+                # self.chrome_options.add_argument("--no-sandbox")  # Necessário para rodar no Linux
     
-                self.driver = webdriver.Chrome(options=self.chrome_options)
+                # self.driver = webdriver.Chrome(options=self.chrome_options)
+                self.driver = webdriver.Chrome()
                 navegador = "chrome"
             except Exception as e:
                 try: 
@@ -127,7 +128,7 @@ class Crawler:
         centralize(f'Navegador Usado: {RIGHT_ARROW} {navegador.capitalize()} {LEFT_ARROW}')
 
     def instance_login(self):
-        self.driver.implicitly_wait(10)
+        self.driver.implicitly_wait(120)
 
         sp._insert_credencials_into_sigaa(self.driver, self.env)
         

@@ -1,7 +1,9 @@
 import components.selection_components as sc
-from database_generator.constants import FIRST_DAY_OF_MONTH, MONTHS_LAST_DAY, ROWS_DATA_CELLS
+import components.info_printer as scif
+import components.info_view as sciv
 import pages.extension_page as ep
 import database_generator.json_generator as jg
+from database_generator.constants import FIRST_DAY_OF_MONTH, MONTHS_LAST_DAY, ROWS_DATA_CELLS
 from output_format import *
     
 def get_every_extension_activity_from_years(start_year: str, end_year: str, driver:str, perfil:str):
@@ -73,12 +75,12 @@ def get_every_extension_activity_from_month_years(month: str, year: str, driver,
                 # _get_activities_from_list_view(driver, month, year)
         
 def _get_activities_from_list_printer(driver, month, year):
-    activities_info = sc.get_row_data_printer(driver, month, year)
+    activities_info = scif.get_row_data_printer(driver, month, year)
     for row in activities_info:
         jg.add_item_to_database(row["codigo"], row)
         
 def _get_activities_from_list_view(driver, month, year):
-    activities_info = sc.get_row_data_view(driver, month, year)
+    activities_info = sciv.get_row_data_view(driver, month, year)
     for row in activities_info:
         jg.add_item_to_database(row["codigo"], row)
         
