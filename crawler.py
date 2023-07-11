@@ -17,43 +17,34 @@ MAX_THREADS = 8
 
 class MiniCrawler:
     def __init__(self):
-        try: 
-            self.safari_options = Options()
-            self.safari_options.headless = True
+        try:
+            self.chrome_options = webdriver.ChromeOptions()
+            self.chrome_options.add_argument("--headless=new")
 
-            self.driver = webdriver.Safari(options=self.safari_options)
-            navegador = "safari"    
+            self.driver = webdriver.Chrome(options=self.chrome_options)
+            self.driver = webdriver.Chrome()
+            navegador = "chrome"
         except Exception as e:
-            try:
-                # self.chrome_options = Options()
-                # self.chrome_options.headless = True
-                # # self.chrome_options.add_argument("--disable-gpu")  # Desabilitar aceleração de hardware
-                # self.chrome_options.add_argument("--no-sandbox")  # Necessário para rodar no Linux
-    
-                # self.driver = webdriver.Chrome(options=self.chrome_options)
-                self.driver = webdriver.Chrome()
-                navegador = "chrome"
+            try: 
+                self.firefox_options = Options()
+                self.firefox_options.headless = True    
+
+                self.driver = webdriver.Firefox(options=self.firefox_options)
+                navegador = "firefox"
             except Exception as e:
                 try: 
-                    self.firefox_options = Options()
-                    self.firefox_options.headless = True    
-
-                    self.driver = webdriver.Firefox(options=self.firefox_options)
-                    navegador = "firefox"
+                    self.driver = webdriver.Edge()
+                    navegador = "edge"
                 except Exception as e:
-                    try: 
-                        self.driver = webdriver.Edge()
-                        navegador = "edge"
-                    except Exception as e:
-                        centralize("Nenhum navegador encontrado")
-                        navegador = None
-                        exit(1)
+                    centralize("Nenhum navegador encontrado")
+                    navegador = None
+                    exit(1)
     
     def instance_login(self, username, password):
         sp.login_into_sigaa(self.driver, username, password)
-
+        
     def navigate_to_extension_page(self):
-        self.driver.get("https://sigaa.unb.br/sigaa/extensao/Atividade/lista.jsf")
+        self.driver.get(sp.EXTENSION_PAGE)
             
     def get_year(self, year, perfil):
         dg.get_every_extension_activity_from_months(1, 12, year, self.driver, perfil)
@@ -83,9 +74,10 @@ class MiniCrawler:
             dg.get_every_extension_activity_from_months(10, 12, year, self.driver, perfil)
 
     def run(self, perfil, username, password, type_search, year, semester=None, quarter=None, trimester=None, group=None):
-        self.driver.get("https://sigaa.unb.br/sigaa/")
-        
+        self.driver.get(sp.LOGIN_PAGE)
+
         self.instance_login(username, password)
+      
         self.navigate_to_extension_page()
         
         if type_search == "year":
@@ -96,51 +88,50 @@ class MiniCrawler:
             self.get_year_quarter(year, perfil, quarter)
         elif type_search == "trimester":
             self.get_year_trimester(year, perfil, trimester)
-        elif type_search == "alternative":
-            self.get_alternative(year, perfil, group)
+        elif type_search == "linear":
+            self.get_year(year, perfil)
 
         self.driver.quit()
 
 class Crawler:
     def __init__(self):
         try:
-            self.driver = webdriver.Safari()
-            navegador = "safari"
+            self.driver = webdriver.Chrome()
+            self.navegador = "chrome"
         except Exception as e:
             try:
-                self.driver = webdriver.Chrome()
-                navegador = "chrome"
+                self.driver = webdriver.Edge()
+                self.navegador = "edge"
             except Exception as e:
                 try:
-                    self.driver = webdriver.Edge()
-                    navegador = "edge"
+                    self.driver = webdriver.Firefox()
+                    self.navegador = "firefox"
                 except Exception as e:
                     try:
-                        self.driver = webdriver.Firefox()
-                        navegador = "firefox"
+                        self.driver = webdriver.Safari()
+                        self.navegador = "safari"
                     except Exception as e:
                         centralize("Nenhum navegador encontrado")
-                        navegador = None
+                        self.navegador = None
                         exit(1)
 
         self.env = dotenv_values(".env")
 
-        centralize(f'Navegador Usado: {RIGHT_ARROW} {navegador.capitalize()} {LEFT_ARROW}')
+        centralize(f'Navegador Usado: {RIGHT_ARROW} {self.navegador.capitalize()} {LEFT_ARROW}')
 
     def instance_login(self):
-        self.driver.implicitly_wait(120)
+        self.driver.implicitly_wait(20)
 
-        sp._insert_credencials_into_sigaa(self.driver, self.env)
+        sp.insert_credencials_into_sigaa_env(self.driver, self.env)
         
-        username_xpath = "/html/body/div[2]/div[2]/div[4]/form/table/tbody/tr[1]/td/input"
-        password_xpath = "/html/body/div[2]/div[2]/div[4]/form/table/tbody/tr[2]/td/input"
+        username = sc.get_element_by_xpath(sp.USERNAME_XPATH, self.driver)
+        password = sc.get_element_by_xpath(sp.PASSWORD_XPATH, self.driver)
+        
+        sp.click_submit_button(self.driver)
 
-        username = sc.get_element_by_xpath(username_xpath, self.driver)
-        password = sc.get_element_by_xpath(password_xpath, self.driver)
-        
         while (self.driver.current_url not in pages_valid['discente'] and self.driver.current_url not in pages_valid['docente']):
-            username = sc.get_element_by_xpath(username_xpath, self.driver)
-            password = sc.get_element_by_xpath(password_xpath, self.driver)
+            username = sc.get_element_by_xpath(sp.USERNAME_XPATH, self.driver)
+            password = sc.get_element_by_xpath(sp.PASSWORD_XPATH, self.driver)
             
             try:
                 username = username.get_attribute("value")
@@ -196,17 +187,23 @@ class Crawler:
                         trimester[str(year)+"_"+str(i)] = trimester_instance
                         executor.submit(trimester[str(year)+"_"+str(i)].run, self.perfil, username, password, type_search, year, None, None, i+1)
 
+        elif type_search == 'linear':
+            for year in range(START_YEAR, END_YEAR+1):
+                instance = MiniCrawler()
+                instance.run(self.perfil, username, password, type_search, year)
+
     def run(self):
-        self.driver.get("https://sigaa.unb.br/sigaa/")
+        self.driver.get(sp.LOGIN_PAGE)
 
         self.perfil, username, password = self.instance_login()
-
+       
         self.driver.quit()
 
-        # self.search("year", username, password)
+        self.search("year", username, password)
         # self.search("semester", username, password)
         # self.search("quarter", username, password)
-        self.search("trimester", username, password)
+        # self.search("trimester", username, password)
+        # self.search("linear", username, password)
 
         jg.generate_json(START_YEAR, END_YEAR)
 
