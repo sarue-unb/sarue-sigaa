@@ -66,8 +66,9 @@ def get_row_data_printer(driver, month, year):
     rows_total_data = []
     result_table = get_rows_from_table(driver)
     rows_length = get_rows_len(result_table)
-    
-    for i in tqdm(range(0, rows_length - 1), desc=f'{month}/{year}', bar_format='{desc} - {elapsed} {bar} {n_fmt}/{total_fmt} - {percentage:.0f}%', ncols=SIZE_TERMINAL): # tqdm is a progress bar
+
+    desc = f'{month:02d}/{year}'
+    for i in tqdm(range(0, rows_length - 1), desc=desc, bar_format='{desc} - {elapsed} {bar} {n_fmt}/{total_fmt} - {percentage:.0f}%', ncols=SIZE_TERMINAL): # tqdm is a progress bar
         use_element_by_id(PRINTER_FORM_ID_PRE_FIX + str(i) + PRINTER_FORM_ID_POS_FIX, result_table)
         
         row_info = Printer.get_info_from_print_page(driver)

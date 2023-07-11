@@ -12,6 +12,7 @@ from concurrent.futures import ThreadPoolExecutor
 
 START_YEAR = 2020
 END_YEAR = 2023
+MAX_THREADS = 8
 
 class MiniCrawler:
     def __init__(self):
@@ -41,17 +42,52 @@ class MiniCrawler:
     def navigate_to_extension_page(self):
         self.driver.get("https://sigaa.unb.br/sigaa/extensao/Atividade/lista.jsf")
             
-    def run(self, year, perfil, username, password):
+    def get_year(self, year, perfil):
+        dg.get_every_extension_activity_from_months(1, 12, year, self.driver, perfil)
+
+    def get_year_semester(self, year, perfil, semester):
+        if semester == 1:
+            dg.get_every_extension_activity_from_months(1, 6, year, self.driver, perfil)
+        elif semester == 2:
+            dg.get_every_extension_activity_from_months(7, 12, year, self.driver, perfil)
+
+    def get_year_quarter(self, year, perfil, quarter):
+        if quarter == 1:
+            dg.get_every_extension_activity_from_months(1, 4, year, self.driver, perfil)
+        elif quarter == 2:
+            dg.get_every_extension_activity_from_months(5, 8, year, self.driver, perfil)
+        elif quarter == 3:
+            dg.get_every_extension_activity_from_months(9, 12, year, self.driver, perfil)
+
+    def get_year_trimester(self, year, perfil, trimester):
+        if trimester == 1:
+            dg.get_every_extension_activity_from_months(1, 3, year, self.driver, perfil)
+        elif trimester == 2:
+            dg.get_every_extension_activity_from_months(4, 6, year, self.driver, perfil)
+        elif trimester == 3:
+            dg.get_every_extension_activity_from_months(7, 9, year, self.driver, perfil)
+        elif trimester == 4:
+            dg.get_every_extension_activity_from_months(10, 12, year, self.driver, perfil)
+
+    def run(self, perfil, username, password, type_search, year, semester=None, quarter=None, trimester=None, group=None):
         self.driver.get("https://sigaa.unb.br/sigaa/")
         
         self.instance_login(username, password)
         self.navigate_to_extension_page()
         
-        dg.get_every_extension_activity_from_years(year, year, self.driver, perfil)
+        if type_search == "year":
+            self.get_year(year, perfil)
+        elif type_search == "semester":
+            self.get_year_semester(year, perfil, semester)
+        elif type_search == "quarter":
+            self.get_year_quarter(year, perfil, quarter)
+        elif type_search == "trimester":
+            self.get_year_trimester(year, perfil, trimester)
+        elif type_search == "alternative":
+            self.get_alternative(year, perfil, group)
 
         self.driver.quit()
 
-# TRY LATER: Get login and password from sigaa login page
 class Crawler:
     def __init__(self):
         try:
@@ -110,6 +146,43 @@ class Crawler:
         centralize(f'{RIGHT_ARROW} Logged in as {perfil} {LEFT_ARROW}')
         return perfil, username, password
 
+    def search(self, type_search, username, password):
+        if type_search == 'year':
+            year_list = {}
+            with ThreadPoolExecutor(max_workers=MAX_THREADS) as executor:
+                for year in range(START_YEAR, END_YEAR+1):
+                    year_instance = MiniCrawler()
+                    year_list[year] = year_instance
+                    executor.submit(year_instance.run, self.perfil, username, password, type_search, year)
+        
+        elif type_search == 'semester':
+            semester = {}
+            with ThreadPoolExecutor(max_workers=MAX_THREADS) as executor:
+                for year in range(START_YEAR, END_YEAR+1):
+                    for i in range(2):
+                        semester_instance = MiniCrawler()
+                        semester[str(year)+"_"+str(i)] = semester_instance
+                        executor.submit(semester[str(year)+"_"+str(i)].run, self.perfil, username, password, type_search, year, i+1)
+        
+        elif type_search == 'quarter':
+            quarter = {}
+            with ThreadPoolExecutor(max_workers=MAX_THREADS) as executor:
+                for year in range(START_YEAR, END_YEAR+1):
+                    for i in range(2):
+                        quarter_instance = MiniCrawler()
+                        quarter[str(year)+"_"+str(i)] = quarter_instance
+                        executor.submit(quarter[str(year)+"_"+str(i)].run, self.perfil, username, password, type_search, year, None, i+1)
+        
+
+        elif type_search == 'trimester':                
+            trimester = {}
+            with ThreadPoolExecutor(max_workers=MAX_THREADS) as executor:
+                for year in range(START_YEAR, END_YEAR+1):
+                    for i in range(4):
+                        trimester_instance = MiniCrawler()
+                        trimester[str(year)+"_"+str(i)] = trimester_instance
+                        executor.submit(trimester[str(year)+"_"+str(i)].run, self.perfil, username, password, type_search, year, None, None, i+1)
+
     def run(self):
         self.driver.get("https://sigaa.unb.br/sigaa/")
 
@@ -117,11 +190,10 @@ class Crawler:
 
         self.driver.quit()
 
-        year_list = {}
-        with ThreadPoolExecutor(max_workers=(END_YEAR-START_YEAR)+1) as executor:
-            for year in range(START_YEAR, END_YEAR+1):
-                year_instance = MiniCrawler()
-                year_list[year] = year_instance
-                executor.submit(year_instance.run, year, self.perfil, username, password)
+        # self.search("year", username, password)
+        # self.search("semester", username, password)
+        # self.search("quarter", username, password)
+        self.search("trimester", username, password)
+
         jg.generate_json(START_YEAR, END_YEAR)
 
