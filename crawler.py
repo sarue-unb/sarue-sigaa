@@ -13,15 +13,18 @@ from concurrent.futures import ThreadPoolExecutor
 
 START_YEAR = 2020
 END_YEAR = 2023
-MAX_THREADS = 8
+MAX_THREADS = 8 
 
 class MiniCrawler:
     def __init__(self):
         try:
             self.chrome_options = webdriver.ChromeOptions()
             self.chrome_options.add_argument("--headless=new")
+            self.chrome_options.add_experimental_option('excludeSwitches', ['disable-popup-blocking'])
+            self.chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
 
             self.driver = webdriver.Chrome(options=self.chrome_options)
+            self.driver = webdriver.Chrome()
             self.navegador = "chrome"
         except Exception as e:
             try: 
@@ -45,16 +48,16 @@ class MiniCrawler:
     def navigate_to_extension_page(self):
         self.driver.get(sp.EXTENSION_PAGE)
             
-    def get_year(self, year, perfil):
+    def get_year(self, perfil, year):
         dg.get_every_extension_activity_from_months(1, 12, year, self.driver, perfil)
 
-    def get_year_semester(self, year, perfil, semester):
+    def get_year_semester(self, perfil, year, semester):
         if semester == 1:
             dg.get_every_extension_activity_from_months(1, 6, year, self.driver, perfil)
         elif semester == 2:
             dg.get_every_extension_activity_from_months(7, 12, year, self.driver, perfil)
 
-    def get_year_quarter(self, year, perfil, quarter):
+    def get_year_quarter(self, perfil, year, quarter):
         if quarter == 1:
             dg.get_every_extension_activity_from_months(1, 4, year, self.driver, perfil)
         elif quarter == 2:
@@ -62,7 +65,7 @@ class MiniCrawler:
         elif quarter == 3:
             dg.get_every_extension_activity_from_months(9, 12, year, self.driver, perfil)
 
-    def get_year_trimester(self, year, perfil, trimester):
+    def get_year_trimester(self, perfil, year, trimester):
         if trimester == 1:
             dg.get_every_extension_activity_from_months(1, 3, year, self.driver, perfil)
         elif trimester == 2:
@@ -72,28 +75,37 @@ class MiniCrawler:
         elif trimester == 4:
             dg.get_every_extension_activity_from_months(10, 12, year, self.driver, perfil)
 
+    def get_year_month(self, perfil, year, month):
+        dg.get_every_extension_activity_from_month_years(month, year, self.driver, perfil)
+
     def run(self, perfil, username, password, type_search, year, semester=None, quarter=None, trimester=None, group=None):
         self.driver.get(sp.LOGIN_PAGE)
         self.instance_login(username, password)
         self.navigate_to_extension_page()
         
         if type_search == "year":
-            self.get_year(year, perfil)
+            self.get_year(perfil, year)
         elif type_search == "semester":
-            self.get_year_semester(year, perfil, semester)
+            self.get_year_semester(perfil, year, semester)
         elif type_search == "quarter":
-            self.get_year_quarter(year, perfil, quarter)
+            self.get_year_quarter(perfil, year, quarter)
         elif type_search == "trimester":
-            self.get_year_trimester(year, perfil, trimester)
+            self.get_year_trimester(perfil, year, trimester)
         elif type_search == "linear":
-            self.get_year(year, perfil)
+            self.get_year(perfil, year)
+        elif type_search == "group":
+            self.get_year_month(perfil, year, semester)
 
         self.driver.quit()
 
 class Crawler:
     def __init__(self):
         try:
-            self.driver = webdriver.Chrome()
+            self.chrome_options = webdriver.ChromeOptions()
+            self.chrome_options.add_experimental_option('excludeSwitches', ['disable-popup-blocking'])
+            self.chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
+
+            self.driver = webdriver.Chrome(options=self.chrome_options)
             self.navegador = "chrome"
         except Exception as e:
             try:
@@ -170,8 +182,7 @@ class Crawler:
                     for i in range(2):
                         quarter_instance = MiniCrawler()
                         quarter[str(year)+"_"+str(i)] = quarter_instance
-                        executor.submit(quarter[str(year)+"_"+str(i)].run, self.perfil, username, password, type_search, year, None, i+1)
-        
+                        executor.submit(quarter[str(year)+"_"+str(i)].run, self.perfil, username, password, type_search, year, None, i+1)    
 
         elif type_search == 'trimester':                
             trimester = {}
@@ -187,6 +198,19 @@ class Crawler:
                 instance = MiniCrawler()
                 instance.run(self.perfil, username, password, type_search, year)
 
+        elif type_search == 'group':
+            pool = {str(year) + '/' + str(month): False for year in range(START_YEAR, END_YEAR + 1) for month in range(1, 13)}
+
+            instances = [MiniCrawler() for _ in range(MAX_THREADS)]
+
+            with ThreadPoolExecutor(max_workers=MAX_THREADS) as executor:
+                for year_month, visited in pool.items():    
+                    year, month = year_month.split('/') 
+                    if not visited:
+                        for instance in instances:
+                            executor.submit(instance.run, username, password, type_search, year, month)
+                        pool[year_month] = True   
+
     def run(self):
         self.driver.get(sp.LOGIN_PAGE)
 
@@ -196,9 +220,10 @@ class Crawler:
 
         # self.search("year", username, password)
         # self.search("semester", username, password)
-        # self.search("quarter", username, password)
-        self.search("trimester", username, password)
+        # self.search("quarter", username, password) # 8 - 32:01 16 - 
+        # self.search("trimester", username, password) # 8 - 36:38 16 - 32:01
         # self.search("linear", username, password)
+        self.search("group", username, password)
 
-        # jg.generate_json(START_YEAR, END_YEAR)
+        jg.generate_json(START_YEAR, END_YEAR)
 
