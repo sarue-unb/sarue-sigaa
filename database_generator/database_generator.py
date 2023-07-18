@@ -6,36 +6,6 @@ import database_generator.json_generator as jg
 from database_generator.constants import FIRST_DAY_OF_MONTH, MONTHS_LAST_DAY, ROWS_DATA_CELLS
 from output_format import *
 from config.filter_descryption import *
-    
-# def get_every_extension_activity_from_years(start_year: str, end_year: str, driver:str, perfil:str):
-#     if (end_year < start_year):
-#         print("ERROR: End Year less than start year")
-#         return
-    
-
-#     for year in range(start_year, end_year + 1):
-#         time = Timer()
-#         time.set_start_time()
-#         for month in range(1,13): # Janeiro a Dezembro
-#             _search_month_year(month, year, driver)
-            
-#             if perfil == "discente":
-#                 qtd = sc.get_rows_len(driver) # 55 é a quantidade quando não tem ações para discentes
-
-#                 if (qtd > 55):
-#                     _get_activities_from_list_printer(driver, month, year)
-#                     # _get_activities_from_list_view(driver, month, year)
-                    
-#             elif perfil == "docente":
-#                 qtd = sc.count_listing(driver) # função demora muito quando não encontra
-
-#                 if (qtd > 0):
-#                     _get_activities_from_list_printer(driver, month, year)
-#                     # _get_activities_from_list_view(driver, month, year)
-        
-#         print("\n",SEPARATOR, sep='')
-#         time.print_partial_elapsed_ctime(f'{year}')  
-#         print(SEPARATOR)
 
 def get_every_extension_activity_from_months(start_month: str, end_month: str, year: str, driver, perfil:str):
     if (end_month < start_month):
@@ -43,7 +13,32 @@ def get_every_extension_activity_from_months(start_month: str, end_month: str, y
         return
     
     for month in range(start_month, end_month + 1):
-        _search_month_year(month, year, driver)
+        print(month, year)
+        if month == 9 and year == 2023:
+            get_every_extension_activity_from_month_years_cnpq(month, year, driver, perfil)
+        else:
+            get_every_extension_activity_from_month_years(month, year, driver, perfil)
+
+def get_every_extension_activity_from_month_years(month: str, year: str, driver, perfil:str):
+    _search_month_year(month, year, driver)
+
+    if perfil == "discente":
+        qtd = sc.get_rows_len(driver) # 55 é a quantidade quando não tem ações para discentes
+
+        if (qtd > 55):
+            _get_activities_from_list_printer(driver, month, year)
+            # _get_activities_from_list_view(driver, month, year)
+
+    elif perfil == "docente":
+            qtd = sc.count_listing(driver) # função demora muito quando não encontra
+
+            if (qtd > 0):
+                _get_activities_from_list_printer(driver, month, year)
+                # _get_activities_from_list_view(driver, month, year)
+
+def get_every_extension_activity_from_month_years_cnpq(month: str, year: str, driver, perfil:str):
+    for cnpq in AREA_CPNq:
+        _search_month_year_cnpq(month, year, cnpq, driver)
         
         if perfil == "discente":
             qtd = sc.get_rows_len(driver) # 55 é a quantidade quando não tem ações para discentes
@@ -51,30 +46,15 @@ def get_every_extension_activity_from_months(start_month: str, end_month: str, y
             if (qtd > 55):
                 _get_activities_from_list_printer(driver, month, year)
                 # _get_activities_from_list_view(driver, month, year)
-                
+
         elif perfil == "docente":
-            qtd = sc.count_listing(driver) # função demora muito quando não encontra
+                qtd = sc.count_listing(driver) # função demora muito quando não encontra
 
-            if (qtd > 0):
-                _get_activities_from_list_printer(driver, month, year)
-                # _get_activities_from_list_view(driver, month, year)
+                if (qtd > 0):
+                    _get_activities_from_list_printer(driver, month, year)
+                    # _get_activities_from_list_view(driver, month, year)
 
-# def get_every_extension_activity_from_month_years(month: str, year: str, driver, perfil:str):
-#     _search_month_year(month, year, driver)
-
-#     if perfil == "discente":
-#         qtd = sc.get_rows_len(driver) # 55 é a quantidade quando não tem ações para discentes
-
-#         if (qtd > 55):
-#             _get_activities_from_list_printer(driver, month, year)
-#             # _get_activities_from_list_view(driver, month, year)
-
-#     elif perfil == "docente":
-#             qtd = sc.count_listing(driver) # função demora muito quando não encontra
-
-#             if (qtd > 0):
-#                 _get_activities_from_list_printer(driver, month, year)
-#                 # _get_activities_from_list_view(driver, month, year)
+    _uncheck_cnpq(driver)
         
 def _get_activities_from_list_printer(driver, month, year):
     activities_info = scif.get_row_data_printer(driver, month, year)
@@ -91,6 +71,17 @@ def _search_month_year(month:int, year:int, driver):
     start_date =  _monthly_date_generator(month, year, False)
     end_date = _monthly_date_generator(month, year, True)
     _use_execution_period(start_date, end_date, driver)
+    ep.make_search(driver)
+    
+def _search_month_year_cnpq(month:int, year:int, cnpq:str, driver):
+    _clear_execution_period(driver)
+    start_date =  _monthly_date_generator(month, year, False)
+    end_date = _monthly_date_generator(month, year, True)
+    _use_execution_period(start_date, end_date, driver)
+    time.sleep(5)
+    _use_type_action(cnpq, driver)
+    time.sleep(5)
+    ep.make_search(driver)
     
 def _clear_execution_period(driver):
     sc.clear_input_name(NAME_DATA_INICIO_EXECUCAO, driver)
@@ -100,7 +91,14 @@ def _use_execution_period(start_date:str, end_date:str, driver):
     sc.use_element_by_id(NAME_SELECT_BUSCAR_PERIODO, driver)
     sc.use_input_by_name(NAME_DATA_INICIO_EXECUCAO, start_date, driver)
     sc.use_input_by_name(NAME_DATA_FIM_EXECUCAO, end_date, driver)
-    ep.make_search(driver)
+    
+def _use_type_action(cnpq:str, driver):
+    # sc.get_element_by_select(NAME_AREA_CNPq, cnpq, driver)
+
+    time.sleep(5)
+
+def _uncheck_cnpq(driver):
+    sc.uncheck_element_by_id(NAME_AREA_CNPq, driver)
 
 def get_qtd_actions(start_year: str, end_year: str, driver:str):
     if (end_year < start_year):

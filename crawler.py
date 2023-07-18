@@ -14,15 +14,15 @@ from selenium.common.exceptions import StaleElementReferenceException
 from concurrent.futures import ThreadPoolExecutor
 from tqdm import tqdm # pip install tqdm
 
-START_YEAR = 2020
+START_YEAR = 2023
 END_YEAR = 2023
-MAX_THREADS = 12
+MAX_THREADS = 1
 
 class MiniCrawler:
     def __init__(self):
         try:
             self.chrome_options = webdriver.ChromeOptions()
-            self.chrome_options.add_argument("--headless=new")
+            # self.chrome_options.add_argument("--headless=new")
             self.chrome_options.add_experimental_option('excludeSwitches', ['disable-popup-blocking'])
             self.chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
 
@@ -51,7 +51,7 @@ class MiniCrawler:
         self.driver.get(sp.EXTENSION_PAGE)
             
     def get_year(self, perfil:str, year:int):
-        dg.get_every_extension_activity_from_months(1, 12, year, self.driver, perfil)
+        dg.get_every_extension_activity_from_months(9, 9, year, self.driver, perfil)
 
     def get_year_semester(self, perfil:str, year:int, semester:int):
         if semester == 1:
@@ -307,8 +307,8 @@ class Crawler:
         # self.search("year", username, password)
         # self.search("semester", username, password)
         # self.search("quarter", username, password) # 8 - 32:01 16 - 
-        self.search("trimester", username, password) # 8 - 36:38 16 - 32:01
-        # self.search("linear", username, password)
+        # self.search("trimester", username, password) # 8 - 36:38 16 - 32:01
+        self.search("linear", username, password)
         # self.search("group", username, password)
 
         jg.generate_json(START_YEAR, END_YEAR)

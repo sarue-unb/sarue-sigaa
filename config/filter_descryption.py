@@ -10,7 +10,7 @@ NAME_DATA_FIM_EXECUCAO = "formBuscaAtividade:dataFimExecucao"
 
 NAME_BUTTON_BUSCAR = "formBuscaAtividade:btBuscar"
 
-ID_AREA_CNPq = "formBuscaAtividade:buscaAreaCNPq"
+NAME_AREA_CNPq = "formBuscaAtividade:buscaAreaCNPq"
 
 AREA_CPNq = [
     "Ciências Agrárias",
