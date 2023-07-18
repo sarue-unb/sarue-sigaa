@@ -15,8 +15,8 @@ from concurrent.futures import ThreadPoolExecutor
 from tqdm import tqdm # pip install tqdm
 
 START_YEAR = 2020
-END_YEAR = 2020
-MAX_THREADS = 4
+END_YEAR = 2023
+MAX_THREADS = 12
 
 class MiniCrawler:
     def __init__(self):
@@ -243,11 +243,18 @@ class Crawler:
         elif type_search == 'trimester':                
             instances = {}
             with ThreadPoolExecutor(max_workers=MAX_THREADS) as executor:
-                for year in range(START_YEAR, END_YEAR+1):
-                    for i in range(4):
+                for year in range(END_YEAR, START_YEAR-1, -1):
+                    for i in range(4, -1, -1):
                         trimester_instance = MiniCrawler()
                         instances[str(year)+"_"+str(i)] = trimester_instance
                         executor.submit(instances[str(year)+"_"+str(i)].run, self.perfil, username, password, type_search, year, None, None, i+1)
+            # instances = {}
+            # with ThreadPoolExecutor(max_workers=MAX_THREADS) as executor:
+            #     for year in range(START_YEAR, END_YEAR+1):
+            #         for i in range(4):
+            #             trimester_instance = MiniCrawler()
+            #             instances[str(year)+"_"+str(i)] = trimester_instance
+            #             executor.submit(instances[str(year)+"_"+str(i)].run, self.perfil, username, password, type_search, year, None, None, i+1)
 
         elif type_search == 'linear':
             instance = MiniCrawler()
@@ -303,7 +310,6 @@ class Crawler:
         self.search("trimester", username, password) # 8 - 36:38 16 - 32:01
         # self.search("linear", username, password)
         # self.search("group", username, password)
-        # self.search("test", username, password)
 
         jg.generate_json(START_YEAR, END_YEAR)
 
