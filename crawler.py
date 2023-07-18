@@ -1,3 +1,4 @@
+import queue
 import threading
 import pages.extension_page as ep
 import pages.sigaa_pages as sp 
@@ -11,13 +12,14 @@ from selenium.webdriver.chrome.options import Options
 from output_format import *
 from selenium.common.exceptions import StaleElementReferenceException
 from concurrent.futures import ThreadPoolExecutor
+from tqdm import tqdm # pip install tqdm
 
 START_YEAR = 2020
 END_YEAR = 2023
-MAX_THREADS = 8
+MAX_THREADS = 4
 
 class MiniCrawler:
-    def __init__(self, username, password):
+    def __init__(self):
         try:
             self.chrome_options = webdriver.ChromeOptions()
             self.chrome_options.add_argument("--headless=new")
@@ -42,9 +44,6 @@ class MiniCrawler:
                     centralize("Nenhum navegador encontrado")
                     self.navegador = None
                     exit(1)
-        self.driver.get(sp.LOGIN_PAGE)
-        self.instance_login(username, password)
-        self.navigate_to_extension_page()
 
     def instance_login(self, username:str, password:str):
         sp.login_into_sigaa(self.driver, username, password)
@@ -78,12 +77,11 @@ class MiniCrawler:
             dg.get_every_extension_activity_from_months(7, 9, year, self.driver, perfil)
         elif trimester == 4:
             dg.get_every_extension_activity_from_months(10, 12, year, self.driver, perfil)
-            
-    def get_year_month(self, perfil:str, year:int, month:int):
-        dg.get_every_extension_activity_from_months(month, month, year, self.driver, perfil)
 
     def run(self, perfil:str, username:str, password:str, type_search:str, year:int, semester:int=None, quarter:int=None, trimester:int=None, month:int=None):
-        
+        self.driver.get(sp.LOGIN_PAGE)
+        self.instance_login(username, password)
+        self.navigate_to_extension_page()
         
         if type_search == "year":
             self.get_year(perfil, year)
@@ -95,10 +93,60 @@ class MiniCrawler:
             self.get_year_trimester(perfil, year, trimester)
         elif type_search == "linear":
             self.get_year(perfil, year)
+
+        self.driver.quit()
+
+# This is a WIP, it's not working yet
+# Trying to use threads to speed up the process
+class MiniCrawler_keeped:
+    def __init__(self, username, password):
+        try:
+            self.chrome_options = webdriver.ChromeOptions()
+            self.chrome_options.add_argument("--headless=new")
+            self.chrome_options.add_experimental_option('excludeSwitches', ['disable-popup-blocking'])
+            self.chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
+
+            self.driver = webdriver.Chrome(options=self.chrome_options)
+            self.navegador = "chrome"
+        except Exception as e:
+            try: 
+                self.firefox_options = Options()
+                self.firefox_options.headless = True    
+
+                self.driver = webdriver.Firefox(options=self.firefox_options)
+                self.navegador = "firefox"
+            except Exception as e:
+                try: 
+                    self.driver = webdriver.Edge()
+                    self.navegador = "edge"
+                except Exception as e:
+                    centralize("Nenhum navegador encontrado")
+                    self.navegador = None
+                    exit(1)
+        self.driver.get(sp.LOGIN_PAGE)
+        self.instance_login(username, password)
+        self.navigate_to_extension_page()
+
+    def quit(self):
+        self.driver.quit()
+    
+    def instance_login(self, username:str, password:str):
+        sp.login_into_sigaa(self.driver, username, password)
+        
+    def navigate_to_extension_page(self):
+        self.driver.get(sp.EXTENSION_PAGE)
+            
+    def get_year(self, perfil:str, year:int):
+        dg.get_every_extension_activity_from_months(1, 12, year, self.driver, perfil)
+
+    def get_year_month(self, perfil:str, year:int, month:int):
+        dg.get_every_extension_activity_from_months(month, month, year, self.driver, perfil)
+
+    def run(self, perfil:str, username:str, password:str, type_search:str, year:int, semester:int=None, quarter:int=None, trimester:int=None, month:int=None):
+        if type_search == "linear":
+            self.get_year(perfil, year)
         elif type_search == "group":
             self.get_year_month(perfil, year, month)
-
-        # self.driver.quit()
 
 class Crawler:
     def __init__(self):
@@ -159,6 +207,7 @@ class Crawler:
         centralize(f'{RIGHT_ARROW} Logged in as {perfil} {LEFT_ARROW}')
         return perfil, username, password
 
+    # Only for testing
     def auto_login(self):
         username = self.env['SIGAA_USER']
         password = self.env['SIGAA_PASS']
@@ -170,7 +219,7 @@ class Crawler:
             instances = {}
             with ThreadPoolExecutor(max_workers=MAX_THREADS) as executor:
                 for year in range(START_YEAR, END_YEAR+1):
-                    year_instance = MiniCrawler()
+                    year_instance = MiniCrawler_keeped()
                     instances[year] = year_instance
                     executor.submit(year_instance.run, self.perfil, username, password, type_search, year)
         
@@ -179,7 +228,7 @@ class Crawler:
             with ThreadPoolExecutor(max_workers=MAX_THREADS) as executor:
                 for year in range(START_YEAR, END_YEAR+1):
                     for i in range(2):
-                        semester_instance = MiniCrawler()
+                        semester_instance = MiniCrawler_keeped()
                         instances[str(year)+"_"+str(i)] = semester_instance
                         executor.submit(instances[str(year)+"_"+str(i)].run, self.perfil, username, password, type_search, year, i+1)
         
@@ -197,46 +246,23 @@ class Crawler:
             with ThreadPoolExecutor(max_workers=MAX_THREADS) as executor:
                 for year in range(START_YEAR, END_YEAR+1):
                     for i in range(4):
-                        trimester_instance = MiniCrawler()
+                        trimester_instance = MiniCrawler_keeped()
                         instances[str(year)+"_"+str(i)] = trimester_instance
                         executor.submit(instances[str(year)+"_"+str(i)].run, self.perfil, username, password, type_search, year, None, None, i+1)
 
         elif type_search == 'linear':
-            instance = MiniCrawler()
+            instance = MiniCrawler_keeped()
             for year in range(START_YEAR, END_YEAR+1):
                 instance.run(self.perfil, username, password, type_search, year)
-
-        # elif type_search == 'group':
-            # lista = [str(year) + '/' + str(month) for year in range(START_YEAR, END_YEAR + 1) for month in range(1, 13)]
-            # # pool = {str(year) + '/' + str(month): False for year in range(START_YEAR, END_YEAR + 1) for month in range(1, 13)}
-
-            # instances_free = [MiniCrawler(username, password) for i in range(MAX_THREADS)]
-            # instances_used = []
-
-            # semaphoro = Semaphore(MAX_THREADS)
-            
-            # print(len(instances_free))
-            # index = 0
-            # while len(lista) > 0:
-            #     with ThreadPoolExecutor(max_workers=MAX_THREADS) as executor:
-            #         for i in range(MAX_THREADS):
-            #             if len(instances_free) > 0 and len(lista) > 0:
-            #                 instance = instances_free.pop()
-            #                 instances_used.append(instance)
-            #                 year, month = lista.pop(0).split('/')
-
-            #                 executor.submit(instance.run, self.perfil, username, password, type_search, int(year), None, None, None, int(month))    
-            #                 instances_free.append(instance)
-            #                 instances_used.remove(instance)
-            #             else:
-            #                 break
-
                 
         elif type_search == 'group':
-            lista = [str(year) + '/' + str(month) for year in range(START_YEAR, END_YEAR + 1) for month in range(1, 13)]
-            instances = [MiniCrawler(username, password) for _ in range(MAX_THREADS)]
+            lista = [str(year) + '/' + str(month) for month in range(1, 13) for year in range(START_YEAR, END_YEAR + 1)]
+            lista.reverse()
             instances_status = [True] * MAX_THREADS
             semaphore = threading.BoundedSemaphore(MAX_THREADS)
+
+            with ThreadPoolExecutor(max_workers=MAX_THREADS) as executor:
+                instances = [MiniCrawler_keeped(username, password) for _ in tqdm(range(MAX_THREADS), desc='Logging in', bar_format='{desc} - {elapsed} {bar} - {percentage:.0f}%', ncols=SIZE_TERMINAL)]
 
             def execute_task(year, month, index):
                 instance = instances[index]
@@ -261,7 +287,9 @@ class Crawler:
             # Aguarda a finalização de todas as threads
             for thread in threads:
                 thread.join()
+
             time.sleep(1)
+            clear_screen()
 
     def run(self):
         # self.driver.get(sp.LOGIN_PAGE)
@@ -275,7 +303,8 @@ class Crawler:
         # self.search("quarter", username, password) # 8 - 32:01 16 - 
         # self.search("trimester", username, password) # 8 - 36:38 16 - 32:01
         # self.search("linear", username, password)
-        self.search("group", username, password)
+        # self.search("group", username, password)
+        self.search("test", username, password)
 
         jg.generate_json(START_YEAR, END_YEAR)
 
