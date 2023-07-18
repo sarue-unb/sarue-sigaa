@@ -15,7 +15,7 @@ from concurrent.futures import ThreadPoolExecutor
 from tqdm import tqdm # pip install tqdm
 
 START_YEAR = 2020
-END_YEAR = 2023
+END_YEAR = 2020
 MAX_THREADS = 4
 
 class MiniCrawler:
@@ -27,7 +27,6 @@ class MiniCrawler:
             self.chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
 
             self.driver = webdriver.Chrome(options=self.chrome_options)
-            # self.driver = webdriver.Chrome()
             self.navegador = "chrome"
         except Exception as e:
             try: 
@@ -219,7 +218,7 @@ class Crawler:
             instances = {}
             with ThreadPoolExecutor(max_workers=MAX_THREADS) as executor:
                 for year in range(START_YEAR, END_YEAR+1):
-                    year_instance = MiniCrawler_keeped()
+                    year_instance = MiniCrawler()
                     instances[year] = year_instance
                     executor.submit(year_instance.run, self.perfil, username, password, type_search, year)
         
@@ -228,7 +227,7 @@ class Crawler:
             with ThreadPoolExecutor(max_workers=MAX_THREADS) as executor:
                 for year in range(START_YEAR, END_YEAR+1):
                     for i in range(2):
-                        semester_instance = MiniCrawler_keeped()
+                        semester_instance = MiniCrawler()
                         instances[str(year)+"_"+str(i)] = semester_instance
                         executor.submit(instances[str(year)+"_"+str(i)].run, self.perfil, username, password, type_search, year, i+1)
         
@@ -246,12 +245,12 @@ class Crawler:
             with ThreadPoolExecutor(max_workers=MAX_THREADS) as executor:
                 for year in range(START_YEAR, END_YEAR+1):
                     for i in range(4):
-                        trimester_instance = MiniCrawler_keeped()
+                        trimester_instance = MiniCrawler()
                         instances[str(year)+"_"+str(i)] = trimester_instance
                         executor.submit(instances[str(year)+"_"+str(i)].run, self.perfil, username, password, type_search, year, None, None, i+1)
 
         elif type_search == 'linear':
-            instance = MiniCrawler_keeped()
+            instance = MiniCrawler()
             for year in range(START_YEAR, END_YEAR+1):
                 instance.run(self.perfil, username, password, type_search, year)
                 
@@ -301,10 +300,10 @@ class Crawler:
         # self.search("year", username, password)
         # self.search("semester", username, password)
         # self.search("quarter", username, password) # 8 - 32:01 16 - 
-        # self.search("trimester", username, password) # 8 - 36:38 16 - 32:01
+        self.search("trimester", username, password) # 8 - 36:38 16 - 32:01
         # self.search("linear", username, password)
         # self.search("group", username, password)
-        self.search("test", username, password)
+        # self.search("test", username, password)
 
         jg.generate_json(START_YEAR, END_YEAR)
 
