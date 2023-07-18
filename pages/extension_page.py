@@ -1,5 +1,6 @@
 # Specifics from extension page
 import components.selection_components as sc
+from config.filter_descryption import *
 
 def get_year_indicator(year: str, driver):
     _use_year(year, driver)
@@ -20,11 +21,11 @@ def get_action_by_year_indicator(year: str, action: str, driver):
     return f'Total of {action} for the year of {year}: {listing_count}'
 
 def make_search(driver):
-    sc.use_element_by_id('formBuscaAtividade:btBuscar', driver)
+    sc.use_element_by_id(NAME_BUTTON_BUSCAR, driver)
 
 def _use_year(year: int, driver):
-    sc.use_element_by_id('formBuscaAtividade:selectBuscaAno', driver)
-    sc.use_input_by_name('formBuscaAtividade:buscaAno', year, driver)
+    sc.use_element_by_id(NAME_SELECT_BUSCAR_ANO, driver)
+    sc.use_input_by_name(NAME_BUSCAR_ANO, year, driver)
     
 def _use_type_action(action: str, driver):
     tipoAcao = sc.get_element_by_select('formBuscaAtividade:buscaTipoAcao', 'CURSO', driver)
