@@ -12,8 +12,10 @@ from selenium.common.exceptions import StaleElementReferenceException
 from concurrent.futures import ThreadPoolExecutor
 from tqdm import tqdm # pip install tqdm
 from config.date_descryption import *
-START_YEAR = 2023
-END_YEAR = 2023
+
+from config.date_descryption import START_YEAR, END_YEAR
+from config.url_descryption import *
+
 MAX_THREADS = 1
 
 class MiniCrawler:
@@ -46,7 +48,7 @@ class MiniCrawler:
         sp.login_into_sigaa(self.driver, username, password)
         
     def navigate_to_extension_page(self):
-        self.driver.get(sp.EXTENSION_PAGE)
+        self.driver.get(EXTENSION_PAGE)
             
     def get_year(self, perfil:str, year:int):
         dg.get_every_extension_activity_from_months(9, 9, year, self.driver, perfil)
@@ -76,7 +78,7 @@ class MiniCrawler:
             dg.get_every_extension_activity_from_months(10, 12, year, self.driver, perfil)
 
     def run(self, perfil:str, username:str, password:str, type_search:str, year:int, semester:int=None, quarter:int=None, trimester:int=None, month:int=None):
-        self.driver.get(sp.LOGIN_PAGE)
+        self.driver.get(LOGIN_PAGE)
         self.instance_login(username, password)
         self.navigate_to_extension_page()
         
@@ -120,7 +122,7 @@ class MiniCrawler_keeped:
                     centralize("Nenhum navegador encontrado")
                     self.navegador = None
                     exit(1)
-        self.driver.get(sp.LOGIN_PAGE)
+        self.driver.get(LOGIN_PAGE)
         self.instance_login(username, password)
         self.navigate_to_extension_page()
 
@@ -131,7 +133,7 @@ class MiniCrawler_keeped:
         sp.login_into_sigaa(self.driver, username, password)
         
     def navigate_to_extension_page(self):
-        self.driver.get(sp.EXTENSION_PAGE)
+        self.driver.get(EXTENSION_PAGE)
             
     def get_year(self, perfil:str, year:int):
         dg.get_every_extension_activity_from_months(1, 12, year, self.driver, perfil)
@@ -296,7 +298,7 @@ class Crawler:
             clear_screen()
 
     def run(self):
-        # self.driver.get(sp.LOGIN_PAGE)
+        # self.driver.get(LOGIN_PAGE)
         # self.perfil, username, password = self.instance_login()
         self.driver.quit()
 

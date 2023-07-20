@@ -6,6 +6,7 @@ import database_generator.json_generator as jg
 from database_generator.constants import FIRST_DAY_OF_MONTH, MONTHS_LAST_DAY, ROWS_DATA_CELLS
 from output_format import *
 from config.filter_descryption import *
+from config.date_descryption import SPECIAL_DATE
 
 def get_every_extension_activity_from_months(start_month: str, end_month: str, year: str, driver, perfil:str):
     if (end_month < start_month):
@@ -13,8 +14,7 @@ def get_every_extension_activity_from_months(start_month: str, end_month: str, y
         return
     
     for month in range(start_month, end_month + 1):
-        print(month, year)
-        if month == 9 and year == 2023:
+        if f'{month}/{year}' in SPECIAL_DATE:
             get_every_extension_activity_from_month_years_cnpq(month, year, driver, perfil)
         else:
             get_every_extension_activity_from_month_years(month, year, driver, perfil)

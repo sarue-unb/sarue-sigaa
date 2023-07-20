@@ -2,10 +2,6 @@ import components.selection_components as sc
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 
-MAIN_PAGE = "https://sigaa.unb.br/sigaa"
-LOGIN_PAGE = "https://sigaa.unb.br/sigaa/verTelaLogin"
-EXTENSION_PAGE = "https://sigaa.unb.br/sigaa/extensao/Atividade/lista.jsf"
-
 # LOGIN_USER = "user.login"
 # LOGIN_PASS = "user.senha"
 # USERNAME_XPATH = "/html/body/div[2]/div[2]/div[4]/form/table/tbody/tr[1]/td/input"
