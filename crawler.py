@@ -4,19 +4,18 @@ import database_generator.database_generator as dg
 import database_generator.json_generator as jg
 import components.selection_components as sc
 
+from tqdm import tqdm # pip install tqdm
 from dotenv import dotenv_values # pip install python-dotenv
 from selenium import webdriver # pip install selenium
 from selenium.webdriver.chrome.options import Options
 from output_format import *
 from selenium.common.exceptions import StaleElementReferenceException
 from concurrent.futures import ThreadPoolExecutor
-from tqdm import tqdm # pip install tqdm
 from config.date_descryption import *
-
 from config.date_descryption import START_YEAR, END_YEAR
 from config.url_descryption import *
 
-MAX_THREADS = 1
+MAX_THREADS = 8
 
 class MiniCrawler:
     def __init__(self):
@@ -51,7 +50,7 @@ class MiniCrawler:
         self.driver.get(EXTENSION_PAGE)
             
     def get_year(self, perfil:str, year:int):
-        dg.get_every_extension_activity_from_months(9, 9, year, self.driver, perfil)
+        dg.get_every_extension_activity_from_months(1, 12, year, self.driver, perfil)
 
     def get_year_semester(self, perfil:str, year:int, semester:int):
         if semester == 1:
@@ -235,7 +234,7 @@ class Crawler:
             instances = {}
             with ThreadPoolExecutor(max_workers=MAX_THREADS) as executor:
                 for year in range(START_YEAR, END_YEAR+1):
-                    for i in range(2):
+                    for i in range(3):
                         quarter_instance = MiniCrawler()
                         instances[str(year)+"_"+str(i)] = quarter_instance
                         executor.submit(instances[str(year)+"_"+str(i)].run, self.perfil, username, password, type_search, year, None, i+1)    
@@ -264,31 +263,28 @@ class Crawler:
         elif type_search == 'group':
             lista = [str(year) + '/' + str(month) for month in range(1, 13) for year in range(START_YEAR, END_YEAR + 1)]
             lista.reverse()
-            instances_status = [True] * MAX_THREADS
+
             semaphore = threading.BoundedSemaphore(MAX_THREADS)
 
             with ThreadPoolExecutor(max_workers=MAX_THREADS) as executor:
-                instances = [MiniCrawler_keeped(username, password) for _ in tqdm(range(MAX_THREADS), desc='Logging in', bar_format='{desc} - {elapsed} {bar} - {percentage:.0f}%', ncols=SIZE_TERMINAL)]
+                instances = {MiniCrawler_keeped(username, password):True for _ in tqdm(range(MAX_THREADS), desc='Logging in', bar_format='{desc} - {elapsed} {bar} - {percentage:.0f}%', ncols=SIZE_TERMINAL)}
 
-            def execute_task(year, month, index):
-                instance = instances[index]
-                instance.run(self.perfil, username, password, type_search, int(year), None, None, None, int(month))
-                instances_status[index] = True
-                semaphore.release()
-
-            threads = []
-
-            for year_month in lista:
-                year, month = year_month.split('/')
-
-                semaphore.acquire()
-                index = next((index for index, status in enumerate(instances_status) if status), None)
-
-                if index is not None:
-                    instances_status[index] = False
-                    thread = threading.Thread(target=execute_task, args=(year, month, index))
-                    thread.start()
-                    threads.append(thread)
+            while len(lista) > 0:
+                threads = []
+                for instance in instances:
+                    if instances[instance]:
+                        try:
+                            semaphore.acquire()
+                            month = lista.pop()
+                            thread = threading.Thread(target=instance.run, args=(self.perfil, username, password, type_search, START_YEAR, None, None, None, month))
+                            thread.start()
+                            threads.append(thread)
+                        except IndexError:
+                            break
+                        except Exception as e:
+                            print(e)
+                        finally:
+                            semaphore.release()
 
             # Aguarda a finalização de todas as threads
             for thread in threads:
@@ -306,9 +302,9 @@ class Crawler:
 
         # self.search("year", username, password)
         # self.search("semester", username, password)
-        # self.search("quarter", username, password) # 8 - 32:01 16 - 
-        # self.search("trimester", username, password) # 8 - 36:38 16 - 32:01
-        self.search("linear", username, password)
+        # self.search("quarter", username, password) # WIN64 8 - 32:01 16 - 
+        self.search("trimester", username, password) # WIN64 8 - 36:38 16 - 32:01 # MACOS - 8 - 27:10 12 - 24:21
+        # self.search("linear", username, password)
         # self.search("group", username, password)
 
         jg.generate_json(START_YEAR, END_YEAR)

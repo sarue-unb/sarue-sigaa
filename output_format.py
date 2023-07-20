@@ -4,11 +4,6 @@ HASH = "#####"
 SIZE_TERMINAL = 70
 SEPARATOR = "="*SIZE_TERMINAL
 
-pages_valid = {
-    'discente' : ["https://sigaa.unb.br/sigaa/portais/discente/discente.jsf", "https://sigaa.unb.br/sigaa/telaAvisoLogon.jsf"],
-    'docente' : ["https://sigaa.unb.br/sigaa/portais/docente/docente.jsf"]
-}
-
 import time
 import os
 

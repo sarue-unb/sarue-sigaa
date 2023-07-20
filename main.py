@@ -3,7 +3,7 @@ from output_format import *
 
 class Main:
     def __init__(self):
-        pass
+        clear_screen()
     
     def begin(self):
         print(SEPARATOR)

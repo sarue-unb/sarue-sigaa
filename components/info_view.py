@@ -1,5 +1,5 @@
 import components.selection_components as sc
-from database_generator.constants import *
+from config.actions_descryption import *
 from tqdm import tqdm
 
 def get_row_data_view(driver, month, year):
