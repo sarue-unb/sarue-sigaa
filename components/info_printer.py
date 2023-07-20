@@ -3,12 +3,15 @@ from config.actions_descryption import *
 from output_format import SIZE_TERMINAL
 from tqdm import tqdm
 
-def get_row_data_printer(driver, month, year):
+def get_row_data_printer(driver, month:str, year:str, cnpq=None):
     rows_total_data = []
     result_table = sc.get_rows_from_table(driver)
     rows_length = sc.get_rows_len(result_table)
 
-    desc = f'{month:02d}/{year}'
+    if cnpq != None:
+        desc = f'{month:02d}/{year} - {cnpq}'
+    else:
+        desc = f'{month:02d}/{year}'
     for i in tqdm(range(0, rows_length - 1), desc=desc, bar_format='{desc} - {elapsed} {bar} {n_fmt}/{total_fmt} - {percentage:.0f}%', ncols=SIZE_TERMINAL): # tqdm is a progress bar
         sc.use_element_by_id(PRINTER_FORM_ID_PRE_FIX + str(i) + PRINTER_FORM_ID_POS_FIX, result_table)
         

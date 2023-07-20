@@ -1,6 +1,4 @@
-import queue
 import threading
-import pages.extension_page as ep
 import pages.sigaa_pages as sp 
 import database_generator.database_generator as dg
 import database_generator.json_generator as jg
@@ -13,7 +11,7 @@ from output_format import *
 from selenium.common.exceptions import StaleElementReferenceException
 from concurrent.futures import ThreadPoolExecutor
 from tqdm import tqdm # pip install tqdm
-
+from config.date_descryption import *
 START_YEAR = 2023
 END_YEAR = 2023
 MAX_THREADS = 1
@@ -22,7 +20,7 @@ class MiniCrawler:
     def __init__(self):
         try:
             self.chrome_options = webdriver.ChromeOptions()
-            # self.chrome_options.add_argument("--headless=new")
+            self.chrome_options.add_argument("--headless=new")
             self.chrome_options.add_experimental_option('excludeSwitches', ['disable-popup-blocking'])
             self.chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
 
