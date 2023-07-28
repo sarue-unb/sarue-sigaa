@@ -3,7 +3,7 @@ import os
 
 from datetime import datetime
 from components.database_formatter import format_special_char
-from output_format import centralize, SEPARATOR
+from config.output_format import centralize, SEPARATOR
 
 activity_database = {}
 

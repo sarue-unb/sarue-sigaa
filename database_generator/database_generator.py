@@ -4,7 +4,7 @@ import components.info_view as sciv
 import pages.extension_pages as ep
 import database_generator.json_generator as jg
 from database_generator.constants import FIRST_DAY_OF_MONTH, MONTHS_LAST_DAY, ROWS_DATA_CELLS
-from output_format import *
+from config.output_format import *
 from config.filter_descryption import *
 from config.date_descryption import SPECIAL_DATE
 

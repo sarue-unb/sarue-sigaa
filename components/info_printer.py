@@ -1,6 +1,6 @@
 import components.selection_components as sc
 from config.actions_descryption import *
-from output_format import SIZE_TERMINAL
+from config.output_format import SIZE_TERMINAL
 from tqdm import tqdm
 
 def get_row_data_printer(driver, month:str, year:str, cnpq=None):
