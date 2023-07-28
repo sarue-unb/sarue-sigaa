@@ -12,17 +12,14 @@ def add_item_to_database(activity_name:str, activity_values:str):
     activity_database[activity_name] = activity_values
     
 def generate_json(start_year, end_year):
-    current_time = datetime.now().strftime('%H:%M:%S')
+    current_time = datetime.now().strftime('%d-%m_%H-%M-%S')
 
     if not os.path.exists(FILE_PATH):
         os.makedirs(FILE_PATH)
+        
+    output_file_name = FILE_PATH + OUTPUT_FILE_NAME + str(start_year) + "-" + str(end_year) + "_" + str(current_time) + ".json"
+    output_file_name_formatted = FILE_PATH + OUTPUT_FILE_NAME_FORMATTED + str(start_year) + "_" + str(end_year) + "_" + str(current_time) + ".json" 
 
-    output_file_name = FILE_PATH + OUTPUT_FILE_NAME + str(start_year) + "_" + str(end_year) + "_" + str(current_time)
-    output_file_name = output_file_name.replace(":", "-") + ".json"
-
-    output_file_name_formatted = FILE_PATH + OUTPUT_FILE_NAME_FORMATTED + str(start_year) + "_" + str(end_year) + "_" + str(current_time)
-    output_file_name_formatted = output_file_name_formatted.replace(":", "-") + ".json"
-    
     print(SEPARATOR)
     centralize(f'Quantidade de ações = {len(activity_database)}')
     print(SEPARATOR)
