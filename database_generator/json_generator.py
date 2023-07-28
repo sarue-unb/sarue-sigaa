@@ -4,6 +4,7 @@ import os
 from datetime import datetime
 from components.database_formatter import format_special_char
 from config.output_format import centralize, SEPARATOR
+from config.json_descryption import FILE_PATH, OUTPUT_FILE_NAME, OUTPUT_FILE_NAME_FORMATTED
 
 activity_database = {}
 
@@ -12,22 +13,25 @@ def add_item_to_database(activity_name:str, activity_values:str):
     
 def generate_json(start_year, end_year):
     current_time = datetime.now().strftime('%H:%M:%S')
-    
-    file_path = "database/"
 
-    if not os.path.exists(file_path):
-        os.makedirs(file_path)
+    if not os.path.exists(FILE_PATH):
+        os.makedirs(FILE_PATH)
 
-    file_name = file_path + "extension_activity_database_" + str(start_year) + "_" + str(end_year) + "_" + str(current_time)
-    file_name = file_name.replace(":", "-") + ".json"
+    output_file_name = FILE_PATH + OUTPUT_FILE_NAME + str(start_year) + "_" + str(end_year) + "_" + str(current_time)
+    output_file_name = output_file_name.replace(":", "-") + ".json"
+
+    output_file_name_formatted = FILE_PATH + OUTPUT_FILE_NAME_FORMATTED + str(start_year) + "_" + str(end_year) + "_" + str(current_time)
+    output_file_name_formatted = output_file_name_formatted.replace(":", "-") + ".json"
     
     print(SEPARATOR)
     centralize(f'Quantidade de ações = {len(activity_database)}')
     print(SEPARATOR)
 
-    with open(file_name, "w+") as file_output:  
+    with open(output_file_name, "w+") as file_output:  
         json.dump(activity_database, file_output, indent=3)
         
-    format_special_char(file_name)
+    with open(output_file_name_formatted, "w+", encoding="utf-8") as file_output:  
+        json.dump(activity_database, file_output, indent=3, ensure_ascii=False)
 
+    # format_special_char(output_file_name, output_file_name_formatted)
     

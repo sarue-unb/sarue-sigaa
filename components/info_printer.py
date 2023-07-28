@@ -232,7 +232,6 @@ def get_info_objetivos(info: dict, xpath: str, driver):
     
     if tipo != None:
         qtd = sc.get_rows_len(tipo)
-        info["objetivos"] = [int(sc.get_info_direct("//html/body/div/div[2]/form/table[2]/tbody/tr[{}]/td[1]".format(i), driver)) for i in range(1, qtd)]
-        # info["objetivos"] = [int(sc.get_info_direct(XPATHS_OBJETIVOS_PRE_FIX + str(i) + XPATHS_OBJETIVOS_POS_FIX, driver)) for i in range(1, qtd)]
+        info["objetivos"] = [int(sc.get_info_direct(XPATHS_OBJETIVOS_PRE_FIX + str(i) + XPATHS_OBJETIVOS_POS_FIX, driver)) for i in range(1, qtd)]
         
     return info
