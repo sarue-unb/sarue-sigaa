@@ -87,13 +87,12 @@ class MiniCrawlerParallel:
 
         self.driver.quit()
 
-# This is a WIP, it's not working yet
-# Trying to use threads to speed up the process
 class MiniCrawlerConcurrent:
     def __init__(self, username, password):
         try:
             self.chrome_options = webdriver.ChromeOptions()
-            # self.chrome_options.add_argument("--headless=new")
+            self.chrome_options.add_argument("--headless=new")
+            # self.chrome_options.add_argument("--start-minimized")
             self.chrome_options.add_experimental_option('excludeSwitches', ['disable-popup-blocking'])
             self.chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
 
