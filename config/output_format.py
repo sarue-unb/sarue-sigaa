@@ -32,6 +32,8 @@ class Timer:
         self.set_end_time()
         minutes, seconds = self.get_elapsed_time()
 
+        
+
         centralize(f'{RIGHT_ARROW} Script end {LEFT_ARROW}')
         print(SEPARATOR)
         print(f"\tStart time: {self.start_ctime}")

@@ -1,14 +1,10 @@
-from concurrent.futures import ThreadPoolExecutor
-from concurrent.futures import ProcessPoolExecutor, as_completed
 import time
-
 from tqdm import tqdm
 from crawlers.crawler_data import MiniCrawlerParallel, MiniCrawlerConcurrent
-from config.output_format import centralize
+from config.output_format import centralize, Timer
 from config.date_descryption import START_YEAR, END_YEAR
 from config.crawler_descryption import MAX_THREADS, TYPE_SEARCH, TYPE_PERIOD
-
-import threading
+from concurrent.futures import ThreadPoolExecutor
 
 class TypeSearch():
     def __init__(self, username, password, profile):
@@ -49,8 +45,15 @@ class TypeSearch():
                         executor.submit(instances[str(year)+"_"+str(quarter)].run, self.username, self.password, self.profile, year, None, quarter+1)    
 
         elif TYPE_PERIOD == 'TRIMESTER':
+            # instances = {}
+            # with ThreadPoolExecutor(max_workers=MAX_THREADS) as executor:
+            #     for year in range(END_YEAR, START_YEAR-1, -1):
+            #         for trimester in range(3,-1,-1):
+            #             instance = MiniCrawlerParallel()
+            #             instances[str(year)+"_"+str(trimester)] = instance
+            #             executor.submit(instances[str(year)+"_"+str(trimester)].run, self.username, self.password, self.profile, year, None, None, trimester+1)    
             instances = {}
-            with ThreadPoolExecutor(max_workers=4) as executor:
+            with ThreadPoolExecutor(max_workers=MAX_THREADS) as executor:
                 for year in range(START_YEAR, END_YEAR+1):
                     for trimester in range(4):
                         instance = MiniCrawlerParallel()
@@ -61,8 +64,12 @@ class TypeSearch():
             centralize("Invalid type period")
 
     def concurrent_search(self):
-        lista = [str(year) + '/' + str(month) for year in range(END_YEAR, START_YEAR-1, -1) for month in range(12, -1, -1)]
+        timer = self.timer = Timer()
+        timer.set_start_time()
+        # lista = [str(year) + '/' + str(month) for year in range(END_YEAR, START_YEAR-1, -1) for month in range(12, 0, -1)]
+        lista = [str(year) + '/' + str(month) for year in range(START_YEAR, END_YEAR+1) for month in range(1, 12+1)]
         instances = [MiniCrawlerConcurrent(self.username, self.password) for _ in tqdm(range(MAX_THREADS))]
+        timer.print_elapsed_ctime()
 
         def get_instance_with_wait():
             while len(instances) == 0:

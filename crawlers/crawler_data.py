@@ -113,6 +113,7 @@ class MiniCrawlerConcurrent:
                     centralize("Nenhum navegador encontrado")
                     self.navegador = None
                     exit(1)
+                    
         self.driver.get(LOGIN_PAGE)
         self.instance_login(username, password)
         self.navigate_to_extension_page()
