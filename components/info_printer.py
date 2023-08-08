@@ -37,6 +37,11 @@ def get_info_from_print_page(driver):
     info["situacao"] = sc.get_info_direct(XPATHS_SITUACAO, driver)
     ##
     
+    ## FIX: Acoes canceladas
+    if 'xxx' in info["codigo"]:
+        info["codigo"] = info["codigo"] + " _ " + info["titulo"]
+    ##
+    
     if(info["tipo"] == "CURSO"):
         info = get_info_from_printer_type_curso(info, driver)
 
