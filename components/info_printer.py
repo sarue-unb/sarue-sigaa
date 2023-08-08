@@ -1,42 +1,40 @@
-from selenium.webdriver.common.by import By
-from database_generator.constants import OBJECT_FORM_ID
+import components.selection_components as sc
+from config.actions_descryption import *
+from config.output_format import SIZE_TERMINAL
+from tqdm import tqdm
 
-def get_qtd_tables_by_xpath(xpath: str, driver):
-    form = driver.find_element(By.XPATH, xpath)
+def get_row_data_printer(driver, month:str, year:str, cnpq=None):
+    rows_total_data = []
+    result_table = sc.get_rows_from_table(driver)
+    rows_length = sc.get_rows_len(result_table)
 
-    return len(form.find_elements(By.XPATH, "table"))
+    if cnpq != None:
+        desc = f'{month:02d}/{year} - {cnpq}'
+    else:
+        desc = f'{month:02d}/{year}'
+    for i in tqdm(range(0, rows_length - 1), desc=desc, bar_format='{desc} - {elapsed} {bar} {n_fmt}/{total_fmt} - {percentage:.0f}%', ncols=SIZE_TERMINAL): # tqdm is a progress bar
+        sc.use_element_by_id(PRINTER_FORM_ID_PRE_FIX + str(i) + PRINTER_FORM_ID_POS_FIX, result_table)
+        
+        row_info = get_info_from_print_page(driver)
+        sc.add_date_to_item(row_info, month, year)
+        rows_total_data.append(row_info)
+        
+        sc.use_element_by_class("voltar", driver)
 
-def get_element_by_xpath(value: int, driver):
-    return driver.find_element(By.XPATH, value)
-
-def get_element_by_id(id: str, driver):
-    return driver.find_element(By.ID, id)
-    
-def get_element_by_class(class_name: str, driver):
-    return driver.find_element(By.CLASS_NAME, class_name)
-
-def get_rows_len(result_table):
-     return len(result_table.find_elements(By.XPATH, ".//tr"))
-
-def get_info_try_except(xpath, driver):
-    try:
-        return get_element_by_xpath(xpath, driver).text
-    except:
-        return "N/A"
-    
-def get_info_direct(xpath, driver):
-    return get_element_by_xpath(xpath, driver).text
+        result_table = sc.get_rows_from_table(driver)
+        
+    return rows_total_data
 
 def get_info_from_print_page(driver):
     info = {}
 
     ## Padrao a todas
-    info["codigo"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[1]/td", driver)
-    info["titulo"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[2]/td", driver)
-    info["ano"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[3]/td", driver)
-    info["periodo_de_realizacao"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[4]/td", driver)
-    info["tipo"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[5]/td", driver)
-    info["situacao"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[6]/td", driver)
+    info["codigo"] = sc.get_info_direct(XPATHS_CODIGO, driver)
+    info["titulo"] = sc.get_info_direct(XPATHS_TITULO, driver)
+    info["ano"] = sc.get_info_direct(XPATHS_ANO, driver)
+    info["periodo_de_realizacao"] = sc.get_info_direct(XPATHS_PERIODO_DE_REALIZACAO, driver)
+    info["tipo"] = sc.get_info_direct(XPATHS_TIPO, driver)
+    info["situacao"] = sc.get_info_direct(XPATHS_SITUACAO, driver)
     ##
     
     if(info["tipo"] == "CURSO"):
@@ -57,185 +55,183 @@ def get_info_from_print_page(driver):
     elif info["tipo"] == "PROJETO":
         info = get_info_from_printer_type_projeto(info, driver)
 
-    if (get_qtd_tables_by_xpath("/html/body/div/div[2]/form", driver) > 1):
-        info = get_info_objetivos(info, "/html/body/div/div[2]/form/table[2]", driver)
+    if (sc.get_qtd_tables_by_xpath(XPATHS_TABLE_OBJETIVOS, driver) > 1):
+        info = get_info_objetivos(info, XPATHS_OBJETIVOS, driver)
     
     return info
 
 def get_info_from_printer_type_curso(info:dict, driver):
-    info["munincipio_de_realizacao"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[7]/td", driver)
-    info["espaco_de_realizacao"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[8]/td", driver)
-    info["abrangencia"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[9]/td", driver)
-    info["publico_alvo"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[10]/td", driver)
-    info["unidade_proponente"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[11]/td", driver)
-    info["unidade_orcamentaria"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[12]/td", driver)
-    info["outras_unidades_envolvidas"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[13]/td", driver)
-    info["area_principal"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[14]/td", driver)
-    info["area_do_cnpq"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[15]/td", driver)
-    info["fonte_de_financiamento"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[16]/td", driver)
-    info["convenio_funpec"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[17]/td", driver)   
-    info["renovacao"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[18]/td", driver)
-    info["numero_bolsas_solicitadas"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[19]/td", driver) 
-    info["numero_bolsas_concedidas"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[20]/td", driver)
-    info["numero_discentes_envolvidos"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[21]/td", driver)
-    info["faz_parte_de_programa_de_extensao"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[22]/td", driver)
-    info["publico_estimado"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[23]/td", driver)  
-    info["publico_real_atendido"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[24]/td", driver)
-    info["cadastro_tipo"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[25]/td", driver)
-    info["cadastro_categoria"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[26]/td", driver)
-    info["cadastro_subcategoria"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[27]/td", driver)
-    info["periodo_de_execucao"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[28]/td", driver)
-    info["carga_horario"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[29]/td", driver)
-    info["previsao_n_de_vagas"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[30]/td", driver)
+    info["munincipio_de_realizacao"] = sc.get_info_direct(CURSO_XPATHS_MUNICIPIO_DE_REALIZACAO, driver)
+    info["espaco_de_realizacao"] = sc.get_info_direct(CURSO_XPATHS_ESPACO_DE_REALIZACAO, driver)
+    info["abrangencia"] = sc.get_info_direct(CURSO_XPATHS_ABRANGENCIA, driver)
+    info["publico_alvo"] = sc.get_info_direct(CURSO_XPATHS_PUBLICO_ALVO, driver)
+    info["unidade_proponente"] = sc.get_info_direct(CURSO_XPATHS_CURSO_XPATHS_UNIDADE_PROPONENTE, driver)
+    info["unidade_orcamentaria"] = sc.get_info_direct(CURSO_XPATHS_UNIDADE_ORCAMENTARIA, driver)
+    info["outras_unidades_envolvidas"] = sc.get_info_direct(CURSO_XPATHS_OUTRAS_UNIDADES_ENVOLVIDAS, driver)
+    info["area_principal"] = sc.get_info_direct(CURSO_XPATHS_AREA_PRINCIPAL, driver)
+    info["area_do_cnpq"] = sc.get_info_direct(CURSO_XPATHS_AREA_DO_CNPQ, driver)
+    info["fonte_de_financiamento"] = sc.get_info_direct(CURSO_XPATHS_FONTE_DE_FINANCIAMENTO, driver)
+    info["convenio_funpec"] = sc.get_info_direct(CURSO_XPATHS_CONVENIO_FUNPEC, driver)
+    info["renovacao"] = sc.get_info_direct(CURSO_XPATHS_RENOVACAO, driver)
+    info["numero_bolsas_solicitadas"] = sc.get_info_direct(CURSO_XPATHS_NUMERO_BOLSAS_SOLICITADAS, driver)
+    info["numero_bolsas_concedidas"] = sc.get_info_direct(CURSO_XPATHS_NUMERO_BOLSAS_CONCEDIDAS, driver)
+    info["numero_discentes_envolvidos"] = sc.get_info_direct(CURSO_XPATHS_NUMERO_DISCENTES_ENVOLVIDOS, driver)
+    info["faz_parte_de_programa_de_extensao"] = sc.get_info_direct(CURSO_XPATHS_FAZ_PARTE_DE_PROGRAMA_DE_EXTENSAO, driver)
+    info["publico_estimado"] = sc.get_info_direct(CURSO_XPATHS_PUBLICO_ESTIMADO, driver)
+    info["publico_real_atendido"] = sc.get_info_direct(CURSO_XPATHS_PUBLICO_REAL_ATENDIDO, driver)
+    info["cadastro_tipo"] = sc.get_info_direct(CURSO_XPATHS_CADASTRO_TIPO, driver)
+    info["cadastro_categoria"] = sc.get_info_direct(CURSO_XPATHS_CADASTRO_CATEGORIA, driver)
+    info["cadastro_subcategoria"] = sc.get_info_direct(CURSO_XPATHS_CADASTRO_SUBCATEGORIA, driver)
+    info["periodo_de_execucao"] = sc.get_info_direct(CURSO_XPATHS_PERIODO_DE_EXECUCAO, driver)
+    info["carga_horaria"] = sc.get_info_direct(CURSO_XPATHS_CARGA_HORARIO, driver)
+    info["previsao_n_de_vagas"] = sc.get_info_direct(CURSO_XPATHS_PREVISAO_N_DE_VAGAS, driver)
+    info["contato_coordenacao"] = sc.get_info_direct(CURSO_XPATHS_CONTATO_COORDENACAO, driver)
+    info["contato_email"] = sc.get_info_direct(CURSO_XPATHS_CONTATO_EMAIL, driver)
+    info["contato_telefone"] = sc.get_info_direct(CURSO_XPATHS_CONTATO_TELEFONE, driver)
 
-    info["contato_coordenacao"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[32]/td", driver)
-    info["contato_email"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[33]/td", driver)
-    info["contato_telefone"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[34]/td", driver)
-   
     return info
 
 def get_info_from_printer_type_evento(info:dict, driver):
-    info["munincipio_de_realizacao"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[7]/td", driver)
-    info["espaco_de_realizacao"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[8]/td", driver)
-    info["abrangencia"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[9]/td", driver)
-    info["publico_alvo"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[10]/td", driver)
-    info["unidade_proponente"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[11]/td", driver)
-    info["unidade_orcamentaria"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[12]/td", driver)
-    info["outras_unidades_envolvidas"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[13]/td", driver)
-    info["area_principal"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[14]/td", driver)
-    info["area_do_cnpq"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[15]/td", driver)
-    info["fonte_de_financiamento"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[16]/td", driver)
-    info["convenio_funpec"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[17]/td", driver)   
-    info["renovacao"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[18]/td", driver)
-    info["numero_bolsas_solicitadas"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[19]/td", driver) 
-    info["numero_bolsas_concedidas"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[20]/td", driver)
-    info["numero_discentes_envolvidos"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[21]/td", driver)
-    info["faz_parte_de_programa_de_extensao"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[22]/td", driver)
-    info["publico_estimado"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[23]/td", driver)  
-    info["publico_real_atendido"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[24]/td", driver)
-    info["cadastro_tipo"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[25]/td", driver)
-    info["cadastro_categoria"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[26]/td", driver)
-    info["periodo_de_execucao"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[27]/td", driver)
-    info["carga_horario"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[28]/td", driver)
-    info["previsao_n_de_vagas"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[29]/td", driver)
-
-    info["contato_coordenacao"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[32]/td", driver)
-    info["contato_email"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[33]/td", driver)
-    info["contato_telefone"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[34]/td", driver)
-     
+    info["munincipio_de_realizacao"] = sc.get_info_direct(EVENTO_XPATHS_MUNINCIPIO_DE_REALIZACAO, driver)
+    info["espaco_de_realizacao"] = sc.get_info_direct(EVENTO_XPATHS_ESPACO_DE_REALIZACAO, driver)
+    info["abrangencia"] = sc.get_info_direct(EVENTO_XPATHS_ABRANGENCIA, driver)
+    info["publico_alvo"] = sc.get_info_direct(EVENTO_XPATHS_PUBLICO_ALVO, driver)
+    info["unidade_proponente"] = sc.get_info_direct(EVENTO_XPATHS_UNIDADE_PROPONENTE, driver)
+    info["unidade_orcamentaria"] = sc.get_info_direct(EVENTO_XPATHS_UNIDADE_ORCAMENTARIA, driver)
+    info["outras_unidades_envolvidas"] = sc.get_info_direct(EVENTO_XPATHS_OUTRAS_UNIDADES_ENVOLVIDAS, driver)
+    info["area_principal"] = sc.get_info_direct(EVENTO_XPATHS_AREA_PRINCIPAL, driver)
+    info["area_do_cnpq"] = sc.get_info_direct(EVENTO_XPATHS_AREA_DO_CNPQ, driver)
+    info["fonte_de_financiamento"] = sc.get_info_direct(EVENTO_XPATHS_FONTE_DE_FINANCIAMENTO, driver)
+    info["convenio_funpec"] = sc.get_info_direct(EVENTO_XPATHS_CONVENIO_FUNPEC, driver)
+    info["renovacao"] = sc.get_info_direct(EVENTO_XPATHS_RENOVACAO, driver)
+    info["numero_bolsas_solicitadas"] = sc.get_info_direct(EVENTO_XPATHS_NUMERO_BOLSAS_SOLICITADAS, driver)
+    info["numero_bolsas_concedidas"] = sc.get_info_direct(EVENTO_XPATHS_NUMERO_BOLSAS_CONCEDIDAS, driver)
+    info["numero_discentes_envolvidos"] = sc.get_info_direct(EVENTO_XPATHS_NUMERO_DISCENTES_ENVOLVIDOS, driver)
+    info["faz_parte_de_programa_de_extensao"] = sc.get_info_direct(EVENTO_XPATHS_FAZ_PARTE_DE_PROGRAMA_DE_EXTENSAO, driver)
+    info["publico_estimado"] = sc.get_info_direct(EVENTO_XPATHS_PUBLICO_ESTIMADO, driver)   
+    info["publico_real_atendido"] = sc.get_info_direct(EVENTO_XPATHS_PUBLICO_REAL_ATENDIDO, driver)
+    info["cadastro_tipo"] = sc.get_info_direct(EVENTO_XPATHS_CADASTRO_TIPO, driver)
+    info["cadastro_categoria"] = sc.get_info_direct(EVENTO_XPATHS_CADASTRO_CATEGORIA, driver) 
+    info["periodo_de_execucao"] = sc.get_info_direct(EVENTO_XPATHS_PERIODO_DE_EXECUCAO, driver)
+    info["carga_horario"] = sc.get_info_direct(EVENTO_XPATHS_CARGA_HORARIO, driver)
+    info["previsao_n_de_vagas"] = sc.get_info_direct(EVENTO_XPATHS_PREVISAO_N_DE_VAGAS, driver)
+    
+    info["contato_coordenacao"] = sc.get_info_direct(EVENTO_XPATHS_CONTATO_COORDENACAO, driver)
+    info["contato_email"] = sc.get_info_direct(EVENTO_XPATHS_CONTATO_EMAIL, driver)
+    info["contato_telefone"] = sc.get_info_direct(EVENTO_XPATHS_CONTATO_TELEFONE, driver)
+    
     return info
 
 def get_info_from_printer_type_prestacao_servico(info:dict, driver):
     # Nenhuma cadastrada no sigaa
     # BASEADO EM UM E-MAIL. SE EXISTIR UM EXEMPLO DENTRO DO SIGAA. FAVOR ATUALIZAR
-    info["abrangencia"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[7]/td", driver)
-    info["publico_alvo"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[8]/td", driver)
-    info["unidade_proponente"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[9]/td", driver)
-    info["unidade_orcamentaria"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[10]/td", driver)
-    info["outras_unidades_envolvidas"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[11]/td", driver)
-    info["area_principal"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[12]/td", driver)
-    info["area_do_cnpq"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[13]/td", driver)
-    info["fonte_de_financiamento"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[14]/td", driver)
-    info["convenio_funpec"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[15]/td", driver)   
-    info["renovacao"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[16]/td", driver)
-    info["numero_bolsas_solicitadas"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[17]/td", driver) 
-    info["numero_bolsas_concedidas"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[18]/td", driver)
-    info["numero_discentes_envolvidos"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[19]/td", driver)
-    info["publico_estimado"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[20]/td", driver)  
-    info["publico_real_atendido"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[21]/td", driver)
-    info["cadastro_tipo"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[22]/td", driver)
-    info["cadastro_categoria"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[23]/td", driver)
+    info["abrangencia"] = sc.get_info_direct(PRESTACAO_SERVICO_XPATHS_ABRANGENCIA, driver)
+    info["publico_alvo"] = sc.get_info_direct(PRESTACAO_SERVICO_XPATHS_PUBLICO_ALVO, driver)
+    info["unidade_proponente"] = sc.get_info_direct(PRESTACAO_SERVICO_XPATHS_UNIDADE_PROPONENTE, driver)
+    info["unidade_orcamentaria"] = sc.get_info_direct(PRESTACAO_SERVICO_XPATHS_UNIDADE_ORCAMENTARIA, driver)
+    info["outras_unidades_envolvidas"] = sc.get_info_direct(PRESTACAO_SERVICO_XPATHS_OUTRAS_UNIDADES_ENVOLVIDAS, driver)
+    info["area_principal"] = sc.get_info_direct(PRESTACAO_SERVICO_XPATHS_AREA_PRINCIPAL, driver)    
+    info["area_do_cnpq"] = sc.get_info_direct(PRESTACAO_SERVICO_XPATHS_AREA_DO_CNPQ, driver)
+    info["fonte_de_financiamento"] = sc.get_info_direct(PRESTACAO_SERVICO_XPATHS_FONTE_DE_FINANCIAMENTO, driver)
+    info["convenio_funpec"] = sc.get_info_direct(PRESTACAO_SERVICO_XPATHS_CONVENIO_FUNPEC, driver)
+    info["renovacao"] = sc.get_info_direct(PRESTACAO_SERVICO_XPATHS_RENOVACAO, driver)
+    info["numero_bolsas_solicitadas"] = sc.get_info_direct(PRESTACAO_SERVICO_XPATHS_NUMERO_BOLSAS_SOLICITADAS, driver)
+    info["numero_bolsas_concedidas"] = sc.get_info_direct(PRESTACAO_SERVICO_XPATHS_NUMERO_BOLSAS_CONCEDIDAS, driver)
+    info["numero_discentes_envolvidos"] = sc.get_info_direct(PRESTACAO_SERVICO_XPATHS_NUMERO_DISCENTES_ENVOLVIDOS, driver)
+    info["publico_estimado"] = sc.get_info_direct(PRESTACAO_SERVICO_XPATHS_PUBLICO_ESTIMADO, driver)
+    info["publico_real_atendido"] = sc.get_info_direct(PRESTACAO_SERVICO_XPATHS_PUBLICO_REAL_ATENDIDO, driver)
+    info["cadastro_tipo"] = sc.get_info_direct(PRESTACAO_SERVICO_XPATHS_CADASTRO_TIPO, driver)
+    info["cadastro_categoria"] = sc.get_info_direct(PRESTACAO_SERVICO_XPATHS_CADASTRO_CATEGORIA, driver)
     
-    info["contato_coordenacao"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[25]/td", driver)
-    info["contato_email"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[26]/td", driver)
-    info["contato_telefone"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[27]/td", driver)
+    info["contato_coordenacao"] = sc.get_info_direct(PRESTACAO_SERVICO_XPATHS_CONTATO_COORDENACAO, driver)
+    info["contato_email"] = sc.get_info_direct(PRESTACAO_SERVICO_XPATHS_CONTATO_EMAIL, driver)
+    info["contato_telefone"] = sc.get_info_direct(PRESTACAO_SERVICO_XPATHS_CONTATO_TELEFONE, driver)
 
     return info
 
 def get_info_from_printer_type_produto(info:dict, driver):
-    info["abrangencia"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[7]/td", driver)
-    info["publico_alvo"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[8]/td", driver)
-    info["unidade_proponente"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[9]/td", driver)
-    info["unidade_orcamentaria"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[10]/td", driver)
-    info["outras_unidades_envolvidas"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[11]/td", driver)
-    info["area_principal"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[12]/td", driver)
-    info["area_do_cnpq"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[13]/td", driver)
-    info["fonte_de_financiamento"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[14]/td", driver)
-    info["convenio_funpec"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[15]/td", driver)   
-    info["renovacao"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[16]/td", driver)
-    info["numero_bolsas_solicitadas"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[17]/td", driver) 
-    info["numero_bolsas_concedidas"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[18]/td", driver)
-    info["numero_discentes_envolvidos"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[19]/td", driver)
-    info["faz_parte_de_programa_de_extensao"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[20]/td", driver)
-    info["publico_estimado"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[21]/td", driver)  
-    info["publico_real_atendido"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[22]/td", driver)
-    info["cadastro_tipo"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[23]/td", driver)
-    info["cadastro_categoria"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[24]/td", driver)
-    info["triagem"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[25]/td", driver)
+    info["abrangencia"] = sc.get_info_direct(PRODUTO_XPATHS_ABRANGENCIA, driver)
+    info["publico_alvo"] = sc.get_info_direct(PRODUTO_XPATHS_PUBLICO_ALVO, driver)
+    info["unidade_proponente"] = sc.get_info_direct(PRODUTO_XPATHS_UNIDADE_PROPONENTE, driver)
+    info["unidade_orcamentaria"] = sc.get_info_direct(PRODUTO_XPATHS_UNIDADE_ORCAMENTARIA, driver)
+    info["outras_unidades_envolvidas"] = sc.get_info_direct(PRODUTO_XPATHS_OUTRAS_UNIDADES_ENVOLVIDAS, driver)
+    info["area_principal"] = sc.get_info_direct(PRODUTO_XPATHS_AREA_PRINCIPAL, driver)
+    info["area_do_cnpq"] = sc.get_info_direct(PRODUTO_XPATHS_AREA_DO_CNPQ, driver)
+    info["fonte_de_financiamento"] = sc.get_info_direct(PRODUTO_XPATHS_FONTE_DE_FINANCIAMENTO, driver)
+    info["convenio_funpec"] = sc.get_info_direct(PRODUTO_XPATHS_CONVENIO_FUNPEC, driver)
+    info["renovacao"] = sc.get_info_direct(PRODUTO_XPATHS_RENOVACAO, driver)
+    info["numero_bolsas_solicitadas"] = sc.get_info_direct(PRODUTO_XPATHS_NUMERO_BOLSAS_SOLICITADAS, driver)
+    info["numero_bolsas_concedidas"] = sc.get_info_direct(PRODUTO_XPATHS_NUMERO_BOLSAS_CONCEDIDAS, driver)
+    info["numero_discentes_envolvidos"] = sc.get_info_direct(PRODUTO_XPATHS_NUMERO_DISCENTES_ENVOLVIDOS, driver)
+    info["publico_estimado"] = sc.get_info_direct(PRODUTO_XPATHS_PUBLICO_ESTIMADO, driver)
+    info["publico_real_atendido"] = sc.get_info_direct(PRODUTO_XPATHS_PUBLICO_REAL_ATENDIDO, driver)
+    info["cadastro_tipo"] = sc.get_info_direct(PRODUTO_XPATHS_CADASTRO_TIPO, driver)
+    info["cadastro_categoria"] = sc.get_info_direct(PRODUTO_XPATHS_CADASTRO_CATEGORIA, driver)
+    info["triagem"] = sc.get_info_direct(PRODUTO_XPATHS_TRIAGEM, driver)
 
-    info["contato_coordenacao"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[27]/td", driver)
-    info["contato_email"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[28]/td", driver)
-    info["contato_telefone"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[29]/td", driver)
-
+    info["contato_coordenacao"] = sc.get_info_direct(PRODUTO_XPATHS_CONTATO_COORDENACAO, driver)
+    info["contato_email"] = sc.get_info_direct(PRODUTO_XPATHS_CONTATO_EMAIL, driver)
+    info["contato_telefone"] = sc.get_info_direct(PRODUTO_XPATHS_CONTATO_TELEFONE, driver)
+    
     return info
 
 def get_info_from_printer_type_programa(info:dict, driver):
-    info["abrangencia"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[7]/td", driver)
-    info["publico_alvo"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[8]/td", driver)
-    info["unidade_proponente"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[9]/td", driver)
-    info["unidade_orcamentaria"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[10]/td", driver)
-    info["outras_unidades_envolvidas"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[11]/td", driver)
-    info["area_principal"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[12]/td", driver)
-    info["area_do_cnpq"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[13]/td", driver)
-    info["fonte_de_financiamento"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[14]/td", driver)
-    info["convenio_funpec"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[15]/td", driver)   
-    info["renovacao"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[16]/td", driver)
-    info["numero_bolsas_solicitadas"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[17]/td", driver) 
-    info["numero_bolsas_concedidas"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[18]/td", driver)
-    info["numero_discentes_envolvidos"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[19]/td", driver)
-    info["publico_estimado"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[20]/td", driver)  
-    info["publico_real_atendido"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[21]/td", driver)
-    info["cadastro_tipo"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[22]/td", driver)
-    
-    info["contato_coordenacao"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[24]/td", driver)
-    info["contato_email"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[25]/td", driver)
-    info["contato_telefone"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[26]/td", driver)
+    info["abrangencia"] = sc.get_info_direct(PROGRAMA_XPATHS_ABRANGENCIA, driver)
+    info["publico_alvo"] = sc.get_info_direct(PROGRAMA_XPATHS_PUBLICO_ALVO, driver)
+    info["unidade_proponente"] = sc.get_info_direct(PROGRAMA_XPATHS_UNIDADE_PROPONENTE, driver)
+    info["unidade_orcamentaria"] = sc.get_info_direct(PROGRAMA_XPATHS_UNIDADE_ORCAMENTARIA, driver)
+    info["outras_unidades_envolvidas"] = sc.get_info_direct(PROGRAMA_XPATHS_OUTRAS_UNIDADES_ENVOLVIDAS, driver)
+    info["area_principal"] = sc.get_info_direct(PROGRAMA_XPATHS_AREA_PRINCIPAL, driver)
+    info["area_do_cnpq"] = sc.get_info_direct(PROGRAMA_XPATHS_AREA_DO_CNPQ, driver)
+    info["fonte_de_financiamento"] = sc.get_info_direct(PROGRAMA_XPATHS_FONTE_DE_FINANCIAMENTO, driver)
+    info["convenio_funpec"] = sc.get_info_direct(PROGRAMA_XPATHS_CONVENIO_FUNPEC, driver)
+    info["renovacao"] = sc.get_info_direct(PROGRAMA_XPATHS_RENOVACAO, driver)
+    info["numero_bolsas_solicitadas"] = sc.get_info_direct(PROGRAMA_XPATHS_NUMERO_BOLSAS_SOLICITADAS, driver)
+    info["numero_bolsas_concedidas"] = sc.get_info_direct(PROGRAMA_XPATHS_NUMERO_BOLSAS_CONCEDIDAS, driver)
+    info["numero_discentes_envolvidos"] = sc.get_info_direct(PROGRAMA_XPATHS_NUMERO_DISCENTES_ENVOLVIDOS, driver)
+    info["publico_estimado"] = sc.get_info_direct(PROGRAMA_XPATHS_PUBLICO_ESTIMADO, driver)
+    info["publico_real_atendido"] = sc.get_info_direct(PROGRAMA_XPATHS_PUBLICO_REAL_ATENDIDO, driver)
+    info["cadastro_tipo"] = sc.get_info_direct(PROGRAMA_XPATHS_CADASTRO_TIPO, driver)
+
+    info["contato_coordenacao"] = sc.get_info_direct(PROGRAMA_XPATHS_CONTATO_COORDENACAO, driver)
+    info["contato_email"] = sc.get_info_direct(PROGRAMA_XPATHS_CONTATO_EMAIL, driver)
+    info["contato_telefone"] = sc.get_info_direct(PROGRAMA_XPATHS_CONTATO_TELEFONE, driver)
 
     return info
 
 def get_info_from_printer_type_projeto(info:dict, driver):
-    info["munincipio_de_realizacao"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[7]/td", driver)
-    info["espaco_de_realizacao"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[8]/td", driver)
-    info["abrangencia"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[9]/td", driver)
-    info["publico_alvo"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[10]/td", driver)
-    info["unidade_proponente"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[11]/td", driver)
-    info["unidade_orcamentaria"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[12]/td", driver)
-    info["outras_unidades_envolvidas"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[13]/td", driver)
-    info["area_principal"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[14]/td", driver)
-    info["area_do_cnpq"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[15]/td", driver)
-    info["fonte_de_financiamento"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[16]/td", driver)
-    info["convenio_funpec"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[17]/td", driver)   
-    info["renovacao"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[18]/td", driver)
-    info["numero_bolsas_solicitadas"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[19]/td", driver) 
-    info["numero_bolsas_concedidas"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[20]/td", driver)
-    info["numero_discentes_envolvidos"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[21]/td", driver)
-    info["faz_parte_de_programa_de_extensao"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[22]/td", driver)
-    info["grupo_permanente"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[23]/td", driver)  
-    info["publico_estimado"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[24]/td", driver)  
-    info["publico_real_atendido"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[25]/td", driver)
-    info["cadastro_tipo"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[26]/td", driver)
+    info["munincipio_de_realizacao"] = sc.get_info_direct(PROJETO_XPATHS_MUNINCIPIO_DE_REALIZACAO, driver)
+    info["espaco_de_realizacao"] = sc.get_info_direct(PROJETO_XPATHS_ESPACO_DE_REALIZACAO, driver)
+    info["abrangencia"] = sc.get_info_direct(PROJETO_XPATHS_ABRANGENCIA, driver)
+    info["publico_alvo"] = sc.get_info_direct(PROJETO_XPATHS_PUBLICO_ALVO, driver)
+    info["unidade_proponente"] = sc.get_info_direct(PROJETO_XPATHS_UNIDADE_PROPONENTE, driver)
+    info["unidade_orcamentaria"] = sc.get_info_direct(PROJETO_XPATHS_UNIDADE_ORCAMENTARIA, driver)
+    info["outras_unidades_envolvidas"] = sc.get_info_direct(PROJETO_XPATHS_OUTRAS_UNIDADES_ENVOLVIDAS, driver)
+    info["area_principal"] = sc.get_info_direct(PROJETO_XPATHS_AREA_PRINCIPAL, driver)
+    info["area_do_cnpq"] = sc.get_info_direct(PROJETO_XPATHS_AREA_DO_CNPQ, driver)
+    info["fonte_de_financiamento"] = sc.get_info_direct(PROJETO_XPATHS_FONTE_DE_FINANCIAMENTO, driver)
+    info["convenio_funpec"] = sc.get_info_direct(PROJETO_XPATHS_CONVENIO_FUNPEC, driver)
+    info["renovacao"] = sc.get_info_direct(PROJETO_XPATHS_RENOVACAO, driver)
+    info["numero_bolsas_solicitadas"] = sc.get_info_direct(PROJETO_XPATHS_NUMERO_BOLSAS_SOLICITADAS, driver)
+    info["numero_bolsas_concedidas"] = sc.get_info_direct(PROJETO_XPATHS_NUMERO_BOLSAS_CONCEDIDAS, driver)
+    info["numero_discentes_envolvidos"] = sc.get_info_direct(PROJETO_XPATHS_NUMERO_DISCENTES_ENVOLVIDOS, driver)
+    info["faz_parte_de_programa_de_extensao"] = sc.get_info_direct(PROJETO_XPATHS_FAZ_PARTE_DE_PROGRAMA_DE_EXTENSAO, driver)
+    info["grupo_permanente"] = sc.get_info_direct(PROJETO_XPATHS_GRUPO_PERMANENTE, driver)
+    info["publico_estimado"] = sc.get_info_direct(PROJETO_XPATHS_PUBLICO_ESTIMADO, driver)
+    info["publico_real_atendido"] = sc.get_info_direct(PROJETO_XPATHS_PUBLICO_REAL_ATENDIDO, driver)
+    info["cadastro_tipo"] = sc.get_info_direct(PROJETO_XPATHS_CADASTRO_TIPO, driver)
     
-    info["contato_coordenacao"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[28]/td", driver)
-    info["contato_email"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[29]/td", driver)
-    info["contato_telefone"] = get_info_direct("//html/body/div/div[2]/form/table[1]/tbody/tr[30]/td", driver)
+    info["contato_coordenacao"] = sc.get_info_direct(PROJETO_XPATHS_CONTATO_COORDENACAO, driver)
+    info["contato_email"] = sc.get_info_direct(PROJETO_XPATHS_CONTATO_EMAIL, driver)
+    info["contato_telefone"] = sc.get_info_direct(PROJETO_XPATHS_CONTATO_TELEFONE, driver)
 
     return info
 
 def get_info_objetivos(info: dict, xpath: str, driver):
-    tipo = get_element_by_xpath(xpath, driver)
+    tipo = sc.get_element_by_xpath(xpath, driver)
     
     if tipo != None:
-        qtd = get_rows_len(tipo)
-        info["objetivos"] = [int(get_info_direct("//html/body/div/div[2]/form/table[2]/tbody/tr[{}]/td[1]".format(i), driver)) for i in range(1, qtd)]
+        qtd = sc.get_rows_len(tipo)
+        info["objetivos"] = [int(sc.get_info_direct(XPATHS_OBJETIVOS_PRE_FIX + str(i) + XPATHS_OBJETIVOS_POS_FIX, driver)) for i in range(1, qtd)]
         
     return info
