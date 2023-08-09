@@ -1,6 +1,6 @@
 import components.selection_components as sc
 from config.actions_descryption import *
-from config.output_format import SIZE_TERMINAL
+from config.output_format import SIZE_TERMINAL, clear_strings
 from tqdm import tqdm
 
 def get_row_data_printer(driver, month:str, year:str, cnpq=None):
@@ -60,9 +60,13 @@ def get_info_from_print_page(driver):
     elif info["tipo"] == "PROJETO":
         info = get_info_from_printer_type_projeto(info, driver)
 
-    if (sc.get_qtd_tables_by_xpath(XPATHS_TABLE_OBJETIVOS, driver) > 1):
+    qtd_tabelas = sc.get_qtd_tables_by_xpath(XPATHS_OTHER_TABLES, driver)
+
+    if (qtd_tabelas >= 2):
         info = get_info_objetivos(info, XPATHS_OBJETIVOS, driver)
-    
+        if (sc.get_qtd_tables_by_xpath(XPATHS_OTHER_TABLES, driver) >= 3):
+            info = get_info_team_members(info, ID_TEAM_MEMBERS, driver)
+            
     return info
 
 def get_info_from_printer_type_curso(info:dict, driver):
@@ -240,3 +244,28 @@ def get_info_objetivos(info: dict, xpath: str, driver):
         info["objetivos"] = [int(sc.get_info_direct(XPATHS_OBJETIVOS_PRE_FIX + str(i) + XPATHS_OBJETIVOS_POS_FIX, driver)) for i in range(1, qtd)]
         
     return info
+
+def get_info_team_members(info: dict, id: str, driver):
+    tipo = sc.get_element_by_id(id, driver)
+
+    if tipo != None:
+        qtd = sc.get_rows_len(tipo)
+        membros = []
+        # print(tipo, qtd)
+        for i in range(1, qtd):
+            
+            m_equipe_noome = sc.get_info_direct(ID_TEAM_MEMBERS_PRE_FIX + str(i) + XPATHS_TEAM_MEMBERS_POS_FIX_NAME, driver).upper()
+            m_equipe_nome = clear_strings(m_equipe_noome)
+            if m_equipe_noome != m_equipe_nome:
+                print('\n',info['codigo'])
+                print(m_equipe_noome, m_equipe_nome)
+            m_equipe_categoria = sc.get_info_direct(ID_TEAM_MEMBERS_PRE_FIX + str(i) + XPATHS_TEAM_MEMBERS_POS_FIX_CATEGORY, driver).capitalize()
+            m_equipe_funcao = sc.get_info_direct(ID_TEAM_MEMBERS_PRE_FIX + str(i) + XPATHS_TEAM_MEMBERS_POS_FIX_FUNCTION, driver).capitalize()
+            m_equipe_departamento = sc.get_info_direct(ID_TEAM_MEMBERS_PRE_FIX + str(i) + XPATHS_TEAM_MEMBERS_POS_FIX_DEPARTAMENT, driver).capitalize()
+            m_equipe_situacao = sc.get_info_direct(ID_TEAM_MEMBERS_PRE_FIX + str(i) + XPATHS_TEAM_MEMBERS_POS_FIX_STATUS, driver).capitalize()
+            
+            membros.append([m_equipe_nome, m_equipe_categoria, m_equipe_funcao, m_equipe_departamento, m_equipe_situacao])
+           
+        info["membros_da_equipe"] = membros
+    return info
+

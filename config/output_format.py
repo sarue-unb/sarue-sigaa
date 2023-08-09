@@ -3,7 +3,9 @@ LEFT_ARROW = "<-"
 HASH = "#####"
 SIZE_TERMINAL = 70
 SEPARATOR = "="*SIZE_TERMINAL
+FORMATER = r"\((.*?)\)"
 
+import re
 import time
 import os
 
@@ -58,3 +60,13 @@ def clear_screen():
         _ = os.system('clear')
     else:  # Para o Windows
         _ = os.system('cls')
+
+def clear_strings(text: str) -> str:
+    match = re.search(FORMATER, text)
+    
+    if match:
+        nome = match.group(1)
+        return nome.strip()
+    else:
+        return text.strip(',')
+    
