@@ -127,11 +127,15 @@ class MiniCrawlerConcurrent:
     def navigate_to_extension_page(self):
         self.driver.get(EXTENSION_PAGE)
             
-    def get_year(self, perfil:str, year:int):
-        dg.get_every_extension_activity_from_months(1, 12, year, self.driver, perfil)
+    # def get_year(self, perfil:str, year:int):
+    #     dg.get_every_extension_activity_from_months(1, 12, year, self.driver, perfil)
 
-    def get_year_month(self, perfil:str, year:int, month:int):
-        dg.get_every_extension_activity_from_months(month, month, year, self.driver, perfil)
+    def get_year_month(self, perfil:str, year:int, month:int, cnpq:str):
+        if cnpq == None:
+            dg.get_every_extension_activity_from_month_years(month, year, self.driver, perfil)
+            # dg.get_every_extension_activity_from_months(1, 12, year, self.driver, perfil)
+        else:
+            dg.get_every_extension_activity_from_month_years_passing_cnpq(month, year, self.driver, perfil, cnpq)
 
-    def run(self, perfil:str, year:int, month:int):
-        self.get_year_month(perfil, year, month)
+    def run(self, perfil:str, year:int, month:int, cnpq:str):
+        self.get_year_month(perfil, year, month, cnpq)

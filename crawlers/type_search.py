@@ -1,9 +1,10 @@
 import time
 from tqdm import tqdm
 from crawlers.crawler_data import MiniCrawlerParallel, MiniCrawlerConcurrent
-from config.output_format import centralize, Timer
-from config.date_descryption import START_YEAR, END_YEAR
+from config.output_format import centralize, Timer, SIZE_TERMINAL
+from config.date_descryption import START_YEAR, END_YEAR, SPECIAL_DATE
 from config.crawler_descryption import MAX_THREADS, TYPE_SEARCH, TYPE_PERIOD
+from config.filter_descryption import AREA_CNPq
 from concurrent.futures import ThreadPoolExecutor
 
 class TypeSearch():
@@ -64,30 +65,47 @@ class TypeSearch():
             centralize("Invalid type period")
 
     def concurrent_search(self):
-        timer = self.timer = Timer()
-        timer.set_start_time()
-        # lista = [str(year) + '/' + str(month) for year in range(END_YEAR, START_YEAR-1, -1) for month in range(12, 0, -1)]
-        lista = [str(year) + '/' + str(month) for year in range(START_YEAR, END_YEAR+1) for month in range(1, 12+1)]
-        instances = [MiniCrawlerConcurrent(self.username, self.password) for _ in tqdm(range(MAX_THREADS))]
-        timer.print_elapsed_ctime()
+        # timer = self.timer = Timer()
+        # timer.set_start_time()
+        
+        lista = []
+        for year in range(START_YEAR, END_YEAR+1):
+            for month in range(1, 12+1):
+                year_month = str(year) + '/' + str(month)
+                month_year = str(month) + '/' + str(year)
+                if month_year in SPECIAL_DATE:
+                    for cnpq in AREA_CNPq:
+                        lista.append(year_month + '/' + cnpq)
+                else:
+                    lista.append(year_month)
 
+        desc = 'Loggin in'
+        with ThreadPoolExecutor(max_workers=MAX_THREADS) as executor:
+            instances = [MiniCrawlerConcurrent(self.username, self.password) for _ in tqdm(range(MAX_THREADS), desc=desc, bar_format='{desc} - {elapsed} {bar} {n_fmt}/{total_fmt} - {percentage:.0f}%', ncols=SIZE_TERMINAL)]
+        # timer.print_elapsed_ctime()
+        
         def get_instance_with_wait():
             while len(instances) == 0:
                 time.sleep(1)  # Aguarda 1 segundo antes de tentar novamente
             instance = instances.pop(0)
             return instance
 
-        def run_instance(username, password, year_month):
-            year, month = map(int, year_month.split('/'))
-            
+        def run_instance(username, password, year_month_cnpq):
+            lista_year_month_cnpq = year_month_cnpq.split('/')
+            year, month = map(int, lista_year_month_cnpq[:2])
+            if len(lista_year_month_cnpq) == 3:
+                cnpq = lista_year_month_cnpq[2]
+            else:
+                cnpq = None
+
             instance = get_instance_with_wait()
-            instance.run('discente', year, month)
+            instance.run(self.profile, year, month, cnpq)
             instances.append(instance)
-            return year_month
+            return year_month_cnpq
 
         with ThreadPoolExecutor(max_workers=MAX_THREADS) as executor:
-            futures = [executor.submit(run_instance, self.username, self.password, year_month) for year_month in tqdm(lista)]
-
+            futures = [executor.submit(run_instance, self.username, self.password, year_month_cnpq) for year_month_cnpq in lista]
+           
             for instance in instances:
                 instance.quit()
 

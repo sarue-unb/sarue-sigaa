@@ -37,7 +37,7 @@ def get_every_extension_activity_from_month_years(month: str, year: str, driver,
                 # _get_activities_from_list_view(driver, month, year)
 
 def get_every_extension_activity_from_month_years_cnpq(month: str, year: str, driver, perfil:str):
-    for cnpq in AREA_CPNq:
+    for cnpq in AREA_CNPq:
         _search_month_year_cnpq(month, year, cnpq, driver)
         
         if perfil == "discente":
@@ -53,6 +53,25 @@ def get_every_extension_activity_from_month_years_cnpq(month: str, year: str, dr
                 if (qtd > 0):
                     _get_activities_from_list_printer(driver, month, year)
                     # _get_activities_from_list_view(driver, month, year)
+
+    _uncheck_cnpq(driver)
+
+def get_every_extension_activity_from_month_years_passing_cnpq(month: str, year: str, driver, perfil:str, cnpq:str):
+    _search_month_year_cnpq(month, year, cnpq, driver)
+    
+    if perfil == "discente":
+        qtd = sc.get_rows_len(driver) # 55 é a quantidade quando não tem ações para discentes
+
+        if (qtd > 55):
+            _get_activities_from_list_printer(driver, month, year, cnpq)
+            # _get_activities_from_list_view(driver, month, year, cpnq)
+
+    elif perfil == "docente":
+            qtd = sc.count_listing(driver) # função demora muito quando não encontra
+
+            if (qtd > 0):
+                _get_activities_from_list_printer(driver, month, year)
+                # _get_activities_from_list_view(driver, month, year)
 
     _uncheck_cnpq(driver)
         
