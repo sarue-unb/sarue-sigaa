@@ -13,7 +13,7 @@ def add_item_to_database(activity_name:str, activity_values:str):
     activity_database[activity_name] = activity_values
      
 def generate_json(start_year, end_year):
-    current_time = datetime.now().strftime('%d-%m_%H-%M-%S')
+    current_time = datetime.now().strftime('%d-%m_(%H-%M)')
 
     if not os.path.exists(FILE_PATH):
         os.makedirs(FILE_PATH)

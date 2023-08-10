@@ -3,7 +3,7 @@ LEFT_ARROW = "<-"
 HASH = "#####"
 SIZE_TERMINAL = 70
 SEPARATOR = "="*SIZE_TERMINAL
-FORMATER = r"\((.*?)\)"
+FORMATER = r'[0-9]+|[^\w\s]'
 
 import re
 import time
@@ -34,8 +34,6 @@ class Timer:
         self.set_end_time()
         minutes, seconds = self.get_elapsed_time()
 
-        
-
         centralize(f'{RIGHT_ARROW} Script end {LEFT_ARROW}')
         print(SEPARATOR)
         print(f"\tStart time: {self.start_ctime}")
@@ -51,7 +49,6 @@ class Timer:
         print(f"{msg} - {minutes:02}:{seconds:02}")
         print(SEPARATOR)
 
-
 def centralize(msg:str):
     print(msg.center(SIZE_TERMINAL))
 
@@ -62,11 +59,4 @@ def clear_screen():
         _ = os.system('cls')
 
 def clear_strings(text: str) -> str:
-    match = re.search(FORMATER, text)
-    
-    if match:
-        nome = match.group(1)
-        return nome.strip()
-    else:
-        return text.strip(',')
-    
+    return re.sub(FORMATER, '', text)
