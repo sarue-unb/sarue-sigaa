@@ -2,6 +2,13 @@
 XPATHS_OBJETIVOS_PRE_FIX = '//html/body/div/div[2]/form/table[2]/tbody/tr['
 XPATHS_OBJETIVOS_POS_FIX = ']/td[1]'
 
+ID_TEAM_MEMBERS_PRE_FIX = "//*[contains(@id, 'j_id_jsp_')]//*[contains(@id, ':tbEquipe:tbody_element')]/tr["
+XPATHS_TEAM_MEMBERS_POS_FIX_NAME = ']/td[1]'
+XPATHS_TEAM_MEMBERS_POS_FIX_CATEGORY = ']/td[2]'
+XPATHS_TEAM_MEMBERS_POS_FIX_FUNCTION = ']/td[3]'
+XPATHS_TEAM_MEMBERS_POS_FIX_DEPARTAMENT = ']/td[4]'
+XPATHS_TEAM_MEMBERS_POS_FIX_STATUS = ']/td[5]'
+
 PRINTER_FORM_ID_PRE_FIX = 'form:j_id_jsp_1439633680_522:'
 PRINTER_FORM_ID_POS_FIX = ':imprimir'
 
@@ -18,8 +25,9 @@ XPATHS_PERIODO_DE_REALIZACAO = '//html/body/div/div[2]/form/table[1]/tbody/tr[4]
 XPATHS_TIPO = '//html/body/div/div[2]/form/table[1]/tbody/tr[5]/td'
 XPATHS_SITUACAO = '//html/body/div/div[2]/form/table[1]/tbody/tr[6]/td'
     
-XPATHS_TABLE_OBJETIVOS = '/html/body/div/div[2]/form'
+XPATHS_OTHER_TABLES = '/html/body/div/div[2]/form'
 XPATHS_OBJETIVOS = '/html/body/div/div[2]/form/table[2]'
+ID_TEAM_MEMBERS = 'j_id_jsp_345370874_1:tbEquipe'
 
 # CURSO
 CURSO_XPATHS_MUNICIPIO_DE_REALIZACAO = '//html/body/div/div[2]/form/table[1]/tbody/tr[7]/td'

@@ -3,7 +3,9 @@ LEFT_ARROW = "<-"
 HASH = "#####"
 SIZE_TERMINAL = 70
 SEPARATOR = "="*SIZE_TERMINAL
+FORMATER = r'[0-9]+|[^\w\s]'
 
+import re
 import time
 import os
 
@@ -47,7 +49,6 @@ class Timer:
         print(f"{msg} - {minutes:02}:{seconds:02}")
         print(SEPARATOR)
 
-
 def centralize(msg:str):
     print(msg.center(SIZE_TERMINAL))
 
@@ -56,3 +57,6 @@ def clear_screen():
         _ = os.system('clear')
     else:  # Para o Windows
         _ = os.system('cls')
+
+def clear_strings(text: str) -> str:
+    return re.sub(FORMATER, '', text)

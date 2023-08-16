@@ -87,13 +87,12 @@ class MiniCrawlerParallel:
 
         self.driver.quit()
 
-# This is a WIP, it's not working yet
-# Trying to use threads to speed up the process
 class MiniCrawlerConcurrent:
     def __init__(self, username, password):
         try:
             self.chrome_options = webdriver.ChromeOptions()
-            # self.chrome_options.add_argument("--headless=new")
+            self.chrome_options.add_argument("--headless=new")
+            # self.chrome_options.add_argument("--start-minimized")
             self.chrome_options.add_experimental_option('excludeSwitches', ['disable-popup-blocking'])
             self.chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
 
@@ -114,6 +113,7 @@ class MiniCrawlerConcurrent:
                     centralize("Nenhum navegador encontrado")
                     self.navegador = None
                     exit(1)
+                    
         self.driver.get(LOGIN_PAGE)
         self.instance_login(username, password)
         self.navigate_to_extension_page()
@@ -127,11 +127,15 @@ class MiniCrawlerConcurrent:
     def navigate_to_extension_page(self):
         self.driver.get(EXTENSION_PAGE)
             
-    def get_year(self, perfil:str, year:int):
-        dg.get_every_extension_activity_from_months(1, 12, year, self.driver, perfil)
+    # def get_year(self, perfil:str, year:int):
+    #     dg.get_every_extension_activity_from_months(1, 12, year, self.driver, perfil)
 
-    def get_year_month(self, perfil:str, year:int, month:int):
-        dg.get_every_extension_activity_from_months(month, month, year, self.driver, perfil)
+    def get_year_month(self, perfil:str, year:int, month:int, cnpq:str):
+        if cnpq == None:
+            dg.get_every_extension_activity_from_month_years(month, year, self.driver, perfil)
+            # dg.get_every_extension_activity_from_months(1, 12, year, self.driver, perfil)
+        else:
+            dg.get_every_extension_activity_from_month_years_passing_cnpq(month, year, self.driver, perfil, cnpq)
 
-    def run(self, perfil:str, year:int, month:int):
-        self.get_year_month(perfil, year, month)
+    def run(self, perfil:str, year:int, month:int, cnpq:str):
+        self.get_year_month(perfil, year, month, cnpq)

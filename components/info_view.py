@@ -1,6 +1,6 @@
 import components.selection_components as sc
 from config.actions_descryption import *
-from tqdm import tqdm
+from tqdm import tqdm # pip install tqdm
 
 def get_row_data_view(driver, month, year):
     rows_total_data = []
