@@ -251,14 +251,11 @@ def get_info_team_members(info: dict, id: str, driver):
     if tipo != None:
         qtd = sc.get_rows_len(tipo)
         membros = []
-        # print(tipo, qtd)
+        
         for i in range(1, qtd):
+            m_equipe_nome = sc.get_info_direct(ID_TEAM_MEMBERS_PRE_FIX + str(i) + XPATHS_TEAM_MEMBERS_POS_FIX_NAME, driver).upper()
+            m_equipe_nome = clear_strings(m_equipe_nome)
             
-            m_equipe_noome = sc.get_info_direct(ID_TEAM_MEMBERS_PRE_FIX + str(i) + XPATHS_TEAM_MEMBERS_POS_FIX_NAME, driver).upper()
-            m_equipe_nome = clear_strings(m_equipe_noome)
-            if m_equipe_noome != m_equipe_nome:
-                print('\n',info['codigo'])
-                print(m_equipe_noome, m_equipe_nome)
             m_equipe_categoria = sc.get_info_direct(ID_TEAM_MEMBERS_PRE_FIX + str(i) + XPATHS_TEAM_MEMBERS_POS_FIX_CATEGORY, driver).capitalize()
             m_equipe_funcao = sc.get_info_direct(ID_TEAM_MEMBERS_PRE_FIX + str(i) + XPATHS_TEAM_MEMBERS_POS_FIX_FUNCTION, driver).capitalize()
             m_equipe_departamento = sc.get_info_direct(ID_TEAM_MEMBERS_PRE_FIX + str(i) + XPATHS_TEAM_MEMBERS_POS_FIX_DEPARTAMENT, driver).capitalize()
