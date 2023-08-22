@@ -1,11 +1,7 @@
 import json
 import os
-
 from datetime import datetime
-from components.database_formatter import format_special_char
-from config.output_format import centralize, SEPARATOR
 from config.json_descryption import FILE_PATH, OUTPUT_FILE_NAME, OUTPUT_FILE_NAME_FORMATTED
-from config.output_format import clear_screen
 
 activity_database = {}
 
@@ -27,9 +23,5 @@ def generate_json(start_year, end_year):
     with open(output_file_name_formatted, "w+", encoding="utf-8") as file_output:  
         json.dump(activity_database, file_output, indent=3, ensure_ascii=False)
 
-    clear_screen()
-    print(SEPARATOR)
-    centralize(f'Quantidade de ações = {len(activity_database)}')
-    print(SEPARATOR)
-    # format_special_char(output_file_name, output_file_name_formatted)
-    
+def get_quantity_of_activities():
+    return len(activity_database)

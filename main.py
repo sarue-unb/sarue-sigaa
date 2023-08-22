@@ -14,7 +14,8 @@ class Main:
         self.env = dotenv_values(".env")
 
         print(SEPARATOR)
-        centralize("Script start")
+        centralize(f'{RIGHT_ARROW} Script start {LEFT_ARROW}')
+        print(SEPARATOR)
 
     def run_timer(self):
         self.timer = Timer()

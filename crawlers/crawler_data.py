@@ -2,6 +2,7 @@ import pages.sigaa_pages as sp
 import database_generator.database_generator as dg
 from selenium import webdriver # pip install selenium
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
 from config.output_format import *
 from config.url_descryption import *
 from config.crawler_descryption import TYPE_SEARCH, TYPE_PERIOD
@@ -9,12 +10,13 @@ from config.crawler_descryption import TYPE_SEARCH, TYPE_PERIOD
 class MiniCrawlerParallel:
     def __init__(self):
         try:
+            self.chrome_service = Service()
             self.chrome_options = webdriver.ChromeOptions()
             self.chrome_options.add_argument("--headless=new")
             self.chrome_options.add_experimental_option('excludeSwitches', ['disable-popup-blocking'])
             self.chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
 
-            self.driver = webdriver.Chrome(options=self.chrome_options)
+            self.driver = webdriver.Chrome(service=self.chrome_service, options=self.chrome_options)
             self.navegador = "chrome"
         except Exception as e:
             try: 
@@ -90,13 +92,14 @@ class MiniCrawlerParallel:
 class MiniCrawlerConcurrent:
     def __init__(self, username, password):
         try:
+            self.chrome_service = Service()
             self.chrome_options = webdriver.ChromeOptions()
             self.chrome_options.add_argument("--headless=new")
             # self.chrome_options.add_argument("--start-minimized")
             self.chrome_options.add_experimental_option('excludeSwitches', ['disable-popup-blocking'])
             self.chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
 
-            self.driver = webdriver.Chrome(options=self.chrome_options)
+            self.driver = webdriver.Chrome(service=self.chrome_service, options=self.chrome_options)
             self.navegador = "chrome"
         except Exception as e:
             try: 
@@ -127,13 +130,9 @@ class MiniCrawlerConcurrent:
     def navigate_to_extension_page(self):
         self.driver.get(EXTENSION_PAGE)
             
-    # def get_year(self, perfil:str, year:int):
-    #     dg.get_every_extension_activity_from_months(1, 12, year, self.driver, perfil)
-
     def get_year_month(self, perfil:str, year:int, month:int, cnpq:str):
         if cnpq == None:
             dg.get_every_extension_activity_from_month_years(month, year, self.driver, perfil)
-            # dg.get_every_extension_activity_from_months(1, 12, year, self.driver, perfil)
         else:
             dg.get_every_extension_activity_from_month_years_passing_cnpq(month, year, self.driver, perfil, cnpq)
 
