@@ -35,7 +35,7 @@ class Timer:
         self.set_end_time()
         minutes, seconds = self.get_elapsed_time()
 
-        clear_screen()
+        # clear_screen()
         centralize(f'{RIGHT_ARROW} Script end {LEFT_ARROW}')
 
         print(SEPARATOR)
@@ -57,6 +57,7 @@ class Timer:
         print(SEPARATOR)
 
 def centralize(msg:str):
+    redefine_size_terminal()
     print(msg.center(SIZE_TERMINAL))
 
 def clear_screen():
@@ -67,3 +68,9 @@ def clear_screen():
 
 def clear_strings(text: str) -> str:
     return re.sub(FORMATER, '', text)
+
+def redefine_size_terminal():
+    global SIZE_TERMINAL
+    SIZE_TERMINAL = os.get_terminal_size().columns
+    global SEPARATOR
+    SEPARATOR = "="*SIZE_TERMINAL   

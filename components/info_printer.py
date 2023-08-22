@@ -223,17 +223,30 @@ def get_info_from_printer_type_projeto(info:dict, driver):
     info["renovacao"] = sc.get_info_direct(PROJETO_XPATHS_RENOVACAO, driver)
     info["numero_bolsas_solicitadas"] = sc.get_info_direct(PROJETO_XPATHS_NUMERO_BOLSAS_SOLICITADAS, driver)
     info["numero_bolsas_concedidas"] = sc.get_info_direct(PROJETO_XPATHS_NUMERO_BOLSAS_CONCEDIDAS, driver)
-    info["numero_discentes_envolvidos"] = sc.get_info_direct(PROJETO_XPATHS_NUMERO_DISCENTES_ENVOLVIDOS, driver)
-    info["faz_parte_de_programa_de_extensao"] = sc.get_info_direct(PROJETO_XPATHS_FAZ_PARTE_DE_PROGRAMA_DE_EXTENSAO, driver)
-    info["grupo_permanente"] = sc.get_info_direct(PROJETO_XPATHS_GRUPO_PERMANENTE, driver)
-    info["publico_estimado"] = sc.get_info_direct(PROJETO_XPATHS_PUBLICO_ESTIMADO, driver)
-    info["publico_real_atendido"] = sc.get_info_direct(PROJETO_XPATHS_PUBLICO_REAL_ATENDIDO, driver)
-    info["cadastro_tipo"] = sc.get_info_direct(PROJETO_XPATHS_CADASTRO_TIPO, driver)
+  
+    if(sc.get_qtd_tables_by_xpath_relatorio(XPATHS_RELATORIO, driver) == 35):
+        info["numero_discentes_envolvidos"] = sc.get_info_direct(PROJETO_XPATHS_NUMERO_DISCENTES_ENVOLVIDOS_ALTERNATIVE, driver)
+        info["faz_parte_de_programa_de_extensao"] = sc.get_info_direct(PROJETO_XPATHS_FAZ_PARTE_DE_PROGRAMA_DE_EXTENSAO_ALTERNATIVE, driver)
+        info["grupo_permanente"] = sc.get_info_direct(PROJETO_XPATHS_GRUPO_PERMANENTE_ALTERNATIVE, driver)
+        info["publico_estimado"] = sc.get_info_direct(PROJETO_XPATHS_PUBLICO_ESTIMADO_ALTERNATIVE, driver)
+        info["publico_real_atendido"] = sc.get_info_direct(PROJETO_XPATHS_PUBLICO_REAL_ATENDIDO_ALTERNATIVE, driver)
+        info["cadastro_tipo"] = sc.get_info_direct(PROJETO_XPATHS_CADASTRO_TIPO_ALTERNATIVE, driver)
+        
+        info["contato_coordenacao"] = sc.get_info_direct(PROJETO_XPATHS_CONTATO_COORDENACAO_ALTERNATIVE, driver)
+        info["contato_email"] = sc.get_info_direct(PROJETO_XPATHS_CONTATO_EMAIL_ALTERNATIVE, driver)
+        info["contato_telefone"] = sc.get_info_direct(PROJETO_XPATHS_CONTATO_TELEFONE_ALTERNATIVE, driver)
+    else:
+        info["numero_discentes_envolvidos"] = sc.get_info_direct(PROJETO_XPATHS_NUMERO_DISCENTES_ENVOLVIDOS, driver)
+        info["faz_parte_de_programa_de_extensao"] = sc.get_info_direct(PROJETO_XPATHS_FAZ_PARTE_DE_PROGRAMA_DE_EXTENSAO, driver)
+        info["grupo_permanente"] = sc.get_info_direct(PROJETO_XPATHS_GRUPO_PERMANENTE, driver)
+        info["publico_estimado"] = sc.get_info_direct(PROJETO_XPATHS_PUBLICO_ESTIMADO, driver)
+        info["publico_real_atendido"] = sc.get_info_direct(PROJETO_XPATHS_PUBLICO_REAL_ATENDIDO, driver)
+        info["cadastro_tipo"] = sc.get_info_direct(PROJETO_XPATHS_CADASTRO_TIPO, driver)
+        
+        info["contato_coordenacao"] = sc.get_info_direct(PROJETO_XPATHS_CONTATO_COORDENACAO, driver)
+        info["contato_email"] = sc.get_info_direct(PROJETO_XPATHS_CONTATO_EMAIL, driver)
+        info["contato_telefone"] = sc.get_info_direct(PROJETO_XPATHS_CONTATO_TELEFONE, driver)
     
-    info["contato_coordenacao"] = sc.get_info_direct(PROJETO_XPATHS_CONTATO_COORDENACAO, driver)
-    info["contato_email"] = sc.get_info_direct(PROJETO_XPATHS_CONTATO_EMAIL, driver)
-    info["contato_telefone"] = sc.get_info_direct(PROJETO_XPATHS_CONTATO_TELEFONE, driver)
-
     return info
 
 def get_info_objetivos(info: dict, xpath: str, driver):

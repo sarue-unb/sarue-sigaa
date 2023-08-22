@@ -26,6 +26,7 @@ XPATHS_TIPO = '//html/body/div/div[2]/form/table[1]/tbody/tr[5]/td'
 XPATHS_SITUACAO = '//html/body/div/div[2]/form/table[1]/tbody/tr[6]/td'
     
 XPATHS_OTHER_TABLES = '/html/body/div/div[2]/form'
+XPATHS_RELATORIO = '/html/body/div/div[2]/form/table[1]'
 XPATHS_OBJETIVOS = '/html/body/div/div[2]/form/table[2]'
 ID_TEAM_MEMBERS = 'j_id_jsp_345370874_1:tbEquipe'
 
@@ -175,6 +176,7 @@ PROJETO_XPATHS_CONVENIO_FUNPEC = '//html/body/div/div[2]/form/table[1]/tbody/tr[
 PROJETO_XPATHS_RENOVACAO = '//html/body/div/div[2]/form/table[1]/tbody/tr[18]/td'
 PROJETO_XPATHS_NUMERO_BOLSAS_SOLICITADAS = '//html/body/div/div[2]/form/table[1]/tbody/tr[19]/td' 
 PROJETO_XPATHS_NUMERO_BOLSAS_CONCEDIDAS = '//html/body/div/div[2]/form/table[1]/tbody/tr[20]/td'
+
 PROJETO_XPATHS_NUMERO_DISCENTES_ENVOLVIDOS = '//html/body/div/div[2]/form/table[1]/tbody/tr[21]/td'
 PROJETO_XPATHS_FAZ_PARTE_DE_PROGRAMA_DE_EXTENSAO = '//html/body/div/div[2]/form/table[1]/tbody/tr[22]/td'
 PROJETO_XPATHS_GRUPO_PERMANENTE = '//html/body/div/div[2]/form/table[1]/tbody/tr[23]/td'  
@@ -185,3 +187,14 @@ PROJETO_XPATHS_CADASTRO_TIPO = '//html/body/div/div[2]/form/table[1]/tbody/tr[26
 PROJETO_XPATHS_CONTATO_COORDENACAO = '//html/body/div/div[2]/form/table[1]/tbody/tr[28]/td'
 PROJETO_XPATHS_CONTATO_EMAIL = '//html/body/div/div[2]/form/table[1]/tbody/tr[29]/td'
 PROJETO_XPATHS_CONTATO_TELEFONE = '//html/body/div/div[2]/form/table[1]/tbody/tr[30]/td'
+
+PROJETO_XPATHS_NUMERO_DISCENTES_ENVOLVIDOS_ALTERNATIVE = '//html/body/div/div[2]/form/table[1]/tbody/tr[25]/td'
+PROJETO_XPATHS_FAZ_PARTE_DE_PROGRAMA_DE_EXTENSAO_ALTERNATIVE = '//html/body/div/div[2]/form/table[1]/tbody/tr[26]/td'
+PROJETO_XPATHS_GRUPO_PERMANENTE_ALTERNATIVE = '//html/body/div/div[2]/form/table[1]/tbody/tr[27]/td'  
+PROJETO_XPATHS_PUBLICO_ESTIMADO_ALTERNATIVE = '//html/body/div/div[2]/form/table[1]/tbody/tr[28]/td'  
+PROJETO_XPATHS_PUBLICO_REAL_ATENDIDO_ALTERNATIVE = '//html/body/div/div[2]/form/table[1]/tbody/tr[29]/td'
+PROJETO_XPATHS_CADASTRO_TIPO_ALTERNATIVE = '//html/body/div/div[2]/form/table[1]/tbody/tr[30]/td'
+
+PROJETO_XPATHS_CONTATO_COORDENACAO_ALTERNATIVE = '//html/body/div/div[2]/form/table[1]/tbody/tr[32]/td'
+PROJETO_XPATHS_CONTATO_EMAIL_ALTERNATIVE = '//html/body/div/div[2]/form/table[1]/tbody/tr[33]/td'
+PROJETO_XPATHS_CONTATO_TELEFONE_ALTERNATIVE = '//html/body/div/div[2]/form/table[1]/tbody/tr[34]/td'
