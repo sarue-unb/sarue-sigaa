@@ -5,7 +5,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from config.output_format import *
 from config.url_descryption import *
-from config.crawler_descryption import TYPE_SEARCH, TYPE_PERIOD
+from config.crawler_descryption import TYPE_SEARCH, TYPE_PERIOD, TYPE_VISIBILITY
 
 class MiniCrawlerParallel:
     def __init__(self):
@@ -94,8 +94,10 @@ class MiniCrawlerConcurrent:
         try:
             self.chrome_service = Service()
             self.chrome_options = webdriver.ChromeOptions()
-            self.chrome_options.add_argument("--headless=new")
-            # self.chrome_options.add_argument("--start-minimized")
+            if TYPE_VISIBILITY == "INVISIBLE":
+                self.chrome_options.add_argument("--headless=new")
+            else:
+                self.chrome_options.add_argument("--start-maximized=new")
             self.chrome_options.add_experimental_option('excludeSwitches', ['disable-popup-blocking'])
             self.chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
 
