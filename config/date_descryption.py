@@ -1,8 +1,17 @@
-START_YEAR = 2023
-END_YEAR = 2023
+import sys
 
-FIRST_MONTH_OF_YEAR = 1
-LAST_MONTH_OF_YEAR = 12  
+args = sys.argv
+type_base = args[1].upper()
+
+if type_base == 'BASE':
+    START_YEAR = 2023
+    END_YEAR = 2023
+elif type_base == 'REBASE':
+    START_YEAR = 2020
+    END_YEAR = 2022
+
+FIRST_MONTH_OF_YEAR = 10
+LAST_MONTH_OF_YEAR = 10
 
 SPECIAL_DATE = ['9/2023', '3/2023', '8/2022', '9/2021']
 
@@ -21,4 +30,19 @@ MONTHS_LAST_DAY = {
     10: '31',
     11: '30',
     12: '31',
+}
+
+DIGITS_MONTHS = {
+    1: 'janeiro',
+    2: 'fevereiro',
+    3: 'março',
+    4: 'abril',
+    5: 'maio',
+    6: 'junho',
+    7: 'julho',
+    8: 'agosto',
+    9: 'setembro',
+    10: 'outubro',
+    11: 'novembro',
+    12: 'dezembro'
 }

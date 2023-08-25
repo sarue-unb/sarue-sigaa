@@ -1,9 +1,9 @@
 import database_generator.json_generator as jg
 from dotenv import dotenv_values # pip install python-dotenv
-from config.output_format import *
-from config.date_descryption import START_YEAR, END_YEAR
 from crawlers.crawler_auth import CrawlerAuth
 from crawlers.type_search import TypeSearch
+from config.output_format import *
+from config.date_descryption import START_YEAR, END_YEAR
 
 class Main:
     def __init__(self):

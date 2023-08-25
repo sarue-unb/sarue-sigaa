@@ -1,8 +1,11 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
-from database_generator.constants import *
+import components.selection_components as sc
 from config.filter_descryption import *
 from config.crawler_descryption import SEARCH_TYPES
+
+def make_search(driver):
+    sc.use_element_by_id(NAME_BUTTON_BUSCAR, driver)
 
 def get_error_message(driver):
     try:

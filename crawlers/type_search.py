@@ -5,7 +5,7 @@ from config.output_format import centralize, Timer, SIZE_TERMINAL
 from config.date_descryption import *
 from config.crawler_descryption import MAX_THREADS, TYPE_SEARCH, TYPE_PERIOD
 from config.filter_descryption import AREA_CNPq
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 class TypeSearch():
     def __init__(self, username, password, profile):
@@ -93,8 +93,17 @@ class TypeSearch():
             return year_month_cnpq
 
         with ThreadPoolExecutor(max_workers=MAX_THREADS) as executor:
-            futures = [executor.submit(run_instance, self.username, self.password, year_month_cnpq) for year_month_cnpq in lista]
+            futures = {executor.submit(run_instance, self.username, self.password, year_month_cnpq): year_month_cnpq  for year_month_cnpq in lista}
            
+            for future in as_completed(futures):
+                year_month_cnpq = futures[future]
+                try:
+                    data = future.result()
+                except Exception as exc:
+                    print(f'{year_month_cnpq} generated an exception: {exc}')
+                else:
+                    print(f'{year_month_cnpq} ok')
+                    
             for instance in instances:
                 instance.quit()
 
