@@ -6,7 +6,6 @@ FILE_PATH_INDICATORS = 'indicators/'
 
 FILE_NAME_CURRENT = "current_output_file.json"
 FILE_NAME_BASE = "base.json"
-FILE_NAME_REBASE = "rebase.json"
 FILE_NAME_HISTORY = "db_activities_"
 FILE_NAME_INDICATORS = "indicators.json"
 

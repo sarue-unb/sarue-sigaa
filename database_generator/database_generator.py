@@ -76,12 +76,12 @@ def get_every_extension_activity_from_month_years_passing_cnpq(month: str, year:
 def _get_activities_from_list_printer(driver, month:str, year:str, cnpq:str=None):
     activities_info = scif.get_row_data_printer(driver, month, year, cnpq)
     for row in activities_info:
-        jg.add_item_to_database(row["codigo"], row)
+        jg.add_item_to_crawler_database(row["codigo"], row)
         
 def _get_activities_from_list_view(driver, month:str, year:str, cnpq:str=None):
     activities_info = sciv.get_row_data_view(driver, month, year)
     for row in activities_info:
-        jg.add_item_to_database(row["codigo"], row)
+        jg.add_item_to_crawler_database(row["codigo"], row)
         
 def _search_month_year(month:int, year:int, driver):
     _clear_execution_period(driver)

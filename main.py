@@ -42,7 +42,7 @@ class Main:
         self.crawler_data.run()
 
     def generate_output(self):
-        jg.generate_json(START_YEAR, END_YEAR)
+        jg.generate_crawler_json(START_YEAR, END_YEAR)
 
     def begin(self):
         self.run_timer()
