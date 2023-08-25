@@ -2,10 +2,10 @@ import time
 from tqdm import tqdm
 from crawlers.crawler_data import MiniCrawlerParallel, MiniCrawlerConcurrent
 from config.output_format import centralize, Timer, SIZE_TERMINAL
-from config.date_descryption import START_YEAR, END_YEAR, SPECIAL_DATE
+from config.date_descryption import *
 from config.crawler_descryption import MAX_THREADS, TYPE_SEARCH, TYPE_PERIOD
 from config.filter_descryption import AREA_CNPq
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 class TypeSearch():
     def __init__(self, username, password, profile):
@@ -46,13 +46,6 @@ class TypeSearch():
                         executor.submit(instances[str(year)+"_"+str(quarter)].run, self.username, self.password, self.profile, year, None, quarter+1)    
 
         elif TYPE_PERIOD == 'TRIMESTER':
-            # instances = {}
-            # with ThreadPoolExecutor(max_workers=MAX_THREADS) as executor:
-            #     for year in range(END_YEAR, START_YEAR-1, -1):
-            #         for trimester in range(3,-1,-1):
-            #             instance = MiniCrawlerParallel()
-            #             instances[str(year)+"_"+str(trimester)] = instance
-            #             executor.submit(instances[str(year)+"_"+str(trimester)].run, self.username, self.password, self.profile, year, None, None, trimester+1)    
             instances = {}
             with ThreadPoolExecutor(max_workers=MAX_THREADS) as executor:
                 for year in range(START_YEAR, END_YEAR+1):
@@ -65,12 +58,9 @@ class TypeSearch():
             centralize("Invalid type period")
 
     def concurrent_search(self):
-        # timer = self.timer = Timer()
-        # timer.set_start_time()
-        
         lista = []
         for year in range(START_YEAR, END_YEAR+1):
-            for month in range(1, 12+1):
+            for month in range(FIRST_MONTH_OF_YEAR, LAST_MONTH_OF_YEAR+1):
                 year_month = str(year) + '/' + str(month)
                 month_year = str(month) + '/' + str(year)
                 if month_year in SPECIAL_DATE:
@@ -82,7 +72,6 @@ class TypeSearch():
         desc = 'Loggin in'
         with ThreadPoolExecutor(max_workers=MAX_THREADS) as executor:
             instances = [MiniCrawlerConcurrent(self.username, self.password) for _ in tqdm(range(MAX_THREADS), desc=desc, bar_format='{desc} - {elapsed} {bar} {n_fmt}/{total_fmt} - {percentage:.0f}%', ncols=SIZE_TERMINAL)]
-        # timer.print_elapsed_ctime()
         
         def get_instance_with_wait():
             while len(instances) == 0:
@@ -104,8 +93,17 @@ class TypeSearch():
             return year_month_cnpq
 
         with ThreadPoolExecutor(max_workers=MAX_THREADS) as executor:
-            futures = [executor.submit(run_instance, self.username, self.password, year_month_cnpq) for year_month_cnpq in lista]
+            futures = {executor.submit(run_instance, self.username, self.password, year_month_cnpq): year_month_cnpq  for year_month_cnpq in lista}
            
+            for future in as_completed(futures):
+                year_month_cnpq = futures[future]
+                try:
+                    data = future.result()
+                except Exception as exc:
+                    print(f'{year_month_cnpq} generated an exception: {exc}')
+                else:
+                    print(f'{year_month_cnpq} ok')
+                    
             for instance in instances:
                 instance.quit()
 

@@ -1,7 +1,11 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
-from database_generator.constants import *
+import components.selection_components as sc
 from config.filter_descryption import *
+from config.crawler_descryption import SEARCH_TYPES
+
+def make_search(driver):
+    sc.use_element_by_id(NAME_BUTTON_BUSCAR, driver)
 
 def get_error_message(driver):
     try:
@@ -46,7 +50,7 @@ def get_element_by_select(name:str, option:str, driver):
     select.select_by_visible_text(option)
 
 def get_rows_len(result_table):
-     return len(result_table.find_elements(By.XPATH, ".//tr"))
+    return len(result_table.find_elements(By.XPATH, ".//tr"))
 
 def get_rows_from_table(driver):
     return driver.find_element(By.ID, "listagem")
@@ -70,10 +74,21 @@ def get_info_try_except(xpath, driver):
     except:
         return "N/A"
     
-def get_info_direct(xpath, driver):
+def get_info_directly(xpath, driver):
     return get_element_by_xpath(xpath, driver).text
+
+def get_info(xpath, driver):
+    if SEARCH_TYPES == 'DIRECTLY':
+        return get_info_directly(xpath, driver)
+    elif SEARCH_TYPES == 'TRY_EXCEPT':
+        return get_info_try_except(xpath, driver)
 
 def get_qtd_tables_by_xpath(xpath, driver):
     form = driver.find_element(By.XPATH, xpath)
 
     return len(form.find_elements(By.XPATH, "table"))
+
+def get_qtd_tables_by_xpath_relatorio(xpath, driver):
+    form = driver.find_element(By.XPATH, xpath)
+
+    return len(form.find_elements(By.XPATH, ".//tr"))

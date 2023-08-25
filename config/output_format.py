@@ -1,13 +1,15 @@
+import os
+import re
+import time
+from database_generator.json_generator import get_quantity_of_activities
+
 RIGHT_ARROW = "->"
 LEFT_ARROW = "<-"
 HASH = "#####"
-SIZE_TERMINAL = 70
+SIZE_TERMINAL = os.get_terminal_size().columns
 SEPARATOR = "="*SIZE_TERMINAL
 FORMATER = r'[0-9]+|[^\w\s]'
 
-import re
-import time
-import os
 
 class Timer:
     def __init__(self) -> None:
@@ -34,7 +36,13 @@ class Timer:
         self.set_end_time()
         minutes, seconds = self.get_elapsed_time()
 
+        clear_screen()
         centralize(f'{RIGHT_ARROW} Script end {LEFT_ARROW}')
+
+        print(SEPARATOR)
+        centralize(f'Quantidade de ações = {get_quantity_of_activities()}')
+        print(SEPARATOR)
+
         print(SEPARATOR)
         print(f"\tStart time: {self.start_ctime}")
         print(f"\tEnd time: {self.end_ctime}")

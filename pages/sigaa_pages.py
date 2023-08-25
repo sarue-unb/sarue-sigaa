@@ -1,5 +1,4 @@
 import components.selection_components as sc
-from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 
 # LOGIN_USER = "user.login"

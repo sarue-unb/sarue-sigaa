@@ -1,12 +1,10 @@
 import components.selection_components as sc
 import components.info_printer as scif
 import components.info_view as sciv
-import pages.extension_pages as ep
 import database_generator.json_generator as jg
-from database_generator.constants import FIRST_DAY_OF_MONTH, MONTHS_LAST_DAY, ROWS_DATA_CELLS
 from config.output_format import *
 from config.filter_descryption import *
-from config.date_descryption import SPECIAL_DATE
+from config.date_descryption import SPECIAL_DATE, FIRST_DAY_OF_MONTH, MONTHS_LAST_DAY
 
 def get_every_extension_activity_from_months(start_month: str, end_month: str, year: str, driver, perfil:str):
     if (end_month < start_month):
@@ -90,7 +88,7 @@ def _search_month_year(month:int, year:int, driver):
     start_date =  _monthly_date_generator(month, year, False)
     end_date = _monthly_date_generator(month, year, True)
     _use_execution_period(start_date, end_date, driver)
-    ep.make_search(driver)
+    sc.make_search(driver)
     
 def _search_month_year_cnpq(month:int, year:int, cnpq:str, driver):
     _clear_execution_period(driver)
@@ -98,7 +96,7 @@ def _search_month_year_cnpq(month:int, year:int, cnpq:str, driver):
     end_date = _monthly_date_generator(month, year, True)
     _use_execution_period(start_date, end_date, driver)
     _use_type_action(cnpq, driver)
-    ep.make_search(driver)
+    sc.make_search(driver)
     
 def _clear_execution_period(driver):
     sc.clear_input_name(NAME_DATA_INICIO_EXECUCAO, driver)
