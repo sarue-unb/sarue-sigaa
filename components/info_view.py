@@ -1,5 +1,6 @@
 import components.selection_components as sc
-from config.actions_descryption import *
+from config.ids.actions_id_descryption import *
+from config.xapths.actions_xpath_descryption import *
 from tqdm import tqdm # pip install tqdm
 
 def get_row_data_view(driver, month, year):
@@ -15,8 +16,7 @@ def get_row_data_view(driver, month, year):
         rows_total_data.append(row_info)
         
         sc.use_element_by_class("voltar", driver)
-        # use_element_by_xpath("/html/body/div[2]/div[2]/form/table/tfoot/tr/td/input", driver)
-
+        
         result_table = sc.get_rows_from_table(driver)
         
     return rows_total_data

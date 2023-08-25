@@ -1,6 +1,7 @@
 import components.selection_components as sc
-from config.actions_descryption import *
 from config.output_format import SIZE_TERMINAL, clear_strings
+from config.xapths.actions_xpath_descryption import *
+from config.ids.actions_id_descryption import *
 from tqdm import tqdm
 
 def get_row_data_printer(driver, month:str, year:str, cnpq=None):
@@ -266,13 +267,13 @@ def get_info_team_members(info: dict, id: str, driver):
         membros = []
         
         for i in range(1, qtd):
-            m_equipe_nome = sc.get_info(ID_TEAM_MEMBERS_PRE_FIX + str(i) + XPATHS_TEAM_MEMBERS_POS_FIX_NAME, driver).upper()
+            m_equipe_nome = sc.get_info(ID_TEAM_MEMBERS_PRE_FIX + str(i) + ID_TEAM_MEMBERS_POS_FIX_NAME, driver).upper()
             m_equipe_nome = clear_strings(m_equipe_nome)
             
-            m_equipe_categoria = sc.get_info(ID_TEAM_MEMBERS_PRE_FIX + str(i) + XPATHS_TEAM_MEMBERS_POS_FIX_CATEGORY, driver).capitalize()
-            m_equipe_funcao = sc.get_info(ID_TEAM_MEMBERS_PRE_FIX + str(i) + XPATHS_TEAM_MEMBERS_POS_FIX_FUNCTION, driver).capitalize()
-            m_equipe_departamento = sc.get_info(ID_TEAM_MEMBERS_PRE_FIX + str(i) + XPATHS_TEAM_MEMBERS_POS_FIX_DEPARTAMENT, driver).capitalize()
-            m_equipe_situacao = sc.get_info(ID_TEAM_MEMBERS_PRE_FIX + str(i) + XPATHS_TEAM_MEMBERS_POS_FIX_STATUS, driver).capitalize()
+            m_equipe_categoria = sc.get_info(ID_TEAM_MEMBERS_PRE_FIX + str(i) + ID_TEAM_MEMBERS_POS_FIX_CATEGORY, driver).capitalize()
+            m_equipe_funcao = sc.get_info(ID_TEAM_MEMBERS_PRE_FIX + str(i) + ID_TEAM_MEMBERS_POS_FIX_FUNCTION, driver).capitalize()
+            m_equipe_departamento = sc.get_info(ID_TEAM_MEMBERS_PRE_FIX + str(i) + ID_TEAM_MEMBERS_POS_FIX_DEPARTAMENT, driver).capitalize()
+            m_equipe_situacao = sc.get_info(ID_TEAM_MEMBERS_PRE_FIX + str(i) + ID_TEAM_MEMBERS_POS_FIX_STATUS, driver).capitalize()
             
             membros.append([m_equipe_nome, m_equipe_categoria, m_equipe_funcao, m_equipe_departamento, m_equipe_situacao])
            
