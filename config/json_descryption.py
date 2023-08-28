@@ -19,4 +19,12 @@ OUTPUT_NAMES = {
     "status_acao_anual_tipo" : "status_acao_anual_tipo",
     "status_acao_mensal" : "status_acao_mensal",
     "status_acao_mensal_tipo" : "status_acao_mensal_tipo",
+    "objetivos_contemplados_anual" : "objetivos_contemplados_anual",
+    "objetivos_contemplados_anual_tipo" : "objetivos_contemplados_anual_tipo",
+    "objetivos_contemplados_mensal" : "objetivos_contemplados_mensal",
+    "objetivos_contemplados_mensal_tipo" : "objetivos_contemplados_mensal_tipo",
+    "quantidade_objetivos_contemplados_anual" : "quantidade_objetivos_contemplados_anual",
+    "quantidade_objetivos_contemplados_anual_tipo" : "quantidade_objetivos_contemplados_anual_tipo",
+    "quantidade_objetivos_contemplados_mensal" : "quantidade_objetivos_contemplados_mensal",
+    "quantidade_objetivos_contemplados_mensal_tipo" : "quantidade_objetivos_contemplados_mensal_tipo",
 }
