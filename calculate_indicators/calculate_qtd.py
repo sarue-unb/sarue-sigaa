@@ -1,4 +1,3 @@
-import re
 from config.date_descryption import DIGITS_MONTHS
 
 def sorted_dict(dictionary: dict) -> dict:
@@ -10,7 +9,8 @@ def sorted_dict(dictionary: dict) -> dict:
             r_dictionary[year][month] = dictionary[year][month]
     return r_dictionary
 
-def get_qtd_actions(indicators_month: dict, indicators_month_type: dict, indicators_year: dict, indicators_year_type: dict, origin_database: dict) -> dict:
+def get_qtd_actions(origin_database: dict) -> dict:
+    indicators_month, indicators_month_type, indicators_year, indicators_year_type = {}, {}, {}, {}
     for code in origin_database:
         year = origin_database[code]["data_inicio"]["ano"]
         digit_month = origin_database[code]["data_inicio"]["mes"]
@@ -166,88 +166,3 @@ def get_qtd_actions(indicators_month: dict, indicators_month_type: dict, indicat
     
 #     indicators = sorted_dict(indicators)     
 #     return indicators
-
-# def get_members_action(indicators: dict, origin_database: dict) -> dict:
-# #     "sobre_publico" : {
-# #       total : {
-# #          discentes : X
-# #          docentes : X
-# #       }
-# #       2020 : {
-# #          discentes : X
-# #          docentes : X
-# #       }
-# #       2020 : {
-# #          janeiro : {
-# #             discentes : X
-# #             docentes : X
-# #          }
-# #       }
-# #    }
-    
-#     for code in origin_database:
-#         year = origin_database[code]["data_inicio"]["ano"]
-#         digit_month = origin_database[code]["data_inicio"]["mes"]
-#         month = DIGITS_MONTHS[digit_month]
-#         action_type = origin_database[code]["tipo"]
-
-#         if "membros_da_equipe" in origin_database[code]:
-#             team_members = origin_database[code]["membros_da_equipe"]
-        
-#             if year not in indicators: #Year
-#                 indicators[year] = {}
-#             if month not in indicators[year]: #Month
-#                 indicators[year][month] = {}
-            
-#             for member in team_members:
-#                 name = member[0]
-#                 role = member[1]
-
-#                 if name not in indicators[year][month]:
-#                     indicators[year][month][name] = {}
-#                     indicators[year][month][name]["qtd"] = 1
-#                     indicators[year][month][name]["papel"] = role
-#                 else:
-#                     indicators[year][month][name]["qtd"] += 1
-
-#     return indicators
-
-# def get_members_action_type(indicators: dict, origin_database: dict) -> dict:
-#     for code in origin_database:
-#         year = origin_database[code]["data_inicio"]["ano"]
-#         digit_month = origin_database[code]["data_inicio"]["mes"]
-#         month = DIGITS_MONTHS[digit_month]
-#         action_type = origin_database[code]["tipo"]
-
-#         if "membros_da_equipe" in origin_database[code]:
-#             team_members = origin_database[code]["membros_da_equipe"]
-        
-#             if year not in indicators: #Year
-#                 indicators[year] = {}
-#             if month not in indicators[year]: #Month
-#                 indicators[year][month] = {}
-#             if action_type not in indicators[year][month]: #Action Type
-#                 indicators[year][month][action_type] = {}
-            
-#             for member in team_members:
-#                 name = member[0]
-#                 role = member[1]
-
-#                 if name not in indicators[year][month][action_type]:
-#                     indicators[year][month][action_type][name] = {}
-#                     indicators[year][month][action_type][name]["qtd"] = 1
-#                     indicators[year][month][action_type][name]["papel"] = role
-#                 else:
-#                     indicators[year][month][action_type][name]["qtd"] += 1
-
-#     return indicators
-
-def return_number(text: str) -> int:
-    padrao = r'(\d+)'
-    resultado = re.search(padrao, text)  # Procurar o padrão no texto
-
-    if resultado:
-        return int(resultado.group(1))  # Converter o valor encontrado para um inteiro
-    else:
-        return 0
-    

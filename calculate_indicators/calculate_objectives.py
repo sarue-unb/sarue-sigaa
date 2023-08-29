@@ -23,7 +23,8 @@ def sorted_dict_indicators_year(dictionary: dict) -> dict:
 
     return r_dictionary
 
-def get_qtd_actions_objectives(indicators_month: dict, indicators_month_type: dict, indicators_year: dict, indicators_year_type: dict, origin_database: dict) -> dict:
+def get_qtd_actions_objectives(origin_database: dict) -> dict:
+    indicators_month, indicators_month_type, indicators_year, indicators_year_type = {}, {}, {}, {}
     for code in origin_database:
         year = origin_database[code]["data_inicio"]["ano"]
         digit_month = origin_database[code]["data_inicio"]["mes"]
@@ -80,12 +81,12 @@ def get_qtd_actions_objectives(indicators_month: dict, indicators_month_type: di
 
     return indicators_month, indicators_month_type, indicators_year, indicators_year_type
 
-def get_qtd_actions_objectives_len(indicators_month: dict, indicators_month_type: dict, indicators_year: dict, indicators_year_type: dict, origin_database: dict) -> dict:
+def get_qtd_actions_objectives_len(origin_database: dict) -> dict:
+    indicators_month, indicators_month_type, indicators_year, indicators_year_type = {}, {}, {}, {}
     for code in origin_database:
         year = origin_database[code]["data_inicio"]["ano"]
         digit_month = origin_database[code]["data_inicio"]["mes"]
         month = DIGITS_MONTHS[digit_month]
-
         action_type = origin_database[code]["tipo"]
 
         if "objetivos" in origin_database[code]:
@@ -108,36 +109,26 @@ def get_qtd_actions_objectives_len(indicators_month: dict, indicators_month_type
 
             if action_type not in indicators_month[year][month]: #Action Type
                 indicators_month_type[year][month][action_type] = {}            
-            
-            if "qtd_objectives" not in indicators_year[year]:
-                indicators_year[year]["qtd_objectives"] = {}
-            if "qtd_objectives" not in indicators_month[year][month]:
-                indicators_month[year][month]["qtd_objectives"] = {}
-            if "qtd_objectives" not in indicators_year_type[year][action_type]:
-                indicators_year_type[year][action_type]["qtd_objectives"] = {}
-            if "qtd_objectives" not in indicators_month_type[year][month][action_type]:
-                indicators_month_type[year][month][action_type]["qtd_objectives"] = {}
 
-
-            if len(objectives) not in indicators_year[year]["qtd_objectives"]:
-                indicators_year[year]["qtd_objectives"][len(objectives)] = 1
+            if len(objectives) not in indicators_year[year]:
+                indicators_year[year][len(objectives)] = 1
             else:       
-                indicators_year[year]["qtd_objectives"][len(objectives)] += 1
+                indicators_year[year][len(objectives)] += 1
 
-            if len(objectives) not in indicators_year_type[year][action_type]["qtd_objectives"]:
-                indicators_year_type[year][action_type]["qtd_objectives"][len(objectives)] = 1
+            if len(objectives) not in indicators_year_type[year][action_type]:
+                indicators_year_type[year][action_type][len(objectives)] = 1
             else:
-                indicators_year_type[year][action_type]["qtd_objectives"][len(objectives)] += 1
+                indicators_year_type[year][action_type][len(objectives)] += 1
 
-            if len(objectives) not in indicators_month[year][month]["qtd_objectives"]:
-                indicators_month[year][month]["qtd_objectives"][len(objectives)] = 1
+            if len(objectives) not in indicators_month[year][month]:
+                indicators_month[year][month][len(objectives)] = 1
             else:
-                indicators_month[year][month]["qtd_objectives"][len(objectives)] += 1
+                indicators_month[year][month][len(objectives)] += 1
 
-            if len(objectives) not in indicators_month_type[year][month][action_type]["qtd_objectives"]:
-                indicators_month_type[year][month][action_type]["qtd_objectives"][len(objectives)] = 1
+            if len(objectives) not in indicators_month_type[year][month][action_type]:
+                indicators_month_type[year][month][action_type][len(objectives)] = 1
             else:
-                indicators_month_type[year][month][action_type]["qtd_objectives"][len(objectives)] += 1
+                indicators_month_type[year][month][action_type][len(objectives)] += 1
 
     indicators_month = sorted_dict_indicators_month(indicators_month)
     indicators_month_type = sorted_dict_indicators_month(indicators_month_type)
