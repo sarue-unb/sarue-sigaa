@@ -2,6 +2,8 @@ import database_generator.json_generator as jg
 from dotenv import dotenv_values # pip install python-dotenv
 from crawlers.crawler_auth import CrawlerAuth
 from crawlers.type_search import TypeSearch
+from calculate_indicators.calculate_all import calculate_all_indicators
+from database_generator.load_database import load_indicators_database, generate_indicators_database
 from config.output_format import *
 from config.date_descryption import START_YEAR, END_YEAR
 
@@ -23,6 +25,7 @@ class RunCrawler:
 
     def end_timer(self):
         self.timer.print_elapsed_ctime()
+        input("Press enter to continue...")
 
     def run_crawler_auth(self):
         username = self.env['SIGAA_USER']
@@ -54,10 +57,17 @@ class RunCrawler:
 class RunCalculateIndicators:
     def __init__(self):
         clear_screen()
-        pass
+        self.database = load_indicators_database()
+
+    def output(self):
+        centralize("Indicators calculated.")
+        centralize("Verifique a pasta databases/indicators/")
+        input("Press enter to continue...")
 
     def begin(self):
-        pass
+        calculate_all_indicators(self.database)
+        generate_indicators_database()
+        self.output()
 
 class Main:
     def __init__(self):

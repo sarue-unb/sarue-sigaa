@@ -8,8 +8,8 @@ databases = {name: {inside_name: {} for inside_name in OUTPUT_NAMES[name].keys()
 def add_item_to_indicators_database(activity_name:str, activity_values, database_name:str = "full_database"):
     databases[database_name][activity_name] = activity_values
 
-def load_indicators_database():
-    with open(FILE_NAME_CURRENT_DATABASE, "r", encoding="utf-8") as file:
+def load_indicators_database(file_name:str = FILE_NAME_CURRENT_DATABASE):
+    with open(file_name, "r", encoding="utf-8") as file:
         database = json.load(file)
         return database
     
