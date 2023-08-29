@@ -5,7 +5,7 @@ from crawlers.type_search import TypeSearch
 from config.output_format import *
 from config.date_descryption import START_YEAR, END_YEAR
 
-class Main:
+class RunCrawler:
     def __init__(self):
         clear_screen()
         self.username = ''
@@ -16,7 +16,7 @@ class Main:
         print(SEPARATOR)
         centralize(f'{RIGHT_ARROW} Script start {LEFT_ARROW}')
         print(SEPARATOR)
-
+    
     def run_timer(self):
         self.timer = Timer()
         self.timer.set_start_time()
@@ -41,15 +41,60 @@ class Main:
         self.crawler_data = TypeSearch(self.username, self.password, self.profile)
         self.crawler_data.run()
 
-    def generate_output(self):
+    def generate_crawler_output(self):
         jg.generate_crawler_json(START_YEAR, END_YEAR)
 
     def begin(self):
         self.run_timer()
         self.run_crawler_auth()
         self.run_crawler_data()
-        self.generate_output()
+        self.generate_crawler_output()
         self.end_timer()
+
+class RunCalculateIndicators:
+    def __init__(self):
+        clear_screen()
+        pass
+
+    def begin(self):
+        pass
+
+class Main:
+    def __init__(self):
+        self.options = {
+            '1': 'Run crawler',
+            '2': 'Calculate indicators',
+            '3': 'Exit'
+        }
+        
+    def print_menu(self):
+        clear_screen()
+        print(SEPARATOR)
+        for option, text in self.options.items():
+            centralize(option + " - " + text)
+        print(SEPARATOR)
+    
+    def get_option(self):
+        option = input("Option: ")
+        return option
+    
+    def run_option(self, option):
+        if option == '1':
+            run_crawler = RunCrawler()
+            run_crawler.begin()
+        elif option == '2':
+            run_calculate_indicators = RunCalculateIndicators()
+            run_calculate_indicators.begin()
+        elif option == '3':
+            exit()
+        else:
+            centralize("Invalid option.")
+
+    def begin(self):
+        while True:
+            self.print_menu()
+            option = self.get_option()
+            self.run_option(option)
 
 if __name__ == "__main__":
     main_obj = Main()

@@ -1,7 +1,7 @@
 import sys
 
 args = sys.argv
-TYPE_BASE = args[1].upper()
+TYPE_BASE = 'BASE' if len(args) <= 1 else args[1]
 
 MAX_THREADS = 1
 

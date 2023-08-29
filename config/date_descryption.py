@@ -1,12 +1,9 @@
-import sys
+from config.crawler_descryption import TYPE_BASE
 
-args = sys.argv
-type_base = args[1].upper()
-
-if type_base == 'BASE':
+if TYPE_BASE == 'BASE':
     START_YEAR = 2023
     END_YEAR = 2023
-elif type_base == 'REBASE':
+elif TYPE_BASE == 'REBASE':
     START_YEAR = 2020
     END_YEAR = 2022
 
