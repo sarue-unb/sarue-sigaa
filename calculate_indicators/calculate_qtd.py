@@ -2,29 +2,29 @@ from config.date_descryption import DIGITS_MONTHS
 from calculate_indicators.sorted_dictionarys import *
 
 def get_qtd_actions(origin_database: dict) -> dict:
-    indicators_month, indicators_month_type, indicators_year, indicators_year_type = {}, {}, {}, {}
+    indicators, indicators_month, indicators_month_type, indicators_year, indicators_year_type = {}, {}, {}, {}, {}
     for code in origin_database:
         year = origin_database[code]["data_inicio"]["ano"]
         digit_month = origin_database[code]["data_inicio"]["mes"]
         month = DIGITS_MONTHS[digit_month]
         action_type = origin_database[code]["tipo"]
-       
-        update_dictionary_place(indicators_year, year, 1)
-
+           
         create_dictionary_place(indicators_month, year, {})
-        update_dictionary_place(indicators_month[year], month, 1)
-
         create_dictionary_place(indicators_year_type, year, {})
-        update_dictionary_place(indicators_year_type[year], action_type, 1)
-
         create_dictionary_place(indicators_month_type, year, {})
+
         create_dictionary_place(indicators_month_type[year], month, {})
+
+        update_dictionary_place(indicators, action_type, 1)
+        update_dictionary_place(indicators_year, year, 1)
+        update_dictionary_place(indicators_month[year], month, 1)
+        update_dictionary_place(indicators_year_type[year], action_type, 1)
         update_dictionary_place(indicators_month_type[year][month], action_type, 1)
 
     indicators_month = sorted_dict_year_month(indicators_month)
     indicators_month_type = sorted_dict_year_month(indicators_month_type)
 
-    return indicators_month, indicators_month_type, indicators_year, indicators_year_type
+    return indicators, indicators_month, indicators_month_type, indicators_year, indicators_year_type
 
 def get_qtd_info(origin_database: dict) -> dict:
     indicators, indicators_month, indicators_month_type, indicators_year, indicators_year_type = {}, {}, {}, {}, {}
@@ -273,5 +273,7 @@ def get_qtd_info(origin_database: dict) -> dict:
         indicators_month_type[year][month][action_type]["qtd_publico_estimado"] += int(public_estimated)
         indicators_month_type[year][month][action_type]["qtd_publico_real_atendido"] += int(public_real)
     
+    indicators_month = sorted_dict_year_month(indicators_month)
     indicators_month_type = sorted_dict_year_month(indicators_month_type)     
+    indicators_year_type =sorted_dict_indicators_year(indicators_year_type)
     return indicators, indicators_month, indicators_month_type, indicators_year, indicators_year_type

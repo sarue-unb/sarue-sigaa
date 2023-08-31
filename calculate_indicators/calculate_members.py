@@ -97,4 +97,14 @@ def get_qtd_actions_members_role(origin_database: dict) -> dict:
                 for role in roles_month_type[year][month][action_type]:
                     indicators_month_type[year][month][action_type][role] = len(roles_month_type[year][month][action_type][role])
 
-    return indicators, sorted_dict_indicators_month(indicators_month), sorted_dict_indicators_month_type(indicators_month_type), sorted_dict_indicators_year(indicators_year), sorted_dict_indicators_year_type(indicators_year_type), indicators_info, sorted_dict_members_month(indicators_info_month), sorted_dict_members_month_type(indicators_info_month_type), sorted_dict_members_year(indicators_info_year), sorted_dict_members_year_type(indicators_info_year_type)
+    indicators_month = sorted_dict_indicators_month(indicators_month)
+    indicators_month_type = sorted_dict_indicators_month_type(indicators_month_type)
+    indicators_year = sorted_dict_indicators_year(indicators_year)
+    indicators_year_type = sorted_dict_indicators_year_type(indicators_year_type)
+    
+    indicators_info_month = sorted_dict_members_month(indicators_info_month)
+    indicators_info_month_type = sorted_dict_members_month_type(indicators_info_month_type)
+    indicators_info_year = sorted_dict_members_year(indicators_info_year)
+    indicators_info_year_type = sorted_dict_members_year_type(indicators_info_year_type)
+
+    return indicators, indicators_month, indicators_month_type, indicators_year, indicators_year_type, indicators_info, indicators_info_month, indicators_info_month_type, indicators_info_year, indicators_info_year_type
