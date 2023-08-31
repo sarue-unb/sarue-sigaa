@@ -17,12 +17,12 @@ def update_dictionary_place(indicators:dict, key:str, value:int) -> dict:
 
     return indicators
 
-# def return_number(text: str) -> int:
-#     padrao = r'(\d+)'
-#     resultado = re.search(padrao, text)  # Procurar o padrão no texto
+def return_number(text: str) -> int:
+    padrao = r'(\d+)'
+    resultado = re.search(padrao, text)  # Procurar o padrão no texto
 
-#     if resultado:
-#         return int(resultado.group(1))  # Converter o valor encontrado para um inteiro
-#     else:
-#         return 0
+    if resultado:
+        return int(resultado.group(1))  # Converter o valor encontrado para um inteiro
+    else:
+        return 0
     
