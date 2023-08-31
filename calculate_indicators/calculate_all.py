@@ -24,16 +24,18 @@ def calculate_all_indicators(origin_database: dict):
     add_item_to_indicators_database("status_acao_mensal_tipo", actions_status_month_type, "status_acao")
 
     # Indicadores de objetivos contemplados
-    actions_objectives_month, actions_objectives_month_type, actions_objectives_year, actions_objectives_year_type = get_qtd_actions_objectives(origin_database)
+    actions_objectives, actions_objectives_month, actions_objectives_month_type, actions_objectives_year, actions_objectives_year_type = get_qtd_actions_objectives(origin_database)
 
+    add_item_to_indicators_database("objetivos_contemplados", actions_objectives, "objetivos")
     add_item_to_indicators_database("objetivos_contemplados_anual", actions_objectives_year, "objetivos")
     add_item_to_indicators_database("objetivos_contemplados_anual_tipo", actions_objectives_year_type, "objetivos")
     add_item_to_indicators_database("objetivos_contemplados_mensal", actions_objectives_month, "objetivos")
     add_item_to_indicators_database("objetivos_contemplados_mensal_tipo", actions_objectives_month_type, "objetivos")
 
     # Indicadores de quantidade de objetivos contemplados
-    qtd_actions_objectives_month, qtd_actions_objectives_month_type, qtd_actions_objectives_year, qtd_actions_objectives_year_type = get_qtd_actions_objectives_len(origin_database)
+    qtd_actions_objectives, qtd_actions_objectives_month, qtd_actions_objectives_month_type, qtd_actions_objectives_year, qtd_actions_objectives_year_type = get_qtd_actions_objectives_len(origin_database)
 
+    add_item_to_indicators_database("quantidade_objetivos_contemplados", qtd_actions_objectives, "objetivos")
     add_item_to_indicators_database("quantidade_objetivos_contemplados_anual", qtd_actions_objectives_year, "objetivos")
     add_item_to_indicators_database("quantidade_objetivos_contemplados_anual_tipo", qtd_actions_objectives_year_type, "objetivos")
     add_item_to_indicators_database("quantidade_objetivos_contemplados_mensal", qtd_actions_objectives_month, "objetivos")
@@ -52,3 +54,11 @@ def calculate_all_indicators(origin_database: dict):
     add_item_to_indicators_database("envolvidos_mensal", members_month, "envolvidos")
     add_item_to_indicators_database("envolvidos_anual_tipo", members_year_type, "envolvidos")
     add_item_to_indicators_database("envolvidos_mensal_tipo", members_month_type, "envolvidos")
+
+    actions_information, actions_information_month, actions_information_month_type, actions_information_year, actions_information_year_type = get_qtd_info(origin_database)
+
+    add_item_to_indicators_database("info", actions_information, "info_acoes")
+    add_item_to_indicators_database("info_anual", actions_information_year, "info_acoes")   
+    add_item_to_indicators_database("info_mensal", actions_information_month, "info_acoes")
+    add_item_to_indicators_database("info_anual_tipo", actions_information_year_type, "info_acoes")
+    add_item_to_indicators_database("info_mensal_tipo", actions_information_month_type, "info_acoes")
