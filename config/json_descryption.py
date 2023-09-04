@@ -26,12 +26,14 @@ INDICATORS_NAMES = {
 
 OUTPUT_NAMES = {
     "quantidades" : {
+        "quantidade" : {},
         "quantidade_anual" : {},
         "quantidade_mensal" : {},
         "quantidade_anual_tipo" : {},
         "quantidade_mensal_tipo" : {},
     },
     "status_acao" : {
+        "status_acao" : {},
         "status_acao_anual" : {},
         "status_acao_mensal" : {},
         "status_acao_anual_tipo" : {},

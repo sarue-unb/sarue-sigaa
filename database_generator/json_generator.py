@@ -39,7 +39,7 @@ def generate_crawler_json(start_year, end_year):
         # Obter tudo e gerar um base também
         pass
     elif TYPE_BASE == 'BASE':
-        previous_activity_database = load_indicators_database(FILE_PATH + FILE_PATH_CURRENT + FILE_NAME_BASE)
+        previous_activity_database = load_indicators_database()
         full_activity_database = update_database(current_activity_database, previous_activity_database)
     elif TYPE_BASE == 'REBASE':
         # VERIFICAR SE O ATUAL ARQUIVO É MAIOR QUE O BASE
