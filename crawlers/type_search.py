@@ -1,7 +1,7 @@
 import time
 from tqdm import tqdm
 from crawlers.crawler_data import MiniCrawlerParallel, MiniCrawlerConcurrent
-from config.output_format import centralize, Timer, SIZE_TERMINAL
+from config.output_format import add_item_to_log, centralize, SIZE_TERMINAL
 from config.date_descryption import *
 from config.crawler_descryption import MAX_THREADS, TYPE_SEARCH, TYPE_PERIOD
 from config.filter_descryption import AREA_CNPq
@@ -98,11 +98,11 @@ class TypeSearch():
             for future in as_completed(futures):
                 year_month_cnpq = futures[future]
                 try:
-                    data = future.result()
+                    future.result()
                 except Exception as exc:
-                    print(f'{year_month_cnpq} generated an exception: {exc}')
+                    add_item_to_log(f'{year_month_cnpq} - generated an exception: {exc}')
                 else:
-                    print(f'{year_month_cnpq} ok')
+                    add_item_to_log(f'{year_month_cnpq} - ok')
                     
             for instance in instances:
                 instance.quit()

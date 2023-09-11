@@ -14,7 +14,8 @@ class RunCrawler:
         self.password = ''
         self.profile = ''
         self.env = dotenv_values(".env")
-
+        clear_log()
+        
         print(SEPARATOR)
         centralize(f'{RIGHT_ARROW} Script start {LEFT_ARROW}')
         print(SEPARATOR)

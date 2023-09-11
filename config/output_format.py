@@ -68,3 +68,11 @@ def clear_screen():
 
 def clear_strings(text: str) -> str:
     return re.sub(FORMATER, '', text)
+
+def clear_log():
+    with open('log.txt', 'w+') as file:
+        file.write('')
+
+def add_item_to_log(item:str):
+    with open('log.txt', 'a') as file:
+        file.write(item + '\n')
