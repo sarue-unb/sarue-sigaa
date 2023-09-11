@@ -10,7 +10,6 @@ SIZE_TERMINAL = os.get_terminal_size().columns
 SEPARATOR = "="*SIZE_TERMINAL
 FORMATER = r'[0-9]+|[^\w\s]'
 
-
 class Timer:
     def __init__(self) -> None:
         self.start_time = time.time()
