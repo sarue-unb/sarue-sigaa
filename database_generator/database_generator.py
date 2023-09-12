@@ -28,11 +28,11 @@ def get_every_extension_activity_from_month_years(month: str, year: str, driver,
             # _get_activities_from_list_view(driver, month, year)
 
     elif perfil == "docente":
-            qtd = sc.count_listing(driver) # função demora muito quando não encontra
+        qtd = sc.count_listing(driver) # função demora muito quando não encontra
 
-            if (qtd > 0):
-                _get_activities_from_list_printer(driver, month, year)
-                # _get_activities_from_list_view(driver, month, year)
+        if (qtd > 0):
+            _get_activities_from_list_printer(driver, month, year)
+            # _get_activities_from_list_view(driver, month, year)
 
 def get_every_extension_activity_from_month_years_cnpq(month: str, year: str, driver, perfil:str):
     for cnpq in AREA_CNPq:
@@ -85,25 +85,27 @@ def _get_activities_from_list_view(driver, month:str, year:str, cnpq:str=None):
         
 def _search_month_year(month:int, year:int, driver):
     _clear_execution_period(driver)
-    start_date =  _monthly_date_generator(month, year, False)
+    start_date = _monthly_date_generator(month, year, False)
     end_date = _monthly_date_generator(month, year, True)
     _use_execution_period(start_date, end_date, driver)
     sc.make_search(driver)
     
 def _search_month_year_cnpq(month:int, year:int, cnpq:str, driver):
     _clear_execution_period(driver)
-    start_date =  _monthly_date_generator(month, year, False)
+    start_date = _monthly_date_generator(month, year, False)
     end_date = _monthly_date_generator(month, year, True)
     _use_execution_period(start_date, end_date, driver)
     _use_type_action(cnpq, driver)
     sc.make_search(driver)
     
 def _clear_execution_period(driver):
+    # sc.uncheck_checkbox_name(NAME_SELECT_BUSCAR_PERIODO, driver)
     sc.clear_input_name(NAME_DATA_INICIO_EXECUCAO, driver)
     sc.clear_input_name(NAME_DATA_FIM_EXECUCAO, driver)
 
 def _use_execution_period(start_date:str, end_date:str, driver):
     sc.use_element_by_id(NAME_SELECT_BUSCAR_PERIODO, driver)
+    # driver.implicitly_wait(10)
     sc.use_input_by_name(NAME_DATA_INICIO_EXECUCAO, start_date, driver)
     sc.use_input_by_name(NAME_DATA_FIM_EXECUCAO, end_date, driver)
     

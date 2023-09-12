@@ -37,32 +37,35 @@ def generate_crawler_json(start_year, end_year):
     
     current_time = datetime.now().strftime('%d-%m_%H-%M')
 
-    current_output_file_name = FILE_PATH + FILE_PATH_CURRENT + FILE_NAME_CURRENT
-    history_output_file_name = FILE_PATH + FILE_PATH_HISTORY + FILE_NAME_HISTORY + str(start_year) + "-" + str(end_year) + "_" + str(current_time) + ".json"
+    history_output_file_name = FILE_NAME_HISTORY_DATABASE + str(start_year) + "-" + str(end_year) + "_" + str(current_time) + ".json"
 
     if TYPE_BASE == 'FULL':
         # Obter tudo e gerar um base também
         pass
     elif TYPE_BASE == 'REBASE':
         previous_activity_database = load_base_database()
-
+        full_base_database = update_database(current_activity_database, previous_activity_database)
+        
         len_previous_activity_database = len(previous_activity_database)
         len_current_activity_database = len(current_activity_database)
+        len_full_base_database = len(full_base_database)
 
+        clear_screen()
         print(("Quantidade de atividades na base anterior: " + str(len_previous_activity_database)).center(SIZE_TERMIINAL))
         print(("Quantidade de atividades na base atual: " + str(len_current_activity_database)).center(SIZE_TERMIINAL))
+        print(("Quantidade de atividades na base conjunta: " + str(len_full_base_database)).center(SIZE_TERMIINAL))
 
         entrada = input("Deseja atualizar a base? (S/N): ")
         if entrada == 'S' or entrada == 's':
             with open(FILE_NAME_BASE_DATABASE, "w+", encoding="utf-8") as file_output:
-                json.dump(current_activity_database, file_output, indent=3, ensure_ascii=False) 
-
+                json.dump(full_base_database, file_output, indent=3, ensure_ascii=False) 
+            
     elif TYPE_BASE == 'BASE':
         previous_activity_database = load_base_database()
         full_activity_database = update_database(current_activity_database, previous_activity_database)
 
         # Gear arquivo completo com a base e o atual
-        with open(current_output_file_name, "w+", encoding="utf-8") as file_output:  
+        with open(FILE_NAME_CURRENT_DATABASE, "w+", encoding="utf-8") as file_output:  
             json.dump(full_activity_database, file_output, indent=3, ensure_ascii=False)
         
         # Gerar arquivo de historico
@@ -71,3 +74,9 @@ def generate_crawler_json(start_year, end_year):
 
 def get_quantity_of_activities():
     return len(current_activity_database)
+
+def clear_screen():
+    if os.name == 'posix':  # Para sistemas Unix (Linux, macOS)
+        _ = os.system('clear')
+    else:  # Para o Windows
+        _ = os.system('cls')

@@ -61,12 +61,13 @@ def get_info_from_print_page(driver):
     elif info["tipo"] == "PROJETO":
         info = get_info_from_printer_type_projeto(info, driver)
 
-    qtd_tabelas = sc.get_qtd_tables_by_xpath(XPATHS_OTHER_TABLES, driver)
+    if sc.get_element_by_xpath(XPATHS_OTHER_TABLES, driver):
+        qtd_tabelas = sc.get_qtd_tables_by_xpath(XPATHS_OTHER_TABLES, driver)
 
-    if (qtd_tabelas >= 2):
-        info = get_info_objetivos(info, XPATHS_OBJETIVOS, driver)
-        if (sc.get_qtd_tables_by_xpath(XPATHS_OTHER_TABLES, driver) >= 3):
-            info = get_info_team_members(info, ID_TEAM_MEMBERS, driver)
+        if (qtd_tabelas >= 2):
+            info = get_info_objetivos(info, XPATHS_OBJETIVOS, driver)
+            if (sc.get_qtd_tables_by_xpath(XPATHS_OTHER_TABLES, driver) >= 3):
+                info = get_info_team_members(info, ID_TEAM_MEMBERS, driver)
             
     return info
 
