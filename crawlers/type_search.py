@@ -69,6 +69,7 @@ class TypeSearch():
                 else:
                     lista.append(year_month)
 
+        lista_errors = []
         desc = 'Loggin in'
         with ThreadPoolExecutor(max_workers=MAX_THREADS) as executor:
             instances = [MiniCrawlerConcurrent(self.username, self.password) for _ in tqdm(range(MAX_THREADS), desc=desc, bar_format='{desc} - {elapsed} {bar} {n_fmt}/{total_fmt} - {percentage:.0f}%', ncols=SIZE_TERMINAL)]
@@ -101,11 +102,26 @@ class TypeSearch():
                     future.result()
                 except Exception as exc:
                     add_item_to_log(f'{year_month_cnpq} - generated an exception: {exc}')
+                    lista_errors.append(year_month_cnpq)
                 else:
                     add_item_to_log(f'{year_month_cnpq} - ok')
-                    
+
             for instance in instances:
                 instance.quit()
+
+        if len(lista_errors) > 0:
+            new_instance = MiniCrawlerConcurrent(self.username, self.password)
+            for year_month_cnpq in lista_errors:
+                centralize(f'Trying again: {year_month_cnpq}')
+                lista_year_month_cnpq = year_month_cnpq.split('/')
+                year, month = map(int, lista_year_month_cnpq[:2])
+                if len(lista_year_month_cnpq) == 3:
+                    cnpq = lista_year_month_cnpq[2]
+                else:
+                    cnpq = None
+
+                new_instance.run(self.profile, year, month, cnpq)
+            new_instance.quit()
 
     def search(self):
         if TYPE_SEARCH == 'PARALLEL':
