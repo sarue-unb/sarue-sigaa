@@ -13,6 +13,9 @@ NAME_BUTTON_BUSCAR = "formBuscaAtividade:btBuscar"
 NAME_AREA_CNPq = "formBuscaAtividade:buscaAreaCNPq"
 NAME_SELECT_AREA_CNPq = "formBuscaAtividade:selectBuscaAreaCNPq"
 
+QTD_ROWS_DISCENT = 35
+QTD_ROWS_DOCENT = 63
+
 AREA_CNPq = [
     "Ciências Agrárias",
     "Ciências Biológicas",
