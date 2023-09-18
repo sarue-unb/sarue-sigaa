@@ -1,9 +1,9 @@
-MAX_THREADS = 1
-
 import sys
 
 args = sys.argv
-TYPE_BASE = args[1].upper()
+TYPE_BASE = 'BASE' if len(args) <= 1 else args[1]
+
+MAX_THREADS = 12
 
 TYPES_SEARCH = ['PARALLEL', 'CONCURRENT', 'LINEAR']
 TYPES_PERIOD = ['YEAR', 'SEMESTER', 'QUARTER', 'TRIMESTER']
