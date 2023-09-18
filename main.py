@@ -1,6 +1,7 @@
 import database_generator.json_generator as jg
 from dotenv import dotenv_values # pip install python-dotenv
 from crawlers.crawler_auth import CrawlerAuth
+from crawlers.crawler_config import CrawlerConfig
 from crawlers.type_search import TypeSearch
 from calculate_indicators.calculate_all import calculate_all_indicators
 from database_generator.load_database import load_indicators_database, generate_indicators_database
@@ -13,6 +14,7 @@ class RunCrawler:
         self.username = ''
         self.password = ''
         self.profile = ''
+        self.offset = 0
         self.env = dotenv_values(".env")
         clear_log()
         
@@ -41,6 +43,12 @@ class RunCrawler:
             self.crawler_auth = CrawlerAuth()
             self.username, self.password, self.profile = self.crawler_auth.run()
 
+    def run_crawler_config(self):
+        self.crawler_config = CrawlerConfig()
+        self.offset = self.crawler_config.run(self.username, self.password)
+        centralize(f'Offset: {self.offset}')
+        input()
+
     def run_crawler_data(self):
         self.crawler_data = TypeSearch(self.username, self.password, self.profile)
         self.crawler_data.run()
@@ -51,6 +59,7 @@ class RunCrawler:
     def begin(self):
         self.run_timer()
         self.run_crawler_auth()
+        self.run_crawler_config()
         self.run_crawler_data()
         self.generate_crawler_output()
         self.end_timer()

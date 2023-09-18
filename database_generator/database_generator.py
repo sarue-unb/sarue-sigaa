@@ -6,7 +6,7 @@ from config.output_format import *
 from config.filter_descryption import *
 from config.date_descryption import SPECIAL_DATE, FIRST_DAY_OF_MONTH, MONTHS_LAST_DAY
 
-def get_every_extension_activity_from_months(start_month: str, end_month: str, year: str, driver, perfil:str):
+def get_every_extension_activity_from_months(start_month: int, end_month: int, year: int, driver, perfil:str):
     if (end_month < start_month):
         print("ERROR: End Month less than start month")
         return
@@ -17,7 +17,7 @@ def get_every_extension_activity_from_months(start_month: str, end_month: str, y
         else:
             get_every_extension_activity_from_month_years(month, year, driver, perfil)
 
-def get_every_extension_activity_from_month_years(month: str, year: str, driver, perfil:str):
+def get_every_extension_activity_from_month_years(month: int, year: int, driver, perfil:str):
     _search_month_year(month, year, driver)
 
     if perfil == "discente":
@@ -166,6 +166,10 @@ def _uncheck_cnpq(driver):
 #     sc.use_element_by_id(NAME_SELECT_BUSCAR_ANO, driver)
 #     sc.use_input_by_name(NAME_BUSCAR_ANO, year, driver)
 #     ep.make_search(driver)
+
+def get_offset(month:int, year:int, driver):
+    _search_month_year(month, year, driver)
+    return sc.get_rows_len(driver) 
 
 def _monthly_date_generator(month:int, year:int, monthEnd:bool) -> str:
     expetected_day = FIRST_DAY_OF_MONTH

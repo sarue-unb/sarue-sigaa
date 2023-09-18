@@ -14,6 +14,8 @@ SPECIAL_DATE = ['9/2023', '3/2023', '8/2022', '9/2021']
 
 FIRST_DAY_OF_MONTH = '01'
 
+EMPTY_MONTH = '1/2020'
+
 MONTHS_LAST_DAY = {
     1: '31',
     2: '28',
