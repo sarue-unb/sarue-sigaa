@@ -43,49 +43,49 @@ class MiniCrawlerParallel:
     def instance_login(self, username:str, password:str):
         sp.login_into_sigaa(self.driver, username, password)
             
-    def get_year(self, profile:str, year:int):
-        dg.get_every_extension_activity_from_months(1, 12, year, self.driver, profile)
+    def get_year(self, offset:int, year:int):
+        dg.get_every_extension_activity_from_months(1, 12, year, offset, self.driver)
 
-    def get_year_semester(self, profile:str, year:int, semester:int):
+    def get_year_semester(self, offset:int, year:int, semester:int):
         if semester == 1:
-            dg.get_every_extension_activity_from_months(1, 6, year, self.driver, profile)
+            dg.get_every_extension_activity_from_months(1, 6, year, offset, self.driver)
         elif semester == 2:
-            dg.get_every_extension_activity_from_months(7, 12, year, self.driver, profile)
+            dg.get_every_extension_activity_from_months(7, 12, year, offset, self.driver)
 
-    def get_year_quarter(self, profile:str, year:int, quarter:int):
+    def get_year_quarter(self, offset:int, year:int, quarter:int):
         if quarter == 1:
-            dg.get_every_extension_activity_from_months(1, 4, year, self.driver, profile)
+            dg.get_every_extension_activity_from_months(1, 4, year, offset, self.driver)
         elif quarter == 2:
-            dg.get_every_extension_activity_from_months(5, 8, year, self.driver, profile)
+            dg.get_every_extension_activity_from_months(5, 8, year, offset, self.driver)
         elif quarter == 3:
-            dg.get_every_extension_activity_from_months(9, 12, year, self.driver, profile)
+            dg.get_every_extension_activity_from_months(9, 12, year, offset, self.driver)
 
-    def get_year_trimester(self, profile:str, year:int, trimester:int):
+    def get_year_trimester(self, offset:int, year:int, trimester:int):
         if trimester == 1:
-            dg.get_every_extension_activity_from_months(1, 3, year, self.driver, profile)
+            dg.get_every_extension_activity_from_months(1, 3, year, offset, self.driver)
         elif trimester == 2:
-            dg.get_every_extension_activity_from_months(4, 6, year, self.driver, profile)
+            dg.get_every_extension_activity_from_months(4, 6, year, offset, self.driver)
         elif trimester == 3:
-            dg.get_every_extension_activity_from_months(7, 9, year, self.driver, profile)
+            dg.get_every_extension_activity_from_months(7, 9, year, offset, self.driver)
         elif trimester == 4:
-            dg.get_every_extension_activity_from_months(10, 12, year, self.driver, profile)
+            dg.get_every_extension_activity_from_months(10, 12, year, offset, self.driver)
 
-    def run(self, username:str, password:str, profile:str, year:int, semester:int=None, quarter:int=None, trimester:int=None):
+    def run(self, username:str, password:str, offset:int, year:int, semester:int=None, quarter:int=None, trimester:int=None):
         self.navigate_to_login_page()
         self.instance_login(username, password)
         self.navigate_to_extension_page()
         
         if TYPE_SEARCH == "PARALLEL":
             if TYPE_PERIOD == "YEAR":
-                self.get_year(profile, year)
+                self.get_year(offset, year)
             elif TYPE_PERIOD == "SEMESTER":
-                self.get_year_semester(profile, year, semester)
+                self.get_year_semester(offset, year, semester)
             elif TYPE_PERIOD == "QUARTER":
-                self.get_year_quarter(profile, year, quarter)
+                self.get_year_quarter(offset, year, quarter)
             elif TYPE_PERIOD == "TRIMESTER":
-                self.get_year_trimester(profile, year, trimester)
+                self.get_year_trimester(offset, year, trimester)
         elif TYPE_SEARCH == "LINEAR":
-            self.get_year(profile, year)
+            self.get_year(offset, year)
 
         self.driver.quit()
 
@@ -132,11 +132,11 @@ class MiniCrawlerConcurrent:
     def navigate_to_extension_page(self):
         self.driver.get(EXTENSION_PAGE)
             
-    def get_year_month(self, perfil:str, year:int, month:int, cnpq:str):
+    def get_year_month(self, offset:int, year:int, month:int, cnpq:str):
         if cnpq == None:
-            dg.get_every_extension_activity_from_month_years(month, year, self.driver, perfil)
+            dg.get_every_extension_activity_from_month_years(month, year, offset, self.driver)
         else:
-            dg.get_every_extension_activity_from_month_years_passing_cnpq(month, year, self.driver, perfil, cnpq)
+            dg.get_every_extension_activity_from_month_years_passing_cnpq(month, year, cnpq, offset, self.driver)
 
-    def run(self, perfil:str, year:int, month:int, cnpq:str):
-        self.get_year_month(perfil, year, month, cnpq)
+    def run(self, offset:int, year:int, month:int, cnpq:str):
+        self.get_year_month(offset, year, month, cnpq)

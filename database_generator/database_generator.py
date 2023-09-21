@@ -6,88 +6,46 @@ from config.output_format import *
 from config.filter_descryption import *
 from config.date_descryption import SPECIAL_DATE, FIRST_DAY_OF_MONTH, MONTHS_LAST_DAY
 
-def get_every_extension_activity_from_months(start_month: int, end_month: int, year: int, driver, perfil:str):
+def get_every_extension_activity_from_months(start_month: int, end_month: int, year: int, offset:int, driver):
     if (end_month < start_month):
         print("ERROR: End Month less than start month")
         return
     
     for month in range(start_month, end_month + 1):
         if f'{month}/{year}' in SPECIAL_DATE:
-            get_every_extension_activity_from_month_years_cnpq(month, year, driver, perfil)
+            get_every_extension_activity_from_month_years_cnpq(month, year, offset, driver)
         else:
-            get_every_extension_activity_from_month_years(month, year, driver, perfil)
+            get_every_extension_activity_from_month_years(month, year, offset, driver)
 
-def get_every_extension_activity_from_month_years(month: int, year: int, driver, perfil:str):
+def get_every_extension_activity_from_month_years(month:int, year:int, offset:int, driver):
     _search_month_year(month, year, driver)
 
-    if perfil == "discente":
-        qtd = sc.get_rows_len(driver) 
+    qtd = sc.get_rows_len(driver) 
 
-        if (qtd > QTD_ROWS_DISCENT): # maior que a quantidade quando não tem ações para discentes
-            _get_activities_from_list_printer(driver, month, year)
-            # _get_activities_from_list_view(driver, month, year)
+    if (qtd > offset): # maior que a quantidade quando não tem ações para discentes
+        _get_activities_from_list_printer(driver, month, year)
+        # _get_activities_from_list_view(driver, month, year)
 
-    elif perfil == "DOCENTE":
-        qtd = sc.get_rows_len(driver) 
-
-        if (qtd > QTD_ROWS_DOCENT):
-            _get_activities_from_list_printer(driver, month, year)
-            # _get_activities_from_list_view(driver, month, year)
-        
-        # qtd = sc.count_listing(driver) # função demora muito quando não encontra
-
-        # if (qtd > 0):
-        #     _get_activities_from_list_printer(driver, month, year)
-        #     # _get_activities_from_list_view(driver, month, year)
-
-def get_every_extension_activity_from_month_years_cnpq(month: str, year: str, driver, perfil:str):
+def get_every_extension_activity_from_month_years_cnpq(month:str, year:str, offset:int, driver):
     for cnpq in AREA_CNPq:
         _search_month_year_cnpq(month, year, cnpq, driver)
         
-        if perfil == "discente":
-            qtd = sc.get_rows_len(driver)
+        qtd = sc.get_rows_len(driver) 
 
-            if (qtd > QTD_ROWS_DISCENT): # maior que a quantidade quando não tem ações para discentes
-                _get_activities_from_list_printer(driver, month, year, cnpq)
-                # _get_activities_from_list_view(driver, month, year, cpnq)
-
-        elif perfil == "DOCENTE":
-            qtd = sc.get_rows_len(driver) 
-            
-            if (qtd > QTD_ROWS_DOCENT):
-                _get_activities_from_list_printer(driver, month, year)
-                # _get_activities_from_list_view(driver, month, year)
-
-            # qtd = sc.count_listing(driver) # função demora muito quando não encontra
-
-            # if (qtd > 0):
-            #     _get_activities_from_list_printer(driver, month, year)
-            #     # _get_activities_from_list_view(driver, month, year)
+        if (qtd > offset): # maior que a quantidade quando não tem ações para discentes
+            _get_activities_from_list_printer(driver, month, year)
+            # _get_activities_from_list_view(driver, month, year)
 
     _uncheck_cnpq(driver)
 
-def get_every_extension_activity_from_month_years_passing_cnpq(month: str, year: str, driver, perfil:str, cnpq:str):
+def get_every_extension_activity_from_month_years_passing_cnpq(month: str, year: str, cnpq:str, offset:int, driver):
     _search_month_year_cnpq(month, year, cnpq, driver)
     
-    if perfil == "discente":
-        qtd = sc.get_rows_len(driver)
+    qtd = sc.get_rows_len(driver) 
 
-        if (qtd > QTD_ROWS_DISCENT): # maior que a quantidade quando não tem ações para discentes
-            _get_activities_from_list_printer(driver, month, year, cnpq)
-            # _get_activities_from_list_view(driver, month, year, cpnq)
-
-    elif perfil == "DOCENTE":
-        qtd = sc.get_rows_len(driver) 
-
-        if (qtd > QTD_ROWS_DOCENT):
-            _get_activities_from_list_printer(driver, month, year, cnpq)
-            # _get_activities_from_list_view(driver, month, year)
-                
-        # qtd = sc.count_listing(driver) # função demora muito quando não encontra
-
-        # if (qtd > 0):
-        #     _get_activities_from_list_printer(driver, month, year)
-        #     # _get_activities_from_list_view(driver, month, year)
+    if (qtd > offset): # maior que a quantidade quando não tem ações para discentes
+        _get_activities_from_list_printer(driver, month, year, cnpq)
+        # _get_activities_from_list_view(driver, month,  year, cnpq)
 
     _uncheck_cnpq(driver)
         

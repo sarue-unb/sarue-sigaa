@@ -13,7 +13,6 @@ class RunCrawler:
         clear_screen()
         self.username = ''
         self.password = ''
-        self.profile = ''
         self.offset = 0
         self.env = dotenv_values(".env")
         clear_log()
@@ -33,15 +32,13 @@ class RunCrawler:
     def run_crawler_auth(self):
         username = self.env['SIGAA_USER']
         password = self.env['SIGAA_PASS']
-        profile = self.env['SIGAA_PROFILE']
-
+        
         if username != '' and password != '':
             self.username = username
             self.password = password
-            self.profile = profile
         else:    
             self.crawler_auth = CrawlerAuth()
-            self.username, self.password, self.profile = self.crawler_auth.run()
+            self.username, self.password = self.crawler_auth.run()
 
     def run_crawler_config(self):
         self.crawler_config = CrawlerConfig()
@@ -50,7 +47,7 @@ class RunCrawler:
         input("Press enter to continue...")
 
     def run_crawler_data(self):
-        self.crawler_data = TypeSearch(self.username, self.password, self.profile)
+        self.crawler_data = TypeSearch(self.username, self.password, self.offset)
         self.crawler_data.run()
 
     def generate_crawler_output(self):

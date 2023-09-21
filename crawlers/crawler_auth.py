@@ -53,16 +53,10 @@ class CrawlerAuth:
             
             time.sleep(0.2)
 
-        if self.driver.current_url in pages_valid['discente']:
-            profile = "discente"
-        elif self.driver.current_url in pages_valid['docente']:
-            profile = "docente"
-
-        centralize(f'{RIGHT_ARROW} Logged in as {profile} {LEFT_ARROW}')
-        return username, password, profile
+        return username, password
 
     def run(self) -> tuple[str, str, str]:
         self.driver.get(LOGIN_PAGE)
-        username, password, profile = self.instance_login()
+        username, password = self.instance_login()
         self.driver.quit()
-        return username, password, profile
+        return username, password
