@@ -8,15 +8,15 @@ from config.filter_descryption import AREA_CNPq
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 class TypeSearch():
-    def __init__(self, username, password, profile):
+    def __init__(self, username, password, offset):
         self.username = username
         self.password = password
-        self.profile = profile
-
+        self.offset = offset
+        
     def linear_search(self):
         instance = MiniCrawlerParallel()
         for year in range(START_YEAR, END_YEAR+1):
-            instance.run(self.username, self.password, self.profile, year)
+            instance.run(self.username, self.password, self.offset, year)
 
     def parallel_search(self):
         if TYPE_PERIOD == 'YEAR':
@@ -25,7 +25,7 @@ class TypeSearch():
                 for year in range(START_YEAR, END_YEAR+1):
                     instance = MiniCrawlerParallel()
                     instances[year] = instance
-                    executor.submit(instances[year].run, self.username, self.password, self.profile, year)
+                    executor.submit(instances[year].run, self.username, self.password, self.offset, year)
         
         elif TYPE_PERIOD == 'SEMESTER':
             instances = {}
@@ -34,7 +34,7 @@ class TypeSearch():
                     for semester in range(2):
                         instance = MiniCrawlerParallel()
                         instances[str(year)+"_"+str(semester)] = instance
-                        executor.submit(instances[str(year)+"_"+str(semester)].run, self.username, self.password, self.profile, year, semester+1)
+                        executor.submit(instances[str(year)+"_"+str(semester)].run, self.username, self.password, self.offset, year, semester+1)
     
         elif TYPE_PERIOD == 'QUARTER':
             instances = {}
@@ -43,7 +43,7 @@ class TypeSearch():
                     for quarter in range(3):
                         instance = MiniCrawlerParallel()
                         instances[str(year)+"_"+str(quarter)] = instance
-                        executor.submit(instances[str(year)+"_"+str(quarter)].run, self.username, self.password, self.profile, year, None, quarter+1)    
+                        executor.submit(instances[str(year)+"_"+str(quarter)].run, self.username, self.password, self.offset, year, None, quarter+1)    
 
         elif TYPE_PERIOD == 'TRIMESTER':
             instances = {}
@@ -52,7 +52,7 @@ class TypeSearch():
                     for trimester in range(4):
                         instance = MiniCrawlerParallel()
                         instances[str(year)+"_"+str(trimester)] = instance
-                        executor.submit(instances[str(year)+"_"+str(trimester)].run, self.username, self.password, self.profile, year, None, None, trimester+1)    
+                        executor.submit(instances[str(year)+"_"+str(trimester)].run, self.username, self.password, self.offset, year, None, None, trimester+1)    
 
         else:
             centralize("Invalid type period")
@@ -89,7 +89,7 @@ class TypeSearch():
                 cnpq = None
 
             instance = get_instance_with_wait()
-            instance.run(self.profile, year, month, cnpq)
+            instance.run(self.offset, year, month, cnpq)
             instances.append(instance)
             return year_month_cnpq
 
@@ -120,7 +120,7 @@ class TypeSearch():
                 else:
                     cnpq = None
 
-                new_instance.run(self.profile, year, month, cnpq)
+                new_instance.run(year, month, cnpq)
             new_instance.quit()
 
     def search(self):
