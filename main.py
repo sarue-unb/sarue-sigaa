@@ -1,7 +1,9 @@
 from requeriments import checkLibraries 
+from config.display_descryption import clear_screen
 
 class Main():
     def __init__(self):
+        clear_screen()
         checkLibraries()
     def begin(self):
         from menu import Menu
