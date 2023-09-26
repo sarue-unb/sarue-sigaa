@@ -3,7 +3,10 @@ import os
 RIGHT_ARROW = "->"
 LEFT_ARROW = "<-"
 HASH = "#####"
-SIZE_TERMINAL = os.get_terminal_size().columns
+try:
+    SIZE_TERMINAL = os.get_terminal_size().columns
+except OSError as e:
+    SIZE_TERMINAL = 70
 SEPARATOR = "="*SIZE_TERMINAL
 
 def centralize(msg:str):
