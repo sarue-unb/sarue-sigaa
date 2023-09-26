@@ -1,12 +1,11 @@
-from concurrent.futures import ThreadPoolExecutor
 import unittest
-
+import pages.sigaa_pages as sp
+from concurrent.futures import ThreadPoolExecutor
 from dotenv import dotenv_values # pip install python-dotenv
 from selenium import webdriver
 from tqdm import tqdm # pip install selenium
 from config.crawler_descryption import MAX_THREADS, TYPE_VISIBILITY
 from config.url_descryption import *
-import pages.sigaa_pages as sp
 
 from selenium.webdriver.chrome.service import Service
 
