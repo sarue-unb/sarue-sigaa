@@ -3,7 +3,7 @@ import database_generator.database_generator as dg
 from selenium import webdriver # pip install selenium
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
-from config.output_format import *
+# from config.output_format import *
 from config.display_descryption import *
 from config.url_descryption import *
 from config.crawler_descryption import TYPE_SEARCH, TYPE_PERIOD, TYPE_VISIBILITY

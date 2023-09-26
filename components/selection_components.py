@@ -1,6 +1,6 @@
+import components.selection_components as sc
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
-import components.selection_components as sc
 from config.filter_descryption import *
 from config.crawler_descryption import SEARCH_TYPES
 

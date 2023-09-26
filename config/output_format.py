@@ -1,4 +1,3 @@
-import os
 import re
 import time
 from database_generator.json_generator import get_quantity_of_activities

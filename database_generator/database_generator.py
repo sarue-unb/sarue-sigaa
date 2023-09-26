@@ -2,7 +2,6 @@ import components.selection_components as sc
 import components.info_printer as scif
 import components.info_view as sciv
 import database_generator.json_generator as jg
-from config.output_format import *
 from config.filter_descryption import *
 from config.date_descryption import SPECIAL_DATE, FIRST_DAY_OF_MONTH, MONTHS_LAST_DAY
 

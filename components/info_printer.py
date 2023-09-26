@@ -1,10 +1,11 @@
 import components.selection_components as sc
-from config.output_format import SIZE_TERMINAL, clear_strings
+from config.output_format import clear_strings
+from config.display_descryption import SIZE_TERMINAL
 from config.xapths.actions_xpath_descryption import *
 from config.ids.actions_id_descryption import *
 from tqdm import tqdm
 
-def get_row_data_printer(driver, month:str, year:str, cnpq=None):
+def get_row_data_printer(driver, month:int, year:int, cnpq=None):
     rows_total_data = []
     result_table = sc.get_rows_from_table(driver)
     rows_length = sc.get_rows_len(result_table)
