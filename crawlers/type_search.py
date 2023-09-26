@@ -1,7 +1,8 @@
 import time
 from tqdm import tqdm
 from crawlers.crawler_data import MiniCrawlerParallel, MiniCrawlerConcurrent
-from config.output_format import add_item_to_log, centralize, SIZE_TERMINAL
+from config.output_format import *
+from config.display_descryption import *
 from config.date_descryption import *
 from config.crawler_descryption import MAX_THREADS, TYPE_SEARCH, TYPE_PERIOD
 from config.filter_descryption import AREA_CNPq

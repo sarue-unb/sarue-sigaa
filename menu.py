@@ -5,8 +5,9 @@ from crawlers.crawler_config import CrawlerConfig
 from crawlers.type_search import TypeSearch
 from calculate_indicators.calculate_all import calculate_all_indicators
 from database_generator.load_database import load_indicators_database, generate_indicators_database
-from config.output_format import *
 from config.date_descryption import START_YEAR, END_YEAR
+from config.output_format import *
+from config.display_descryption import *
 
 class RunCrawler:
     def __init__(self):

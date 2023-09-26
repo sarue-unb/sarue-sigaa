@@ -1,5 +1,8 @@
 import os
 
+RIGHT_ARROW = "->"
+LEFT_ARROW = "<-"
+HASH = "#####"
 SIZE_TERMINAL = os.get_terminal_size().columns
 SEPARATOR = "="*SIZE_TERMINAL
 
