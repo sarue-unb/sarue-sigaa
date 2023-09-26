@@ -3,6 +3,7 @@ import components.selection_components as sc
 from dotenv import dotenv_values # pip install python-dotenv
 from selenium import webdriver # pip install selenium
 from config.output_format import *
+from config.display_descryption import *
 from config.url_descryption import *
 from selenium.common.exceptions import StaleElementReferenceException
 
