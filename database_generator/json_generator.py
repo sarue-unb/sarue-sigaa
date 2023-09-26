@@ -3,9 +3,9 @@ import os
 from datetime import datetime
 from config.json_descryption import *
 from config.crawler_descryption import TYPE_BASE
-from database_generator.load_database import load_indicators_database, load_base_database
+from config.display_descryption import centralize, clear_screen
+from database_generator.load_database import load_base_database
 from database_generator.database_updater import update_database
-SIZE_TERMIINAL = os.get_terminal_size().columns
 
 current_activity_database = {}
 previous_activity_database = {}
@@ -51,9 +51,9 @@ def generate_crawler_json(start_year, end_year):
         len_full_base_database = len(full_base_database)
 
         clear_screen()
-        print(("Quantidade de atividades na base anterior: " + str(len_previous_activity_database)).center(SIZE_TERMIINAL))
-        print(("Quantidade de atividades na base atual: " + str(len_current_activity_database)).center(SIZE_TERMIINAL))
-        print(("Quantidade de atividades na base conjunta: " + str(len_full_base_database)).center(SIZE_TERMIINAL))
+        print(("Quantidade de atividades na base anterior: " + centralize(len_previous_activity_database)))
+        print(("Quantidade de atividades na base atual: " + centralize(len_current_activity_database)))
+        print(("Quantidade de atividades na base conjunta: " + centralize(len_full_base_database)))
 
         entrada = input("Deseja atualizar a base? (S/N): ")
         if entrada == 'S' or entrada == 's':
