@@ -51,9 +51,9 @@ def generate_crawler_json(start_year, end_year):
         len_full_base_database = len(full_base_database)
 
         clear_screen()
-        print(("Quantidade de atividades na base anterior: " + centralize(len_previous_activity_database)))
-        print(("Quantidade de atividades na base atual: " + centralize(len_current_activity_database)))
-        print(("Quantidade de atividades na base conjunta: " + centralize(len_full_base_database)))
+        print(("Quantidade de atividades na base anterior: " + centralize(str(len_previous_activity_database))))
+        print(("Quantidade de atividades na base atual: " + centralize(len(len_current_activity_database))))
+        print(("Quantidade de atividades na base conjunta: " + centralize(len(len_full_base_database))))
 
         entrada = input("Deseja atualizar a base? (S/N): ")
         if entrada == 'S' or entrada == 's':
