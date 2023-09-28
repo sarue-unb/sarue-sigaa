@@ -3,7 +3,7 @@ import components.info_printer as scif
 import components.info_view as sciv
 import database_generator.json_generator as jg
 from config.filter_descryption import *
-from config.date_descryption import SPECIAL_DATE, FIRST_DAY_OF_MONTH, MONTHS_LAST_DAY
+from config.date_descryption import SPECIAL_DATE, FIRST_DAY_OF_MONTH, MONTHS_LAST_DAY, LEAP_YEAR
 
 def get_every_extension_activity_from_months(start_month: int, end_month: int, year: int, offset:int, driver):
     if (end_month < start_month):
@@ -132,7 +132,10 @@ def _monthly_date_generator(month:int, year:int, monthEnd:bool) -> str:
     expetected_day = FIRST_DAY_OF_MONTH
 
     if monthEnd:
-        expetected_day = MONTHS_LAST_DAY[month]
+        if month == 2 and year in LEAP_YEAR:
+            expetected_day = '29'
+        else:
+            expetected_day = MONTHS_LAST_DAY[month]
 
     # Sigaa does not accept single digit months
     if month < 10:
