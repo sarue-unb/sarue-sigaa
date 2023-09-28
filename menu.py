@@ -8,6 +8,9 @@ from database_generator.load_database import load_indicators_database, generate_
 from config.date_descryption import START_YEAR, END_YEAR
 from config.output_format import *
 from config.display_descryption import *
+from config.crawler_descryption import SCHEDULE
+import time
+from datetime import datetime
 
 class RunCrawler:
     def __init__(self):
@@ -28,7 +31,10 @@ class RunCrawler:
 
     def end_timer(self):
         self.timer.print_elapsed_ctime()
-        input("Press enter to continue...")
+        if SCHEDULE == True:
+            time.sleep(3)
+        else:
+            input("Press enter to continue...")
 
     def run_crawler_auth(self):
         username = self.env['SIGAA_USER']
@@ -45,7 +51,10 @@ class RunCrawler:
         self.crawler_config = CrawlerConfig()
         self.offset = self.crawler_config.run(self.username, self.password)
         centralize(f'Offset: {self.offset}')
-        input("Press enter to continue...")
+        if SCHEDULE == True:
+            time.sleep(3)
+        else:
+            input("Press enter to continue...")
 
     def run_crawler_data(self):
         self.crawler_data = TypeSearch(self.username, self.password, self.offset)
@@ -70,7 +79,10 @@ class RunCalculateIndicators:
     def output(self):
         centralize("Indicators calculated.")
         centralize("Verifique a pasta databases/indicators/")
-        input("Press enter to continue...")
+        if SCHEDULE == True:
+            time.sleep(3)
+        else:
+            input("Press enter to continue...")
 
     def begin(self):
         calculate_all_indicators(self.database)
@@ -109,7 +121,12 @@ class Menu:
             centralize("Invalid option.")
 
     def begin(self):
-        while True:
-            self.print_menu()
-            option = self.get_option()
-            self.run_option(option)
+        if SCHEDULE == True:
+            self.run_option('1')
+            self.run_option('2')
+            self.run_option('3')
+        else:
+            while True:
+                self.print_menu()
+                option = self.get_option()
+                self.run_option(option)
