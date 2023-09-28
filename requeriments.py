@@ -3,6 +3,7 @@ import importlib
 import subprocess
 from config.libraries_descryption import list_libraries
 from config.display_descryption import SEPARATOR
+from config.crawler_descryption import SCHEDULE
 import time
 
 def checkLibraries():
@@ -19,5 +20,7 @@ def checkLibraries():
                 print(f'Erro ao instalar {library} : {e}')
                 exit(1)
     print(SEPARATOR)
-    time.sleep(3)
-    # input("Press enter to continue...")
+    if SCHEDULE == True:
+        time.sleep(3)
+    else:
+        input("Press enter to continue...")
