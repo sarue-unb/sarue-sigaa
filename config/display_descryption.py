@@ -3,6 +3,7 @@ import os
 RIGHT_ARROW = "->"
 LEFT_ARROW = "<-"
 HASH = "#####"
+SLEEP_TIME = 3
 try:
     SIZE_TERMINAL = os.get_terminal_size().columns
 except OSError as e:
