@@ -2,7 +2,7 @@ import sys
 import importlib
 import subprocess
 from config.libraries_descryption import list_libraries
-from config.display_descryption import SEPARATOR
+from config.display_descryption import SEPARATOR, SLEEP_TIME
 from config.crawler_descryption import SCHEDULE
 import time
 
@@ -21,6 +21,6 @@ def checkLibraries():
                 exit(1)
     print(SEPARATOR)
     if SCHEDULE == True:
-        time.sleep(3)
+        time.sleep(SLEEP_TIME)
     else:
         input("Press enter to continue...")

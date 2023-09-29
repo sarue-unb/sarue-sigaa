@@ -32,7 +32,7 @@ class RunCrawler:
     def end_timer(self):
         self.timer.print_elapsed_ctime()
         if SCHEDULE == True:
-            time.sleep(3)
+            time.sleep(SLEEP_TIME)
         else:
             input("Press enter to continue...")
 
@@ -52,7 +52,7 @@ class RunCrawler:
         self.offset = self.crawler_config.run(self.username, self.password)
         centralize(f'Offset: {self.offset}')
         if SCHEDULE == True:
-            time.sleep(3)
+            time.sleep(SLEEP_TIME)
         else:
             input("Press enter to continue...")
 
@@ -80,7 +80,7 @@ class RunCalculateIndicators:
         centralize("Indicators calculated.")
         centralize("Verifique a pasta databases/indicators/")
         if SCHEDULE == True:
-            time.sleep(3)
+            time.sleep(SLEEP_TIME)
         else:
             input("Press enter to continue...")
 
