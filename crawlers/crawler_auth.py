@@ -1,8 +1,10 @@
 import pages.sigaa_pages as sp 
 import components.selection_components as sc
+import time
 from dotenv import dotenv_values # pip install python-dotenv
 from selenium import webdriver # pip install selenium
-from config.output_format import *
+# from config.output_format import *
+from config.display_descryption import *
 from config.url_descryption import *
 from selenium.common.exceptions import StaleElementReferenceException
 
@@ -53,16 +55,10 @@ class CrawlerAuth:
             
             time.sleep(0.2)
 
-        if self.driver.current_url in pages_valid['discente']:
-            profile = "discente"
-        elif self.driver.current_url in pages_valid['docente']:
-            profile = "docente"
-
-        centralize(f'{RIGHT_ARROW} Logged in as {profile} {LEFT_ARROW}')
-        return username, password, profile
+        return username, password
 
     def run(self) -> tuple[str, str, str]:
         self.driver.get(LOGIN_PAGE)
-        username, password, profile = self.instance_login()
+        username, password = self.instance_login()
         self.driver.quit()
-        return username, password, profile
+        return username, password

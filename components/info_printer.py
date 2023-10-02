@@ -1,10 +1,11 @@
 import components.selection_components as sc
-from config.output_format import SIZE_TERMINAL, clear_strings
+from config.output_format import clear_strings
+from config.display_descryption import SIZE_TERMINAL
 from config.xapths.actions_xpath_descryption import *
 from config.ids.actions_id_descryption import *
 from tqdm import tqdm
 
-def get_row_data_printer(driver, month:str, year:str, cnpq=None):
+def get_row_data_printer(driver, month:int, year:int, cnpq=None):
     rows_total_data = []
     result_table = sc.get_rows_from_table(driver)
     rows_length = sc.get_rows_len(result_table)
@@ -61,12 +62,13 @@ def get_info_from_print_page(driver):
     elif info["tipo"] == "PROJETO":
         info = get_info_from_printer_type_projeto(info, driver)
 
-    qtd_tabelas = sc.get_qtd_tables_by_xpath(XPATHS_OTHER_TABLES, driver)
+    if sc.get_element_by_xpath(XPATHS_OTHER_TABLES, driver):
+        qtd_tabelas = sc.get_qtd_tables_by_xpath(XPATHS_OTHER_TABLES, driver)
 
-    if (qtd_tabelas >= 2):
-        info = get_info_objetivos(info, XPATHS_OBJETIVOS, driver)
-        if (sc.get_qtd_tables_by_xpath(XPATHS_OTHER_TABLES, driver) >= 3):
-            info = get_info_team_members(info, ID_TEAM_MEMBERS, driver)
+        if (qtd_tabelas >= 2):
+            info = get_info_objetivos(info, XPATHS_OBJETIVOS, driver)
+            if (sc.get_qtd_tables_by_xpath(XPATHS_OTHER_TABLES, driver) >= 3):
+                info = get_info_team_members(info, ID_TEAM_MEMBERS, driver)
             
     return info
 

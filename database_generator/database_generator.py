@@ -2,74 +2,49 @@ import components.selection_components as sc
 import components.info_printer as scif
 import components.info_view as sciv
 import database_generator.json_generator as jg
-from config.output_format import *
 from config.filter_descryption import *
-from config.date_descryption import SPECIAL_DATE, FIRST_DAY_OF_MONTH, MONTHS_LAST_DAY
+from config.date_descryption import SPECIAL_DATE, FIRST_DAY_OF_MONTH, MONTHS_LAST_DAY, LEAP_YEAR
 
-def get_every_extension_activity_from_months(start_month: str, end_month: str, year: str, driver, perfil:str):
+def get_every_extension_activity_from_months(start_month: int, end_month: int, year: int, offset:int, driver):
     if (end_month < start_month):
         print("ERROR: End Month less than start month")
         return
     
     for month in range(start_month, end_month + 1):
         if f'{month}/{year}' in SPECIAL_DATE:
-            get_every_extension_activity_from_month_years_cnpq(month, year, driver, perfil)
+            get_every_extension_activity_from_month_years_cnpq(month, year, offset, driver)
         else:
-            get_every_extension_activity_from_month_years(month, year, driver, perfil)
+            get_every_extension_activity_from_month_years(month, year, offset, driver)
 
-def get_every_extension_activity_from_month_years(month: str, year: str, driver, perfil:str):
+def get_every_extension_activity_from_month_years(month:int, year:int, offset:int, driver):
     _search_month_year(month, year, driver)
 
-    if perfil == "discente":
-        qtd = sc.get_rows_len(driver) # 55 é a quantidade quando não tem ações para discentes
+    qtd = sc.get_rows_len(driver) 
 
-        if (qtd > 55):
-            _get_activities_from_list_printer(driver, month, year)
-            # _get_activities_from_list_view(driver, month, year)
+    if (qtd > offset): # maior que a quantidade quando não tem ações para discentes
+        _get_activities_from_list_printer(driver, month, year)
+        # _get_activities_from_list_view(driver, month, year)
 
-    elif perfil == "docente":
-            qtd = sc.count_listing(driver) # função demora muito quando não encontra
-
-            if (qtd > 0):
-                _get_activities_from_list_printer(driver, month, year)
-                # _get_activities_from_list_view(driver, month, year)
-
-def get_every_extension_activity_from_month_years_cnpq(month: str, year: str, driver, perfil:str):
+def get_every_extension_activity_from_month_years_cnpq(month:str, year:str, offset:int, driver):
     for cnpq in AREA_CNPq:
         _search_month_year_cnpq(month, year, cnpq, driver)
         
-        if perfil == "discente":
-            qtd = sc.get_rows_len(driver) # 55 é a quantidade quando não tem ações para discentes
+        qtd = sc.get_rows_len(driver) 
 
-            if (qtd > 55):
-                _get_activities_from_list_printer(driver, month, year, cnpq)
-                # _get_activities_from_list_view(driver, month, year, cpnq)
-
-        elif perfil == "docente":
-                qtd = sc.count_listing(driver) # função demora muito quando não encontra
-
-                if (qtd > 0):
-                    _get_activities_from_list_printer(driver, month, year)
-                    # _get_activities_from_list_view(driver, month, year)
+        if (qtd > offset): # maior que a quantidade quando não tem ações para discentes
+            _get_activities_from_list_printer(driver, month, year)
+            # _get_activities_from_list_view(driver, month, year)
 
     _uncheck_cnpq(driver)
 
-def get_every_extension_activity_from_month_years_passing_cnpq(month: str, year: str, driver, perfil:str, cnpq:str):
+def get_every_extension_activity_from_month_years_passing_cnpq(month: str, year: str, cnpq:str, offset:int, driver):
     _search_month_year_cnpq(month, year, cnpq, driver)
     
-    if perfil == "discente":
-        qtd = sc.get_rows_len(driver) # 55 é a quantidade quando não tem ações para discentes
+    qtd = sc.get_rows_len(driver) 
 
-        if (qtd > 55):
-            _get_activities_from_list_printer(driver, month, year, cnpq)
-            # _get_activities_from_list_view(driver, month, year, cpnq)
-
-    elif perfil == "docente":
-            qtd = sc.count_listing(driver) # função demora muito quando não encontra
-
-            if (qtd > 0):
-                _get_activities_from_list_printer(driver, month, year)
-                # _get_activities_from_list_view(driver, month, year)
+    if (qtd > offset): # maior que a quantidade quando não tem ações para discentes
+        _get_activities_from_list_printer(driver, month, year, cnpq)
+        # _get_activities_from_list_view(driver, month,  year, cnpq)
 
     _uncheck_cnpq(driver)
         
@@ -85,14 +60,14 @@ def _get_activities_from_list_view(driver, month:str, year:str, cnpq:str=None):
         
 def _search_month_year(month:int, year:int, driver):
     _clear_execution_period(driver)
-    start_date =  _monthly_date_generator(month, year, False)
+    start_date = _monthly_date_generator(month, year, False)
     end_date = _monthly_date_generator(month, year, True)
     _use_execution_period(start_date, end_date, driver)
     sc.make_search(driver)
     
 def _search_month_year_cnpq(month:int, year:int, cnpq:str, driver):
     _clear_execution_period(driver)
-    start_date =  _monthly_date_generator(month, year, False)
+    start_date = _monthly_date_generator(month, year, False)
     end_date = _monthly_date_generator(month, year, True)
     _use_execution_period(start_date, end_date, driver)
     _use_type_action(cnpq, driver)
@@ -149,11 +124,18 @@ def _uncheck_cnpq(driver):
 #     sc.use_input_by_name(NAME_BUSCAR_ANO, year, driver)
 #     ep.make_search(driver)
 
+def get_offset(month:int, year:int, driver):
+    _search_month_year(month, year, driver)
+    return sc.get_rows_len(driver) 
+
 def _monthly_date_generator(month:int, year:int, monthEnd:bool) -> str:
     expetected_day = FIRST_DAY_OF_MONTH
 
     if monthEnd:
-        expetected_day = MONTHS_LAST_DAY[month]
+        if month == 2 and year in LEAP_YEAR:
+            expetected_day = '29'
+        else:
+            expetected_day = MONTHS_LAST_DAY[month]
 
     # Sigaa does not accept single digit months
     if month < 10:

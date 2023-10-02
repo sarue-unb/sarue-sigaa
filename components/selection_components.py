@@ -1,6 +1,6 @@
+import components.selection_components as sc
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
-import components.selection_components as sc
 from config.filter_descryption import *
 from config.crawler_descryption import SEARCH_TYPES
 
@@ -39,7 +39,7 @@ def use_element_by_class(class_name:str, driver):
 def get_element_by_id(id:str, driver):
     return driver.find_element(By.ID, id)
 
-def get_element_by_xpath(value:int, driver):
+def get_element_by_xpath(value:str, driver):
     return driver.find_element(By.XPATH, value)
 
 def get_element_by_class(class_name:str, driver):

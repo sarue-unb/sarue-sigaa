@@ -1,15 +1,9 @@
-import os
 import re
 import time
 from database_generator.json_generator import get_quantity_of_activities
+from config.display_descryption import *
 
-RIGHT_ARROW = "->"
-LEFT_ARROW = "<-"
-HASH = "#####"
-SIZE_TERMINAL = os.get_terminal_size().columns
-SEPARATOR = "="*SIZE_TERMINAL
 FORMATER = r'[0-9]+|[^\w\s]'
-
 
 class Timer:
     def __init__(self) -> None:
@@ -57,14 +51,13 @@ class Timer:
         print(f"{msg} - {minutes:02}:{seconds:02}")
         print(SEPARATOR)
 
-def centralize(msg:str):
-    print(msg.center(SIZE_TERMINAL))
-
-def clear_screen():
-    if os.name == 'posix':  # Para sistemas Unix (Linux, macOS)
-        _ = os.system('clear')
-    else:  # Para o Windows
-        _ = os.system('cls')
-
 def clear_strings(text: str) -> str:
     return re.sub(FORMATER, '', text)
+
+def clear_log():
+    with open('log.txt', 'w+') as file:
+        file.write('')
+
+def add_item_to_log(item:str):
+    with open('log.txt', 'a') as file:
+        file.write(item + '\n')
