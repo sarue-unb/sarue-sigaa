@@ -1,9 +1,10 @@
 import json
 import os
+import time
 from datetime import datetime
 from config.json_descryption import *
-from config.crawler_descryption import TYPE_BASE
-from config.display_descryption import centralize, clear_screen
+from config.crawler_descryption import TYPE_BASE, SCHEDULE
+from config.display_descryption import centralize, clear_screen, SLEEP_TIME
 from database_generator.load_database import load_base_database
 from database_generator.database_updater import update_database
 
@@ -50,16 +51,27 @@ def generate_crawler_json(start_year, end_year):
         len_current_activity_database = len(current_activity_database)
         len_full_base_database = len(full_base_database)
 
-        clear_screen()
-        print(("Quantidade de atividades na base anterior: " + centralize(str(len_previous_activity_database))))
-        print(("Quantidade de atividades na base atual: " + centralize(len(len_current_activity_database))))
-        print(("Quantidade de atividades na base conjunta: " + centralize(len(len_full_base_database))))
+        if SCHEDULE == True:
+            clear_screen()
+            print(("Quantidade de atividades na base anterior: " + centralize(str(len_previous_activity_database))))
+            print(("Quantidade de atividades na base atual: " + centralize(len(len_current_activity_database))))
+            print(("Quantidade de atividades na base conjunta: " + centralize(len(len_full_base_database))))
 
-        entrada = input("Deseja atualizar a base? (S/N): ")
-        if entrada == 'S' or entrada == 's':
+            time.sleep(SLEEP_TIME)
             with open(FILE_NAME_BASE_DATABASE, "w+", encoding="utf-8") as file_output:
                 json.dump(full_base_database, file_output, indent=3, ensure_ascii=False) 
-            
+                
+        else:
+            clear_screen()
+            print(("Quantidade de atividades na base anterior: " + centralize(str(len_previous_activity_database))))
+            print(("Quantidade de atividades na base atual: " + centralize(len(len_current_activity_database))))
+            print(("Quantidade de atividades na base conjunta: " + centralize(len(len_full_base_database))))
+
+            entrada = input("Deseja atualizar a base? (S/N): ")
+            if entrada == 'S' or entrada == 's':
+                with open(FILE_NAME_BASE_DATABASE, "w+", encoding="utf-8") as file_output:
+                    json.dump(full_base_database, file_output, indent=3, ensure_ascii=False) 
+                
     elif TYPE_BASE == 'BASE':
         previous_activity_database = load_base_database()
         full_activity_database = update_database(current_activity_database, previous_activity_database)
