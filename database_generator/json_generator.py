@@ -53,20 +53,20 @@ def generate_crawler_json(start_year, end_year):
 
         if SCHEDULE == True:
             clear_screen()
-            print(("Quantidade de atividades na base anterior: " + centralize(str(len_previous_activity_database))))
-            print(("Quantidade de atividades na base atual: " + centralize(len(len_current_activity_database))))
-            print(("Quantidade de atividades na base conjunta: " + centralize(len(len_full_base_database))))
-
+            centralize(("Quantidade de atividades na base anterior: " + str(len_previous_activity_database)))
+            centralize(("Quantidade de atividades na base atual: " + str(len_current_activity_database)))
+            centralize(("Quantidade de atividades na base conjunta: " + str(len_full_base_database)))
+            
             time.sleep(SLEEP_TIME)
             with open(FILE_NAME_BASE_DATABASE, "w+", encoding="utf-8") as file_output:
                 json.dump(full_base_database, file_output, indent=3, ensure_ascii=False) 
                 
         else:
             clear_screen()
-            print(("Quantidade de atividades na base anterior: " + centralize(str(len_previous_activity_database))))
-            print(("Quantidade de atividades na base atual: " + centralize(len(len_current_activity_database))))
-            print(("Quantidade de atividades na base conjunta: " + centralize(len(len_full_base_database))))
-
+            centralize(("Quantidade de atividades na base anterior: " + str(len_previous_activity_database)))
+            centralize(("Quantidade de atividades na base atual: " + str(len_current_activity_database)))
+            centralize(("Quantidade de atividades na base conjunta: " + str(len_full_base_database)))
+            
             entrada = input("Deseja atualizar a base? (S/N): ")
             if entrada == 'S' or entrada == 's':
                 with open(FILE_NAME_BASE_DATABASE, "w+", encoding="utf-8") as file_output:
