@@ -1,5 +1,6 @@
 import os
 import json
+from datetime import datetime
 from config.json_descryption import *
 
 full_database = {}
@@ -44,6 +45,8 @@ def generate_indicators_database():
 
             with open(file_name, "w+", encoding="utf-8") as file_output:  
                 json.dump(databases[name][inside_name], file_output, indent=3, ensure_ascii=False)
+
+    full_database["date_time"] =  datetime.now().strftime('%d-%m-%y_%H-%M')
 
     with open(FILE_NAME_FULL_DATABASE, "w+", encoding="utf-8") as file_output:
         json.dump(full_database, file_output, indent=3, ensure_ascii=False)
