@@ -1,5 +1,5 @@
-list_libraries = [
-    "selenium",
-    "dotenv",
-    "tqdm"
-]
+list_libraries = {
+    "selenium" : "selenium",
+    "dotenv" : "python-dotenv",
+    "tqdm" : "tqdm",
+}
