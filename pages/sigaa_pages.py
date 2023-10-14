@@ -1,5 +1,7 @@
 import components.selection_components as sc
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 # LOGIN_USER = "user.login"
 # LOGIN_PASS = "user.senha"
@@ -12,6 +14,7 @@ LOGIN_PASS = "password"
 USERNAME_XPATH = "/html/body/div[3]/div/div[1]/form/div[1]/input"
 PASSWORD_XPATH = "/html/body/div[3]/div/div[1]/form/div[2]/input"
 SUBMIT_BUTTON = "//button[contains(text(), 'ENTRAR')]"
+COOKIES_BUTTON = "//button[contains(text(), 'Ciente')]"
 
 def insert_credencials_into_sigaa(driver, USERNAME, PASSWORD):
     sc.use_input_by_name(LOGIN_USER, USERNAME, driver)
@@ -31,3 +34,8 @@ def login_into_sigaa(driver, USERNAME, PASSWORD):
 def login_into_sigaa_env(driver, env_var):
     insert_credencials_into_sigaa_env(driver, env_var)
     click_submit_button(driver)
+
+def accept_cookies(driver):
+    wait = WebDriverWait(driver, 10)
+    button_ciente = wait.until(EC.visibility_of_element_located((By.XPATH, COOKIES_BUTTON)))
+    button_ciente.click()

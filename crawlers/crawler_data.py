@@ -123,6 +123,7 @@ class MiniCrawlerConcurrent:
         self.driver.get(LOGIN_PAGE)
         self.instance_login(username, password)
         self.navigate_to_extension_page()
+        self.accept_cookies()
 
     def quit(self):
         self.driver.quit()
@@ -133,6 +134,10 @@ class MiniCrawlerConcurrent:
     def navigate_to_extension_page(self):
         self.driver.get(EXTENSION_PAGE)
             
+    def accept_cookies(self):
+        sp.accept_cookies(self.driver)
+        input("Pressione enter para continuar...")
+
     def get_year_month(self, offset:int, year:int, month:int, cnpq:str):
         if cnpq == None:
             dg.get_every_extension_activity_from_month_years(month, year, offset, self.driver)
