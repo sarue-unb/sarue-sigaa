@@ -26,6 +26,7 @@
 *.sql
 *.sqlite
 log.txt
+log_timer.txt
 
 # OS generated files #
 ######################
