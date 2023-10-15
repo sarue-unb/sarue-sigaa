@@ -31,6 +31,7 @@ class RunCrawler:
 
     def end_timer(self):
         self.timer.print_elapsed_ctime()
+        self.timer.create_timer_log()
         if SCHEDULE == True:
             time.sleep(SLEEP_TIME)
         else:
@@ -48,13 +49,14 @@ class RunCrawler:
             self.username, self.password = self.crawler_auth.run()
 
     def run_crawler_config(self):
-        self.crawler_config = CrawlerConfig()
-        self.offset = self.crawler_config.run(self.username, self.password)
-        centralize(f'Offset: {self.offset}')
-        if SCHEDULE == True:
-            time.sleep(SLEEP_TIME)
-        else:
-            input("Press enter to continue...")
+        # self.crawler_config = CrawlerConfig()
+        # self.offset = self.crawler_config.run(self.username, self.password)
+        # centralize(f'Offset: {self.offset}')
+        # if SCHEDULE == True:
+        #     time.sleep(SLEEP_TIME)
+        # else:
+        #     input("Press enter to continue...")
+        self.offset = 55
 
     def run_crawler_data(self):
         self.crawler_data = TypeSearch(self.username, self.password, self.offset)

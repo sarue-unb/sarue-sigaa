@@ -1,9 +1,8 @@
 import pages.sigaa_pages as sp 
 import database_generator.database_generator as dg
-from selenium import webdriver # pip install selenium
+from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
-# from config.output_format import *
 from config.display_descryption import *
 from config.url_descryption import *
 from config.crawler_descryption import TYPE_SEARCH, TYPE_PERIOD, TYPE_VISIBILITY
@@ -136,7 +135,6 @@ class MiniCrawlerConcurrent:
             
     def accept_cookies(self):
         sp.accept_cookies(self.driver)
-        input("Pressione enter para continuar...")
 
     def get_year_month(self, offset:int, year:int, month:int, cnpq:str):
         if cnpq == None:
