@@ -226,8 +226,8 @@ def get_info_from_printer_type_projeto(info:dict, driver):
     info["renovacao"] = sc.get_info(PROJETO_XPATHS_RENOVACAO, driver)
     info["numero_bolsas_solicitadas"] = sc.get_info(PROJETO_XPATHS_NUMERO_BOLSAS_SOLICITADAS, driver)
     info["numero_bolsas_concedidas"] = sc.get_info(PROJETO_XPATHS_NUMERO_BOLSAS_CONCEDIDAS, driver)
-  
-    if(sc.get_qtd_tables_by_xpath_relatorio(XPATHS_RELATORIO, driver) == 35):
+    
+    if(sc.get_qtd_tables_by_xpath_relatorio(XPATHS_RELATORIO, driver) == 35 and info["codigo"] != "PJ314-2022"):
         info["numero_discentes_envolvidos"] = sc.get_info(PROJETO_XPATHS_NUMERO_DISCENTES_ENVOLVIDOS_ALTERNATIVE, driver)
         info["faz_parte_de_programa_de_extensao"] = sc.get_info(PROJETO_XPATHS_FAZ_PARTE_DE_PROGRAMA_DE_EXTENSAO_ALTERNATIVE, driver)
         info["grupo_permanente"] = sc.get_info(PROJETO_XPATHS_GRUPO_PERMANENTE_ALTERNATIVE, driver)
@@ -249,7 +249,7 @@ def get_info_from_printer_type_projeto(info:dict, driver):
         info["contato_coordenacao"] = sc.get_info(PROJETO_XPATHS_CONTATO_COORDENACAO, driver)
         info["contato_email"] = sc.get_info(PROJETO_XPATHS_CONTATO_EMAIL, driver)
         info["contato_telefone"] = sc.get_info(PROJETO_XPATHS_CONTATO_TELEFONE, driver)
-    
+
     return info
 
 def get_info_objetivos(info: dict, xpath: str, driver):
