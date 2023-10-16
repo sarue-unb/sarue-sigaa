@@ -3,7 +3,7 @@ import time
 from database_generator.json_generator import get_quantity_of_activities
 from config.display_descryption import *
 from config.date_descryption import START_YEAR, END_YEAR, FIRST_MONTH_OF_YEAR, LAST_MONTH_OF_YEAR
-from config.crawler_descryption import MAX_THREADS
+from config.crawler_descryption import MAX_THREADS, TYPE_SEARCH, TYPE_PERIOD
 
 FORMATER = r'[0-9]+|[^\w\s]'
 
@@ -56,7 +56,12 @@ class Timer:
         minutes, seconds = self.get_elapsed_time()
         with open('log_timer.txt', 'a') as file:
             file.write(f'{SEPARATOR}\n')
-            file.write(f'\tInstâncias = {MAX_THREADS}\n')
+            if TYPE_SEARCH == 'PARALLEL':
+                file.write(f'\tInstâncias = {MAX_THREADS} - {TYPE_SEARCH} - {TYPE_PERIOD}\n')
+            elif TYPE_SEARCH == 'CONCURRENT':
+                file.write(f'\tInstâncias = {MAX_THREADS} - {TYPE_SEARCH}\n')
+            elif TYPE_SEARCH == 'LINEAR':
+                file.write(f'\tInstâncias = {MAX_THREADS} - {TYPE_SEARCH}\n')
             file.write(f'\t{START_YEAR}/{END_YEAR} - ({FIRST_MONTH_OF_YEAR}/{LAST_MONTH_OF_YEAR})\n')
             file.write(f'\tQuantidade de ações = {get_quantity_of_activities()}\n')
             file.write(f"\tStart time: {self.start_ctime}\n")
