@@ -91,12 +91,65 @@ class RunCalculateIndicators:
         generate_indicators_database()
         self.output()
 
+class RunChangeConfig:
+    def __init__(self):
+        self.options = {
+            '1': 'Change credentials',
+            '2': 'Exit',
+        }
+
+        self.username = ''
+        self.password = ''
+        self.env = dotenv_values(".env")
+
+    def print_menu(self):
+        clear_screen()
+        print(SEPARATOR)
+        for option, text in self.options.items():
+            centralize(option + " - " + text)
+        print(SEPARATOR)
+
+    def get_option(self):
+        option = input("Option: ")
+        return option    
+
+    def run_option(self, option):
+        if option == '1':
+            self.crawler_auth = CrawlerAuth()
+            self.username, self.password = self.crawler_auth.run()
+            with open('.env', 'w') as f:
+                f.write(f'# DO NOT COMMIT YOUR LOGIN AND INFO\n')
+                f.write(f'SIGAA_USER = "{self.username}"\n')
+                f.write(f'SIGAA_PASS = "{self.password}"\n')
+        elif option == '2':
+            exit()
+        else:
+            centralize("Invalid option.")
+
+    def run_crawler_auth(self):
+        username = self.env['SIGAA_USER']
+        password = self.env['SIGAA_PASS']
+        
+        if username != '' and password != '':
+            self.username = username
+            self.password = password
+        else:    
+            self.crawler_auth = CrawlerAuth()
+            self.username, self.password = self.crawler_auth.run()
+
+    def begin(self):
+        while True:
+            self.print_menu()
+            option = self.get_option()
+            self.run_option(option)
+
 class Menu:
     def __init__(self):
         self.options = {
             '1': 'Run crawler',
             '2': 'Calculate indicators',
-            '3': 'Exit'
+            '3': 'Config',
+            '4': 'Exit'
         }
 
     def print_menu(self):
@@ -118,6 +171,9 @@ class Menu:
             run_calculate_indicators = RunCalculateIndicators()
             run_calculate_indicators.begin()
         elif option == '3':
+            run_crawler = RunChangeConfig()
+            run_crawler.begin()
+        elif option == '4':
             exit()
         else:
             centralize("Invalid option.")
@@ -126,7 +182,7 @@ class Menu:
         if SCHEDULE == True:
             self.run_option('1')
             self.run_option('2')
-            self.run_option('3')
+            self.run_option('4')
         else:
             while True:
                 self.print_menu()
