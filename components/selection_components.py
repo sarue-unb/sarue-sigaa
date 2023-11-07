@@ -1,6 +1,8 @@
 import components.selection_components as sc
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import Select
+from selenium.webdriver.support.ui import Select, WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from config.filter_descryption import *
 from config.crawler_descryption import SEARCH_TYPES
 
@@ -33,9 +35,18 @@ def use_element_by_id(id:str, driver):
 def use_element_by_xpath(value:int, driver):
     driver.find_element(By.XPATH, value).click()
 
-def use_element_by_class(class_name:str, driver):
-    driver.find_element(By.CLASS_NAME, class_name).click()
+# def use_element_by_class(class_name:str, driver):
+#         driver.find_element(By.CLASS_NAME, class_name).click()
 
+def use_element_by_class(class_name: str, driver):
+    try:
+        element = WebDriverWait(driver, 15).until(
+            EC.element_to_be_clickable((By.CLASS_NAME, class_name))
+        )
+        element.click()
+    except (TimeoutException, NoSuchElementException):
+        return element
+    
 def get_element_by_id(id:str, driver):
     return driver.find_element(By.ID, id)
 
@@ -52,8 +63,19 @@ def get_element_by_select(name:str, option:str, driver):
 def get_rows_len(result_table):
     return len(result_table.find_elements(By.XPATH, ".//tr"))
 
+# def get_rows_from_table(driver):
+#     return driver.find_element(By.ID, "listagem")
+
 def get_rows_from_table(driver):
-    return driver.find_element(By.ID, "listagem")
+    try:
+        table = WebDriverWait(driver, timeout=15).until(
+            lambda driver: driver.find_element(By.ID, "listagem")
+        )
+        return table
+    except NoSuchElementException:
+        # Lidar com a exceção se o elemento da tabela não for encontrado
+        return table
+    
 
 def count_listing(driver):
     try:
