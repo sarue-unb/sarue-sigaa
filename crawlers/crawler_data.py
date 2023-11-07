@@ -1,8 +1,6 @@
 import pages.sigaa_pages as sp 
 import database_generator.database_generator as dg
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.chrome.service import Service
 from config.display_descryption import *
 from config.url_descryption import *
 from config.crawler_descryption import TYPE_SEARCH, TYPE_PERIOD, TYPE_VISIBILITY
@@ -10,30 +8,58 @@ from config.crawler_descryption import TYPE_SEARCH, TYPE_PERIOD, TYPE_VISIBILITY
 class MiniCrawlerParallel:
     def __init__(self):
         try:
-            self.chrome_service = Service()
+            self.chrome_service = webdriver.ChromeService()
             self.chrome_options = webdriver.ChromeOptions()
-            self.chrome_options.add_argument("--headless=new")
+
+            self.chrome_options.page_load_strategy = "normal"
+
+            self.chrome_options.add_argument("--log-level=OFF")
+
+            self.chrome_options.use_chromium = True
+            self.chrome_options.add_argument('headless') if TYPE_VISIBILITY == "INVISIBLE" else self.chrome_options.add_argument('start-maximized')
+            self.chrome_options.add_argument('disable-gpu')
             self.chrome_options.add_experimental_option('excludeSwitches', ['disable-popup-blocking'])
             self.chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
 
             self.driver = webdriver.Chrome(service=self.chrome_service, options=self.chrome_options)
+
             self.navegador = "chrome"
         except Exception as e:
             try: 
-                self.firefox_options = Options()
-                self.firefox_options.headless = True    
+                self.edge_options = webdriver.EdgeOptions()
+                self.edge_service = webdriver.EdgeService()
 
-                self.driver = webdriver.Firefox(options=self.firefox_options)
-                self.navegador = "firefox"
+                self.edge_options.page_load_strategy = "normal"
+
+                self.edge_options.add_argument("--log-level=OFF")
+
+                self.edge_options.use_chromium = True
+                self.edge_options.add_argument('headless')
+                self.edge_options.add_argument('disable-gpu')
+
+                self.edge_options.add_experimental_option('excludeSwitches', ['disable-popup-blocking'])
+                self.edge_options.add_experimental_option('excludeSwitches', ['enable-logging'])
+                self.driver = webdriver.Edge(service=self.edge_service, options=self.edge_options)
+
+                self.navegador = "edge"
             except Exception as e:
                 try: 
-                    self.driver = webdriver.Edge()
-                    self.navegador = "edge"
+                    self.firefox_service = webdriver.FirefoxService()
+                    self.firefox_options = webdriver.FirefoxOptions()
+
+                    self.firefox_options.page_load_strategy = "normal"
+
+                    self.firefox_options.add_argument("--log-level=OFF")
+
+                    self.firefox_options.add_argument('-headless') if TYPE_VISIBILITY == "INVISIBLE" else self.firefox_options.add_argument('start-maximized')
+
+                    self.driver = webdriver.Firefox(service=self.firefox_service, options=self.firefox_options)
+                    self.navegador = "firefox"
                 except Exception as e:
                     centralize("Nenhum navegador encontrado")
                     self.navegador = None
                     exit(1)
-
+                    
     def navigate_to_login_page(self):
         self.driver.get(LOGIN_PAGE)
 
@@ -92,28 +118,53 @@ class MiniCrawlerParallel:
 class MiniCrawlerConcurrent:
     def __init__(self, username, password):
         try:
-            self.chrome_service = Service()
+            self.chrome_service = webdriver.ChromeService()
             self.chrome_options = webdriver.ChromeOptions()
-            if TYPE_VISIBILITY == "INVISIBLE":
-                self.chrome_options.add_argument("--headless=new")
-            else:
-                self.chrome_options.add_argument("--start-maximized=new")
+
+            self.chrome_options.page_load_strategy = "normal"
+
+            self.chrome_options.add_argument("--log-level=OFF")
+
+            self.chrome_options.use_chromium = True
+            self.chrome_options.add_argument('headless') if TYPE_VISIBILITY == "INVISIBLE" else self.chrome_options.add_argument('start-maximized')
+            self.chrome_options.add_argument('disable-gpu')
             self.chrome_options.add_experimental_option('excludeSwitches', ['disable-popup-blocking'])
             self.chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
 
             self.driver = webdriver.Chrome(service=self.chrome_service, options=self.chrome_options)
+
             self.navegador = "chrome"
         except Exception as e:
             try: 
-                self.firefox_options = Options()
-                self.firefox_options.headless = True    
+                self.edge_options = webdriver.EdgeOptions()
+                self.edge_service = webdriver.EdgeService()
 
-                self.driver = webdriver.Firefox(options=self.firefox_options)
-                self.navegador = "firefox"
+                self.edge_options.page_load_strategy = "normal"
+
+                self.edge_options.add_argument("--log-level=OFF")
+
+                self.edge_options.use_chromium = True
+                self.edge_options.add_argument('headless')
+                self.edge_options.add_argument('disable-gpu')
+
+                self.edge_options.add_experimental_option('excludeSwitches', ['disable-popup-blocking'])
+                self.edge_options.add_experimental_option('excludeSwitches', ['enable-logging'])
+                self.driver = webdriver.Edge(service=self.edge_service, options=self.edge_options)
+
+                self.navegador = "edge"
             except Exception as e:
                 try: 
-                    self.driver = webdriver.Edge()
-                    self.navegador = "edge"
+                    self.firefox_service = webdriver.FirefoxService()
+                    self.firefox_options = webdriver.FirefoxOptions()
+
+                    self.firefox_options.page_load_strategy = "normal"
+
+                    self.firefox_options.add_argument("--log-level=OFF")
+
+                    self.firefox_options.add_argument('-headless') if TYPE_VISIBILITY == "INVISIBLE" else self.firefox_options.add_argument('start-maximized')
+
+                    self.driver = webdriver.Firefox(service=self.firefox_service, options=self.firefox_options)
+                    self.navegador = "firefox"
                 except Exception as e:
                     centralize("Nenhum navegador encontrado")
                     self.navegador = None
