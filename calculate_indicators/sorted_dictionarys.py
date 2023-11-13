@@ -11,9 +11,9 @@ def sorted_dict_year_month(dictionary: dict) -> dict:
     r_dictionary = {}
     for year in dictionary:
         for month in sorted(dictionary[year], key=lambda x: list(DIGITS_MONTHS.values()).index(x)):
-            if year not in r_dictionary:
-                r_dictionary[year] = {}
+            create_dictionary_place(r_dictionary, year, {})
             r_dictionary[year][month] = dictionary[year][month]
+            
     return r_dictionary
 
 def sorted_dict_indicators_month(dictionary: dict) -> dict:
@@ -58,6 +58,15 @@ def sorted_dict_indicators_year_type(dictionary: dict) -> dict:
                 create_dictionary_place(r_dictionary[year], action_type, {})
                 r_dictionary[year][action_type][item] = dictionary[year][action_type][item]
 
+    return r_dictionary
+
+def sorted_dict_members_type(dictionary: dict) -> dict:
+    r_dictionary = {}
+    for action_type in sorted(dictionary):
+        for name in sorted(dictionary[action_type]):
+            create_dictionary_place(r_dictionary, action_type, {})
+            r_dictionary[action_type][name] = dictionary[action_type][name]
+        
     return r_dictionary
 
 def sorted_dict_members_month(dictionary: dict) -> dict:
