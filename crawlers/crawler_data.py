@@ -3,7 +3,7 @@ import database_generator.database_generator as dg
 from selenium import webdriver
 from config.display_descryption import *
 from config.url_descryption import *
-from config.crawler_descryption import TYPE_SEARCH, TYPE_PERIOD, TYPE_VISIBILITY
+from config.crawler_descryption import TYPE_SEARCH, TYPE_PERIOD, INVISIBLE
 
 class MiniCrawlerParallel:
     def __init__(self):
@@ -11,13 +11,12 @@ class MiniCrawlerParallel:
             self.chrome_service = webdriver.ChromeService()
             self.chrome_options = webdriver.ChromeOptions()
 
-            self.chrome_options.page_load_strategy = "normal"
+            # self.chrome_options.page_load_strategy = "normal"
 
-            self.chrome_options.add_argument("--log-level=OFF")
+            # self.chrome_options.add_argument("--log-level=OFF")
 
-            self.chrome_options.use_chromium = True
-            self.chrome_options.add_argument('headless') if TYPE_VISIBILITY == "INVISIBLE" else self.chrome_options.add_argument('start-maximized')
-            self.chrome_options.add_argument('disable-gpu')
+            self.chrome_options.add_argument('--headless=new') if INVISIBLE == True else self.chrome_options.add_argument('start-maximized')
+            # self.chrome_options.add_argument('disable-gpu')
             self.chrome_options.add_experimental_option('excludeSwitches', ['disable-popup-blocking'])
             self.chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
 
@@ -34,7 +33,7 @@ class MiniCrawlerParallel:
                 self.edge_options.add_argument("--log-level=OFF")
 
                 self.edge_options.use_chromium = True
-                self.edge_options.add_argument('headless')
+                self.edge_options.add_argument('--headless=new') if INVISIBLE == True else self.chrome_options.add_argument('start-maximized')
                 self.edge_options.add_argument('disable-gpu')
 
                 self.edge_options.add_experimental_option('excludeSwitches', ['disable-popup-blocking'])
@@ -51,7 +50,7 @@ class MiniCrawlerParallel:
 
                     self.firefox_options.add_argument("--log-level=OFF")
 
-                    self.firefox_options.add_argument('-headless') if TYPE_VISIBILITY == "INVISIBLE" else self.firefox_options.add_argument('start-maximized')
+                    self.firefox_options.add_argument('-headless') if INVISIBLE == True else self.firefox_options.add_argument('start-maximized')
 
                     self.driver = webdriver.Firefox(service=self.firefox_service, options=self.firefox_options)
                     self.navegador = "firefox"
@@ -121,12 +120,13 @@ class MiniCrawlerConcurrent:
             self.chrome_service = webdriver.ChromeService()
             self.chrome_options = webdriver.ChromeOptions()
 
+            self.chrome_service = webdriver.ChromeService(service_args=['--disable-build-check'])
+
             self.chrome_options.page_load_strategy = "normal"
 
             self.chrome_options.add_argument("--log-level=OFF")
 
-            self.chrome_options.use_chromium = True
-            self.chrome_options.add_argument('headless') if TYPE_VISIBILITY == "INVISIBLE" else self.chrome_options.add_argument('start-maximized')
+            self.chrome_options.add_argument('headless') if INVISIBLE == True else self.chrome_options.add_argument('start-maximized')
             self.chrome_options.add_argument('disable-gpu')
             self.chrome_options.add_experimental_option('excludeSwitches', ['disable-popup-blocking'])
             self.chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
@@ -161,7 +161,7 @@ class MiniCrawlerConcurrent:
 
                     self.firefox_options.add_argument("--log-level=OFF")
 
-                    self.firefox_options.add_argument('-headless') if TYPE_VISIBILITY == "INVISIBLE" else self.firefox_options.add_argument('start-maximized')
+                    self.firefox_options.add_argument('-headless') if INVISIBLE == True else self.firefox_options.add_argument('start-maximized')
 
                     self.driver = webdriver.Firefox(service=self.firefox_service, options=self.firefox_options)
                     self.navegador = "firefox"

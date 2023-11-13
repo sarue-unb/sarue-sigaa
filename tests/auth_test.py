@@ -4,7 +4,7 @@ from concurrent.futures import ThreadPoolExecutor
 from dotenv import dotenv_values # pip install python-dotenv
 from selenium import webdriver
 from tqdm import tqdm # pip install selenium
-from config.crawler_descryption import MAX_THREADS, TYPE_VISIBILITY
+from config.crawler_descryption import MAX_THREADS, INVISIBLE
 from config.url_descryption import *
 
 from selenium.webdriver.chrome.service import Service
@@ -42,10 +42,7 @@ class TestCrawlerAuthConcurrent(unittest.TestCase):
     def setUp(self):
         self.chrome_service = Service()
         self.chrome_options = webdriver.ChromeOptions()
-        if TYPE_VISIBILITY == "INVISIBLE":
-            self.chrome_options.add_argument("--headless=new")
-        else:
-            self.chrome_options.add_argument("--start-maximized=new")
+        self.chrome_options.add_argument('headless') if INVISIBLE == True else self.chrome_options.add_argument('start-maximized')
         self.chrome_options.add_experimental_option('excludeSwitches', ['disable-popup-blocking'])
         self.chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
 
@@ -66,10 +63,7 @@ class TestCrawlerAuthConcurrent(unittest.TestCase):
             def __init__(self, username, password):
                 self.chrome_service = Service()
                 self.chrome_options = webdriver.ChromeOptions()
-                if TYPE_VISIBILITY == "INVISIBLE":
-                    self.chrome_options.add_argument("--headless=new")
-                else:
-                    self.chrome_options.add_argument("--start-maximized=new")
+                self.chrome_options.add_argument('headless') if INVISIBLE == True else self.chrome_options.add_argument('start-maximized')
                 self.chrome_options.add_experimental_option('excludeSwitches', ['disable-popup-blocking'])
                 self.chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
 
