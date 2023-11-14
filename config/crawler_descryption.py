@@ -3,7 +3,7 @@ import sys
 args = sys.argv
 TYPE_BASE = 'BASE' if len(args) <= 1 else args[1]
 
-MAX_THREADS = 12 if len(args) <= 2 else int(args[2])
+MAX_THREADS = int(args[2]) if len(args) > 2 and args[2].isdigit() else 12
 
 SCHEDULE = True
 

@@ -1,11 +1,7 @@
 from config.crawler_descryption import TYPE_BASE
 
-if TYPE_BASE == 'BASE':
-    START_YEAR = 2023
-    END_YEAR = 2023
-elif TYPE_BASE == 'REBASE':
-    START_YEAR = 2020
-    END_YEAR = 2022
+START_YEAR = 2023 if TYPE_BASE == 'BASE' else 2020
+END_YEAR = 2023 if TYPE_BASE == 'BASE' else 2022
 
 FIRST_MONTH_OF_YEAR = 1
 LAST_MONTH_OF_YEAR = 12
