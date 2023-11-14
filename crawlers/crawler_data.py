@@ -64,6 +64,9 @@ class MiniCrawlerParallel:
 
     def navigate_to_extension_page(self):
         self.driver.get(EXTENSION_PAGE)
+
+    def accept_cookies(self):
+        sp.accept_cookies(self.driver)
         
     def instance_login(self, username:str, password:str):
         sp.login_into_sigaa(self.driver, username, password)
@@ -99,6 +102,7 @@ class MiniCrawlerParallel:
         self.navigate_to_login_page()
         self.instance_login(username, password)
         self.navigate_to_extension_page()
+        self.accept_cookies()
         
         if TYPE_SEARCH == "PARALLEL":
             if TYPE_PERIOD == "YEAR":
