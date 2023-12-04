@@ -2,6 +2,8 @@ import re
 import time
 from database_generator.json_generator import get_quantity_of_activities
 from config.display_descryption import *
+from config.date_descryption import START_YEAR, END_YEAR, FIRST_MONTH_OF_YEAR, LAST_MONTH_OF_YEAR
+from config.crawler_descryption import MAX_THREADS, TYPE_SEARCH, TYPE_PERIOD
 
 FORMATER = r'[0-9]+|[^\w\s]'
 
@@ -27,7 +29,6 @@ class Timer:
         return minutes, seconds
     
     def print_elapsed_ctime(self):
-        self.set_end_time()
         minutes, seconds = self.get_elapsed_time()
 
         clear_screen()
@@ -51,6 +52,24 @@ class Timer:
         print(f"{msg} - {minutes:02}:{seconds:02}")
         print(SEPARATOR)
 
+    def create_timer_log(self):
+        minutes, seconds = self.get_elapsed_time()
+        with open('log_timer.txt', 'a') as file:
+            file.write(f'{SEPARATOR}\n')
+            if TYPE_SEARCH == 'PARALLEL':
+                file.write(f'\tInstâncias = {MAX_THREADS} - {TYPE_SEARCH} - {TYPE_PERIOD}\n')
+            elif TYPE_SEARCH == 'CONCURRENT':
+                file.write(f'\tInstâncias = {MAX_THREADS} - {TYPE_SEARCH}\n')
+            elif TYPE_SEARCH == 'LINEAR':
+                file.write(f'\tInstâncias = {MAX_THREADS} - {TYPE_SEARCH}\n')
+            file.write(f'\t{START_YEAR}/{END_YEAR} - ({FIRST_MONTH_OF_YEAR}/{LAST_MONTH_OF_YEAR})\n')
+            file.write(f'\tQuantidade de ações = {get_quantity_of_activities()}\n')
+            file.write(f"\tStart time: {self.start_ctime}\n")
+            file.write(f"\tEnd time: {self.end_ctime}\n")
+            file.write(f"\tElapsed time: {minutes:02}:{seconds:02} minutes\n")
+            file.write(f'{SEPARATOR}\n')
+    
+
 def clear_strings(text: str) -> str:
     return re.sub(FORMATER, '', text)
 
@@ -61,3 +80,5 @@ def clear_log():
 def add_item_to_log(item:str):
     with open('log.txt', 'a') as file:
         file.write(item + '\n')
+
+

@@ -1,11 +1,7 @@
 from config.crawler_descryption import TYPE_BASE
 
-if TYPE_BASE == 'BASE':
-    START_YEAR = 2023
-    END_YEAR = 2023
-elif TYPE_BASE == 'REBASE':
-    START_YEAR = 2020
-    END_YEAR = 2022
+START_YEAR = 2023 if TYPE_BASE == 'BASE' else 2020
+END_YEAR = 2023 if TYPE_BASE == 'BASE' else 2022
 
 FIRST_MONTH_OF_YEAR = 1
 LAST_MONTH_OF_YEAR = 12
@@ -14,8 +10,8 @@ SPECIAL_DATE = ['9/2023', '3/2023', '8/2022', '9/2021']
 
 FIRST_DAY_OF_MONTH = '01'
 
-EMPTY_MONTH = '1/2020'
-HAS_DATA_MONTH = '7/2022'
+EMPTY_MONTH = '1/2020' #used for offset and test
+HAS_DATA_MONTH = '7/2022' #used for test
 
 LEAP_YEAR = [2020, 2024, 2028, 2032, 2036, 2040, 2044, 2048]
 

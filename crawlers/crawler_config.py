@@ -1,6 +1,6 @@
 import pages.sigaa_pages as sp 
 import database_generator.database_generator as dg
-from selenium import webdriver # pip install selenium
+from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from config.display_descryption import *

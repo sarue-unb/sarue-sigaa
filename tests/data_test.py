@@ -25,7 +25,7 @@ class TestData(unittest.TestCase):
         self.env = dotenv_values(".env")
         self.username = self.env['SIGAA_USER']
         self.password = self.env['SIGAA_PASS']
-        self.offset = 63 # baseado no perfil de coordenadora de extensão
+        self.offset = 55 # baseado no perfil de discente
 
     def testGetOffset(self):
         instance = cc.CrawlerConfig()
