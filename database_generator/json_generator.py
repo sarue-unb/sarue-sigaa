@@ -36,6 +36,9 @@ def generate_crawler_json(start_year, end_year):
     if not os.path.exists(FILE_PATH + FILE_PATH_INDICATORS):
         os.makedirs(FILE_PATH + FILE_PATH_INDICATORS)
     
+    if not os.path.exists(FILE_PATH + FILE_PATH_OUTPUTS):
+        os.makedirs(FILE_PATH + FILE_PATH_OUTPUTS)
+
     current_time = datetime.now().strftime('%d-%m_%H-%M')
 
     history_output_file_name = FILE_NAME_HISTORY_DATABASE + str(start_year) + "-" + str(end_year) + "_" + str(current_time) + ".json"

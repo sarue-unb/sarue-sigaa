@@ -33,7 +33,7 @@ class TestData(unittest.TestCase):
 
         self.assertEqual(offset, self.offset)
 
-    def testLoginInstance(self):
+    def testGetActions(self):
         def _monthly_date_generator(month:int, year:int, monthEnd:bool) -> str:
             expetected_day = FIRST_DAY_OF_MONTH
 
