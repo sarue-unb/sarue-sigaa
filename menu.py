@@ -5,6 +5,7 @@ from crawlers.crawler_config import CrawlerConfig
 from crawlers.type_search import TypeSearch
 from calculate_indicators.calculate_all import calculate_all_indicators
 from database_generator.load_database import load_indicators_database, generate_indicators_database
+from database_generator.excel_generator import generate_excel_database
 from config.date_descryption import START_YEAR, END_YEAR
 from config.output_format import *
 from config.display_descryption import *
@@ -91,6 +92,22 @@ class RunCalculateIndicators:
         generate_indicators_database()
         self.output()
 
+class RunGenerateExcel:
+    def __init__(self):
+        clear_screen()
+        
+    def output(self):
+        centralize("Excel generated.")
+        centralize("Verifique a pasta databases/outputs/")
+        if SCHEDULE == True:
+            time.sleep(SLEEP_TIME)
+        else:
+            input("Press enter to continue...")
+
+    def begin(self):
+        generate_excel_database()
+        self.output()
+
 class RunChangeConfig:
     def __init__(self):
         self.options = {
@@ -148,8 +165,9 @@ class Menu:
         self.options = {
             '1': 'Run crawler',
             '2': 'Calculate indicators',
-            '3': 'Config',
-            '4': 'Exit'
+            '3': 'Generate excel',
+            '4': 'Config',
+            '5': 'Exit'
         }
 
     def print_menu(self):
@@ -171,9 +189,12 @@ class Menu:
             run_calculate_indicators = RunCalculateIndicators()
             run_calculate_indicators.begin()
         elif option == '3':
+            run_generate_excel = RunGenerateExcel()
+            run_generate_excel.begin()
+        elif option == '4':
             run_crawler = RunChangeConfig()
             run_crawler.begin()
-        elif option == '4':
+        elif option == '5':
             exit()
         else:
             centralize("Invalid option.")
@@ -182,7 +203,8 @@ class Menu:
         if SCHEDULE == True:
             self.run_option('1')
             self.run_option('2')
-            self.run_option('4')
+            self.run_option('3')
+            self.run_option('5')
         else:
             while True:
                 self.print_menu()
