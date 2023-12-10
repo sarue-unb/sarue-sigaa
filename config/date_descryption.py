@@ -3,7 +3,7 @@ from config.crawler_descryption import TYPE_BASE
 START_YEAR = 2023 if TYPE_BASE == 'BASE' else 2020
 END_YEAR = 2023 if TYPE_BASE == 'BASE' else 2022
 
-FIRST_MONTH_OF_YEAR = 12
+FIRST_MONTH_OF_YEAR = 1
 LAST_MONTH_OF_YEAR = 12
 
 SPECIAL_DATE = ['9/2023', '3/2023', '8/2022', '9/2021']
