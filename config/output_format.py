@@ -1,3 +1,7 @@
+# output_format.py
+## @file
+# Módulo com as funções de formatação de saída de dados.
+
 import re
 import time
 from database_generator.json_generator import get_quantity_of_activities

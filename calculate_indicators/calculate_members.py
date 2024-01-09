@@ -1,8 +1,24 @@
+# calculate_members.py
+## @file
+# Módulo para calcular todos os indicadores relacionados aos envolvidos.
+
 from config.date_descryption import DIGITS_MONTHS
 from calculate_indicators.dictionary_functions import *
 from calculate_indicators.sorted_dictionarys import *
 
-def get_qtd_actions_members_role(origin_database: dict) -> dict:
+def get_qtd_actions_members_role(origin_database: dict) -> tuple[dict, dict, dict, dict, dict, dict, dict, dict, dict, dict]:
+    """
+    Calcula a quantidade de ações relacionadas aos papéis dos membros da equipe em diferentes períodos e tipos.
+
+    Esta função recebe um banco de dados de origem como entrada e calcula a quantidade de ações relacionadas aos papéis
+    dos membros da equipe nos seguintes períodos e tipos: geral, anual, mensal, anual com tipo de ação, mensal com tipo de
+    ação e informações sobre membros da equipe em diferentes períodos e tipos.
+
+    @param origin_database: Banco de dados de entrada contendo informações sobre membros da equipe e ações.
+    @return: Uma tupla contendo dicionários para os indicadores gerais, anuais, mensais, anuais com tipo de ação, mensais
+             com tipo de ação, e informações sobre membros da equipe em diferentes períodos e tipos.
+
+    """
     indicators, indicators_month, indicators_month_type, indicators_year, indicators_year_type = {}, {}, {}, {}, {}
     indicators_info, indicators_info_month, indicators_info_month_type, indicators_info_year, indicators_info_year_type = {}, {}, {}, {}, {}
 
@@ -30,10 +46,8 @@ def get_qtd_actions_members_role(origin_database: dict) -> dict:
                 create_dictionary_place(roles_year_type, year, {})
                 create_dictionary_place(roles_month, year, {})
                 create_dictionary_place(roles_month_type, year, {})
-
                 create_dictionary_place(roles_month[year], month, {})
                 create_dictionary_place(roles_month_type[year], month, {})
-
                 create_dictionary_place(roles_year_type[year], action_type, {})
                 create_dictionary_place(roles_month_type[year][month], action_type, {})
 
@@ -47,13 +61,10 @@ def get_qtd_actions_members_role(origin_database: dict) -> dict:
                 create_dictionary_place(indicators_info_year_type, year, {})
                 create_dictionary_place(indicators_info_month, year, {})
                 create_dictionary_place(indicators_info_month_type, year, {})
-
                 create_dictionary_place(indicators_info_month[year], month, {})
                 create_dictionary_place(indicators_info_month_type[year], month, {})
-
                 create_dictionary_place(indicators_info_year_type[year], action_type, {})
                 create_dictionary_place(indicators_info_month_type[year][month], action_type, {})
-
                 create_dictionary_place(indicators_info, role, {})
                 create_dictionary_place(indicators_info_year[year], role, {})
                 create_dictionary_place(indicators_info_year_type[year][action_type], role, {})

@@ -1,0 +1,53 @@
+\doxysection{Referência do Arquivo calculate\+\_\+indicators/calculate\+\_\+qtd.py}
+\hypertarget{calculate__qtd_8py}{}\label{calculate__qtd_8py}\index{calculate\_indicators/calculate\_qtd.py@{calculate\_indicators/calculate\_qtd.py}}
+
+
+Módulo para calcular todos os indicadores relacionados a qauntidade de ações.  
+
+
+\doxysubsubsection*{Funções}
+\begin{DoxyCompactItemize}
+\item 
+dict \mbox{\hyperlink{calculate__qtd_8py_a178b8756f0394eb35be0ceae72304c51}{calculate\+\_\+qtd.\+get\+\_\+qtd\+\_\+actions}} (dict origin\+\_\+database)
+\item 
+dict \mbox{\hyperlink{calculate__qtd_8py_a0afd20773add2c6c6f62eb8ea0eb3554}{calculate\+\_\+qtd.\+get\+\_\+qtd\+\_\+info}} (dict origin\+\_\+database)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descrição detalhada}
+Módulo para calcular todos os indicadores relacionados a qauntidade de ações. 
+
+
+
+\doxysubsection{Funções}
+\Hypertarget{calculate__qtd_8py_a178b8756f0394eb35be0ceae72304c51}\label{calculate__qtd_8py_a178b8756f0394eb35be0ceae72304c51} 
+\index{calculate\_qtd.py@{calculate\_qtd.py}!get\_qtd\_actions@{get\_qtd\_actions}}
+\index{get\_qtd\_actions@{get\_qtd\_actions}!calculate\_qtd.py@{calculate\_qtd.py}}
+\doxysubsubsection{\texorpdfstring{get\_qtd\_actions()}{get\_qtd\_actions()}}
+{\footnotesize\ttfamily  dict calculate\+\_\+qtd.\+get\+\_\+qtd\+\_\+actions (\begin{DoxyParamCaption}\item[{dict}]{origin\+\_\+database }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Calculate the quantity of actions for each indicator in different time frames and types.
+
+This function takes an origin database as input and calculates the quantity of actions for each indicator in the
+following time frames and types: overall, yearly, monthly, yearly with action type, and monthly with action type.
+
+@param origin_database: Input database containing information about actions.
+@return: A tuple containing dictionaries for overall, yearly, monthly, yearly with action type, and monthly with
+         action type indicators.
+\end{DoxyVerb}
+ \Hypertarget{calculate__qtd_8py_a0afd20773add2c6c6f62eb8ea0eb3554}\label{calculate__qtd_8py_a0afd20773add2c6c6f62eb8ea0eb3554} 
+\index{calculate\_qtd.py@{calculate\_qtd.py}!get\_qtd\_info@{get\_qtd\_info}}
+\index{get\_qtd\_info@{get\_qtd\_info}!calculate\_qtd.py@{calculate\_qtd.py}}
+\doxysubsubsection{\texorpdfstring{get\_qtd\_info()}{get\_qtd\_info()}}
+{\footnotesize\ttfamily  dict calculate\+\_\+qtd.\+get\+\_\+qtd\+\_\+info (\begin{DoxyParamCaption}\item[{dict}]{origin\+\_\+database }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Calculate the quantity of information for each indicator in different time frames and types.
+
+This function takes an origin database as input and calculates the quantity of information for each indicator in
+the following time frames and types: overall, yearly, monthly, yearly with action type, and monthly with action type.
+
+@param origin_database: Input database containing information about actions.
+@return: A tuple containing dictionaries for overall, yearly, monthly, yearly with action type, and monthly with
+         action type indicators.
+\end{DoxyVerb}
+ 

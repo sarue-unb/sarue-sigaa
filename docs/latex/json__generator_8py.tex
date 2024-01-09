@@ -1,0 +1,39 @@
+\doxysection{Referência do Arquivo database\+\_\+generator/json\+\_\+generator.py}
+\hypertarget{json__generator_8py}{}\label{json__generator_8py}\index{database\_generator/json\_generator.py@{database\_generator/json\_generator.py}}
+
+
+Módulo com funções para gerar um arquivo JSON com as atividades do crawler.  
+
+
+\doxysubsubsection*{Funções}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{json__generator_8py_ad5c9ce16adf2602f639f86ede1c3cdd5}\label{json__generator_8py_ad5c9ce16adf2602f639f86ede1c3cdd5} 
+{\bfseries json\+\_\+generator.\+add\+\_\+item\+\_\+to\+\_\+crawler\+\_\+database} (str activity\+\_\+name, str activity\+\_\+values)
+\begin{DoxyCompactList}\small\item\em Adiciona uma atividade ao banco de dados do crawler. \end{DoxyCompactList}\item 
+\Hypertarget{json__generator_8py_a1e9e67c5547a46da7fa62656b7d1f14d}\label{json__generator_8py_a1e9e67c5547a46da7fa62656b7d1f14d} 
+{\bfseries json\+\_\+generator.\+generate\+\_\+crawler\+\_\+json} (start\+\_\+year, end\+\_\+year)
+\begin{DoxyCompactList}\small\item\em Gera o arquivo JSON com as atividades do crawler. \end{DoxyCompactList}\item 
+\Hypertarget{json__generator_8py_a7b3ff4a8c5134e1ad125a96cc4bcf466}\label{json__generator_8py_a7b3ff4a8c5134e1ad125a96cc4bcf466} 
+{\bfseries json\+\_\+generator.\+get\+\_\+quantity\+\_\+of\+\_\+activities} ()
+\begin{DoxyCompactList}\small\item\em Obtém a quantidade de atividades na base de dados atual. \end{DoxyCompactList}\item 
+\Hypertarget{json__generator_8py_a862d454eb0d4f2ad572cea633653d086}\label{json__generator_8py_a862d454eb0d4f2ad572cea633653d086} 
+{\bfseries json\+\_\+generator.\+clear\+\_\+screen} ()
+\begin{DoxyCompactList}\small\item\em Limpa a tela do console. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variáveis}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{json__generator_8py_a9d49eb25057d042d643d30ff832dc491}\label{json__generator_8py_a9d49eb25057d042d643d30ff832dc491} 
+dict {\bfseries json\+\_\+generator.\+current\+\_\+activity\+\_\+database} = \{\}
+\begin{DoxyCompactList}\small\item\em Dicionário para armazenar as atividades da base de dados atual. \end{DoxyCompactList}\item 
+\Hypertarget{json__generator_8py_a179f196e7610bac27170efe816d7f554}\label{json__generator_8py_a179f196e7610bac27170efe816d7f554} 
+dict {\bfseries json\+\_\+generator.\+previous\+\_\+activity\+\_\+database} = \{\}
+\begin{DoxyCompactList}\small\item\em Dicionário para armazenar as atividades da base de dados anterior. \end{DoxyCompactList}\item 
+\Hypertarget{json__generator_8py_a1d53d056e9723e2e366ff1b6584feeb0}\label{json__generator_8py_a1d53d056e9723e2e366ff1b6584feeb0} 
+dict {\bfseries json\+\_\+generator.\+full\+\_\+activity\+\_\+database} = \{\}
+\begin{DoxyCompactList}\small\item\em Dicionário para armazenar a base de dados completa. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descrição detalhada}
+Módulo com funções para gerar um arquivo JSON com as atividades do crawler. 
+

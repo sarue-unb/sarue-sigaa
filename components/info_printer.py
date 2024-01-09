@@ -1,3 +1,8 @@
+#info_printer.py
+##@file 
+#@brief Contém funções para extrair informações de uma página de impressão.
+
+#Este módulo fornece funções para extrair várias informações de uma página de impressão.
 import components.selection_components as sc
 from config.output_format import clear_strings
 from config.display_descryption import SIZE_TERMINAL
@@ -6,6 +11,18 @@ from config.ids.actions_id_descryption import *
 from tqdm import tqdm
 
 def get_row_data_printer(driver, month:int, year:int, cnpq=None):
+    """
+    Obtém dados da linha de uma impressora.
+
+    Esta função recupera dados da linha de uma página de impressora e retorna uma lista de informações.
+
+    @param driver: Objeto WebDriver para interagir com a página da web.
+    @param month: O mês para o qual os dados estão sendo recuperados.
+    @param year: O ano para o qual os dados estão sendo recuperados.
+    @param cnpq: Informações CNPQ (opcional).
+
+    @return: Uma lista de dados da linha.
+    """
     rows_total_data = []
     result_table = sc.get_rows_from_table(driver)
     rows_length = sc.get_rows_len(result_table)
@@ -28,6 +45,15 @@ def get_row_data_printer(driver, month:int, year:int, cnpq=None):
     return rows_total_data
 
 def get_info_from_print_page(driver):
+    """
+    Obtém informações de uma página de impressão.
+
+    Esta função extrai informações de uma página de impressão e retorna um dicionário.
+
+    @param driver: Objeto WebDriver para interagir com a página da web.
+
+    @return: Um dicionário contendo informações da página de impressão.
+    """
     info = {}
 
     ## Padrao a todas
@@ -73,6 +99,16 @@ def get_info_from_print_page(driver):
     return info
 
 def get_info_from_printer_type_curso(info:dict, driver):
+    """
+    Obtém informações de uma impressora do tipo 'CURSO'.
+
+    Esta função extrai informações específicas do tipo 'CURSO' de uma página de impressora.
+
+    @param info: Dicionário para armazenar informações extraídas.
+    @param driver: Objeto WebDriver para interagir com a página da web.
+
+    @return: Dicionário atualizado com informações específicas de 'CURSO'.
+    """
     info["munincipio_de_realizacao"] = sc.get_info(CURSO_XPATHS_MUNICIPIO_DE_REALIZACAO, driver)
     info["espaco_de_realizacao"] = sc.get_info(CURSO_XPATHS_ESPACO_DE_REALIZACAO, driver)
     info["abrangencia"] = sc.get_info(CURSO_XPATHS_ABRANGENCIA, driver)
@@ -104,6 +140,16 @@ def get_info_from_printer_type_curso(info:dict, driver):
     return info
 
 def get_info_from_printer_type_evento(info:dict, driver):
+    """
+    Obtém informações de uma impressora do tipo 'EVENTO'.
+
+    Esta função extrai informações específicas do tipo 'EVENTO' de uma página de impressora.
+
+    @param info: Dicionário para armazenar informações extraídas.
+    @param driver: Objeto WebDriver para interagir com a página da web.
+
+    @return: Dicionário atualizado com informações específicas de 'EVENTO'.
+    """
     info["munincipio_de_realizacao"] = sc.get_info(EVENTO_XPATHS_MUNINCIPIO_DE_REALIZACAO, driver)
     info["espaco_de_realizacao"] = sc.get_info(EVENTO_XPATHS_ESPACO_DE_REALIZACAO, driver)
     info["abrangencia"] = sc.get_info(EVENTO_XPATHS_ABRANGENCIA, driver)
@@ -135,6 +181,16 @@ def get_info_from_printer_type_evento(info:dict, driver):
     return info
 
 def get_info_from_printer_type_prestacao_servico(info:dict, driver):
+    """
+    Obtém informações de uma impressora do tipo 'PRESTAÇÃO DE SERVIÇO'.
+
+    Esta função extrai informações específicas do tipo 'PRESTAÇÃO DE SERVIÇO' de uma página de impressora.
+
+    @param info: Dicionário para armazenar informações extraídas.
+    @param driver: Objeto WebDriver para interagir com a página da web.
+
+    @return: Dicionário atualizado com informações específicas de 'PRESTAÇÃO DE SERVIÇO'.
+    """
     # Nenhuma cadastrada no sigaa
     # BASEADO EM UM E-MAIL. SE EXISTIR UM EXEMPLO DENTRO DO SIGAA. FAVOR ATUALIZAR
     info["abrangencia"] = sc.get_info(PRESTACAO_SERVICO_XPATHS_ABRANGENCIA, driver)
@@ -162,6 +218,16 @@ def get_info_from_printer_type_prestacao_servico(info:dict, driver):
     return info
 
 def get_info_from_printer_type_produto(info:dict, driver):
+    """
+    Obtém informações de uma impressora do tipo 'PRODUTO'.
+
+    Esta função extrai informações específicas do tipo 'PRODUTO' de uma página de impressora.
+
+    @param info: Dicionário para armazenar informações extraídas.
+    @param driver: Objeto WebDriver para interagir com a página da web.
+
+    @return: Dicionário atualizado com informações específicas de 'PRODUTO'.
+    """
     info["abrangencia"] = sc.get_info(PRODUTO_XPATHS_ABRANGENCIA, driver)
     info["publico_alvo"] = sc.get_info(PRODUTO_XPATHS_PUBLICO_ALVO, driver)
     info["unidade_proponente"] = sc.get_info(PRODUTO_XPATHS_UNIDADE_PROPONENTE, driver)
@@ -188,6 +254,16 @@ def get_info_from_printer_type_produto(info:dict, driver):
     return info
 
 def get_info_from_printer_type_programa(info:dict, driver):
+    """
+    Obtém informações de uma impressora do tipo 'PROGRAMA'.
+
+    Esta função extrai informações específicas do tipo 'PROGRAMA' de uma página de impressora.
+
+    @param info: Dicionário para armazenar informações extraídas.
+    @param driver: Objeto WebDriver para interagir com a página da web.
+
+    @return: Dicionário atualizado com informações específicas de 'PROGRAMA'.
+    """
     info["abrangencia"] = sc.get_info(PROGRAMA_XPATHS_ABRANGENCIA, driver)
     info["publico_alvo"] = sc.get_info(PROGRAMA_XPATHS_PUBLICO_ALVO, driver)
     info["unidade_proponente"] = sc.get_info(PROGRAMA_XPATHS_UNIDADE_PROPONENTE, driver)
@@ -212,6 +288,16 @@ def get_info_from_printer_type_programa(info:dict, driver):
     return info
 
 def get_info_from_printer_type_projeto(info:dict, driver):
+    """
+    Obtém informações de uma impressora do tipo 'PROJETO'.
+
+    Esta função extrai informações específicas do tipo 'PROJETO' de uma página de impressora.
+
+    @param info: Dicionário para armazenar informações extraídas.
+    @param driver: Objeto WebDriver para interagir com a página da web.
+
+    @return: Dicionário atualizado com informações específicas de 'PROJETO'.
+    """
     info["munincipio_de_realizacao"] = sc.get_info(PROJETO_XPATHS_MUNINCIPIO_DE_REALIZACAO, driver)
     info["espaco_de_realizacao"] = sc.get_info(PROJETO_XPATHS_ESPACO_DE_REALIZACAO, driver)
     info["abrangencia"] = sc.get_info(PROJETO_XPATHS_ABRANGENCIA, driver)
@@ -253,6 +339,17 @@ def get_info_from_printer_type_projeto(info:dict, driver):
     return info
 
 def get_info_objetivos(info: dict, xpath: str, driver):
+    """
+    Obtém informações sobre objetivos a partir de um XPath específico.
+
+    Esta função extrai informações sobre objetivos de um XPath especificado na página da web.
+
+    @param info: Dicionário para armazenar informações extraídas.
+    @param xpath: XPath para localizar o elemento contendo informações de objetivo.
+    @param driver: Objeto WebDriver para interagir com a página da web.
+
+    @return: Dicionário atualizado com informações de objetivo.
+    """
     tipo = sc.get_element_by_xpath(xpath, driver)
     
     if tipo != None:
@@ -262,6 +359,17 @@ def get_info_objetivos(info: dict, xpath: str, driver):
     return info
 
 def get_info_team_members(info: dict, id: str, driver):
+    """
+    Obtém informações sobre membros da equipe a partir de um ID específico.
+
+    Esta função extrai informações sobre membros da equipe de um ID específico na página da web.
+
+    @param info: Dicionário para armazenar informações extraídas.
+    @param id: ID para localizar o elemento contendo informações de membros da equipe.
+    @param driver: Objeto WebDriver para interagir com a página da web.
+
+    @return: Dicionário atualizado com informações de membros da equipe.
+    """
     tipo = sc.get_element_by_id(id, driver)
 
     if tipo != None:
@@ -281,4 +389,3 @@ def get_info_team_members(info: dict, id: str, driver):
            
         info["membros_da_equipe"] = membros
     return info
-

@@ -1,0 +1,300 @@
+\doxysection{Referência do Arquivo database\+\_\+generator/database\+\_\+generator.py}
+\hypertarget{database__generator_8py}{}\label{database__generator_8py}\index{database\_generator/database\_generator.py@{database\_generator/database\_generator.py}}
+
+
+Módulo para gerar dados de extensão a partir do Sigaa.  
+
+
+\doxysubsubsection*{Funções}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{database__generator_8py_a162b4409adc45a0f9063f73ba64edaa8}{database\+\_\+generator.\+get\+\_\+every\+\_\+extension\+\_\+activity\+\_\+from\+\_\+months}} (int start\+\_\+month, int end\+\_\+month, int year, int offset, driver)
+\begin{DoxyCompactList}\small\item\em Obtém todas as atividades de extensão de um conjunto de meses. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{database__generator_8py_aa41a14577ca63844ab65cabd55a41d1c}{database\+\_\+generator.\+get\+\_\+every\+\_\+extension\+\_\+activity\+\_\+from\+\_\+month\+\_\+years}} (int month, int year, int offset, driver)
+\begin{DoxyCompactList}\small\item\em Obtém todas as atividades de extensão de um mês específico. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{database__generator_8py_aab5db0afcc13c2fc40613d77d86572d4}{database\+\_\+generator.\+get\+\_\+every\+\_\+extension\+\_\+activity\+\_\+from\+\_\+month\+\_\+years\+\_\+cnpq}} (str month, str year, int offset, driver)
+\begin{DoxyCompactList}\small\item\em Obtém todas as atividades de extensão de um mês específico para várias áreas CNPq. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{database__generator_8py_a40bf92a733e714d1d64ed6d6f5883aa7}{database\+\_\+generator.\+get\+\_\+every\+\_\+extension\+\_\+activity\+\_\+from\+\_\+month\+\_\+years\+\_\+passing\+\_\+cnpq}} (str month, str year, str cnpq, int offset, driver)
+\begin{DoxyCompactList}\small\item\em Obtém todas as atividades de extensão de um mês específico para uma área CNPq específica. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{database__generator_8py_aa3a6ee786e4ac164394c7737dca75daa}{database\+\_\+generator.\+\_\+get\+\_\+activities\+\_\+from\+\_\+list\+\_\+printer}} (driver, str month, str year, str cnpq=None)
+\begin{DoxyCompactList}\small\item\em Obtém atividades de extensão a partir de uma lista utilizando a visualização de impressão. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{database__generator_8py_a3b03d54f86538f561cca28539aec4eb5}{database\+\_\+generator.\+\_\+search\+\_\+month\+\_\+year}} (int month, int year, driver)
+\begin{DoxyCompactList}\small\item\em Realiza a busca por mês e ano. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{database__generator_8py_aea00b9f9e026e54a8e0667c27348da84}{database\+\_\+generator.\+\_\+search\+\_\+month\+\_\+year\+\_\+cnpq}} (int month, int year, str cnpq, driver)
+\begin{DoxyCompactList}\small\item\em Realiza a busca por mês, ano e CNPq. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{database__generator_8py_af8cc2cd494ccffac2126d209dda81bfb}{database\+\_\+generator.\+\_\+clear\+\_\+execution\+\_\+period}} (driver)
+\begin{DoxyCompactList}\small\item\em Limpa o período de execução no formulário. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{database__generator_8py_a6b23aba28e0dd04fae19e87928ca4018}{database\+\_\+generator.\+\_\+use\+\_\+execution\+\_\+period}} (str start\+\_\+date, str end\+\_\+date, driver)
+\begin{DoxyCompactList}\small\item\em Utiliza o período de execução no formulário. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{database__generator_8py_a4a9babf5423241cf274de0743bba496c}{database\+\_\+generator.\+\_\+use\+\_\+type\+\_\+action}} (str cnpq, driver)
+\begin{DoxyCompactList}\small\item\em Utiliza a área CNPq no formulário. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{database__generator_8py_acf6dbbcdf5c64c570246fb1e460c8ca0}{database\+\_\+generator.\+\_\+uncheck\+\_\+cnpq}} (driver)
+\begin{DoxyCompactList}\small\item\em Desmarca a opção de área CNPq no formulário. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{database__generator_8py_a9c9447113ef09c0e4cfb6bf3a66857c4}{database\+\_\+generator.\+get\+\_\+offset}} (int month, int year, driver)
+\begin{DoxyCompactList}\small\item\em Obtém o deslocamento temporal a partir de um mês e ano. \end{DoxyCompactList}\item 
+str \mbox{\hyperlink{database__generator_8py_a1a66c19c1e48f3f4224267ea4ea37f62}{database\+\_\+generator.\+\_\+monthly\+\_\+date\+\_\+generator}} (int month, int year, bool month\+End)
+\begin{DoxyCompactList}\small\item\em Gera a data mensal de acordo com o formato esperado pelo Sigaa. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descrição detalhada}
+Módulo para gerar dados de extensão a partir do Sigaa. 
+
+
+
+\doxysubsection{Funções}
+\Hypertarget{database__generator_8py_af8cc2cd494ccffac2126d209dda81bfb}\label{database__generator_8py_af8cc2cd494ccffac2126d209dda81bfb} 
+\index{database\_generator.py@{database\_generator.py}!\_clear\_execution\_period@{\_clear\_execution\_period}}
+\index{\_clear\_execution\_period@{\_clear\_execution\_period}!database\_generator.py@{database\_generator.py}}
+\doxysubsubsection{\texorpdfstring{\_clear\_execution\_period()}{\_clear\_execution\_period()}}
+{\footnotesize\ttfamily database\+\_\+generator.\+\_\+clear\+\_\+execution\+\_\+period (\begin{DoxyParamCaption}\item[{}]{driver }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Limpa o período de execução no formulário. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em driver} & Objeto do driver do Selenium. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{database__generator_8py_aa3a6ee786e4ac164394c7737dca75daa}\label{database__generator_8py_aa3a6ee786e4ac164394c7737dca75daa} 
+\index{database\_generator.py@{database\_generator.py}!\_get\_activities\_from\_list\_printer@{\_get\_activities\_from\_list\_printer}}
+\index{\_get\_activities\_from\_list\_printer@{\_get\_activities\_from\_list\_printer}!database\_generator.py@{database\_generator.py}}
+\doxysubsubsection{\texorpdfstring{\_get\_activities\_from\_list\_printer()}{\_get\_activities\_from\_list\_printer()}}
+{\footnotesize\ttfamily database\+\_\+generator.\+\_\+get\+\_\+activities\+\_\+from\+\_\+list\+\_\+printer (\begin{DoxyParamCaption}\item[{}]{driver,  }\item[{str}]{month,  }\item[{str}]{year,  }\item[{str}]{cnpq = {\ttfamily None} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Obtém atividades de extensão a partir de uma lista utilizando a visualização de impressão. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em driver} & Objeto do driver do Selenium. \\
+\hline
+{\em month} & Mês. \\
+\hline
+{\em year} & Ano. \\
+\hline
+{\em cnpq} & Área CNPq (opcional). \\
+\hline
+\end{DoxyParams}
+\Hypertarget{database__generator_8py_a1a66c19c1e48f3f4224267ea4ea37f62}\label{database__generator_8py_a1a66c19c1e48f3f4224267ea4ea37f62} 
+\index{database\_generator.py@{database\_generator.py}!\_monthly\_date\_generator@{\_monthly\_date\_generator}}
+\index{\_monthly\_date\_generator@{\_monthly\_date\_generator}!database\_generator.py@{database\_generator.py}}
+\doxysubsubsection{\texorpdfstring{\_monthly\_date\_generator()}{\_monthly\_date\_generator()}}
+{\footnotesize\ttfamily  str database\+\_\+generator.\+\_\+monthly\+\_\+date\+\_\+generator (\begin{DoxyParamCaption}\item[{int}]{month,  }\item[{int}]{year,  }\item[{bool}]{month\+End }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Gera a data mensal de acordo com o formato esperado pelo Sigaa. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em month} & Mês. \\
+\hline
+{\em year} & Ano. \\
+\hline
+{\em month\+End} & Flag indicando se é o último dia do mês. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+String representando a data. 
+\end{DoxyReturn}
+\Hypertarget{database__generator_8py_a3b03d54f86538f561cca28539aec4eb5}\label{database__generator_8py_a3b03d54f86538f561cca28539aec4eb5} 
+\index{database\_generator.py@{database\_generator.py}!\_search\_month\_year@{\_search\_month\_year}}
+\index{\_search\_month\_year@{\_search\_month\_year}!database\_generator.py@{database\_generator.py}}
+\doxysubsubsection{\texorpdfstring{\_search\_month\_year()}{\_search\_month\_year()}}
+{\footnotesize\ttfamily database\+\_\+generator.\+\_\+search\+\_\+month\+\_\+year (\begin{DoxyParamCaption}\item[{int}]{month,  }\item[{int}]{year,  }\item[{}]{driver }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Realiza a busca por mês e ano. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em month} & Mês. \\
+\hline
+{\em year} & Ano. \\
+\hline
+{\em driver} & Objeto do driver do Selenium. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{database__generator_8py_aea00b9f9e026e54a8e0667c27348da84}\label{database__generator_8py_aea00b9f9e026e54a8e0667c27348da84} 
+\index{database\_generator.py@{database\_generator.py}!\_search\_month\_year\_cnpq@{\_search\_month\_year\_cnpq}}
+\index{\_search\_month\_year\_cnpq@{\_search\_month\_year\_cnpq}!database\_generator.py@{database\_generator.py}}
+\doxysubsubsection{\texorpdfstring{\_search\_month\_year\_cnpq()}{\_search\_month\_year\_cnpq()}}
+{\footnotesize\ttfamily database\+\_\+generator.\+\_\+search\+\_\+month\+\_\+year\+\_\+cnpq (\begin{DoxyParamCaption}\item[{int}]{month,  }\item[{int}]{year,  }\item[{str}]{cnpq,  }\item[{}]{driver }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Realiza a busca por mês, ano e CNPq. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em month} & Mês. \\
+\hline
+{\em year} & Ano. \\
+\hline
+{\em cnpq} & Área CNPq. \\
+\hline
+{\em driver} & Objeto do driver do Selenium. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{database__generator_8py_acf6dbbcdf5c64c570246fb1e460c8ca0}\label{database__generator_8py_acf6dbbcdf5c64c570246fb1e460c8ca0} 
+\index{database\_generator.py@{database\_generator.py}!\_uncheck\_cnpq@{\_uncheck\_cnpq}}
+\index{\_uncheck\_cnpq@{\_uncheck\_cnpq}!database\_generator.py@{database\_generator.py}}
+\doxysubsubsection{\texorpdfstring{\_uncheck\_cnpq()}{\_uncheck\_cnpq()}}
+{\footnotesize\ttfamily database\+\_\+generator.\+\_\+uncheck\+\_\+cnpq (\begin{DoxyParamCaption}\item[{}]{driver }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Desmarca a opção de área CNPq no formulário. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em driver} & Objeto do driver do Selenium. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{database__generator_8py_a6b23aba28e0dd04fae19e87928ca4018}\label{database__generator_8py_a6b23aba28e0dd04fae19e87928ca4018} 
+\index{database\_generator.py@{database\_generator.py}!\_use\_execution\_period@{\_use\_execution\_period}}
+\index{\_use\_execution\_period@{\_use\_execution\_period}!database\_generator.py@{database\_generator.py}}
+\doxysubsubsection{\texorpdfstring{\_use\_execution\_period()}{\_use\_execution\_period()}}
+{\footnotesize\ttfamily database\+\_\+generator.\+\_\+use\+\_\+execution\+\_\+period (\begin{DoxyParamCaption}\item[{str}]{start\+\_\+date,  }\item[{str}]{end\+\_\+date,  }\item[{}]{driver }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Utiliza o período de execução no formulário. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em start\+\_\+date} & Data de início. \\
+\hline
+{\em end\+\_\+date} & Data de término. \\
+\hline
+{\em driver} & Objeto do driver do Selenium. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{database__generator_8py_a4a9babf5423241cf274de0743bba496c}\label{database__generator_8py_a4a9babf5423241cf274de0743bba496c} 
+\index{database\_generator.py@{database\_generator.py}!\_use\_type\_action@{\_use\_type\_action}}
+\index{\_use\_type\_action@{\_use\_type\_action}!database\_generator.py@{database\_generator.py}}
+\doxysubsubsection{\texorpdfstring{\_use\_type\_action()}{\_use\_type\_action()}}
+{\footnotesize\ttfamily database\+\_\+generator.\+\_\+use\+\_\+type\+\_\+action (\begin{DoxyParamCaption}\item[{str}]{cnpq,  }\item[{}]{driver }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Utiliza a área CNPq no formulário. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em cnpq} & Área CNPq. \\
+\hline
+{\em driver} & Objeto do driver do Selenium. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{database__generator_8py_aa41a14577ca63844ab65cabd55a41d1c}\label{database__generator_8py_aa41a14577ca63844ab65cabd55a41d1c} 
+\index{database\_generator.py@{database\_generator.py}!get\_every\_extension\_activity\_from\_month\_years@{get\_every\_extension\_activity\_from\_month\_years}}
+\index{get\_every\_extension\_activity\_from\_month\_years@{get\_every\_extension\_activity\_from\_month\_years}!database\_generator.py@{database\_generator.py}}
+\doxysubsubsection{\texorpdfstring{get\_every\_extension\_activity\_from\_month\_years()}{get\_every\_extension\_activity\_from\_month\_years()}}
+{\footnotesize\ttfamily database\+\_\+generator.\+get\+\_\+every\+\_\+extension\+\_\+activity\+\_\+from\+\_\+month\+\_\+years (\begin{DoxyParamCaption}\item[{int}]{month,  }\item[{int}]{year,  }\item[{int}]{offset,  }\item[{}]{driver }\end{DoxyParamCaption})}
+
+
+
+Obtém todas as atividades de extensão de um mês específico. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em month} & Mês. \\
+\hline
+{\em year} & Ano. \\
+\hline
+{\em offset} & Deslocamento temporal. \\
+\hline
+{\em driver} & Objeto do driver do Selenium. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{database__generator_8py_aab5db0afcc13c2fc40613d77d86572d4}\label{database__generator_8py_aab5db0afcc13c2fc40613d77d86572d4} 
+\index{database\_generator.py@{database\_generator.py}!get\_every\_extension\_activity\_from\_month\_years\_cnpq@{get\_every\_extension\_activity\_from\_month\_years\_cnpq}}
+\index{get\_every\_extension\_activity\_from\_month\_years\_cnpq@{get\_every\_extension\_activity\_from\_month\_years\_cnpq}!database\_generator.py@{database\_generator.py}}
+\doxysubsubsection{\texorpdfstring{get\_every\_extension\_activity\_from\_month\_years\_cnpq()}{get\_every\_extension\_activity\_from\_month\_years\_cnpq()}}
+{\footnotesize\ttfamily database\+\_\+generator.\+get\+\_\+every\+\_\+extension\+\_\+activity\+\_\+from\+\_\+month\+\_\+years\+\_\+cnpq (\begin{DoxyParamCaption}\item[{str}]{month,  }\item[{str}]{year,  }\item[{int}]{offset,  }\item[{}]{driver }\end{DoxyParamCaption})}
+
+
+
+Obtém todas as atividades de extensão de um mês específico para várias áreas CNPq. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em month} & Mês. \\
+\hline
+{\em year} & Ano. \\
+\hline
+{\em offset} & Deslocamento temporal. \\
+\hline
+{\em driver} & Objeto do driver do Selenium. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{database__generator_8py_a40bf92a733e714d1d64ed6d6f5883aa7}\label{database__generator_8py_a40bf92a733e714d1d64ed6d6f5883aa7} 
+\index{database\_generator.py@{database\_generator.py}!get\_every\_extension\_activity\_from\_month\_years\_passing\_cnpq@{get\_every\_extension\_activity\_from\_month\_years\_passing\_cnpq}}
+\index{get\_every\_extension\_activity\_from\_month\_years\_passing\_cnpq@{get\_every\_extension\_activity\_from\_month\_years\_passing\_cnpq}!database\_generator.py@{database\_generator.py}}
+\doxysubsubsection{\texorpdfstring{get\_every\_extension\_activity\_from\_month\_years\_passing\_cnpq()}{get\_every\_extension\_activity\_from\_month\_years\_passing\_cnpq()}}
+{\footnotesize\ttfamily database\+\_\+generator.\+get\+\_\+every\+\_\+extension\+\_\+activity\+\_\+from\+\_\+month\+\_\+years\+\_\+passing\+\_\+cnpq (\begin{DoxyParamCaption}\item[{str}]{month,  }\item[{str}]{year,  }\item[{str}]{cnpq,  }\item[{int}]{offset,  }\item[{}]{driver }\end{DoxyParamCaption})}
+
+
+
+Obtém todas as atividades de extensão de um mês específico para uma área CNPq específica. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em month} & Mês. \\
+\hline
+{\em year} & Ano. \\
+\hline
+{\em cnpq} & Área CNPq. \\
+\hline
+{\em offset} & Deslocamento temporal. \\
+\hline
+{\em driver} & Objeto do driver do Selenium. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{database__generator_8py_a162b4409adc45a0f9063f73ba64edaa8}\label{database__generator_8py_a162b4409adc45a0f9063f73ba64edaa8} 
+\index{database\_generator.py@{database\_generator.py}!get\_every\_extension\_activity\_from\_months@{get\_every\_extension\_activity\_from\_months}}
+\index{get\_every\_extension\_activity\_from\_months@{get\_every\_extension\_activity\_from\_months}!database\_generator.py@{database\_generator.py}}
+\doxysubsubsection{\texorpdfstring{get\_every\_extension\_activity\_from\_months()}{get\_every\_extension\_activity\_from\_months()}}
+{\footnotesize\ttfamily database\+\_\+generator.\+get\+\_\+every\+\_\+extension\+\_\+activity\+\_\+from\+\_\+months (\begin{DoxyParamCaption}\item[{int}]{start\+\_\+month,  }\item[{int}]{end\+\_\+month,  }\item[{int}]{year,  }\item[{int}]{offset,  }\item[{}]{driver }\end{DoxyParamCaption})}
+
+
+
+Obtém todas as atividades de extensão de um conjunto de meses. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em start\+\_\+month} & Mês inicial. \\
+\hline
+{\em end\+\_\+month} & Mês final. \\
+\hline
+{\em year} & Ano. \\
+\hline
+{\em offset} & Deslocamento temporal. \\
+\hline
+{\em driver} & Objeto do driver do Selenium. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{database__generator_8py_a9c9447113ef09c0e4cfb6bf3a66857c4}\label{database__generator_8py_a9c9447113ef09c0e4cfb6bf3a66857c4} 
+\index{database\_generator.py@{database\_generator.py}!get\_offset@{get\_offset}}
+\index{get\_offset@{get\_offset}!database\_generator.py@{database\_generator.py}}
+\doxysubsubsection{\texorpdfstring{get\_offset()}{get\_offset()}}
+{\footnotesize\ttfamily database\+\_\+generator.\+get\+\_\+offset (\begin{DoxyParamCaption}\item[{int}]{month,  }\item[{int}]{year,  }\item[{}]{driver }\end{DoxyParamCaption})}
+
+
+
+Obtém o deslocamento temporal a partir de um mês e ano. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em month} & Mês. \\
+\hline
+{\em year} & Ano. \\
+\hline
+{\em driver} & Objeto do driver do Selenium. \\
+\hline
+\end{DoxyParams}

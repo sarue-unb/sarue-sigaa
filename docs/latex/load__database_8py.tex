@@ -1,0 +1,39 @@
+\doxysection{Referência do Arquivo database\+\_\+generator/load\+\_\+database.py}
+\hypertarget{load__database_8py}{}\label{load__database_8py}\index{database\_generator/load\_database.py@{database\_generator/load\_database.py}}
+
+
+Módulo com funções para carregar e gerar bancos de dados.  
+
+
+\doxysubsubsection*{Funções}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{load__database_8py_af9c704ee210708d2101f30481dfad478}\label{load__database_8py_af9c704ee210708d2101f30481dfad478} 
+{\bfseries load\+\_\+database.\+add\+\_\+item\+\_\+to\+\_\+indicators\+\_\+database} (str activity\+\_\+name, activity\+\_\+values, str database\+\_\+name)
+\begin{DoxyCompactList}\small\item\em Adiciona uma atividade ao banco de dados de indicadores. \end{DoxyCompactList}\item 
+\Hypertarget{load__database_8py_a371623c946d57da1d6e66c7453fdfe0a}\label{load__database_8py_a371623c946d57da1d6e66c7453fdfe0a} 
+{\bfseries load\+\_\+database.\+add\+\_\+item\+\_\+to\+\_\+private\+\_\+database} (str activity\+\_\+name, activity\+\_\+values, str database\+\_\+name)
+\begin{DoxyCompactList}\small\item\em Adiciona uma atividade ao banco de dados privado. \end{DoxyCompactList}\item 
+\Hypertarget{load__database_8py_a18df48e5a1442b97499c4ca844dfb85c}\label{load__database_8py_a18df48e5a1442b97499c4ca844dfb85c} 
+{\bfseries load\+\_\+database.\+load\+\_\+base\+\_\+database} ()
+\begin{DoxyCompactList}\small\item\em Carrega a base de dados completa. \end{DoxyCompactList}\item 
+\Hypertarget{load__database_8py_aa2368f4c77d97c384bb8475a9089d792}\label{load__database_8py_aa2368f4c77d97c384bb8475a9089d792} 
+{\bfseries load\+\_\+database.\+load\+\_\+indicators\+\_\+database} ()
+\begin{DoxyCompactList}\small\item\em Carrega o banco de dados de indicadores. \end{DoxyCompactList}\item 
+\Hypertarget{load__database_8py_ad6f97c670e4e089e34f3d944ac41d912}\label{load__database_8py_ad6f97c670e4e089e34f3d944ac41d912} 
+{\bfseries load\+\_\+database.\+generate\+\_\+indicators\+\_\+database} ()
+\begin{DoxyCompactList}\small\item\em Gera o banco de dados de indicadores. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variáveis}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{load__database_8py_a542375ef0ca79ecab7d30881f49d3cad}\label{load__database_8py_a542375ef0ca79ecab7d30881f49d3cad} 
+dict {\bfseries load\+\_\+database.\+full\+\_\+database} = \{\}
+\begin{DoxyCompactList}\small\item\em Dicionário para armazenar a base de dados completa. \end{DoxyCompactList}\item 
+\Hypertarget{load__database_8py_a6fc24b4859f29aa417cb9346caa88506}\label{load__database_8py_a6fc24b4859f29aa417cb9346caa88506} 
+dict {\bfseries load\+\_\+database.\+databases} = \{name\+: \{inside\+\_\+name\+: \{\} for inside\+\_\+name in OUTPUT\+\_\+\+NAMES\mbox{[}name\mbox{]}.keys()\} for name in OUTPUT\+\_\+\+NAMES\}
+\begin{DoxyCompactList}\small\item\em Dicionário de dicionários para armazenar diferentes bancos de dados. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descrição detalhada}
+Módulo com funções para carregar e gerar bancos de dados. 
+

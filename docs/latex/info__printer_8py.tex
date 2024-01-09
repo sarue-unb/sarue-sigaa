@@ -1,0 +1,192 @@
+\doxysection{Referência do Arquivo components/info\+\_\+printer.py}
+\hypertarget{info__printer_8py}{}\label{info__printer_8py}\index{components/info\_printer.py@{components/info\_printer.py}}
+
+
+Contém funções para extrair informações de uma página de impressão.  
+
+
+\doxysubsubsection*{Funções}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{info__printer_8py_a6d602f3dced3a24d6e9e467934bbf0ab}{info\+\_\+printer.\+get\+\_\+row\+\_\+data\+\_\+printer}} (driver, int month, int year, cnpq=None)
+\item 
+\mbox{\hyperlink{info__printer_8py_a314774135b3f6bce7d6b6c867670bad5}{info\+\_\+printer.\+get\+\_\+info\+\_\+from\+\_\+print\+\_\+page}} (driver)
+\item 
+\mbox{\hyperlink{info__printer_8py_a21b4136b488a199288fb5eb6d4686b83}{info\+\_\+printer.\+get\+\_\+info\+\_\+from\+\_\+printer\+\_\+type\+\_\+curso}} (dict info, driver)
+\item 
+\mbox{\hyperlink{info__printer_8py_aff2b0a9663a18ea784eb3294611981a9}{info\+\_\+printer.\+get\+\_\+info\+\_\+from\+\_\+printer\+\_\+type\+\_\+evento}} (dict info, driver)
+\item 
+\mbox{\hyperlink{info__printer_8py_a0e4886a4dd9023d9d39b020d2b029829}{info\+\_\+printer.\+get\+\_\+info\+\_\+from\+\_\+printer\+\_\+type\+\_\+prestacao\+\_\+servico}} (dict info, driver)
+\item 
+\mbox{\hyperlink{info__printer_8py_ac7b3d4db517f5f72342563d228898dde}{info\+\_\+printer.\+get\+\_\+info\+\_\+from\+\_\+printer\+\_\+type\+\_\+produto}} (dict info, driver)
+\item 
+\mbox{\hyperlink{info__printer_8py_a3bccc3fc77a41e336a2af1303b975829}{info\+\_\+printer.\+get\+\_\+info\+\_\+from\+\_\+printer\+\_\+type\+\_\+programa}} (dict info, driver)
+\item 
+\mbox{\hyperlink{info__printer_8py_a15213595bda9b740abb8af2177a8ea9b}{info\+\_\+printer.\+get\+\_\+info\+\_\+from\+\_\+printer\+\_\+type\+\_\+projeto}} (dict info, driver)
+\item 
+\mbox{\hyperlink{info__printer_8py_a96350b70ff29b54d1e53c9f3915abb3c}{info\+\_\+printer.\+get\+\_\+info\+\_\+objetivos}} (dict info, str xpath, driver)
+\item 
+\mbox{\hyperlink{info__printer_8py_af3ad5a5f47ef02677f59b0b83c36c1e0}{info\+\_\+printer.\+get\+\_\+info\+\_\+team\+\_\+members}} (dict info, str id, driver)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descrição detalhada}
+Contém funções para extrair informações de uma página de impressão. 
+
+
+
+\doxysubsection{Funções}
+\Hypertarget{info__printer_8py_a314774135b3f6bce7d6b6c867670bad5}\label{info__printer_8py_a314774135b3f6bce7d6b6c867670bad5} 
+\index{info\_printer.py@{info\_printer.py}!get\_info\_from\_print\_page@{get\_info\_from\_print\_page}}
+\index{get\_info\_from\_print\_page@{get\_info\_from\_print\_page}!info\_printer.py@{info\_printer.py}}
+\doxysubsubsection{\texorpdfstring{get\_info\_from\_print\_page()}{get\_info\_from\_print\_page()}}
+{\footnotesize\ttfamily info\+\_\+printer.\+get\+\_\+info\+\_\+from\+\_\+print\+\_\+page (\begin{DoxyParamCaption}\item[{}]{driver }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Obtém informações de uma página de impressão.
+
+Esta função extrai informações de uma página de impressão e retorna um dicionário.
+
+@param driver: Objeto WebDriver para interagir com a página da web.
+
+@return: Um dicionário contendo informações da página de impressão.
+\end{DoxyVerb}
+ \Hypertarget{info__printer_8py_a21b4136b488a199288fb5eb6d4686b83}\label{info__printer_8py_a21b4136b488a199288fb5eb6d4686b83} 
+\index{info\_printer.py@{info\_printer.py}!get\_info\_from\_printer\_type\_curso@{get\_info\_from\_printer\_type\_curso}}
+\index{get\_info\_from\_printer\_type\_curso@{get\_info\_from\_printer\_type\_curso}!info\_printer.py@{info\_printer.py}}
+\doxysubsubsection{\texorpdfstring{get\_info\_from\_printer\_type\_curso()}{get\_info\_from\_printer\_type\_curso()}}
+{\footnotesize\ttfamily info\+\_\+printer.\+get\+\_\+info\+\_\+from\+\_\+printer\+\_\+type\+\_\+curso (\begin{DoxyParamCaption}\item[{dict}]{info,  }\item[{}]{driver }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Obtém informações de uma impressora do tipo 'CURSO'.
+
+Esta função extrai informações específicas do tipo 'CURSO' de uma página de impressora.
+
+@param info: Dicionário para armazenar informações extraídas.
+@param driver: Objeto WebDriver para interagir com a página da web.
+
+@return: Dicionário atualizado com informações específicas de 'CURSO'.
+\end{DoxyVerb}
+ \Hypertarget{info__printer_8py_aff2b0a9663a18ea784eb3294611981a9}\label{info__printer_8py_aff2b0a9663a18ea784eb3294611981a9} 
+\index{info\_printer.py@{info\_printer.py}!get\_info\_from\_printer\_type\_evento@{get\_info\_from\_printer\_type\_evento}}
+\index{get\_info\_from\_printer\_type\_evento@{get\_info\_from\_printer\_type\_evento}!info\_printer.py@{info\_printer.py}}
+\doxysubsubsection{\texorpdfstring{get\_info\_from\_printer\_type\_evento()}{get\_info\_from\_printer\_type\_evento()}}
+{\footnotesize\ttfamily info\+\_\+printer.\+get\+\_\+info\+\_\+from\+\_\+printer\+\_\+type\+\_\+evento (\begin{DoxyParamCaption}\item[{dict}]{info,  }\item[{}]{driver }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Obtém informações de uma impressora do tipo 'EVENTO'.
+
+Esta função extrai informações específicas do tipo 'EVENTO' de uma página de impressora.
+
+@param info: Dicionário para armazenar informações extraídas.
+@param driver: Objeto WebDriver para interagir com a página da web.
+
+@return: Dicionário atualizado com informações específicas de 'EVENTO'.
+\end{DoxyVerb}
+ \Hypertarget{info__printer_8py_a0e4886a4dd9023d9d39b020d2b029829}\label{info__printer_8py_a0e4886a4dd9023d9d39b020d2b029829} 
+\index{info\_printer.py@{info\_printer.py}!get\_info\_from\_printer\_type\_prestacao\_servico@{get\_info\_from\_printer\_type\_prestacao\_servico}}
+\index{get\_info\_from\_printer\_type\_prestacao\_servico@{get\_info\_from\_printer\_type\_prestacao\_servico}!info\_printer.py@{info\_printer.py}}
+\doxysubsubsection{\texorpdfstring{get\_info\_from\_printer\_type\_prestacao\_servico()}{get\_info\_from\_printer\_type\_prestacao\_servico()}}
+{\footnotesize\ttfamily info\+\_\+printer.\+get\+\_\+info\+\_\+from\+\_\+printer\+\_\+type\+\_\+prestacao\+\_\+servico (\begin{DoxyParamCaption}\item[{dict}]{info,  }\item[{}]{driver }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Obtém informações de uma impressora do tipo 'PRESTAÇÃO DE SERVIÇO'.
+
+Esta função extrai informações específicas do tipo 'PRESTAÇÃO DE SERVIÇO' de uma página de impressora.
+
+@param info: Dicionário para armazenar informações extraídas.
+@param driver: Objeto WebDriver para interagir com a página da web.
+
+@return: Dicionário atualizado com informações específicas de 'PRESTAÇÃO DE SERVIÇO'.
+\end{DoxyVerb}
+ \Hypertarget{info__printer_8py_ac7b3d4db517f5f72342563d228898dde}\label{info__printer_8py_ac7b3d4db517f5f72342563d228898dde} 
+\index{info\_printer.py@{info\_printer.py}!get\_info\_from\_printer\_type\_produto@{get\_info\_from\_printer\_type\_produto}}
+\index{get\_info\_from\_printer\_type\_produto@{get\_info\_from\_printer\_type\_produto}!info\_printer.py@{info\_printer.py}}
+\doxysubsubsection{\texorpdfstring{get\_info\_from\_printer\_type\_produto()}{get\_info\_from\_printer\_type\_produto()}}
+{\footnotesize\ttfamily info\+\_\+printer.\+get\+\_\+info\+\_\+from\+\_\+printer\+\_\+type\+\_\+produto (\begin{DoxyParamCaption}\item[{dict}]{info,  }\item[{}]{driver }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Obtém informações de uma impressora do tipo 'PRODUTO'.
+
+Esta função extrai informações específicas do tipo 'PRODUTO' de uma página de impressora.
+
+@param info: Dicionário para armazenar informações extraídas.
+@param driver: Objeto WebDriver para interagir com a página da web.
+
+@return: Dicionário atualizado com informações específicas de 'PRODUTO'.
+\end{DoxyVerb}
+ \Hypertarget{info__printer_8py_a3bccc3fc77a41e336a2af1303b975829}\label{info__printer_8py_a3bccc3fc77a41e336a2af1303b975829} 
+\index{info\_printer.py@{info\_printer.py}!get\_info\_from\_printer\_type\_programa@{get\_info\_from\_printer\_type\_programa}}
+\index{get\_info\_from\_printer\_type\_programa@{get\_info\_from\_printer\_type\_programa}!info\_printer.py@{info\_printer.py}}
+\doxysubsubsection{\texorpdfstring{get\_info\_from\_printer\_type\_programa()}{get\_info\_from\_printer\_type\_programa()}}
+{\footnotesize\ttfamily info\+\_\+printer.\+get\+\_\+info\+\_\+from\+\_\+printer\+\_\+type\+\_\+programa (\begin{DoxyParamCaption}\item[{dict}]{info,  }\item[{}]{driver }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Obtém informações de uma impressora do tipo 'PROGRAMA'.
+
+Esta função extrai informações específicas do tipo 'PROGRAMA' de uma página de impressora.
+
+@param info: Dicionário para armazenar informações extraídas.
+@param driver: Objeto WebDriver para interagir com a página da web.
+
+@return: Dicionário atualizado com informações específicas de 'PROGRAMA'.
+\end{DoxyVerb}
+ \Hypertarget{info__printer_8py_a15213595bda9b740abb8af2177a8ea9b}\label{info__printer_8py_a15213595bda9b740abb8af2177a8ea9b} 
+\index{info\_printer.py@{info\_printer.py}!get\_info\_from\_printer\_type\_projeto@{get\_info\_from\_printer\_type\_projeto}}
+\index{get\_info\_from\_printer\_type\_projeto@{get\_info\_from\_printer\_type\_projeto}!info\_printer.py@{info\_printer.py}}
+\doxysubsubsection{\texorpdfstring{get\_info\_from\_printer\_type\_projeto()}{get\_info\_from\_printer\_type\_projeto()}}
+{\footnotesize\ttfamily info\+\_\+printer.\+get\+\_\+info\+\_\+from\+\_\+printer\+\_\+type\+\_\+projeto (\begin{DoxyParamCaption}\item[{dict}]{info,  }\item[{}]{driver }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Obtém informações de uma impressora do tipo 'PROJETO'.
+
+Esta função extrai informações específicas do tipo 'PROJETO' de uma página de impressora.
+
+@param info: Dicionário para armazenar informações extraídas.
+@param driver: Objeto WebDriver para interagir com a página da web.
+
+@return: Dicionário atualizado com informações específicas de 'PROJETO'.
+\end{DoxyVerb}
+ \Hypertarget{info__printer_8py_a96350b70ff29b54d1e53c9f3915abb3c}\label{info__printer_8py_a96350b70ff29b54d1e53c9f3915abb3c} 
+\index{info\_printer.py@{info\_printer.py}!get\_info\_objetivos@{get\_info\_objetivos}}
+\index{get\_info\_objetivos@{get\_info\_objetivos}!info\_printer.py@{info\_printer.py}}
+\doxysubsubsection{\texorpdfstring{get\_info\_objetivos()}{get\_info\_objetivos()}}
+{\footnotesize\ttfamily info\+\_\+printer.\+get\+\_\+info\+\_\+objetivos (\begin{DoxyParamCaption}\item[{dict}]{info,  }\item[{str}]{xpath,  }\item[{}]{driver }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Obtém informações sobre objetivos a partir de um XPath específico.
+
+Esta função extrai informações sobre objetivos de um XPath especificado na página da web.
+
+@param info: Dicionário para armazenar informações extraídas.
+@param xpath: XPath para localizar o elemento contendo informações de objetivo.
+@param driver: Objeto WebDriver para interagir com a página da web.
+
+@return: Dicionário atualizado com informações de objetivo.
+\end{DoxyVerb}
+ \Hypertarget{info__printer_8py_af3ad5a5f47ef02677f59b0b83c36c1e0}\label{info__printer_8py_af3ad5a5f47ef02677f59b0b83c36c1e0} 
+\index{info\_printer.py@{info\_printer.py}!get\_info\_team\_members@{get\_info\_team\_members}}
+\index{get\_info\_team\_members@{get\_info\_team\_members}!info\_printer.py@{info\_printer.py}}
+\doxysubsubsection{\texorpdfstring{get\_info\_team\_members()}{get\_info\_team\_members()}}
+{\footnotesize\ttfamily info\+\_\+printer.\+get\+\_\+info\+\_\+team\+\_\+members (\begin{DoxyParamCaption}\item[{dict}]{info,  }\item[{str}]{id,  }\item[{}]{driver }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Obtém informações sobre membros da equipe a partir de um ID específico.
+
+Esta função extrai informações sobre membros da equipe de um ID específico na página da web.
+
+@param info: Dicionário para armazenar informações extraídas.
+@param id: ID para localizar o elemento contendo informações de membros da equipe.
+@param driver: Objeto WebDriver para interagir com a página da web.
+
+@return: Dicionário atualizado com informações de membros da equipe.
+\end{DoxyVerb}
+ \Hypertarget{info__printer_8py_a6d602f3dced3a24d6e9e467934bbf0ab}\label{info__printer_8py_a6d602f3dced3a24d6e9e467934bbf0ab} 
+\index{info\_printer.py@{info\_printer.py}!get\_row\_data\_printer@{get\_row\_data\_printer}}
+\index{get\_row\_data\_printer@{get\_row\_data\_printer}!info\_printer.py@{info\_printer.py}}
+\doxysubsubsection{\texorpdfstring{get\_row\_data\_printer()}{get\_row\_data\_printer()}}
+{\footnotesize\ttfamily info\+\_\+printer.\+get\+\_\+row\+\_\+data\+\_\+printer (\begin{DoxyParamCaption}\item[{}]{driver,  }\item[{int}]{month,  }\item[{int}]{year,  }\item[{}]{cnpq = {\ttfamily None} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Obtém dados da linha de uma impressora.
+
+Esta função recupera dados da linha de uma página de impressora e retorna uma lista de informações.
+
+@param driver: Objeto WebDriver para interagir com a página da web.
+@param month: O mês para o qual os dados estão sendo recuperados.
+@param year: O ano para o qual os dados estão sendo recuperados.
+@param cnpq: Informações CNPQ (opcional).
+
+@return: Uma lista de dados da linha.
+\end{DoxyVerb}
+ 

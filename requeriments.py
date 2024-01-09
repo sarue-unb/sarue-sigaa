@@ -1,3 +1,8 @@
+# requirements.py
+
+## @file
+# Módulo para verificar e atualizar bibliotecas necessárias.
+
 import importlib
 import subprocess
 import sys
@@ -6,6 +11,7 @@ from config.libraries_descryption import list_libraries
 from config.display_descryption import SEPARATOR, SLEEP_TIME
 from config.crawler_descryption import SCHEDULE
 
+## Função para verificar a instalação do pip e atualizá-lo, se necessário.
 def check_install_pip():
     try:
         # Verificar se o pip está instalado
@@ -23,27 +29,31 @@ def check_install_pip():
         except subprocess.CalledProcessError as e:
             print("Erro ao tentar atualizar o pip:", e)
 
+## Função para verificar e atualizar uma biblioteca específica.
+# @param library_name Nome da biblioteca.
+# @param library_import Nome da biblioteca para importação.
 def update_library(library_name, library_import):
     try:
         importlib.import_module(library_name)
-        print(f'{library_name} is installed')
-        print(f'Updating {library_name} to the latest version...')
+        print(f'{library_name} está instalada')
+        print(f'Atualizando {library_name} para a versão mais recente...')
         subprocess.check_call([sys.executable, "-m", "pip", "install", library_import, "-U"])
-        print(f'{library_name} has been updated to the latest version.')
+        print(f'{library_name} foi atualizada para a versão mais recente.')
 
     except ImportError:
-        print(f'{library_name} is not installed')
-        print(f'Installing {library_name}...')
+        print(f'{library_name} não está instalada')
+        print(f'Instalando {library_name}...')
         try:
             subprocess.check_call([sys.executable, "-m", "pip", "install", library_import])
-            print(f'{library_name} has been installed.')
+            print(f'{library_name} foi instalada.')
         except Exception as e:
-            print(f'Error installing {library_name}: {e}')
+            print(f'Erro ao instalar {library_name}: {e}')
             sys.exit(1)
 
     except Exception as e:
-        print(f'Error updating {library_name}: {e}')
+        print(f'Erro ao atualizar {library_name}: {e}')
 
+## Função principal para verificar e atualizar todas as bibliotecas necessárias.
 def checkLibraries():
     print(SEPARATOR)
     check_install_pip()
@@ -56,4 +66,4 @@ def checkLibraries():
         import time
         time.sleep(SLEEP_TIME)
     else:
-        input("Press enter to continue...")
+        input("Pressione Enter para continuar...")

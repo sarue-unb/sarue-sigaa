@@ -1,3 +1,7 @@
+# actions_xpath_descryption.py
+## @file
+# Módulo com XPATHs de ações do SIGAA. Cada tipo de ação tem uma quantidade de elementos na lista de imprimir a ação. SE NECESSÁRIO, ATUALIZAR AQUI COM O XPATH CORRESPONDENTE.
+
 XPATHS_OBJETIVOS_PRE_FIX = '//html/body/div/div[2]/form/table[2]/tbody/tr['
 XPATHS_OBJETIVOS_POS_FIX = ']/td[1]'
 

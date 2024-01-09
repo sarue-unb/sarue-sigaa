@@ -1,0 +1,691 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.10.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>sarue-sigaa: Referência do Arquivo database_generator/database_generator.py</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">sarue-sigaa
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Gerado por Doxygen 1.10.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Busca');
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Carregando...</div>
+<div class="SRStatus" id="Searching">Procurando...</div>
+<div class="SRStatus" id="NoMatches">Nenhuma entrada encontrado</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_24d1c3ee76218d4f138bc3e501489b54.html">database_generator</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Funções</a>  </div>
+  <div class="headertitle"><div class="title">Referência do Arquivo database_generator.py</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Módulo para gerar dados de extensão a partir do Sigaa.  
+<a href="#details">Mais...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Funções</h2></td></tr>
+<tr class="memitem:a162b4409adc45a0f9063f73ba64edaa8" id="r_a162b4409adc45a0f9063f73ba64edaa8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a162b4409adc45a0f9063f73ba64edaa8">database_generator.get_every_extension_activity_from_months</a> (int start_month, int end_month, int year, int offset, driver)</td></tr>
+<tr class="memdesc:a162b4409adc45a0f9063f73ba64edaa8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtém todas as atividades de extensão de um conjunto de meses.  <br /></td></tr>
+<tr class="separator:a162b4409adc45a0f9063f73ba64edaa8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa41a14577ca63844ab65cabd55a41d1c" id="r_aa41a14577ca63844ab65cabd55a41d1c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa41a14577ca63844ab65cabd55a41d1c">database_generator.get_every_extension_activity_from_month_years</a> (int month, int year, int offset, driver)</td></tr>
+<tr class="memdesc:aa41a14577ca63844ab65cabd55a41d1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtém todas as atividades de extensão de um mês específico.  <br /></td></tr>
+<tr class="separator:aa41a14577ca63844ab65cabd55a41d1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab5db0afcc13c2fc40613d77d86572d4" id="r_aab5db0afcc13c2fc40613d77d86572d4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aab5db0afcc13c2fc40613d77d86572d4">database_generator.get_every_extension_activity_from_month_years_cnpq</a> (str month, str year, int offset, driver)</td></tr>
+<tr class="memdesc:aab5db0afcc13c2fc40613d77d86572d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtém todas as atividades de extensão de um mês específico para várias áreas CNPq.  <br /></td></tr>
+<tr class="separator:aab5db0afcc13c2fc40613d77d86572d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40bf92a733e714d1d64ed6d6f5883aa7" id="r_a40bf92a733e714d1d64ed6d6f5883aa7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a40bf92a733e714d1d64ed6d6f5883aa7">database_generator.get_every_extension_activity_from_month_years_passing_cnpq</a> (str month, str year, str cnpq, int offset, driver)</td></tr>
+<tr class="memdesc:a40bf92a733e714d1d64ed6d6f5883aa7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtém todas as atividades de extensão de um mês específico para uma área CNPq específica.  <br /></td></tr>
+<tr class="separator:a40bf92a733e714d1d64ed6d6f5883aa7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3a6ee786e4ac164394c7737dca75daa" id="r_aa3a6ee786e4ac164394c7737dca75daa"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa3a6ee786e4ac164394c7737dca75daa">database_generator._get_activities_from_list_printer</a> (driver, str month, str year, str cnpq=None)</td></tr>
+<tr class="memdesc:aa3a6ee786e4ac164394c7737dca75daa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtém atividades de extensão a partir de uma lista utilizando a visualização de impressão.  <br /></td></tr>
+<tr class="separator:aa3a6ee786e4ac164394c7737dca75daa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b03d54f86538f561cca28539aec4eb5" id="r_a3b03d54f86538f561cca28539aec4eb5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3b03d54f86538f561cca28539aec4eb5">database_generator._search_month_year</a> (int month, int year, driver)</td></tr>
+<tr class="memdesc:a3b03d54f86538f561cca28539aec4eb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Realiza a busca por mês e ano.  <br /></td></tr>
+<tr class="separator:a3b03d54f86538f561cca28539aec4eb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea00b9f9e026e54a8e0667c27348da84" id="r_aea00b9f9e026e54a8e0667c27348da84"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aea00b9f9e026e54a8e0667c27348da84">database_generator._search_month_year_cnpq</a> (int month, int year, str cnpq, driver)</td></tr>
+<tr class="memdesc:aea00b9f9e026e54a8e0667c27348da84"><td class="mdescLeft">&#160;</td><td class="mdescRight">Realiza a busca por mês, ano e CNPq.  <br /></td></tr>
+<tr class="separator:aea00b9f9e026e54a8e0667c27348da84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8cc2cd494ccffac2126d209dda81bfb" id="r_af8cc2cd494ccffac2126d209dda81bfb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af8cc2cd494ccffac2126d209dda81bfb">database_generator._clear_execution_period</a> (driver)</td></tr>
+<tr class="memdesc:af8cc2cd494ccffac2126d209dda81bfb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Limpa o período de execução no formulário.  <br /></td></tr>
+<tr class="separator:af8cc2cd494ccffac2126d209dda81bfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b23aba28e0dd04fae19e87928ca4018" id="r_a6b23aba28e0dd04fae19e87928ca4018"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6b23aba28e0dd04fae19e87928ca4018">database_generator._use_execution_period</a> (str start_date, str end_date, driver)</td></tr>
+<tr class="memdesc:a6b23aba28e0dd04fae19e87928ca4018"><td class="mdescLeft">&#160;</td><td class="mdescRight">Utiliza o período de execução no formulário.  <br /></td></tr>
+<tr class="separator:a6b23aba28e0dd04fae19e87928ca4018"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a9babf5423241cf274de0743bba496c" id="r_a4a9babf5423241cf274de0743bba496c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4a9babf5423241cf274de0743bba496c">database_generator._use_type_action</a> (str cnpq, driver)</td></tr>
+<tr class="memdesc:a4a9babf5423241cf274de0743bba496c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Utiliza a área CNPq no formulário.  <br /></td></tr>
+<tr class="separator:a4a9babf5423241cf274de0743bba496c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf6dbbcdf5c64c570246fb1e460c8ca0" id="r_acf6dbbcdf5c64c570246fb1e460c8ca0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acf6dbbcdf5c64c570246fb1e460c8ca0">database_generator._uncheck_cnpq</a> (driver)</td></tr>
+<tr class="memdesc:acf6dbbcdf5c64c570246fb1e460c8ca0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Desmarca a opção de área CNPq no formulário.  <br /></td></tr>
+<tr class="separator:acf6dbbcdf5c64c570246fb1e460c8ca0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c9447113ef09c0e4cfb6bf3a66857c4" id="r_a9c9447113ef09c0e4cfb6bf3a66857c4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9c9447113ef09c0e4cfb6bf3a66857c4">database_generator.get_offset</a> (int month, int year, driver)</td></tr>
+<tr class="memdesc:a9c9447113ef09c0e4cfb6bf3a66857c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtém o deslocamento temporal a partir de um mês e ano.  <br /></td></tr>
+<tr class="separator:a9c9447113ef09c0e4cfb6bf3a66857c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a66c19c1e48f3f4224267ea4ea37f62" id="r_a1a66c19c1e48f3f4224267ea4ea37f62"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1a66c19c1e48f3f4224267ea4ea37f62">database_generator._monthly_date_generator</a> (int month, int year, bool monthEnd)</td></tr>
+<tr class="memdesc:a1a66c19c1e48f3f4224267ea4ea37f62"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gera a data mensal de acordo com o formato esperado pelo Sigaa.  <br /></td></tr>
+<tr class="separator:a1a66c19c1e48f3f4224267ea4ea37f62"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Descrição detalhada</h2>
+<div class="textblock"><p>Módulo para gerar dados de extensão a partir do Sigaa. </p>
+</div><h2 class="groupheader">Funções</h2>
+<a id="af8cc2cd494ccffac2126d209dda81bfb" name="af8cc2cd494ccffac2126d209dda81bfb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af8cc2cd494ccffac2126d209dda81bfb">&#9670;&#160;</a></span>_clear_execution_period()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">database_generator._clear_execution_period </td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>driver</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Limpa o período de execução no formulário. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">driver</td><td>Objeto do driver do Selenium. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aa3a6ee786e4ac164394c7737dca75daa" name="aa3a6ee786e4ac164394c7737dca75daa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3a6ee786e4ac164394c7737dca75daa">&#9670;&#160;</a></span>_get_activities_from_list_printer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">database_generator._get_activities_from_list_printer </td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>driver</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">str</td>          <td class="paramname"><span class="paramname"><em>month</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">str</td>          <td class="paramname"><span class="paramname"><em>year</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">str</td>          <td class="paramname"><span class="paramname"><em>cnpq</em><span class="paramdefsep"> = </span><span class="paramdefval">None</span></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Obtém atividades de extensão a partir de uma lista utilizando a visualização de impressão. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">driver</td><td>Objeto do driver do Selenium. </td></tr>
+    <tr><td class="paramname">month</td><td>Mês. </td></tr>
+    <tr><td class="paramname">year</td><td>Ano. </td></tr>
+    <tr><td class="paramname">cnpq</td><td>Área CNPq (opcional). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a1a66c19c1e48f3f4224267ea4ea37f62" name="a1a66c19c1e48f3f4224267ea4ea37f62"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a66c19c1e48f3f4224267ea4ea37f62">&#9670;&#160;</a></span>_monthly_date_generator()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"> str database_generator._monthly_date_generator </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>month</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>year</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>monthEnd</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gera a data mensal de acordo com o formato esperado pelo Sigaa. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">month</td><td>Mês. </td></tr>
+    <tr><td class="paramname">year</td><td>Ano. </td></tr>
+    <tr><td class="paramname">monthEnd</td><td>Flag indicando se é o último dia do mês. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>String representando a data. </dd></dl>
+
+</div>
+</div>
+<a id="a3b03d54f86538f561cca28539aec4eb5" name="a3b03d54f86538f561cca28539aec4eb5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b03d54f86538f561cca28539aec4eb5">&#9670;&#160;</a></span>_search_month_year()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">database_generator._search_month_year </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>month</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>year</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>driver</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Realiza a busca por mês e ano. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">month</td><td>Mês. </td></tr>
+    <tr><td class="paramname">year</td><td>Ano. </td></tr>
+    <tr><td class="paramname">driver</td><td>Objeto do driver do Selenium. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aea00b9f9e026e54a8e0667c27348da84" name="aea00b9f9e026e54a8e0667c27348da84"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea00b9f9e026e54a8e0667c27348da84">&#9670;&#160;</a></span>_search_month_year_cnpq()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">database_generator._search_month_year_cnpq </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>month</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>year</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">str</td>          <td class="paramname"><span class="paramname"><em>cnpq</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>driver</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Realiza a busca por mês, ano e CNPq. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">month</td><td>Mês. </td></tr>
+    <tr><td class="paramname">year</td><td>Ano. </td></tr>
+    <tr><td class="paramname">cnpq</td><td>Área CNPq. </td></tr>
+    <tr><td class="paramname">driver</td><td>Objeto do driver do Selenium. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="acf6dbbcdf5c64c570246fb1e460c8ca0" name="acf6dbbcdf5c64c570246fb1e460c8ca0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf6dbbcdf5c64c570246fb1e460c8ca0">&#9670;&#160;</a></span>_uncheck_cnpq()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">database_generator._uncheck_cnpq </td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>driver</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Desmarca a opção de área CNPq no formulário. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">driver</td><td>Objeto do driver do Selenium. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a6b23aba28e0dd04fae19e87928ca4018" name="a6b23aba28e0dd04fae19e87928ca4018"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b23aba28e0dd04fae19e87928ca4018">&#9670;&#160;</a></span>_use_execution_period()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">database_generator._use_execution_period </td>
+          <td>(</td>
+          <td class="paramtype">str</td>          <td class="paramname"><span class="paramname"><em>start_date</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">str</td>          <td class="paramname"><span class="paramname"><em>end_date</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>driver</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Utiliza o período de execução no formulário. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">start_date</td><td>Data de início. </td></tr>
+    <tr><td class="paramname">end_date</td><td>Data de término. </td></tr>
+    <tr><td class="paramname">driver</td><td>Objeto do driver do Selenium. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a4a9babf5423241cf274de0743bba496c" name="a4a9babf5423241cf274de0743bba496c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a9babf5423241cf274de0743bba496c">&#9670;&#160;</a></span>_use_type_action()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">database_generator._use_type_action </td>
+          <td>(</td>
+          <td class="paramtype">str</td>          <td class="paramname"><span class="paramname"><em>cnpq</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>driver</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Utiliza a área CNPq no formulário. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cnpq</td><td>Área CNPq. </td></tr>
+    <tr><td class="paramname">driver</td><td>Objeto do driver do Selenium. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aa41a14577ca63844ab65cabd55a41d1c" name="aa41a14577ca63844ab65cabd55a41d1c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa41a14577ca63844ab65cabd55a41d1c">&#9670;&#160;</a></span>get_every_extension_activity_from_month_years()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">database_generator.get_every_extension_activity_from_month_years </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>month</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>year</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>offset</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>driver</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Obtém todas as atividades de extensão de um mês específico. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">month</td><td>Mês. </td></tr>
+    <tr><td class="paramname">year</td><td>Ano. </td></tr>
+    <tr><td class="paramname">offset</td><td>Deslocamento temporal. </td></tr>
+    <tr><td class="paramname">driver</td><td>Objeto do driver do Selenium. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aab5db0afcc13c2fc40613d77d86572d4" name="aab5db0afcc13c2fc40613d77d86572d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab5db0afcc13c2fc40613d77d86572d4">&#9670;&#160;</a></span>get_every_extension_activity_from_month_years_cnpq()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">database_generator.get_every_extension_activity_from_month_years_cnpq </td>
+          <td>(</td>
+          <td class="paramtype">str</td>          <td class="paramname"><span class="paramname"><em>month</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">str</td>          <td class="paramname"><span class="paramname"><em>year</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>offset</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>driver</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Obtém todas as atividades de extensão de um mês específico para várias áreas CNPq. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">month</td><td>Mês. </td></tr>
+    <tr><td class="paramname">year</td><td>Ano. </td></tr>
+    <tr><td class="paramname">offset</td><td>Deslocamento temporal. </td></tr>
+    <tr><td class="paramname">driver</td><td>Objeto do driver do Selenium. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a40bf92a733e714d1d64ed6d6f5883aa7" name="a40bf92a733e714d1d64ed6d6f5883aa7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40bf92a733e714d1d64ed6d6f5883aa7">&#9670;&#160;</a></span>get_every_extension_activity_from_month_years_passing_cnpq()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">database_generator.get_every_extension_activity_from_month_years_passing_cnpq </td>
+          <td>(</td>
+          <td class="paramtype">str</td>          <td class="paramname"><span class="paramname"><em>month</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">str</td>          <td class="paramname"><span class="paramname"><em>year</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">str</td>          <td class="paramname"><span class="paramname"><em>cnpq</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>offset</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>driver</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Obtém todas as atividades de extensão de um mês específico para uma área CNPq específica. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">month</td><td>Mês. </td></tr>
+    <tr><td class="paramname">year</td><td>Ano. </td></tr>
+    <tr><td class="paramname">cnpq</td><td>Área CNPq. </td></tr>
+    <tr><td class="paramname">offset</td><td>Deslocamento temporal. </td></tr>
+    <tr><td class="paramname">driver</td><td>Objeto do driver do Selenium. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a162b4409adc45a0f9063f73ba64edaa8" name="a162b4409adc45a0f9063f73ba64edaa8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a162b4409adc45a0f9063f73ba64edaa8">&#9670;&#160;</a></span>get_every_extension_activity_from_months()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">database_generator.get_every_extension_activity_from_months </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>start_month</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>end_month</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>year</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>offset</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>driver</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Obtém todas as atividades de extensão de um conjunto de meses. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">start_month</td><td>Mês inicial. </td></tr>
+    <tr><td class="paramname">end_month</td><td>Mês final. </td></tr>
+    <tr><td class="paramname">year</td><td>Ano. </td></tr>
+    <tr><td class="paramname">offset</td><td>Deslocamento temporal. </td></tr>
+    <tr><td class="paramname">driver</td><td>Objeto do driver do Selenium. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a9c9447113ef09c0e4cfb6bf3a66857c4" name="a9c9447113ef09c0e4cfb6bf3a66857c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c9447113ef09c0e4cfb6bf3a66857c4">&#9670;&#160;</a></span>get_offset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">database_generator.get_offset </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>month</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>year</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>driver</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Obtém o deslocamento temporal a partir de um mês e ano. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">month</td><td>Mês. </td></tr>
+    <tr><td class="paramname">year</td><td>Ano. </td></tr>
+    <tr><td class="paramname">driver</td><td>Objeto do driver do Selenium. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Gerado por&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+</small></address>
+</body>
+</html>

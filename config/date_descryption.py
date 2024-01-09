@@ -1,7 +1,10 @@
+# date_descryption.py
+## @file
+# Informações sobre datas. EMPTY_MONTH é usado para testes (PRECISA DE UM MÊS SEM AÇÕES CADASTRADAS NO SIGAA). 
 from config.crawler_descryption import TYPE_BASE
 
 START_YEAR = 2023 if TYPE_BASE == 'BASE' else 2020
-END_YEAR = 2023 if TYPE_BASE == 'BASE' else 2022
+END_YEAR = 2024 if TYPE_BASE == 'BASE' else 2022
 
 FIRST_MONTH_OF_YEAR = 1
 LAST_MONTH_OF_YEAR = 12

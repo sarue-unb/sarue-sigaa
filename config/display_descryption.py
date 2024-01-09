@@ -1,3 +1,7 @@
+# display_descryption.py
+## @file
+# Módulo com as funções de exibição de informações no terminal.
+
 import os
 
 RIGHT_ARROW = "->"

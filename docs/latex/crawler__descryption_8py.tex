@@ -1,0 +1,46 @@
+\doxysection{Referência do Arquivo config/crawler\+\_\+descryption.py}
+\hypertarget{crawler__descryption_8py}{}\label{crawler__descryption_8py}\index{config/crawler\_descryption.py@{config/crawler\_descryption.py}}
+
+
+Módulo com as variáveis de configuração do crawler.  
+
+
+\doxysubsubsection*{Variáveis}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{crawler__descryption_8py_afe374f2a70ec8386e5eac33c5e35c5ea}\label{crawler__descryption_8py_afe374f2a70ec8386e5eac33c5e35c5ea} 
+{\bfseries crawler\+\_\+descryption.\+args} = sys.\+argv
+\item 
+\Hypertarget{crawler__descryption_8py_a17e948bd62901031b5725aee3aed52a6}\label{crawler__descryption_8py_a17e948bd62901031b5725aee3aed52a6} 
+str {\bfseries crawler\+\_\+descryption.\+TYPE\+\_\+\+BASE} = 1 else args\mbox{[}1\mbox{]}
+\item 
+\Hypertarget{crawler__descryption_8py_affaf0a584627899f24fbc2dade2bc841}\label{crawler__descryption_8py_affaf0a584627899f24fbc2dade2bc841} 
+int {\bfseries crawler\+\_\+descryption.\+MAX\+\_\+\+THREADS} = int(args\mbox{[}2\mbox{]}) if len(args) $>$ 2 and args\mbox{[}2\mbox{]}.isdigit() else 12
+\item 
+\Hypertarget{crawler__descryption_8py_ae0215ea208895cfe734330060f7ec3de}\label{crawler__descryption_8py_ae0215ea208895cfe734330060f7ec3de} 
+bool {\bfseries crawler\+\_\+descryption.\+SCHEDULE} = True
+\item 
+\Hypertarget{crawler__descryption_8py_a9e188afd39a10604c2788c756be9e81f}\label{crawler__descryption_8py_a9e188afd39a10604c2788c756be9e81f} 
+bool {\bfseries crawler\+\_\+descryption.\+INVISIBLE} = True
+\item 
+\Hypertarget{crawler__descryption_8py_aeadef28ebf085fb3a7daab24c91d02bd}\label{crawler__descryption_8py_aeadef28ebf085fb3a7daab24c91d02bd} 
+str {\bfseries crawler\+\_\+descryption.\+TYPE\+\_\+\+SEARCH} = \textquotesingle{}CONCURRENT\textquotesingle{}
+\item 
+\Hypertarget{crawler__descryption_8py_a6e3687d00fb7e5f65ab174091b675715}\label{crawler__descryption_8py_a6e3687d00fb7e5f65ab174091b675715} 
+list {\bfseries crawler\+\_\+descryption.\+SEARCHS\+\_\+\+METHODS} = \mbox{[}\textquotesingle{}ID\textquotesingle{}, \textquotesingle{}XPATH\textquotesingle{}, \textquotesingle{}CLASS\textquotesingle{}\mbox{]}
+\item 
+\Hypertarget{crawler__descryption_8py_acb746ec9a10efa1c800e1f2ca7ca92bc}\label{crawler__descryption_8py_acb746ec9a10efa1c800e1f2ca7ca92bc} 
+list {\bfseries crawler\+\_\+descryption.\+SEARCH\+\_\+\+METHODS} = SEARCHS\+\_\+\+METHODS\mbox{[}1\mbox{]}
+\item 
+\Hypertarget{crawler__descryption_8py_a341ada8a27fc4e18b94296fc4382b6f8}\label{crawler__descryption_8py_a341ada8a27fc4e18b94296fc4382b6f8} 
+list {\bfseries crawler\+\_\+descryption.\+SEARCHS\+\_\+\+TYPES} = \mbox{[}\textquotesingle{}DIRECTLY\textquotesingle{}, \textquotesingle{}TRY\+\_\+\+EXCEPT\textquotesingle{}\mbox{]}
+\item 
+\Hypertarget{crawler__descryption_8py_a3fd0b91247cfeed55263c7315963e34f}\label{crawler__descryption_8py_a3fd0b91247cfeed55263c7315963e34f} 
+list {\bfseries crawler\+\_\+descryption.\+SEARCH\+\_\+\+TYPES} = SEARCHS\+\_\+\+TYPES\mbox{[}1\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descrição detalhada}
+Módulo com as variáveis de configuração do crawler. 
+
+EM CASO DE ATUALIZAÇÃO DA SENHA, ALTERAR SCHEDULE == True PARA == False. Se o teste de máximo de instâncias não funcionar reduzir em MAX\+\_\+\+THREADS. 

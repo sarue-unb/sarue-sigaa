@@ -1,3 +1,7 @@
+# crawler_descryption.py
+## @file
+# Módulo com as variáveis de configuração do crawler. EM CASO DE ATUALIZAÇÃO DA SENHA, ALTERAR SCHEDULE == True PARA == False. Se o teste de máximo de instâncias não funcionar reduzir em MAX_THREADS.
+
 import sys
 
 args = sys.argv

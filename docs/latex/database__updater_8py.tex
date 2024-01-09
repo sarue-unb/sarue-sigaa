@@ -1,0 +1,60 @@
+\doxysection{Referência do Arquivo database\+\_\+generator/database\+\_\+updater.py}
+\hypertarget{database__updater_8py}{}\label{database__updater_8py}\index{database\_generator/database\_updater.py@{database\_generator/database\_updater.py}}
+
+
+Módulo para atualizar bancos de dados.  
+
+
+\doxysubsubsection*{Funções}
+\begin{DoxyCompactItemize}
+\item 
+dict \mbox{\hyperlink{database__updater_8py_ac6e73b66c54d6219f677f7f9845808e3}{database\+\_\+updater.\+update\+\_\+database}} (dict current\+\_\+database, dict previous\+\_\+database)
+\begin{DoxyCompactList}\small\item\em Atualiza um banco de dados com informações mais recentes. \end{DoxyCompactList}\item 
+dict \mbox{\hyperlink{database__updater_8py_aa52b6bce0b79bd54f67609e99e584586}{database\+\_\+updater.\+sorted\+\_\+database}} (dict database)
+\begin{DoxyCompactList}\small\item\em Ordena um banco de dados com base nas chaves. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descrição detalhada}
+Módulo para atualizar bancos de dados. 
+
+
+
+\doxysubsection{Funções}
+\Hypertarget{database__updater_8py_aa52b6bce0b79bd54f67609e99e584586}\label{database__updater_8py_aa52b6bce0b79bd54f67609e99e584586} 
+\index{database\_updater.py@{database\_updater.py}!sorted\_database@{sorted\_database}}
+\index{sorted\_database@{sorted\_database}!database\_updater.py@{database\_updater.py}}
+\doxysubsubsection{\texorpdfstring{sorted\_database()}{sorted\_database()}}
+{\footnotesize\ttfamily  dict database\+\_\+updater.\+sorted\+\_\+database (\begin{DoxyParamCaption}\item[{dict}]{database }\end{DoxyParamCaption})}
+
+
+
+Ordena um banco de dados com base nas chaves. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em database} & Banco de dados a ser ordenado. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Banco de dados ordenado. 
+\end{DoxyReturn}
+\Hypertarget{database__updater_8py_ac6e73b66c54d6219f677f7f9845808e3}\label{database__updater_8py_ac6e73b66c54d6219f677f7f9845808e3} 
+\index{database\_updater.py@{database\_updater.py}!update\_database@{update\_database}}
+\index{update\_database@{update\_database}!database\_updater.py@{database\_updater.py}}
+\doxysubsubsection{\texorpdfstring{update\_database()}{update\_database()}}
+{\footnotesize\ttfamily  dict database\+\_\+updater.\+update\+\_\+database (\begin{DoxyParamCaption}\item[{dict}]{current\+\_\+database,  }\item[{dict}]{previous\+\_\+database }\end{DoxyParamCaption})}
+
+
+
+Atualiza um banco de dados com informações mais recentes. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em current\+\_\+database} & Banco de dados atual. \\
+\hline
+{\em previous\+\_\+database} & Banco de dados anterior. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Novo banco de dados atualizado. 
+\end{DoxyReturn}

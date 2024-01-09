@@ -1,0 +1,118 @@
+\doxysection{Referência do Arquivo pages/sigaa\+\_\+pages.py}
+\hypertarget{sigaa__pages_8py}{}\label{sigaa__pages_8py}\index{pages/sigaa\_pages.py@{pages/sigaa\_pages.py}}
+
+
+Módulo com funções para interagir com a página da web do SIGAA.  
+
+
+\doxysubsubsection*{Funções}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{sigaa__pages_8py_a1545ff28d873634426761cad713bb926}{sigaa\+\_\+pages.\+insert\+\_\+credentials\+\_\+into\+\_\+sigaa}} (driver, USERNAME, PASSWORD)
+\item 
+\mbox{\hyperlink{sigaa__pages_8py_a7028dc08b6602d6db132aa822c60aa1e}{sigaa\+\_\+pages.\+insert\+\_\+credentials\+\_\+into\+\_\+sigaa\+\_\+env}} (driver, env\+\_\+var)
+\item 
+\mbox{\hyperlink{sigaa__pages_8py_a6cd4f646b4becfe9b837e38b7326ddab}{sigaa\+\_\+pages.\+click\+\_\+submit\+\_\+button}} (driver)
+\item 
+\mbox{\hyperlink{sigaa__pages_8py_a8449893edbe4c1e39362a67923231e84}{sigaa\+\_\+pages.\+login\+\_\+into\+\_\+sigaa}} (driver, USERNAME, PASSWORD)
+\item 
+\mbox{\hyperlink{sigaa__pages_8py_afff297a7169474177957ff8d232f539b}{sigaa\+\_\+pages.\+login\+\_\+into\+\_\+sigaa\+\_\+env}} (driver, env\+\_\+var)
+\item 
+\mbox{\hyperlink{sigaa__pages_8py_a9f46b5c271550a987275bbff381ca704}{sigaa\+\_\+pages.\+accept\+\_\+cookies}} (driver)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variáveis}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{sigaa__pages_8py_a9485d47a3ac211a7d5bcf9d4551d0564}\label{sigaa__pages_8py_a9485d47a3ac211a7d5bcf9d4551d0564} 
+str {\bfseries sigaa\+\_\+pages.\+LOGIN\+\_\+\+USER} = "{}username"{}
+\item 
+\Hypertarget{sigaa__pages_8py_a28d113f5f9fa62ceb2fcf062e212dc7c}\label{sigaa__pages_8py_a28d113f5f9fa62ceb2fcf062e212dc7c} 
+str {\bfseries sigaa\+\_\+pages.\+LOGIN\+\_\+\+PASS} = "{}password"{}
+\item 
+\Hypertarget{sigaa__pages_8py_ad76ae58fc0a07981e112edaa2b7e4932}\label{sigaa__pages_8py_ad76ae58fc0a07981e112edaa2b7e4932} 
+str {\bfseries sigaa\+\_\+pages.\+USERNAME\+\_\+\+XPATH} = "{}/html/body/div\mbox{[}3\mbox{]}/div/div\mbox{[}1\mbox{]}/form/div\mbox{[}1\mbox{]}/input"{}
+\item 
+\Hypertarget{sigaa__pages_8py_ae647c927d9f7970d692290430cc40867}\label{sigaa__pages_8py_ae647c927d9f7970d692290430cc40867} 
+str {\bfseries sigaa\+\_\+pages.\+PASSWORD\+\_\+\+XPATH} = "{}/html/body/div\mbox{[}3\mbox{]}/div/div\mbox{[}1\mbox{]}/form/div\mbox{[}2\mbox{]}/input"{}
+\item 
+\Hypertarget{sigaa__pages_8py_acc6e4e6f2ebadccf741ca004b65152c2}\label{sigaa__pages_8py_acc6e4e6f2ebadccf741ca004b65152c2} 
+str {\bfseries sigaa\+\_\+pages.\+SUBMIT\+\_\+\+BUTTON} = "{}//button\mbox{[}contains(text(), \textquotesingle{}ENTRAR\textquotesingle{})\mbox{]}"{}
+\item 
+\Hypertarget{sigaa__pages_8py_a1b73991c2ffcf562a20104cead74e6ef}\label{sigaa__pages_8py_a1b73991c2ffcf562a20104cead74e6ef} 
+str {\bfseries sigaa\+\_\+pages.\+COOKIES\+\_\+\+BUTTON} = "{}//button\mbox{[}contains(text(), \textquotesingle{}Ciente\textquotesingle{})\mbox{]}"{}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descrição detalhada}
+Módulo com funções para interagir com a página da web do SIGAA. 
+
+
+
+\doxysubsection{Funções}
+\Hypertarget{sigaa__pages_8py_a9f46b5c271550a987275bbff381ca704}\label{sigaa__pages_8py_a9f46b5c271550a987275bbff381ca704} 
+\index{sigaa\_pages.py@{sigaa\_pages.py}!accept\_cookies@{accept\_cookies}}
+\index{accept\_cookies@{accept\_cookies}!sigaa\_pages.py@{sigaa\_pages.py}}
+\doxysubsubsection{\texorpdfstring{accept\_cookies()}{accept\_cookies()}}
+{\footnotesize\ttfamily sigaa\+\_\+pages.\+accept\+\_\+cookies (\begin{DoxyParamCaption}\item[{}]{driver }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Aceita os cookies no SIGAA clicando no botão "Ciente".
+
+@param driver: Instância do driver do Selenium.
+\end{DoxyVerb}
+ \Hypertarget{sigaa__pages_8py_a6cd4f646b4becfe9b837e38b7326ddab}\label{sigaa__pages_8py_a6cd4f646b4becfe9b837e38b7326ddab} 
+\index{sigaa\_pages.py@{sigaa\_pages.py}!click\_submit\_button@{click\_submit\_button}}
+\index{click\_submit\_button@{click\_submit\_button}!sigaa\_pages.py@{sigaa\_pages.py}}
+\doxysubsubsection{\texorpdfstring{click\_submit\_button()}{click\_submit\_button()}}
+{\footnotesize\ttfamily sigaa\+\_\+pages.\+click\+\_\+submit\+\_\+button (\begin{DoxyParamCaption}\item[{}]{driver }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Clica no botão de envio (login) no SIGAA.
+
+@param driver: Instância do driver do Selenium.
+\end{DoxyVerb}
+ \Hypertarget{sigaa__pages_8py_a1545ff28d873634426761cad713bb926}\label{sigaa__pages_8py_a1545ff28d873634426761cad713bb926} 
+\index{sigaa\_pages.py@{sigaa\_pages.py}!insert\_credentials\_into\_sigaa@{insert\_credentials\_into\_sigaa}}
+\index{insert\_credentials\_into\_sigaa@{insert\_credentials\_into\_sigaa}!sigaa\_pages.py@{sigaa\_pages.py}}
+\doxysubsubsection{\texorpdfstring{insert\_credentials\_into\_sigaa()}{insert\_credentials\_into\_sigaa()}}
+{\footnotesize\ttfamily sigaa\+\_\+pages.\+insert\+\_\+credentials\+\_\+into\+\_\+sigaa (\begin{DoxyParamCaption}\item[{}]{driver,  }\item[{}]{USERNAME,  }\item[{}]{PASSWORD }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Insere as credenciais (nome de usuário e senha) nos campos de login do SIGAA.
+
+@param driver: Instância do driver do Selenium.
+@param USERNAME: Nome de usuário para login.
+@param PASSWORD: Senha para login.
+\end{DoxyVerb}
+ \Hypertarget{sigaa__pages_8py_a7028dc08b6602d6db132aa822c60aa1e}\label{sigaa__pages_8py_a7028dc08b6602d6db132aa822c60aa1e} 
+\index{sigaa\_pages.py@{sigaa\_pages.py}!insert\_credentials\_into\_sigaa\_env@{insert\_credentials\_into\_sigaa\_env}}
+\index{insert\_credentials\_into\_sigaa\_env@{insert\_credentials\_into\_sigaa\_env}!sigaa\_pages.py@{sigaa\_pages.py}}
+\doxysubsubsection{\texorpdfstring{insert\_credentials\_into\_sigaa\_env()}{insert\_credentials\_into\_sigaa\_env()}}
+{\footnotesize\ttfamily sigaa\+\_\+pages.\+insert\+\_\+credentials\+\_\+into\+\_\+sigaa\+\_\+env (\begin{DoxyParamCaption}\item[{}]{driver,  }\item[{}]{env\+\_\+var }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Insere as credenciais (nome de usuário e senha) nos campos de login do SIGAA usando variáveis de ambiente.
+
+@param driver: Instância do driver do Selenium.
+@param env_var: Dicionário contendo as variáveis de ambiente (SIGAA_USER e SIGAA_PASS).
+\end{DoxyVerb}
+ \Hypertarget{sigaa__pages_8py_a8449893edbe4c1e39362a67923231e84}\label{sigaa__pages_8py_a8449893edbe4c1e39362a67923231e84} 
+\index{sigaa\_pages.py@{sigaa\_pages.py}!login\_into\_sigaa@{login\_into\_sigaa}}
+\index{login\_into\_sigaa@{login\_into\_sigaa}!sigaa\_pages.py@{sigaa\_pages.py}}
+\doxysubsubsection{\texorpdfstring{login\_into\_sigaa()}{login\_into\_sigaa()}}
+{\footnotesize\ttfamily sigaa\+\_\+pages.\+login\+\_\+into\+\_\+sigaa (\begin{DoxyParamCaption}\item[{}]{driver,  }\item[{}]{USERNAME,  }\item[{}]{PASSWORD }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Realiza o login no SIGAA usando as credenciais fornecidas.
+
+@param driver: Instância do driver do Selenium.
+@param USERNAME: Nome de usuário para login.
+@param PASSWORD: Senha para login.
+\end{DoxyVerb}
+ \Hypertarget{sigaa__pages_8py_afff297a7169474177957ff8d232f539b}\label{sigaa__pages_8py_afff297a7169474177957ff8d232f539b} 
+\index{sigaa\_pages.py@{sigaa\_pages.py}!login\_into\_sigaa\_env@{login\_into\_sigaa\_env}}
+\index{login\_into\_sigaa\_env@{login\_into\_sigaa\_env}!sigaa\_pages.py@{sigaa\_pages.py}}
+\doxysubsubsection{\texorpdfstring{login\_into\_sigaa\_env()}{login\_into\_sigaa\_env()}}
+{\footnotesize\ttfamily sigaa\+\_\+pages.\+login\+\_\+into\+\_\+sigaa\+\_\+env (\begin{DoxyParamCaption}\item[{}]{driver,  }\item[{}]{env\+\_\+var }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Realiza o login no SIGAA usando as credenciais armazenadas nas variáveis de ambiente.
+
+@param driver: Instância do driver do Selenium.
+@param env_var: Dicionário contendo as variáveis de ambiente (SIGAA_USER e SIGAA_PASS).
+\end{DoxyVerb}
+ 

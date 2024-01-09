@@ -1,3 +1,7 @@
+# filter_descryption.py
+## @file
+# XPATHs e variáveis de configuração do filtro de busca de atividades. CASO SURGA UMA NOVA ÁREA CNPq, ADICIONE AQUI.
+
 XPATH_ERROR_MESSAGE = "/html/body/div[2]/div[2]/div[1]/ul/li"
 XPATH_ROWS = "/html/body/div[2]/div[2]/form[2]/table/tbody/tr"
 

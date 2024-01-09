@@ -1,0 +1,54 @@
+\doxysection{Referência do Arquivo calculate\+\_\+indicators/calculate\+\_\+objectives.py}
+\hypertarget{calculate__objectives_8py}{}\label{calculate__objectives_8py}\index{calculate\_indicators/calculate\_objectives.py@{calculate\_indicators/calculate\_objectives.py}}
+
+
+Módulo para calcular todos os indicadores relacionados aos objetivos das ações.  
+
+
+\doxysubsubsection*{Funções}
+\begin{DoxyCompactItemize}
+\item 
+tuple\mbox{[}dict, dict, dict, dict, dict\mbox{]} \mbox{\hyperlink{calculate__objectives_8py_a6a4e6afabcd6be33a0bff906cf16335b}{calculate\+\_\+objectives.\+get\+\_\+qtd\+\_\+actions\+\_\+objectives}} (dict origin\+\_\+database)
+\item 
+tuple\mbox{[}dict, dict, dict, dict, dict\mbox{]} \mbox{\hyperlink{calculate__objectives_8py_ac2440d5acecca31ba8c0e4bddc976759}{calculate\+\_\+objectives.\+get\+\_\+qtd\+\_\+actions\+\_\+objectives\+\_\+len}} (dict origin\+\_\+database)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descrição detalhada}
+Módulo para calcular todos os indicadores relacionados aos objetivos das ações. 
+
+
+
+\doxysubsection{Funções}
+\Hypertarget{calculate__objectives_8py_a6a4e6afabcd6be33a0bff906cf16335b}\label{calculate__objectives_8py_a6a4e6afabcd6be33a0bff906cf16335b} 
+\index{calculate\_objectives.py@{calculate\_objectives.py}!get\_qtd\_actions\_objectives@{get\_qtd\_actions\_objectives}}
+\index{get\_qtd\_actions\_objectives@{get\_qtd\_actions\_objectives}!calculate\_objectives.py@{calculate\_objectives.py}}
+\doxysubsubsection{\texorpdfstring{get\_qtd\_actions\_objectives()}{get\_qtd\_actions\_objectives()}}
+{\footnotesize\ttfamily  tuple\mbox{[}dict, dict, dict, dict, dict\mbox{]} calculate\+\_\+objectives.\+get\+\_\+qtd\+\_\+actions\+\_\+objectives (\begin{DoxyParamCaption}\item[{dict}]{origin\+\_\+database }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Calcula a quantidade de ações relacionadas a objetivos para cada indicador em diferentes períodos e tipos.
+
+Esta função recebe um banco de dados de origem como entrada e calcula a quantidade de ações relacionadas a objetivos
+para cada indicador nos seguintes períodos e tipos: geral, anual, mensal, anual com tipo de ação e mensal com tipo de ação.
+
+@param origin_database: Banco de dados de entrada contendo informações sobre ações.
+@return: Uma tupla contendo dicionários para os indicadores gerais, anuais, mensais, anuais com tipo de ação e mensais
+         com tipo de ação.
+\end{DoxyVerb}
+ \Hypertarget{calculate__objectives_8py_ac2440d5acecca31ba8c0e4bddc976759}\label{calculate__objectives_8py_ac2440d5acecca31ba8c0e4bddc976759} 
+\index{calculate\_objectives.py@{calculate\_objectives.py}!get\_qtd\_actions\_objectives\_len@{get\_qtd\_actions\_objectives\_len}}
+\index{get\_qtd\_actions\_objectives\_len@{get\_qtd\_actions\_objectives\_len}!calculate\_objectives.py@{calculate\_objectives.py}}
+\doxysubsubsection{\texorpdfstring{get\_qtd\_actions\_objectives\_len()}{get\_qtd\_actions\_objectives\_len()}}
+{\footnotesize\ttfamily  tuple\mbox{[}dict, dict, dict, dict, dict\mbox{]} calculate\+\_\+objectives.\+get\+\_\+qtd\+\_\+actions\+\_\+objectives\+\_\+len (\begin{DoxyParamCaption}\item[{dict}]{origin\+\_\+database }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Calcula a quantidade de ações relacionadas ao comprimento dos objetivos para cada indicador em diferentes períodos e tipos.
+
+Esta função recebe um banco de dados de origem como entrada e calcula a quantidade de ações relacionadas ao comprimento
+dos objetivos para cada indicador nos seguintes períodos e tipos: geral, anual, mensal, anual com tipo de ação e mensal
+com tipo de ação.
+
+@param origin_database: Banco de dados de entrada contendo informações sobre ações.
+@return: Uma tupla contendo dicionários para os indicadores gerais, anuais, mensais, anuais com tipo de ação e mensais
+         com tipo de ação.
+\end{DoxyVerb}
+ 

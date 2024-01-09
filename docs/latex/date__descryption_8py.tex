@@ -1,0 +1,97 @@
+\doxysection{Referência do Arquivo config/date\+\_\+descryption.py}
+\hypertarget{date__descryption_8py}{}\label{date__descryption_8py}\index{config/date\_descryption.py@{config/date\_descryption.py}}
+
+
+Informações sobre datas.  
+
+
+\doxysubsubsection*{Variáveis}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{date__descryption_8py_ad415ca2701f5f92f6fcea90b0e36b2de}\label{date__descryption_8py_ad415ca2701f5f92f6fcea90b0e36b2de} 
+int {\bfseries date\+\_\+descryption.\+START\+\_\+\+YEAR} = \textquotesingle{}BASE\textquotesingle{} else 2020
+\item 
+\Hypertarget{date__descryption_8py_a58317aef5df11d3a85d0b9e81f24db96}\label{date__descryption_8py_a58317aef5df11d3a85d0b9e81f24db96} 
+int {\bfseries date\+\_\+descryption.\+END\+\_\+\+YEAR} = \textquotesingle{}BASE\textquotesingle{} else 2022
+\item 
+\Hypertarget{date__descryption_8py_a416640c7c446320569e88b153d6f73d9}\label{date__descryption_8py_a416640c7c446320569e88b153d6f73d9} 
+int {\bfseries date\+\_\+descryption.\+FIRST\+\_\+\+MONTH\+\_\+\+OF\+\_\+\+YEAR} = 1
+\item 
+\Hypertarget{date__descryption_8py_ad6ae2bf49ba6427eb9d7e0597cd18703}\label{date__descryption_8py_ad6ae2bf49ba6427eb9d7e0597cd18703} 
+int {\bfseries date\+\_\+descryption.\+LAST\+\_\+\+MONTH\+\_\+\+OF\+\_\+\+YEAR} = 12
+\item 
+\Hypertarget{date__descryption_8py_a65339b9736ee139e8ff8595e37ac41fd}\label{date__descryption_8py_a65339b9736ee139e8ff8595e37ac41fd} 
+list {\bfseries date\+\_\+descryption.\+SPECIAL\+\_\+\+DATE} = \mbox{[}\textquotesingle{}9/2023\textquotesingle{}, \textquotesingle{}3/2023\textquotesingle{}, \textquotesingle{}8/2022\textquotesingle{}, \textquotesingle{}9/2021\textquotesingle{}\mbox{]}
+\item 
+\Hypertarget{date__descryption_8py_aaf8ddee22d3bc019795292c751b86cdb}\label{date__descryption_8py_aaf8ddee22d3bc019795292c751b86cdb} 
+str {\bfseries date\+\_\+descryption.\+FIRST\+\_\+\+DAY\+\_\+\+OF\+\_\+\+MONTH} = \textquotesingle{}01\textquotesingle{}
+\item 
+\Hypertarget{date__descryption_8py_a24c8ebfdd434f9186bd37478329dfde7}\label{date__descryption_8py_a24c8ebfdd434f9186bd37478329dfde7} 
+str {\bfseries date\+\_\+descryption.\+EMPTY\+\_\+\+MONTH} = \textquotesingle{}1/2020\textquotesingle{}
+\item 
+\Hypertarget{date__descryption_8py_a28221a860ab4664557dbf038274823b0}\label{date__descryption_8py_a28221a860ab4664557dbf038274823b0} 
+str {\bfseries date\+\_\+descryption.\+HAS\+\_\+\+DATA\+\_\+\+MONTH} = \textquotesingle{}7/2022\textquotesingle{}
+\item 
+\Hypertarget{date__descryption_8py_a5f889e4f2299d1a323d88bb25fddae14}\label{date__descryption_8py_a5f889e4f2299d1a323d88bb25fddae14} 
+list {\bfseries date\+\_\+descryption.\+LEAP\+\_\+\+YEAR} = \mbox{[}2020, 2024, 2028, 2032, 2036, 2040, 2044, 2048\mbox{]}
+\item 
+dict \mbox{\hyperlink{date__descryption_8py_a3c6127d7e234dd5b69388efe22d07e8e}{date\+\_\+descryption.\+MONTHS\+\_\+\+LAST\+\_\+\+DAY}}
+\item 
+dict \mbox{\hyperlink{date__descryption_8py_a947dc64cd3a625b10b2714949b1e757f}{date\+\_\+descryption.\+DIGITS\+\_\+\+MONTHS}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descrição detalhada}
+Informações sobre datas. 
+
+EMPTY\+\_\+\+MONTH é usado para testes (PRECISA DE UM MÊS SEM AÇÕ\+ES CADASTRADAS NO SIGAA). 
+
+\doxysubsection{Variáveis}
+\Hypertarget{date__descryption_8py_a947dc64cd3a625b10b2714949b1e757f}\label{date__descryption_8py_a947dc64cd3a625b10b2714949b1e757f} 
+\index{date\_descryption.py@{date\_descryption.py}!DIGITS\_MONTHS@{DIGITS\_MONTHS}}
+\index{DIGITS\_MONTHS@{DIGITS\_MONTHS}!date\_descryption.py@{date\_descryption.py}}
+\doxysubsubsection{\texorpdfstring{DIGITS\_MONTHS}{DIGITS\_MONTHS}}
+{\footnotesize\ttfamily dict date\+\_\+descryption.\+DIGITS\+\_\+\+MONTHS}
+
+{\bfseries Valor inicial\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ \{}
+\DoxyCodeLine{00002\ \ \ \ \ 1:\ \textcolor{stringliteral}{'janeiro'},}
+\DoxyCodeLine{00003\ \ \ \ \ 2:\ \textcolor{stringliteral}{'fevereiro'},}
+\DoxyCodeLine{00004\ \ \ \ \ 3:\ \textcolor{stringliteral}{'março'},}
+\DoxyCodeLine{00005\ \ \ \ \ 4:\ \textcolor{stringliteral}{'abril'},}
+\DoxyCodeLine{00006\ \ \ \ \ 5:\ \textcolor{stringliteral}{'maio'},}
+\DoxyCodeLine{00007\ \ \ \ \ 6:\ \textcolor{stringliteral}{'junho'},}
+\DoxyCodeLine{00008\ \ \ \ \ 7:\ \textcolor{stringliteral}{'julho'},}
+\DoxyCodeLine{00009\ \ \ \ \ 8:\ \textcolor{stringliteral}{'agosto'},}
+\DoxyCodeLine{00010\ \ \ \ \ 9:\ \textcolor{stringliteral}{'setembro'},}
+\DoxyCodeLine{00011\ \ \ \ \ 10:\ \textcolor{stringliteral}{'outubro'},}
+\DoxyCodeLine{00012\ \ \ \ \ 11:\ \textcolor{stringliteral}{'novembro'},}
+\DoxyCodeLine{00013\ \ \ \ \ 12:\ \textcolor{stringliteral}{'dezembro'}}
+\DoxyCodeLine{00014\ \}}
+
+\end{DoxyCode}
+\Hypertarget{date__descryption_8py_a3c6127d7e234dd5b69388efe22d07e8e}\label{date__descryption_8py_a3c6127d7e234dd5b69388efe22d07e8e} 
+\index{date\_descryption.py@{date\_descryption.py}!MONTHS\_LAST\_DAY@{MONTHS\_LAST\_DAY}}
+\index{MONTHS\_LAST\_DAY@{MONTHS\_LAST\_DAY}!date\_descryption.py@{date\_descryption.py}}
+\doxysubsubsection{\texorpdfstring{MONTHS\_LAST\_DAY}{MONTHS\_LAST\_DAY}}
+{\footnotesize\ttfamily dict date\+\_\+descryption.\+MONTHS\+\_\+\+LAST\+\_\+\+DAY}
+
+{\bfseries Valor inicial\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ \{}
+\DoxyCodeLine{00002\ \ \ \ \ 1:\ \textcolor{stringliteral}{'31'},}
+\DoxyCodeLine{00003\ \ \ \ \ 2:\ \textcolor{stringliteral}{'28'},}
+\DoxyCodeLine{00004\ \ \ \ \ 3:\ \textcolor{stringliteral}{'31'},}
+\DoxyCodeLine{00005\ \ \ \ \ 4:\ \textcolor{stringliteral}{'30'},}
+\DoxyCodeLine{00006\ \ \ \ \ 5:\ \textcolor{stringliteral}{'31'},}
+\DoxyCodeLine{00007\ \ \ \ \ 6:\ \textcolor{stringliteral}{'30'},}
+\DoxyCodeLine{00008\ \ \ \ \ 7:\ \textcolor{stringliteral}{'31'},}
+\DoxyCodeLine{00009\ \ \ \ \ 8:\ \textcolor{stringliteral}{'31'},}
+\DoxyCodeLine{00010\ \ \ \ \ 9:\ \textcolor{stringliteral}{'30'},}
+\DoxyCodeLine{00011\ \ \ \ \ 10:\ \textcolor{stringliteral}{'31'},}
+\DoxyCodeLine{00012\ \ \ \ \ 11:\ \textcolor{stringliteral}{'30'},}
+\DoxyCodeLine{00013\ \ \ \ \ 12:\ \textcolor{stringliteral}{'31'},}
+\DoxyCodeLine{00014\ \}}
+
+\end{DoxyCode}

@@ -1,3 +1,7 @@
+# json_descryption.py
+## @file
+# Nome do arquivo JSON contendo o banco de dados base.
+
 FILE_PATH = "databases/"
 
 FILE_PATH_BASE = 'base/'

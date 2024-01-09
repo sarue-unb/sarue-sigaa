@@ -1,0 +1,77 @@
+\doxysection{Referência do Arquivo calculate\+\_\+indicators/dictionary\+\_\+functions.py}
+\hypertarget{dictionary__functions_8py}{}\label{dictionary__functions_8py}\index{calculate\_indicators/dictionary\_functions.py@{calculate\_indicators/dictionary\_functions.py}}
+
+
+Módulo com funções auxiliares para o cálculo dos indicadores.  
+
+
+\doxysubsubsection*{Funções}
+\begin{DoxyCompactItemize}
+\item 
+dict \mbox{\hyperlink{dictionary__functions_8py_a777ddc89ca18c34f153a40539bc40830}{dictionary\+\_\+functions.\+create\+\_\+dictionary\+\_\+place}} (dict indicators, str key, int value)
+\item 
+dict \mbox{\hyperlink{dictionary__functions_8py_a602982d3ae36d716381a4f74ba7872f2}{dictionary\+\_\+functions.\+create\+\_\+set\+\_\+place}} (dict indicators, str key, int value)
+\item 
+dict \mbox{\hyperlink{dictionary__functions_8py_ae90919b2baa3219da49563160931d408}{dictionary\+\_\+functions.\+update\+\_\+dictionary\+\_\+place}} (dict indicators, str key, int value)
+\item 
+int \mbox{\hyperlink{dictionary__functions_8py_abd34f1d8843f623a4724c396e0b01776}{dictionary\+\_\+functions.\+return\+\_\+number}} (str text)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descrição detalhada}
+Módulo com funções auxiliares para o cálculo dos indicadores. 
+
+
+
+\doxysubsection{Funções}
+\Hypertarget{dictionary__functions_8py_a777ddc89ca18c34f153a40539bc40830}\label{dictionary__functions_8py_a777ddc89ca18c34f153a40539bc40830} 
+\index{dictionary\_functions.py@{dictionary\_functions.py}!create\_dictionary\_place@{create\_dictionary\_place}}
+\index{create\_dictionary\_place@{create\_dictionary\_place}!dictionary\_functions.py@{dictionary\_functions.py}}
+\doxysubsubsection{\texorpdfstring{create\_dictionary\_place()}{create\_dictionary\_place()}}
+{\footnotesize\ttfamily  dict dictionary\+\_\+functions.\+create\+\_\+dictionary\+\_\+place (\begin{DoxyParamCaption}\item[{dict}]{indicators,  }\item[{str}]{key,  }\item[{int}]{value }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Cria uma entrada de dicionário ou atualiza o valor se a chave já existir.
+
+@param indicators: Dicionário de entrada.
+@param key: Chave para a entrada do dicionário.
+@param value: Valor a ser associado à chave.
+@return: Dicionário atualizado.
+\end{DoxyVerb}
+ \Hypertarget{dictionary__functions_8py_a602982d3ae36d716381a4f74ba7872f2}\label{dictionary__functions_8py_a602982d3ae36d716381a4f74ba7872f2} 
+\index{dictionary\_functions.py@{dictionary\_functions.py}!create\_set\_place@{create\_set\_place}}
+\index{create\_set\_place@{create\_set\_place}!dictionary\_functions.py@{dictionary\_functions.py}}
+\doxysubsubsection{\texorpdfstring{create\_set\_place()}{create\_set\_place()}}
+{\footnotesize\ttfamily  dict dictionary\+\_\+functions.\+create\+\_\+set\+\_\+place (\begin{DoxyParamCaption}\item[{dict}]{indicators,  }\item[{str}]{key,  }\item[{int}]{value }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Cria uma entrada de conjunto ou adiciona o valor a um conjunto existente para a chave especificada.
+
+@param indicators: Dicionário de entrada.
+@param key: Chave para a entrada do conjunto.
+@param value: Valor a ser adicionado ao conjunto.
+@return: Dicionário atualizado com uma entrada de conjunto.
+\end{DoxyVerb}
+ \Hypertarget{dictionary__functions_8py_abd34f1d8843f623a4724c396e0b01776}\label{dictionary__functions_8py_abd34f1d8843f623a4724c396e0b01776} 
+\index{dictionary\_functions.py@{dictionary\_functions.py}!return\_number@{return\_number}}
+\index{return\_number@{return\_number}!dictionary\_functions.py@{dictionary\_functions.py}}
+\doxysubsubsection{\texorpdfstring{return\_number()}{return\_number()}}
+{\footnotesize\ttfamily  int dictionary\+\_\+functions.\+return\+\_\+number (\begin{DoxyParamCaption}\item[{str}]{text }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Extrai e retorna o primeiro inteiro encontrado no texto de entrada.
+
+@param text: Texto de entrada contendo valores numéricos.
+@return: Inteiro extraído ou 0 se nenhum inteiro for encontrado.
+\end{DoxyVerb}
+ \Hypertarget{dictionary__functions_8py_ae90919b2baa3219da49563160931d408}\label{dictionary__functions_8py_ae90919b2baa3219da49563160931d408} 
+\index{dictionary\_functions.py@{dictionary\_functions.py}!update\_dictionary\_place@{update\_dictionary\_place}}
+\index{update\_dictionary\_place@{update\_dictionary\_place}!dictionary\_functions.py@{dictionary\_functions.py}}
+\doxysubsubsection{\texorpdfstring{update\_dictionary\_place()}{update\_dictionary\_place()}}
+{\footnotesize\ttfamily  dict dictionary\+\_\+functions.\+update\+\_\+dictionary\+\_\+place (\begin{DoxyParamCaption}\item[{dict}]{indicators,  }\item[{str}]{key,  }\item[{int}]{value }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Atualiza uma entrada do dicionário adicionando o valor especificado ao valor existente para a chave.
+
+@param indicators: Dicionário de entrada.
+@param key: Chave para a entrada do dicionário.
+@param value: Valor a ser adicionado ao valor existente.
+@return: Dicionário atualizado.
+\end{DoxyVerb}
+ 

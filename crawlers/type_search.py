@@ -1,3 +1,8 @@
+# type_search.py
+
+## @file
+# Módulo para realizar a busca de dados de extensão.
+
 import time
 from tqdm import tqdm
 from crawlers.crawler_data import MiniCrawlerConcurrent
@@ -8,12 +13,18 @@ from config.crawler_descryption import MAX_THREADS, TYPE_SEARCH
 from config.filter_descryption import AREA_CNPq
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
+## Classe para realizar a busca de dados de extensão.
 class TypeSearch():
+    ## Método construtor da classe TypeSearch.
+    # @param username Nome de usuário para login.
+    # @param password Senha para login.
+    # @param offset Deslocamento temporal.
     def __init__(self, username, password, offset):
         self.username = username
         self.password = password
         self.offset = offset
         
+    ## Método para realizar a busca de dados de extensão de forma concorrente.
     def concurrent_search(self):
         lista = []
         for year in range(START_YEAR, END_YEAR+1):
@@ -61,11 +72,13 @@ class TypeSearch():
             for instance in instances:
                 instance.quit()
 
+    ## Método para realizar a busca de dados de extensão.
     def search(self):
         if TYPE_SEARCH == 'CONCURRENT':
             self.concurrent_search()
         else:
             centralize("Invalid type search")
     
+    ## Método principal para executar o processo de busca de dados.
     def run(self):
         self.search()

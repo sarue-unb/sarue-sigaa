@@ -1,3 +1,7 @@
+# calculate_all.py
+## @file
+# Módulo para calcular todos os indicadores relacionados a quantidade de ações, status das ações, objetivos contemplados e envolvidos.
+
 from config.json_descryption import OUTPUT_NAMES
 from database_generator.load_database import add_item_to_indicators_database, add_item_to_private_database
 
@@ -7,6 +11,15 @@ from calculate_indicators.calculate_objectives import *
 from calculate_indicators.calculate_members import *
 
 def calculate_all_indicators(origin_database: dict):
+    """
+    Calcula e armazena vários indicadores relacionados a ações, status, objetivos e membros da equipe.
+
+    Esta função recebe um banco de dados de origem como entrada e calcula vários indicadores relacionados a ações, status,
+    objetivos e membros da equipe. Os indicadores calculados são então armazenados no banco de dados de indicadores e no banco
+    de dados privado para análises posteriores.
+
+    @param origin_database: Banco de dados de entrada contendo informações sobre ações, status, objetivos e membros da equipe.
+    """
     # Indicadores de quantidade de ações
     actions, actions_month, actions_month_type, actions_year, actions_year_type = get_qtd_actions(origin_database)
   

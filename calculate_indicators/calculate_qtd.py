@@ -1,7 +1,21 @@
+# calculate_qtd.py
+## @file
+# Módulo para calcular todos os indicadores relacionados a qauntidade de ações.
+
 from config.date_descryption import DIGITS_MONTHS
 from calculate_indicators.sorted_dictionarys import *
 
 def get_qtd_actions(origin_database: dict) -> dict:
+    """
+    Calculate the quantity of actions for each indicator in different time frames and types.
+
+    This function takes an origin database as input and calculates the quantity of actions for each indicator in the
+    following time frames and types: overall, yearly, monthly, yearly with action type, and monthly with action type.
+
+    @param origin_database: Input database containing information about actions.
+    @return: A tuple containing dictionaries for overall, yearly, monthly, yearly with action type, and monthly with
+             action type indicators.
+    """
     indicators, indicators_month, indicators_month_type, indicators_year, indicators_year_type = {}, {}, {}, {}, {}
     for code in origin_database:
         year = origin_database[code]["data_inicio"]["ano"]
@@ -27,6 +41,16 @@ def get_qtd_actions(origin_database: dict) -> dict:
     return indicators, indicators_month, indicators_month_type, indicators_year, indicators_year_type
 
 def get_qtd_info(origin_database: dict) -> dict:
+    """
+    Calculate the quantity of information for each indicator in different time frames and types.
+
+    This function takes an origin database as input and calculates the quantity of information for each indicator in
+    the following time frames and types: overall, yearly, monthly, yearly with action type, and monthly with action type.
+
+    @param origin_database: Input database containing information about actions.
+    @return: A tuple containing dictionaries for overall, yearly, monthly, yearly with action type, and monthly with
+             action type indicators.
+    """
     indicators, indicators_month, indicators_month_type, indicators_year, indicators_year_type = {}, {}, {}, {}, {}
 
     indicators["qtd_convenio_funpec"] = 0

@@ -1,3 +1,8 @@
+# crawler_auth.py
+
+## @file
+# Módulo para autenticação em páginas web usando Selenium.
+
 import pages.sigaa_pages as sp 
 import components.selection_components as sc
 import time
@@ -6,7 +11,9 @@ from config.display_descryption import *
 from config.url_descryption import *
 from selenium.common.exceptions import StaleElementReferenceException
 
+## Classe para autenticar o usuário em páginas web.
 class CrawlerAuth:
+    ## Método construtor da classe CrawlerAuth.
     def __init__(self):
         try:
             self.chrome_options = webdriver.ChromeOptions()
@@ -34,6 +41,7 @@ class CrawlerAuth:
 
         centralize(f'Navegador Usado: {RIGHT_ARROW} {self.navegador.capitalize()} {LEFT_ARROW}')
 
+    ## Método para realizar a instância de login.
     def instance_login(self):
         self.driver.implicitly_wait(20)
 
@@ -55,6 +63,8 @@ class CrawlerAuth:
 
         return username, password
 
+    ## Método principal para executar o processo de autenticação.
+    # @return Uma tupla contendo o nome de usuário e senha.
     def run(self) -> tuple[str, str, str]:
         self.driver.get(LOGIN_PAGE)
         username, password = self.instance_login()

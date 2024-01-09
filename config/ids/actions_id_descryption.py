@@ -1,3 +1,8 @@
+# actions_id_descryption.py
+## @file
+# Módulo com IDs de ações do SIGAA. Nem todos os tipos de ações estão listados aqui porque não utilizamos o id, usamos o XPATH nas páginas de açÕes.
+
+
 PRINTER_FORM_ID_PRE_FIX = 'form:j_id_jsp_1439633680_513:'
 # PRINTER_FORM_ID_PRE_FIX = "//*[matches(@id, 'form:j_id_jsp_.*:imprimir')]"
 PRINTER_FORM_ID_POS_FIX = ':imprimir'

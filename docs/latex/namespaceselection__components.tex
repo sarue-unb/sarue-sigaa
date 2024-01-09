@@ -1,0 +1,301 @@
+\doxysection{selection\+\_\+components Namespace Reference}
+\hypertarget{namespaceselection__components}{}\label{namespaceselection__components}\index{selection\_components@{selection\_components}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceselection__components_a1ae66f215e218c1e437373371b6952de}{make\+\_\+search}} (driver)
+\item 
+\mbox{\hyperlink{namespaceselection__components_a986bb3e410670920e5b55fab9c6d4f01}{get\+\_\+error\+\_\+message}} (driver)
+\item 
+\mbox{\hyperlink{namespaceselection__components_af1a66608d67fcdff5315b8d964b16307}{clear\+\_\+input\+\_\+name}} (str name, driver)
+\item 
+\mbox{\hyperlink{namespaceselection__components_a918a608549ecd420b370e12b0abb08e4}{uncheck\+\_\+checkbox\+\_\+name}} (str name, driver)
+\item 
+\mbox{\hyperlink{namespaceselection__components_abd1166545635b8bfa43190ed274c249a}{use\+\_\+input\+\_\+by\+\_\+name}} (str name, str input, driver)
+\item 
+\mbox{\hyperlink{namespaceselection__components_a63f684c89eb835dc1f7613bc42f438f3}{use\+\_\+element\+\_\+by\+\_\+id}} (str id, driver)
+\item 
+\mbox{\hyperlink{namespaceselection__components_a3bb2e729f8487ba5f879e681713e10a4}{use\+\_\+element\+\_\+by\+\_\+xpath}} (int value, driver)
+\item 
+\mbox{\hyperlink{namespaceselection__components_a0bde2286d96d67f40d7ecb690a57ff81}{use\+\_\+element\+\_\+by\+\_\+class}} (str class\+\_\+name, driver)
+\item 
+\mbox{\hyperlink{namespaceselection__components_a59e483bb1b21e3718338b93255e1317c}{get\+\_\+element\+\_\+by\+\_\+id}} (str id, driver)
+\item 
+\mbox{\hyperlink{namespaceselection__components_abd90e6b84d4abff731029d79991aad6f}{get\+\_\+element\+\_\+by\+\_\+xpath}} (str value, driver)
+\item 
+\mbox{\hyperlink{namespaceselection__components_ab0bfc830530cb6e6fcf5e3c5ce956156}{get\+\_\+element\+\_\+by\+\_\+class}} (str class\+\_\+name, driver)
+\item 
+\mbox{\hyperlink{namespaceselection__components_a1cc171cbeca2e98a29366c9d8903cf66}{get\+\_\+element\+\_\+by\+\_\+select}} (str name, str option, driver)
+\item 
+\mbox{\hyperlink{namespaceselection__components_a81a4cae6460230b87d77e5c14a217912}{get\+\_\+rows\+\_\+len}} (result\+\_\+table)
+\item 
+\mbox{\hyperlink{namespaceselection__components_af7eb9e057020f67f2ca107d877897240}{get\+\_\+rows\+\_\+from\+\_\+table}} (driver)
+\item 
+\mbox{\hyperlink{namespaceselection__components_af81e72d6289a03df6651d49c98c3d6df}{count\+\_\+listing}} (driver)
+\item 
+\mbox{\hyperlink{namespaceselection__components_a51a90467dcc4c24965bf829a681aa976}{add\+\_\+date\+\_\+to\+\_\+item}} (item, month, year)
+\item 
+\mbox{\hyperlink{namespaceselection__components_afee585c39fdc992b881f41b237995074}{get\+\_\+info\+\_\+try\+\_\+except}} (xpath, driver)
+\item 
+\mbox{\hyperlink{namespaceselection__components_a2c105de36a805a7904237c90522f262d}{get\+\_\+info\+\_\+directly}} (xpath, driver)
+\item 
+\mbox{\hyperlink{namespaceselection__components_a4ae4465f6c8d9bccc497a8c513d6364a}{get\+\_\+info}} (xpath, driver)
+\item 
+\mbox{\hyperlink{namespaceselection__components_ab6f75c580d4582aa21aa3d1591841f74}{get\+\_\+qtd\+\_\+tables\+\_\+by\+\_\+xpath}} (xpath, driver)
+\item 
+\mbox{\hyperlink{namespaceselection__components_a24b6336dd2cd2c820f53527f7d747157}{get\+\_\+qtd\+\_\+tables\+\_\+by\+\_\+xpath\+\_\+relatorio}} (xpath, driver)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}selection_components.py
+@file
+
+Módulo com funções para interagir com a página da web e obter informações.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespaceselection__components_a51a90467dcc4c24965bf829a681aa976}\label{namespaceselection__components_a51a90467dcc4c24965bf829a681aa976} 
+\index{selection\_components@{selection\_components}!add\_date\_to\_item@{add\_date\_to\_item}}
+\index{add\_date\_to\_item@{add\_date\_to\_item}!selection\_components@{selection\_components}}
+\doxysubsubsection{\texorpdfstring{add\_date\_to\_item()}{add\_date\_to\_item()}}
+{\footnotesize\ttfamily selection\+\_\+components.\+add\+\_\+date\+\_\+to\+\_\+item (\begin{DoxyParamCaption}\item[{}]{item,  }\item[{}]{month,  }\item[{}]{year }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Adiciona informações de data a um dicionário de item.
+
+@param item: Dicionário representando um item.
+@param month: Informações do mês a serem adicionadas.
+@param year: Informações do ano a serem adicionadas.
+@return: Dicionário de item atualizado com informações de data.
+\end{DoxyVerb}
+ \Hypertarget{namespaceselection__components_af1a66608d67fcdff5315b8d964b16307}\label{namespaceselection__components_af1a66608d67fcdff5315b8d964b16307} 
+\index{selection\_components@{selection\_components}!clear\_input\_name@{clear\_input\_name}}
+\index{clear\_input\_name@{clear\_input\_name}!selection\_components@{selection\_components}}
+\doxysubsubsection{\texorpdfstring{clear\_input\_name()}{clear\_input\_name()}}
+{\footnotesize\ttfamily selection\+\_\+components.\+clear\+\_\+input\+\_\+name (\begin{DoxyParamCaption}\item[{str}]{name,  }\item[{}]{driver }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Limpa o campo de entrada com o nome especificado.
+
+@param name: Atributo de nome do campo de entrada.
+@param driver: Objeto WebDriver para interagir com a página da web.
+\end{DoxyVerb}
+ \Hypertarget{namespaceselection__components_af81e72d6289a03df6651d49c98c3d6df}\label{namespaceselection__components_af81e72d6289a03df6651d49c98c3d6df} 
+\index{selection\_components@{selection\_components}!count\_listing@{count\_listing}}
+\index{count\_listing@{count\_listing}!selection\_components@{selection\_components}}
+\doxysubsubsection{\texorpdfstring{count\_listing()}{count\_listing()}}
+{\footnotesize\ttfamily selection\+\_\+components.\+count\+\_\+listing (\begin{DoxyParamCaption}\item[{}]{driver }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Conta o número de listagens na página da web.
+
+@param driver: Objeto WebDriver para interagir com a página da web.
+@return: Número de listagens.
+\end{DoxyVerb}
+ \Hypertarget{namespaceselection__components_ab0bfc830530cb6e6fcf5e3c5ce956156}\label{namespaceselection__components_ab0bfc830530cb6e6fcf5e3c5ce956156} 
+\index{selection\_components@{selection\_components}!get\_element\_by\_class@{get\_element\_by\_class}}
+\index{get\_element\_by\_class@{get\_element\_by\_class}!selection\_components@{selection\_components}}
+\doxysubsubsection{\texorpdfstring{get\_element\_by\_class()}{get\_element\_by\_class()}}
+{\footnotesize\ttfamily selection\+\_\+components.\+get\+\_\+element\+\_\+by\+\_\+class (\begin{DoxyParamCaption}\item[{str}]{class\+\_\+name,  }\item[{}]{driver }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Obtém um elemento pelo seu nome de classe.
+
+@param class_name: Atributo de nome de classe do elemento.
+@param driver: Objeto WebDriver para interagir com a página da web.
+@return: Objeto WebElement representando o elemento localizado.
+\end{DoxyVerb}
+ \Hypertarget{namespaceselection__components_a59e483bb1b21e3718338b93255e1317c}\label{namespaceselection__components_a59e483bb1b21e3718338b93255e1317c} 
+\index{selection\_components@{selection\_components}!get\_element\_by\_id@{get\_element\_by\_id}}
+\index{get\_element\_by\_id@{get\_element\_by\_id}!selection\_components@{selection\_components}}
+\doxysubsubsection{\texorpdfstring{get\_element\_by\_id()}{get\_element\_by\_id()}}
+{\footnotesize\ttfamily selection\+\_\+components.\+get\+\_\+element\+\_\+by\+\_\+id (\begin{DoxyParamCaption}\item[{str}]{id,  }\item[{}]{driver }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Obtém um elemento pelo seu ID.
+
+@param id: Atributo de ID do elemento.
+@param driver: Objeto WebDriver para interagir com a página da web.
+@return: Objeto WebElement representando o elemento localizado.
+\end{DoxyVerb}
+ \Hypertarget{namespaceselection__components_a1cc171cbeca2e98a29366c9d8903cf66}\label{namespaceselection__components_a1cc171cbeca2e98a29366c9d8903cf66} 
+\index{selection\_components@{selection\_components}!get\_element\_by\_select@{get\_element\_by\_select}}
+\index{get\_element\_by\_select@{get\_element\_by\_select}!selection\_components@{selection\_components}}
+\doxysubsubsection{\texorpdfstring{get\_element\_by\_select()}{get\_element\_by\_select()}}
+{\footnotesize\ttfamily selection\+\_\+components.\+get\+\_\+element\+\_\+by\+\_\+select (\begin{DoxyParamCaption}\item[{str}]{name,  }\item[{str}]{option,  }\item[{}]{driver }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Obtém um elemento pelo seu nome e seleciona uma opção de um menu suspenso.
+
+@param name: Atributo de nome do elemento (menu suspenso).
+@param option: Opção a ser selecionada no menu suspenso.
+@param driver: Objeto WebDriver para interagir com a página da web.
+\end{DoxyVerb}
+ \Hypertarget{namespaceselection__components_abd90e6b84d4abff731029d79991aad6f}\label{namespaceselection__components_abd90e6b84d4abff731029d79991aad6f} 
+\index{selection\_components@{selection\_components}!get\_element\_by\_xpath@{get\_element\_by\_xpath}}
+\index{get\_element\_by\_xpath@{get\_element\_by\_xpath}!selection\_components@{selection\_components}}
+\doxysubsubsection{\texorpdfstring{get\_element\_by\_xpath()}{get\_element\_by\_xpath()}}
+{\footnotesize\ttfamily selection\+\_\+components.\+get\+\_\+element\+\_\+by\+\_\+xpath (\begin{DoxyParamCaption}\item[{str}]{value,  }\item[{}]{driver }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Obtém um elemento pelo seu XPath.
+
+@param value: Expressão XPath para localizar o elemento.
+@param driver: Objeto WebDriver para interagir com a página da web.
+@return: Objeto WebElement representando o elemento localizado.
+\end{DoxyVerb}
+ \Hypertarget{namespaceselection__components_a986bb3e410670920e5b55fab9c6d4f01}\label{namespaceselection__components_a986bb3e410670920e5b55fab9c6d4f01} 
+\index{selection\_components@{selection\_components}!get\_error\_message@{get\_error\_message}}
+\index{get\_error\_message@{get\_error\_message}!selection\_components@{selection\_components}}
+\doxysubsubsection{\texorpdfstring{get\_error\_message()}{get\_error\_message()}}
+{\footnotesize\ttfamily selection\+\_\+components.\+get\+\_\+error\+\_\+message (\begin{DoxyParamCaption}\item[{}]{driver }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Obtém a mensagem de erro da página da web.
+
+@param driver: Objeto WebDriver para interagir com a página da web.
+@return: Texto da mensagem de erro ou None se nenhuma mensagem de erro for encontrada.
+\end{DoxyVerb}
+ \Hypertarget{namespaceselection__components_a4ae4465f6c8d9bccc497a8c513d6364a}\label{namespaceselection__components_a4ae4465f6c8d9bccc497a8c513d6364a} 
+\index{selection\_components@{selection\_components}!get\_info@{get\_info}}
+\index{get\_info@{get\_info}!selection\_components@{selection\_components}}
+\doxysubsubsection{\texorpdfstring{get\_info()}{get\_info()}}
+{\footnotesize\ttfamily selection\+\_\+components.\+get\+\_\+info (\begin{DoxyParamCaption}\item[{}]{xpath,  }\item[{}]{driver }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Obtém informações com base no tipo de pesquisa selecionado.
+
+@param xpath: Expressão XPath para localizar o elemento contendo informações.
+@param driver: Objeto WebDriver para interagir com a página da web.
+@return: Informações extraídas.
+\end{DoxyVerb}
+ \Hypertarget{namespaceselection__components_a2c105de36a805a7904237c90522f262d}\label{namespaceselection__components_a2c105de36a805a7904237c90522f262d} 
+\index{selection\_components@{selection\_components}!get\_info\_directly@{get\_info\_directly}}
+\index{get\_info\_directly@{get\_info\_directly}!selection\_components@{selection\_components}}
+\doxysubsubsection{\texorpdfstring{get\_info\_directly()}{get\_info\_directly()}}
+{\footnotesize\ttfamily selection\+\_\+components.\+get\+\_\+info\+\_\+directly (\begin{DoxyParamCaption}\item[{}]{xpath,  }\item[{}]{driver }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Obtém informações diretamente de um XPath específico.
+
+@param xpath: Expressão XPath para localizar o elemento contendo informações.
+@param driver: Objeto WebDriver para interagir com a página da web.
+@return: Informações extraídas.
+\end{DoxyVerb}
+ \Hypertarget{namespaceselection__components_afee585c39fdc992b881f41b237995074}\label{namespaceselection__components_afee585c39fdc992b881f41b237995074} 
+\index{selection\_components@{selection\_components}!get\_info\_try\_except@{get\_info\_try\_except}}
+\index{get\_info\_try\_except@{get\_info\_try\_except}!selection\_components@{selection\_components}}
+\doxysubsubsection{\texorpdfstring{get\_info\_try\_except()}{get\_info\_try\_except()}}
+{\footnotesize\ttfamily selection\+\_\+components.\+get\+\_\+info\+\_\+try\+\_\+except (\begin{DoxyParamCaption}\item[{}]{xpath,  }\item[{}]{driver }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Obtém informações usando um bloco try-except com um XPath específico.
+
+@param xpath: Expressão XPath para localizar o elemento contendo informações.
+@param driver: Objeto WebDriver para interagir com a página da web.
+@return: Informações extraídas ou "N/A" se ocorrer uma exceção.
+\end{DoxyVerb}
+ \Hypertarget{namespaceselection__components_ab6f75c580d4582aa21aa3d1591841f74}\label{namespaceselection__components_ab6f75c580d4582aa21aa3d1591841f74} 
+\index{selection\_components@{selection\_components}!get\_qtd\_tables\_by\_xpath@{get\_qtd\_tables\_by\_xpath}}
+\index{get\_qtd\_tables\_by\_xpath@{get\_qtd\_tables\_by\_xpath}!selection\_components@{selection\_components}}
+\doxysubsubsection{\texorpdfstring{get\_qtd\_tables\_by\_xpath()}{get\_qtd\_tables\_by\_xpath()}}
+{\footnotesize\ttfamily selection\+\_\+components.\+get\+\_\+qtd\+\_\+tables\+\_\+by\+\_\+xpath (\begin{DoxyParamCaption}\item[{}]{xpath,  }\item[{}]{driver }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Obtém o número de tabelas em um formulário pelo seu XPath.
+
+@param xpath: Expressão XPath para localizar o formulário.
+@param driver: Objeto WebDriver para interagir com a página da web.
+@return: Número de tabelas no formulário.
+\end{DoxyVerb}
+ \Hypertarget{namespaceselection__components_a24b6336dd2cd2c820f53527f7d747157}\label{namespaceselection__components_a24b6336dd2cd2c820f53527f7d747157} 
+\index{selection\_components@{selection\_components}!get\_qtd\_tables\_by\_xpath\_relatorio@{get\_qtd\_tables\_by\_xpath\_relatorio}}
+\index{get\_qtd\_tables\_by\_xpath\_relatorio@{get\_qtd\_tables\_by\_xpath\_relatorio}!selection\_components@{selection\_components}}
+\doxysubsubsection{\texorpdfstring{get\_qtd\_tables\_by\_xpath\_relatorio()}{get\_qtd\_tables\_by\_xpath\_relatorio()}}
+{\footnotesize\ttfamily selection\+\_\+components.\+get\+\_\+qtd\+\_\+tables\+\_\+by\+\_\+xpath\+\_\+relatorio (\begin{DoxyParamCaption}\item[{}]{xpath,  }\item[{}]{driver }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Obtém o número de tabelas em um formulário pelo seu XPath para um relatório.
+
+@param xpath: Expressão XPath para localizar o formulário.
+@param driver: Objeto WebDriver para interagir com a página da web.
+@return: Número de tabelas no formulário para um relatório.
+\end{DoxyVerb}
+ \Hypertarget{namespaceselection__components_af7eb9e057020f67f2ca107d877897240}\label{namespaceselection__components_af7eb9e057020f67f2ca107d877897240} 
+\index{selection\_components@{selection\_components}!get\_rows\_from\_table@{get\_rows\_from\_table}}
+\index{get\_rows\_from\_table@{get\_rows\_from\_table}!selection\_components@{selection\_components}}
+\doxysubsubsection{\texorpdfstring{get\_rows\_from\_table()}{get\_rows\_from\_table()}}
+{\footnotesize\ttfamily selection\+\_\+components.\+get\+\_\+rows\+\_\+from\+\_\+table (\begin{DoxyParamCaption}\item[{}]{driver }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Obtém o elemento da tabela da página da web.
+
+@param driver: Objeto WebDriver para interagir com a página da web.
+@return: Objeto WebElement representando a tabela.
+\end{DoxyVerb}
+ \Hypertarget{namespaceselection__components_a81a4cae6460230b87d77e5c14a217912}\label{namespaceselection__components_a81a4cae6460230b87d77e5c14a217912} 
+\index{selection\_components@{selection\_components}!get\_rows\_len@{get\_rows\_len}}
+\index{get\_rows\_len@{get\_rows\_len}!selection\_components@{selection\_components}}
+\doxysubsubsection{\texorpdfstring{get\_rows\_len()}{get\_rows\_len()}}
+{\footnotesize\ttfamily selection\+\_\+components.\+get\+\_\+rows\+\_\+len (\begin{DoxyParamCaption}\item[{}]{result\+\_\+table }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Obtém o número de linhas em uma tabela.
+
+@param result_table: Objeto WebElement representando a tabela.
+@return: Número de linhas na tabela.
+\end{DoxyVerb}
+ \Hypertarget{namespaceselection__components_a1ae66f215e218c1e437373371b6952de}\label{namespaceselection__components_a1ae66f215e218c1e437373371b6952de} 
+\index{selection\_components@{selection\_components}!make\_search@{make\_search}}
+\index{make\_search@{make\_search}!selection\_components@{selection\_components}}
+\doxysubsubsection{\texorpdfstring{make\_search()}{make\_search()}}
+{\footnotesize\ttfamily selection\+\_\+components.\+make\+\_\+search (\begin{DoxyParamCaption}\item[{}]{driver }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Realiza uma pesquisa utilizando um WebDriver específico.
+
+@param driver: Objeto WebDriver para interagir com a página da web.
+\end{DoxyVerb}
+ \Hypertarget{namespaceselection__components_a918a608549ecd420b370e12b0abb08e4}\label{namespaceselection__components_a918a608549ecd420b370e12b0abb08e4} 
+\index{selection\_components@{selection\_components}!uncheck\_checkbox\_name@{uncheck\_checkbox\_name}}
+\index{uncheck\_checkbox\_name@{uncheck\_checkbox\_name}!selection\_components@{selection\_components}}
+\doxysubsubsection{\texorpdfstring{uncheck\_checkbox\_name()}{uncheck\_checkbox\_name()}}
+{\footnotesize\ttfamily selection\+\_\+components.\+uncheck\+\_\+checkbox\+\_\+name (\begin{DoxyParamCaption}\item[{str}]{name,  }\item[{}]{driver }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Desmarca a caixa de seleção com o nome especificado.
+
+@param name: Atributo de nome da caixa de seleção.
+@param driver: Objeto WebDriver para interagir com a página da web.
+\end{DoxyVerb}
+ \Hypertarget{namespaceselection__components_a0bde2286d96d67f40d7ecb690a57ff81}\label{namespaceselection__components_a0bde2286d96d67f40d7ecb690a57ff81} 
+\index{selection\_components@{selection\_components}!use\_element\_by\_class@{use\_element\_by\_class}}
+\index{use\_element\_by\_class@{use\_element\_by\_class}!selection\_components@{selection\_components}}
+\doxysubsubsection{\texorpdfstring{use\_element\_by\_class()}{use\_element\_by\_class()}}
+{\footnotesize\ttfamily selection\+\_\+components.\+use\+\_\+element\+\_\+by\+\_\+class (\begin{DoxyParamCaption}\item[{str}]{class\+\_\+name,  }\item[{}]{driver }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Interage com um elemento usando seu nome de classe.
+
+@param class_name: Atributo de nome de classe do elemento.
+@param driver: Objeto WebDriver para interagir com a página da web.
+\end{DoxyVerb}
+ \Hypertarget{namespaceselection__components_a63f684c89eb835dc1f7613bc42f438f3}\label{namespaceselection__components_a63f684c89eb835dc1f7613bc42f438f3} 
+\index{selection\_components@{selection\_components}!use\_element\_by\_id@{use\_element\_by\_id}}
+\index{use\_element\_by\_id@{use\_element\_by\_id}!selection\_components@{selection\_components}}
+\doxysubsubsection{\texorpdfstring{use\_element\_by\_id()}{use\_element\_by\_id()}}
+{\footnotesize\ttfamily selection\+\_\+components.\+use\+\_\+element\+\_\+by\+\_\+id (\begin{DoxyParamCaption}\item[{str}]{id,  }\item[{}]{driver }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Interage com um elemento usando seu ID.
+
+@param id: Atributo de ID do elemento.
+@param driver: Objeto WebDriver para interagir com a página da web.
+\end{DoxyVerb}
+ \Hypertarget{namespaceselection__components_a3bb2e729f8487ba5f879e681713e10a4}\label{namespaceselection__components_a3bb2e729f8487ba5f879e681713e10a4} 
+\index{selection\_components@{selection\_components}!use\_element\_by\_xpath@{use\_element\_by\_xpath}}
+\index{use\_element\_by\_xpath@{use\_element\_by\_xpath}!selection\_components@{selection\_components}}
+\doxysubsubsection{\texorpdfstring{use\_element\_by\_xpath()}{use\_element\_by\_xpath()}}
+{\footnotesize\ttfamily selection\+\_\+components.\+use\+\_\+element\+\_\+by\+\_\+xpath (\begin{DoxyParamCaption}\item[{int}]{value,  }\item[{}]{driver }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Interage com um elemento usando seu XPath.
+
+@param value: Expressão XPath para localizar o elemento.
+@param driver: Objeto WebDriver para interagir com a página da web.
+\end{DoxyVerb}
+ \Hypertarget{namespaceselection__components_abd1166545635b8bfa43190ed274c249a}\label{namespaceselection__components_abd1166545635b8bfa43190ed274c249a} 
+\index{selection\_components@{selection\_components}!use\_input\_by\_name@{use\_input\_by\_name}}
+\index{use\_input\_by\_name@{use\_input\_by\_name}!selection\_components@{selection\_components}}
+\doxysubsubsection{\texorpdfstring{use\_input\_by\_name()}{use\_input\_by\_name()}}
+{\footnotesize\ttfamily selection\+\_\+components.\+use\+\_\+input\+\_\+by\+\_\+name (\begin{DoxyParamCaption}\item[{str}]{name,  }\item[{str}]{input,  }\item[{}]{driver }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Interage com um campo de entrada usando seu nome.
+
+@param name: Atributo de nome do campo de entrada.
+@param input: Valor a ser inserido no campo.
+@param driver: Objeto WebDriver para interagir com a página da web.
+\end{DoxyVerb}
+ 
